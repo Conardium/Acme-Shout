@@ -17,15 +17,15 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public abstract class Actor extends DomainEntity {
 
-	private String					nombre;
-	private String					apellidos;
-	private String					correo;
-	private String					telefono;
-	private String					direccionPostal;
+	private String				nombre;
+	private String				apellidos;
+	private String				correo;
+	private String				telefono;
+	private String				direccionPostal;
 
-	private final List<Comentario>	comentarios	= new ArrayList<>();
+	private List<Comentario>	comentarios	= new ArrayList<>();
 
-	private User_Account			userAccount;
+	private User_Account		userAccount;
 
 
 	//----------------User Account
@@ -44,12 +44,15 @@ public abstract class Actor extends DomainEntity {
 		return this.comentarios;
 	}
 
+	public void setComentarios(final List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
+	//----------------Nombre
 	@NotBlank(message = "El nombre no puede estar en blanco")
 	public String getNombre() {
 		return this.nombre;
 	}
-
-	//----------------Nombre
 
 	public void setNombre(final String nombre) {
 		this.nombre = nombre;

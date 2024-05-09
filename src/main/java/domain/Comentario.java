@@ -43,7 +43,7 @@ public class Comentario extends DomainEntity {
 	}
 
 	//------------ACTOR
-	@ManyToOne(targetEntity = Actor.class, optional = false)
+	@ManyToOne(optional = false)
 	public Actor getActor() {
 		return this.actor;
 	}
