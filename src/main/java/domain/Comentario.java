@@ -3,6 +3,8 @@ package domain;
 
 import java.util.Date;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Past;
@@ -11,6 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
+@Access(AccessType.PROPERTY)
 public class Comentario extends DomainEntity {
 
 	private Date	fechaPublicacion;
@@ -40,7 +43,7 @@ public class Comentario extends DomainEntity {
 	}
 
 	//------------ACTOR
-	@ManyToOne
+	@ManyToOne(targetEntity = Actor.class, optional = false)
 	public Actor getActor() {
 		return this.actor;
 	}

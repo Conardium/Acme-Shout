@@ -4,6 +4,8 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -12,6 +14,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
 
 @MappedSuperclass
+@Access(AccessType.PROPERTY)
 public abstract class Actor extends DomainEntity {
 
 	private String					nombre;
@@ -36,7 +39,6 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	//----------------Comentarios
-
 	@OneToMany(mappedBy = "actor")
 	public List<Comentario> getComentarios() {
 		return this.comentarios;

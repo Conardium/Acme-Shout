@@ -4,12 +4,15 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Access(AccessType.PROPERTY)
 public class Alumno extends Actor {
 
 	private Tarjeta_Credito	tarjetaCredito;

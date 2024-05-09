@@ -5,6 +5,8 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -13,6 +15,7 @@ import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
+@Access(AccessType.PROPERTY)
 public class Curso extends DomainEntity {
 
 	private String			titulo;
@@ -23,7 +26,6 @@ public class Curso extends DomainEntity {
 	private DiaSemana		diaSemana;
 	private Time			hora;
 	private Set<Solicitud>	solicitudes;
-
 
 	//------------TITULO
 	@NotBlank

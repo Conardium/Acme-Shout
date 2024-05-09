@@ -1,6 +1,8 @@
 
 package domain;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.Size;
@@ -8,14 +10,14 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-public class User_Account {
+@Access(AccessType.PROPERTY)
+public class User_Account extends DomainEntity {
 
 	private String	nombreUsuario;
 	private String	contrasenia;
 
 
 	//-----------------Nombre Usuario
-
 	@NotBlank
 	@Size(min = 5, max = 32)
 	@Column(unique = true)
