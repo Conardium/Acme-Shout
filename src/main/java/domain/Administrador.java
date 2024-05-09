@@ -7,6 +7,6 @@ import javax.persistence.Entity;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Administrador extends Academia {
+public class Administrador extends Actor {
 
 }
