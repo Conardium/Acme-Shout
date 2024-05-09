@@ -1,0 +1,14 @@
+
+package repositories;
+
+import java.util.Collection;
+
+import org.springframework.data.jpa.repository.Query;
+
+import domain.Academia;
+
+public interface AcademiaRepository extends JpaRepository<Academia, Integer> {
+
+	@Query("select a from Academia a where a.id = ?1")
+	Collection<Academia> findById(int idAcademia);
+}
