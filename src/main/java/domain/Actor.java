@@ -30,7 +30,7 @@ public abstract class Actor extends DomainEntity {
 
 	//----------------User Account
 
-	@OneToOne(mappedBy = "actor")
+	@OneToOne(optional = false)
 	public User_Account getUserAccount() {
 		return this.userAccount;
 	}

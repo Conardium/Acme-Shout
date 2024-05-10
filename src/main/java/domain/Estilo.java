@@ -18,7 +18,7 @@ public class Estilo extends DomainEntity {
 
 
 	//------------NOMBRE
-	@NotBlank
+	@NotBlank(message = "El nombre no puede estar en blanco")
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -28,7 +28,7 @@ public class Estilo extends DomainEntity {
 	}
 
 	//------------DESCRIPCION
-	@NotBlank
+	@NotBlank(message = "La descripcion no puede estar en blanco")
 	public String getDescripcion() {
 		return this.descripcion;
 	}

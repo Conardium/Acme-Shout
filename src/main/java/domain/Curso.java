@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
@@ -26,6 +28,7 @@ public class Curso extends DomainEntity {
 	private DiaSemana		diaSemana;
 	private Time			hora;
 	private Set<Solicitud>	solicitudes;
+
 
 	//------------TITULO
 	@NotBlank
@@ -48,6 +51,7 @@ public class Curso extends DomainEntity {
 	}
 
 	//------------NIVEL
+	@Enumerated(EnumType.STRING)
 	public Nivel getNivel() {
 		return this.nivel;
 	}
@@ -76,6 +80,7 @@ public class Curso extends DomainEntity {
 	}
 
 	//------------DIA SEMANA
+	@Enumerated(EnumType.STRING)
 	public DiaSemana getDiaSemana() {
 		return this.diaSemana;
 	}

@@ -18,7 +18,7 @@ public class User_Account extends DomainEntity {
 
 
 	//-----------------Nombre Usuario
-	@NotBlank
+	@NotBlank(message = "El nombreUsuario no puede estar en blanco")
 	@Size(min = 5, max = 32)
 	@Column(unique = true)
 	public String getNombreUsuario() {
@@ -31,7 +31,7 @@ public class User_Account extends DomainEntity {
 
 	//-----------------Contraseña
 
-	@NotBlank
+	@NotBlank(message = "La contrasenia no puede estar en blanco")
 	@Size(min = 5, max = 32)
 	public String getContrasenia() {
 		return this.contrasenia;

@@ -49,7 +49,7 @@ public class Solicitud extends DomainEntity {
 
 	//---------------Curso
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	public Curso getCurso() {
 		return this.curso;
 	}

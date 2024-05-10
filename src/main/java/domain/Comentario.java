@@ -32,7 +32,7 @@ public class Comentario extends DomainEntity {
 	}
 
 	//------------TEXTO
-	@NotBlank
+	@NotBlank(message = "El texto no puede estar en blanco")
 	@Range(min = 1, max = 140)
 	public String getTexto() {
 		return this.texto;

@@ -22,7 +22,7 @@ public class Alumno extends Actor {
 	//-----------------Tarjeta de Credito
 
 	@NotNull
-	@OneToOne
+	@OneToOne(optional = false)
 	public Tarjeta_Credito getTarjetaCredito() {
 		return this.tarjetaCredito;
 	}

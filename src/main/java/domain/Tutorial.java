@@ -20,7 +20,7 @@ public class Tutorial extends DomainEntity {
 
 
 	//------------TITULO
-	@NotBlank
+	@NotBlank(message = "El titulo no puede estar en blanco")
 	public String getTitulo() {
 		return this.titulo;
 	}
@@ -30,7 +30,7 @@ public class Tutorial extends DomainEntity {
 	}
 
 	//------------DESCRIPCION
-	@NotBlank
+	@NotBlank(message = "La descripcion no puede estar en blanco")
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -40,7 +40,7 @@ public class Tutorial extends DomainEntity {
 	}
 
 	//------------VIDEO
-	@NotBlank
+	@NotBlank(message = "La URL no puede estar en blanco")
 	@Pattern(regexp = "^(https?\\:\\/\\/)?(www\\.youtube\\.com|youtu\\.?be)\\/.+$", message = "El enlace debe ser de YouTube")
 	public String getVideo() {
 		return this.video;
