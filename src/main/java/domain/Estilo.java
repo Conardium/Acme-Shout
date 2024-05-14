@@ -17,6 +17,12 @@ public class Estilo extends DomainEntity {
 	private Set<String>	videos;
 
 
+	public Estilo(final Set<String> imagenes, final Set<String> videos) {
+		super();
+		this.imagenes = new Set<String>();
+		this.videos = videos;
+	}
+
 	//------------NOMBRE
 	@NotBlank(message = "El nombre no puede estar en blanco")
 	public String getNombre() {

@@ -21,6 +21,11 @@ public class Alumno extends Actor {
 
 	//-----------------Tarjeta de Credito
 
+	public Alumno() {
+		super();
+		this.solicitudes = new ArrayList();
+	}
+
 	@NotNull
 	@OneToOne(optional = false)
 	public Tarjeta_Credito getTarjetaCredito() {
@@ -33,7 +38,7 @@ public class Alumno extends Actor {
 
 	//-----------------Solicitudes
 
-	@OneToMany(mappedBy = "alumno")
+	@OneToMany
 	public List<Solicitud> getSolicitudes() {
 		return this.solicitudes;
 	}

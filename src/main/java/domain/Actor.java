@@ -6,14 +6,14 @@ import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-@MappedSuperclass
+@Entity
 @Access(AccessType.PROPERTY)
 public abstract class Actor extends DomainEntity {
 
