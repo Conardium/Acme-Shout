@@ -15,7 +15,6 @@ public class Academia extends Actor {
 
 
 	//-----------------Nombre Comercial
-
 	@NotBlank(message = "El nombre comercial no puede estar en blanco")
 	public String getNombreComercial() {
 		return this.nombreComercial;

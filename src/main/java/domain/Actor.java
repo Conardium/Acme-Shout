@@ -27,18 +27,15 @@ public abstract class Actor extends DomainEntity {
 
 	private Collection<Comentario>	comentarios;
 
+	private UserAccount				userAccount;
+
 
 	public Actor() {
 		super();
 		this.comentarios = new HashSet<Comentario>();
 	}
 
-
-	private UserAccount userAccount;
-
-
-	//----------------User Account
-
+	//----------------UserAccount
 	@OneToOne(optional = false)
 	public UserAccount getUserAccount() {
 		return this.userAccount;
@@ -67,19 +64,17 @@ public abstract class Actor extends DomainEntity {
 		this.nombre = nombre;
 	}
 
+	//----------------Apellidos
 	@NotBlank(message = "Los apellidos no pueden estar en blanco")
 	public String getApellidos() {
 		return this.apellidos;
 	}
-
-	//----------------Nombre
 
 	public void setApellidos(final String apellidos) {
 		this.apellidos = apellidos;
 	}
 
 	//----------------Correo
-
 	@Pattern(regexp = ".+@.+\\..+", message = "El correo debe tener un formato válido")
 	public String getCorreo() {
 		return this.correo;
@@ -90,7 +85,6 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	//-----------------Telefono
-
 	@Pattern(regexp = "\\d{2}\\s\\d{4,}", message = "El teléfono debe tener un formato válido")
 	public String getTelefono() {
 		return this.telefono;
@@ -101,7 +95,6 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	//-----------------Codigo Postal
-
 	public String getDireccionPostal() {
 		return this.direccionPostal;
 	}
