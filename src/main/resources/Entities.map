@@ -1,8 +1,14 @@
 #./src/main/resources/Entities.map
-#Tue May 14 19:17:27 CEST 2024
-alumno1=12
-tutorial1=10
-userAccount3=9
-userAccount2=8
-userAccount1=7
-tarjetaCredito1=11
+#Tue May 14 21:36:50 CEST 2024
+tarjetaCredito1=17
+tutorial1=16
+academia1=20
+alumno1=18
+solicitud1=23
+estilo1=21
+curso1=22
+userAccount3=15
+userAccount2=14
+userAccount1=13
+administrador1=19
+comentario1=24

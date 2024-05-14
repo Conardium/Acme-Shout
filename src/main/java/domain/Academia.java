@@ -18,12 +18,14 @@ public class Academia extends Actor {
 	private String					nombreComercial;
 	private Collection<Tutorial>	tutoriales;
 	private Collection<Solicitud>	solicitudes;
+	private Collection<Curso>		cursos;
 
 
 	public Academia() {
 		super();
 		this.tutoriales = new HashSet<Tutorial>();
 		this.solicitudes = new HashSet<Solicitud>();
+		this.cursos = new HashSet<Curso>();
 	}
 
 	//-----------------Nombre Comercial
@@ -54,5 +56,15 @@ public class Academia extends Actor {
 
 	public void setSolicitudes(final Collection<Solicitud> solicitudes) {
 		this.solicitudes = solicitudes;
+	}
+
+	//-----------------Cursos
+	@OneToMany
+	public Collection<Curso> getCursos() {
+		return this.cursos;
+	}
+
+	public void setCursos(final Collection<Curso> cursos) {
+		this.cursos = cursos;
 	}
 }

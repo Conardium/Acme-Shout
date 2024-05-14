@@ -117,6 +117,18 @@
 	<bean id="estilo1" class="domain.Estilo">
         <property name="descripcion" value="Estilo de baile latinoamericano que se caracteriza por sus movimientos sensuales y ritmos rápidos." />
         <property name="nombre" value="Salsa" />
+        <property name="imagenes">
+        	<set>
+            	<value>https://ejemplo.com/imagen1.jpg</value>
+            	<value>https://ejemplo.com/imagen2.jpg</value>
+        	</set>
+    	</property>
+    	<property name="videos">
+        	<set>
+            	<value>https://ejemplo.com/video1.mp4</value>
+            	<value>https://ejemplo.com/video2.mp4</value>
+        	</set>
+    	</property>
     </bean>
 	
 	<!-- CURSOS -->
@@ -130,6 +142,18 @@
     	<property name="estilo" ref="estilo1" />
 	</bean>
 	
+	<!-- SOLICITUDES -->
+    <bean id="solicitud1" class="domain.Solicitud">
+        <property name="estado" value="Pendiente" />
+        <property name="fecha" value="05/01/2024 13:45" />
+        <property name="curso" ref="curso1" />
+    </bean>
 
+    <!-- COMENTARIOS -->
+    <bean id="comentario1" class="domain.Comentario">
+        <property name="fechaPublicacion" value="05/05/2024 12:30" />
+        <property name="texto" value="Este es un comentario de ejemplo" />
+        <property name="actor" ref="alumno1" />
+    </bean>
 	
 </beans>

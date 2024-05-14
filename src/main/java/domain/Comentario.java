@@ -10,9 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -38,7 +38,7 @@ public class Comentario extends DomainEntity {
 
 	//------------TEXTO
 	@NotBlank(message = "El texto no puede estar en blanco")
-	@Range(min = 1, max = 140)
+	@Size(min = 1, max = 140)
 	public String getTexto() {
 		return this.texto;
 	}

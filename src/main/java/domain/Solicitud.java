@@ -37,11 +37,10 @@ public class Solicitud extends DomainEntity {
 	}
 
 	//---------------Date
-
 	@NotNull
+	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	@Past
 	public Date getFecha() {
 		return this.fecha;
 	}

@@ -7,6 +7,7 @@ import java.util.HashSet;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Pattern;
@@ -26,6 +27,7 @@ public abstract class Actor extends DomainEntity {
 	private String					direccionPostal;
 
 	private Collection<Comentario>	comentarios;
+	private Collection<Actor>		suscritos;
 
 	private UserAccount				userAccount;
 
@@ -33,6 +35,7 @@ public abstract class Actor extends DomainEntity {
 	public Actor() {
 		super();
 		this.comentarios = new HashSet<Comentario>();
+		this.suscritos = new HashSet<Actor>();
 	}
 
 	//----------------UserAccount
@@ -52,6 +55,16 @@ public abstract class Actor extends DomainEntity {
 
 	public void setComentarios(final Collection<Comentario> comentarios) {
 		this.comentarios = comentarios;
+	}
+
+	//----------------Suscritos
+	@ManyToMany
+	public Collection<Actor> getSuscritos() {
+		return this.suscritos;
+	}
+
+	public void setSuscritos(final Collection<Actor> suscritos) {
+		this.suscritos = suscritos;
 	}
 
 	//----------------Nombre

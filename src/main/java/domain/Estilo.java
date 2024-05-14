@@ -8,7 +8,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 
 @Entity
 public class Estilo extends DomainEntity {
@@ -47,7 +46,7 @@ public class Estilo extends DomainEntity {
 
 	//------------IMAGENES
 	@ElementCollection
-	@URL
+	//@URL
 	public Collection<String> getImagenes() {
 		return this.imagenes;
 	}
@@ -58,7 +57,7 @@ public class Estilo extends DomainEntity {
 
 	//------------VIDEOS
 	@ElementCollection
-	@URL
+	//@URL
 	public Collection<String> getVideos() {
 		return this.videos;
 	}
