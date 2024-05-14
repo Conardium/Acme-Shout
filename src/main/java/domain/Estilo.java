@@ -3,8 +3,8 @@ package domain;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -46,22 +46,24 @@ public class Estilo extends DomainEntity {
 	}
 
 	//------------IMAGENES
+	@ElementCollection
 	@URL
 	public Collection<String> getImagenes() {
 		return this.imagenes;
 	}
 
-	public void setImagenes(final Set<String> imagenes) {
+	public void setImagenes(final Collection<String> imagenes) {
 		this.imagenes = imagenes;
 	}
 
 	//------------VIDEOS
+	@ElementCollection
 	@URL
 	public Collection<String> getVideos() {
 		return this.videos;
 	}
 
-	public void setVideos(final Set<String> videos) {
+	public void setVideos(final Collection<String> videos) {
 		this.videos = videos;
 	}
 }

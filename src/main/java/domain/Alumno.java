@@ -20,7 +20,6 @@ public class Alumno extends Actor {
 
 
 	//-----------------Tarjeta de Credito
-
 	public Alumno() {
 		super();
 		this.solicitudes = new HashSet<Solicitud>();
@@ -37,7 +36,6 @@ public class Alumno extends Actor {
 	}
 
 	//-----------------Solicitudes
-
 	@OneToMany
 	public Collection<Solicitud> getSolicitudes() {
 		return this.solicitudes;
