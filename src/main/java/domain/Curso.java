@@ -1,7 +1,7 @@
 
 package domain;
 
-import java.time.LocalTime;
+import java.sql.Time;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -31,7 +31,7 @@ public class Curso extends DomainEntity {
 	private Date					fechaInicio;
 	private Date					fechaFin;
 	private DiaSemana				diaSemana;
-	private LocalTime				hora;
+	private Time					hora;
 	private Collection<Solicitud>	solicitudes;
 
 
@@ -105,11 +105,11 @@ public class Curso extends DomainEntity {
 
 	//------------HORA
 	@DateTimeFormat(iso = ISO.NONE)
-	public LocalTime getHora() {
+	public Time getHora() {
 		return this.hora;
 	}
 
-	public void setHora(final LocalTime hora) {
+	public void setHora(final Time hora) {
 		this.hora = hora;
 	}
 
