@@ -19,12 +19,12 @@ public class Alumno extends Actor {
 	private Collection<Solicitud>	solicitudes;
 
 
-	//-----------------Tarjeta de Credito
 	public Alumno() {
 		super();
 		this.solicitudes = new HashSet<Solicitud>();
 	}
 
+	//-----------------Tarjeta de Credito
 	@NotNull
 	@OneToOne(optional = false)
 	public Tarjeta_Credito getTarjetaCredito() {

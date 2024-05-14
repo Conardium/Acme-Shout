@@ -1,7 +1,7 @@
 
 package domain;
 
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -13,9 +13,13 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -27,7 +31,7 @@ public class Curso extends DomainEntity {
 	private Date					fechaInicio;
 	private Date					fechaFin;
 	private DiaSemana				diaSemana;
-	private Time					hora;
+	private LocalTime				hora;
 	private Collection<Solicitud>	solicitudes;
 
 
@@ -68,6 +72,8 @@ public class Curso extends DomainEntity {
 
 	//------------FECHA INICIO
 	@Past
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getFechaInicio() {
 		return this.fechaInicio;
 	}
@@ -77,6 +83,8 @@ public class Curso extends DomainEntity {
 	}
 
 	//------------FECHA FIN
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getFechaFin() {
 		return this.fechaFin;
 	}
@@ -96,11 +104,12 @@ public class Curso extends DomainEntity {
 	}
 
 	//------------HORA
-	public Time getHora() {
+	@DateTimeFormat(iso = ISO.NONE)
+	public LocalTime getHora() {
 		return this.hora;
 	}
 
-	public void setHora(final Time hora) {
+	public void setHora(final LocalTime hora) {
 		this.hora = hora;
 	}
 

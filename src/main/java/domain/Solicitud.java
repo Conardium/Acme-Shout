@@ -14,6 +14,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Solicitud extends DomainEntity {
@@ -38,6 +40,7 @@ public class Solicitud extends DomainEntity {
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Past
 	public Date getFecha() {
 		return this.fecha;

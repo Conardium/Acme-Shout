@@ -19,6 +19,8 @@
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
+		<property name="id" value="1" />
+    	<property name="version" value="1" />
 		<property name="username" value="administrador" />
 		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
 		<property name="authorities">
@@ -31,6 +33,8 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
+		<property name="id" value="2" />
+    	<property name="version" value="1" />
 		<property name="username" value="alumno" />
 		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
 		<property name="authorities">
@@ -43,6 +47,8 @@
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
+		<property name="id" value="3" />
+    	<property name="version" value="1" />
 		<property name="username" value="academia" />
 		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
 		<property name="authorities">
@@ -54,6 +60,88 @@
 		</property>
 	</bean>
 	
-	<!-- Other domain beans come here -->	
+	<!--########################################################################################################-->
+	
+	<!-- TUTORIALES -->
+    <bean id="tutorial1" class="domain.Tutorial">
+    	<property name="titulo" value="Tutorial Tango" />
+    	<property name="descripcion" value="Pasos Básicos HOMBRE para Tango Argentino" />
+    	<property name="video" value="https://www.youtube.com/watch?v=jFMQb85SZ5w" />
+    	<property name="contador" value="0" />
+	</bean>
+	
+	<!-- TARJETAS DE CREDITO -->
+	<bean id="tarjetaCredito1" class="domain.Tarjeta_Credito">
+    	<property name="nombreTitular" value="Ismael" />
+    	<property name="marca" value="MasterCard" />
+    	<property name="numero" value="4603-2735-0414-7352" />
+    	<property name="mes" value="5" />
+    	<property name="anio" value="2025" />
+    	<property name="codigoCVV" value="789" />
+	</bean>
+	
+	<!-- ALUMNOS -->
+	<bean id="alumno1" class="domain.Alumno">
+    	<property name="apellidos" value="Da-Palma Fernandez" />
+    	<property name="correo" value="elcorreodeismael@gmail.com" />
+    	<property name="direccionPostal" value="21700" />
+    	<property name="nombre" value="Ismael" />
+    	<property name="telefono" value="34 666666666" />
+    	<property name="userAccount" ref="userAccount2" />
+    	<property name="tarjetaCredito" ref="tarjetaCredito1" />
+	</bean>
+	
+		<!-- ADMINISTRADOR -->
+	<bean id="administrador1" class="domain.Administrador">
+    	<property name="apellidos" value="Gonzalez Fuertes" />
+    	<property name="correo" value="albertoGF@gmail.com" />
+    	<property name="direccionPostal" value="Almonte" />
+    	<property name="nombre" value="Alberto" />
+    	<property name="telefono" value="34 600765123" />
+    	<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
+		<!-- ACADEMIAS -->
+	<bean id="academia1" class="domain.Academia">
+    	<property name="apellidos" value="Camacho Alvarez" />
+    	<property name="correo" value="correo@example.com" />
+    	<property name="direccionPostal" value="21711" />
+    	<property name="nombre" value="Zacarias" />
+    	<property name="telefono" value="34 123456789" />
+    	<property name="userAccount" ref="userAccount3" />
+    	<property name="nombreComercial" value="Sevilla's Academy" />
+	</bean>
+	
+	
+	<!-- ESTILOS -->
+	<bean id="estilo1" class="domain.Estilo">
+        <property name="descripcion" value="Estilo de baile latinoamericano que se caracteriza por sus movimientos sensuales y ritmos rápidos." />
+        <property name="nombre" value="Salsa" />
+    </bean>
+	
+	<!-- CURSOS -->
+	<bean id="curso1" class="domain.Curso">
+    	<property name="diaSemana" value="Lunes" />
+    	<property name="fechaInicio" value="05/05/2024 12:30" />	
+    	<property name="fechaFin" value="10/09/2024 11:35" />
+    	<property name="hora" value="10:00:00" />
+    	<property name="nivel" value="Intermedio" />
+    	<property name="titulo" value="Curso de Salsa" />
+    	<property name="estilo" ref="estilo1" />
+	</bean>
+	
+	<!-- SOLICITUDES -->
+	<bean id="solicitud1" class="domain.Solicitud">
+		<property name="estado" value="Pendiente" />
+		<property name="fecha" value="2024-05-10" />
+		<property name="curso" ref="curso1" />
+	</bean>
+	
+	<!-- COMENTARIOS -->
+	<bean id="comentario1" class="domain.Comentario">
+    	<property name="fechaPublicacion" value="2024-05-10" />
+    	<property name="texto" value="Este es un comentario de ejemplo" />
+    	<property name="actor" ref="actor1" />
+	</bean>
 	
 </beans>
