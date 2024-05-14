@@ -13,6 +13,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import security.UserAccount;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public abstract class Actor extends DomainEntity {
@@ -25,16 +27,16 @@ public abstract class Actor extends DomainEntity {
 
 	private List<Comentario>	comentarios	= new ArrayList<>();
 
-	private User_Account		userAccount;
+	private UserAccount			userAccount;
 
 
 	//----------------User Account
 
 	@OneToOne(optional = false)
-	public User_Account getUserAccount() {
+	public UserAccount getUserAccount() {
 		return this.userAccount;
 	}
-	public void setUserAccount(final User_Account userAccount) {
+	public void setUserAccount(final UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
 
