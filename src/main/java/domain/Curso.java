@@ -2,6 +2,7 @@
 package domain;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -19,7 +20,6 @@ import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -38,6 +38,17 @@ public class Curso extends DomainEntity {
 	public Curso() {
 		super();
 		this.solicitudes = new HashSet<Solicitud>();
+	}
+
+	public Curso(final String horaString) {
+		super();
+		this.solicitudes = new HashSet<Solicitud>();
+		try {
+			final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+			final Date parsedDate = sdf.parse(horaString);
+			this.hora = new Time(parsedDate.getTime());
+		} catch (final Exception e) {
+		}
 	}
 
 	//------------TITULO
@@ -104,13 +115,14 @@ public class Curso extends DomainEntity {
 	}
 
 	//------------HORA
-	@DateTimeFormat(iso = ISO.NONE)
 	public Time getHora() {
 		return this.hora;
 	}
 
+	@DateTimeFormat(pattern = "HH:mm:ss")
 	public void setHora(final Time hora) {
 		this.hora = hora;
+
 	}
 
 	//------------SOLICITUDES

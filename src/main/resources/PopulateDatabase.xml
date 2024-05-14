@@ -121,27 +121,15 @@
 	
 	<!-- CURSOS -->
 	<bean id="curso1" class="domain.Curso">
+	 	<constructor-arg value="10:00:00" />
     	<property name="diaSemana" value="Lunes" />
     	<property name="fechaInicio" value="05/05/2024 12:30" />	
     	<property name="fechaFin" value="10/09/2024 11:35" />
-    	<property name="hora" value="10:00:00" />
     	<property name="nivel" value="Intermedio" />
     	<property name="titulo" value="Curso de Salsa" />
     	<property name="estilo" ref="estilo1" />
 	</bean>
 	
-	<!-- SOLICITUDES -->
-	<bean id="solicitud1" class="domain.Solicitud">
-		<property name="estado" value="Pendiente" />
-		<property name="fecha" value="2024-05-10" />
-		<property name="curso" ref="curso1" />
-	</bean>
-	
-	<!-- COMENTARIOS -->
-	<bean id="comentario1" class="domain.Comentario">
-    	<property name="fechaPublicacion" value="2024-05-10" />
-    	<property name="texto" value="Este es un comentario de ejemplo" />
-    	<property name="actor" ref="actor1" />
-	</bean>
+
 	
 </beans>
