@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import domain.Academia;
+import domain.Curso;
 import repositories.AcademiaRepository;
 
 @Service
@@ -17,11 +19,9 @@ public class AcademiaService {
 
 	// Managed repository -------------------------------
 	@Autowired
-	private AcademiaRepository	academiaRepository;
+	private AcademiaRepository academiaRepository;
 
 	// Supporting services ------------------------------
-	@Autowired
-	private CursoService		cursoService;
 
 
 	// Simple CRUD methods ------------------------------
@@ -46,9 +46,20 @@ public class AcademiaService {
 	// Not Simple CRUD methods ------------------------------
 
 	public Academia findAcademiaporCurso(final int cursoId) {
-		this.cursoService.findOne(cursoId);
 
-		return this.academiaRepository.findOne(cursoId);
+		final ArrayList<Academia> academias = new ArrayList<Academia>(this.academiaRepository.findAll());
+		final int numAcademias = academias.size();
+
+		for (int i = 0; i < numAcademias; i++) {
+			final ArrayList<Curso> cursos = new ArrayList<Curso>(academias.get(i).getCursos());
+			final int numCursos = cursos.size();
+
+			for (int j = 0; j < numCursos; j++)
+				if (cursos.get(j).getId() == cursoId)
+					return academias.get(i);
+		}
+
+		return null;
 	}
 
 }
