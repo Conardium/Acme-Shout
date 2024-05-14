@@ -1,8 +1,8 @@
 
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -15,15 +15,15 @@ import javax.validation.constraints.NotNull;
 @Access(AccessType.PROPERTY)
 public class Alumno extends Actor {
 
-	private Tarjeta_Credito	tarjetaCredito;
-	private List<Solicitud>	solicitudes;
+	private Tarjeta_Credito			tarjetaCredito;
+	private Collection<Solicitud>	solicitudes;
 
 
 	//-----------------Tarjeta de Credito
 
 	public Alumno() {
 		super();
-		this.solicitudes = new ArrayList();
+		this.solicitudes = new HashSet<Solicitud>();
 	}
 
 	@NotNull
@@ -39,22 +39,19 @@ public class Alumno extends Actor {
 	//-----------------Solicitudes
 
 	@OneToMany
-	public List<Solicitud> getSolicitudes() {
+	public Collection<Solicitud> getSolicitudes() {
 		return this.solicitudes;
 	}
 
-	public void setSolicitudes(final List<Solicitud> solicitudes) {
+	public void setSolicitudes(final Collection<Solicitud> solicitudes) {
 		this.solicitudes = solicitudes;
 	}
 
 	public void addSolicitud(final Solicitud solicitud) {
-		if (this.solicitudes == null)
-			this.solicitudes = new ArrayList<>();
 		this.solicitudes.add(solicitud);
 	}
 
 	public void removeSolicitud(final Solicitud solicitud) {
-		if (this.solicitudes != null)
-			this.solicitudes.remove(solicitud);
+		this.solicitudes.remove(solicitud);
 	}
 }

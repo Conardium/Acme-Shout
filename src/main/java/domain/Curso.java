@@ -2,8 +2,9 @@
 package domain;
 
 import java.sql.Time;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
+import java.util.HashSet;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -20,15 +21,20 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Curso extends DomainEntity {
 
-	private String			titulo;
-	private Estilo			estilo;
-	private Nivel			nivel;
-	private Date			fechaInicio;
-	private Date			fechaFin;
-	private DiaSemana		diaSemana;
-	private Time			hora;
-	private Set<Solicitud>	solicitudes;
+	private String					titulo;
+	private Estilo					estilo;
+	private Nivel					nivel;
+	private Date					fechaInicio;
+	private Date					fechaFin;
+	private DiaSemana				diaSemana;
+	private Time					hora;
+	private Collection<Solicitud>	solicitudes;
 
+
+	public Curso() {
+		super();
+		this.solicitudes = new HashSet<Solicitud>();
+	}
 
 	//------------TITULO
 	@NotBlank
@@ -100,11 +106,11 @@ public class Curso extends DomainEntity {
 
 	//------------SOLICITUDES
 	@OneToMany(mappedBy = "curso")
-	public Set<Solicitud> getSolicitudes() {
+	public Collection<Solicitud> getSolicitudes() {
 		return this.solicitudes;
 	}
 
-	public void setSolicitudes(final Set<Solicitud> solicitudes) {
+	public void setSolicitudes(final Collection<Solicitud> solicitudes) {
 		this.solicitudes = solicitudes;
 	}
 }

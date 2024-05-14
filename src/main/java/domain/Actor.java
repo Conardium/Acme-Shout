@@ -1,8 +1,8 @@
 
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -19,15 +19,22 @@ import security.UserAccount;
 @Access(AccessType.PROPERTY)
 public abstract class Actor extends DomainEntity {
 
-	private String				nombre;
-	private String				apellidos;
-	private String				correo;
-	private String				telefono;
-	private String				direccionPostal;
+	private String					nombre;
+	private String					apellidos;
+	private String					correo;
+	private String					telefono;
+	private String					direccionPostal;
 
-	private List<Comentario>	comentarios	= new ArrayList<>();
+	private Collection<Comentario>	comentarios;
 
-	private UserAccount			userAccount;
+
+	public Actor() {
+		super();
+		this.comentarios = new HashSet<Comentario>();
+	}
+
+
+	private UserAccount userAccount;
 
 
 	//----------------User Account
@@ -42,11 +49,11 @@ public abstract class Actor extends DomainEntity {
 
 	//----------------Comentarios
 	@OneToMany(mappedBy = "actor")
-	public List<Comentario> getComentarios() {
+	public Collection<Comentario> getComentarios() {
 		return this.comentarios;
 	}
 
-	public void setComentarios(final List<Comentario> comentarios) {
+	public void setComentarios(final Collection<Comentario> comentarios) {
 		this.comentarios = comentarios;
 	}
 

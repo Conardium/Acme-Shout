@@ -1,6 +1,8 @@
 
 package domain;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -11,16 +13,16 @@ import org.hibernate.validator.constraints.URL;
 @Entity
 public class Estilo extends DomainEntity {
 
-	private String		nombre;
-	private String		descripcion;
-	private Set<String>	imagenes;
-	private Set<String>	videos;
+	private String				nombre;
+	private String				descripcion;
+	private Collection<String>	imagenes;
+	private Collection<String>	videos;
 
 
-	public Estilo(final Set<String> imagenes, final Set<String> videos) {
+	public Estilo() {
 		super();
-		this.imagenes = new Set<String>();
-		this.videos = videos;
+		this.imagenes = new HashSet<String>();
+		this.videos = new HashSet<String>();
 	}
 
 	//------------NOMBRE
@@ -45,7 +47,7 @@ public class Estilo extends DomainEntity {
 
 	//------------IMAGENES
 	@URL
-	public Set<String> getImagenes() {
+	public Collection<String> getImagenes() {
 		return this.imagenes;
 	}
 
@@ -55,7 +57,7 @@ public class Estilo extends DomainEntity {
 
 	//------------VIDEOS
 	@URL
-	public Set<String> getVideos() {
+	public Collection<String> getVideos() {
 		return this.videos;
 	}
 
