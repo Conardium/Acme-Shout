@@ -17,10 +17,13 @@ public class CursoService {
 
 	// Managed repository -------------------------------
 	@Autowired
-	private CursoRepository cursoRepository;
+	private CursoRepository	cursoRepository;
 
 	// Supporting services ------------------------------
 	//
+
+	@Autowired
+	private AcademiaService	academiaService;
 
 
 	// Simple CRUD methods ------------------------------
@@ -29,15 +32,18 @@ public class CursoService {
 	}
 
 	public Collection<Curso> findAll() {
-		return null;
+		return this.cursoRepository.findAll();
 	}
 
 	public Curso findOne(final int cursoId) {
-		return null;
+		return this.cursoRepository.findOne(cursoId);
 	}
 	public Curso save(final Curso curso) {
-		return null;
+		return this.cursoRepository.save(curso);
 	}
 	public void delete(final Curso curso) {
+		this.cursoRepository.delete(curso);
 	}
+
+	// No Simple CRUD methods ------------------------------
 }

@@ -17,9 +17,11 @@ public class AcademiaService {
 
 	// Managed repository -------------------------------
 	@Autowired
-	private AcademiaRepository academiaRepository;
+	private AcademiaRepository	academiaRepository;
 
 	// Supporting services ------------------------------
+	@Autowired
+	private CursoService		cursoService;
 
 
 	// Simple CRUD methods ------------------------------
@@ -28,15 +30,25 @@ public class AcademiaService {
 	}
 
 	public Collection<Academia> findAll() {
-		return null;
+		return this.academiaRepository.findAll();
 	}
 
 	public Academia findOne(final int academiaId) {
-		return null;
+		return this.academiaRepository.findOne(academiaId);
 	}
 	public Academia save(final Academia academia) {
-		return null;
+		return this.academiaRepository.save(academia);
 	}
 	public void delete(final Academia academia) {
+		this.academiaRepository.delete(academia);
 	}
+
+	// Not Simple CRUD methods ------------------------------
+
+	public Academia findAcademiaporCurso(final int cursoId) {
+		this.cursoService.findOne(cursoId);
+
+		return this.academiaRepository.findOne(cursoId);
+	}
+
 }
