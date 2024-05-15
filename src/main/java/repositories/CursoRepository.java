@@ -12,4 +12,7 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
 
 	@Query("select c from Curso c where c.id = ?1")
 	Collection<Curso> findById(int idCurso);
+
+	@Query("select c from Curso c where c.estilo.id = ?1")
+	Collection<Curso> findByEstilo(int idEstilo);
 }

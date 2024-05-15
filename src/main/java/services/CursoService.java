@@ -21,7 +21,6 @@ public class CursoService {
 
 	// Supporting services ------------------------------
 	//
-
 	@Autowired
 	private AcademiaService	academiaService;
 
@@ -46,4 +45,14 @@ public class CursoService {
 	}
 
 	// No Simple CRUD methods ------------------------------
+
+	public Collection<Curso> findCursosporAcademia(final int academiaId) {
+
+		return this.academiaService.findOne(academiaId).getCursos();
+	}
+
+	public Collection<Curso> findCursosporEstilo(final int estiloId) {
+
+		return this.cursoRepository.findByEstilo(estiloId);
+	}
 }
