@@ -28,15 +28,16 @@ public class ComentarioService {
 	}
 
 	public Collection<Comentario> findAll() {
-		return null;
+		return this.comentarioRepository.findAll();
 	}
 
 	public Comentario findOne(final int comentarioId) {
-		return null;
+		return this.comentarioRepository.findOne(comentarioId);
 	}
 	public Comentario save(final Comentario comentario) {
-		return null;
+		return this.comentarioRepository.save(comentario);
 	}
 	public void delete(final Comentario comentario) {
+		this.comentarioRepository.delete(comentario);
 	}
 }

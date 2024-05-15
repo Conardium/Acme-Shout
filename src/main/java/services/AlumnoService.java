@@ -28,15 +28,16 @@ public class AlumnoService {
 	}
 
 	public Collection<Alumno> findAll() {
-		return null;
+		return this.alumnoRepository.findAll();
 	}
 
 	public Alumno findOne(final int alumnoId) {
-		return null;
+		return this.alumnoRepository.findOne(alumnoId);
 	}
 	public Alumno save(final Alumno alumno) {
-		return null;
+		return this.alumnoRepository.save(alumno);
 	}
 	public void delete(final Alumno alumno) {
+		this.alumnoRepository.delete(alumno);
 	}
 }

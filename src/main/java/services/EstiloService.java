@@ -28,16 +28,16 @@ public class EstiloService {
 		return null;
 	}
 	public Collection<Estilo> findAll() {
-		return null;
+		return this.estiloRepository.findAll();
 	}
 	public Estilo findOne(final int estiloId) {
-		return null;
+		return this.estiloRepository.findOne(estiloId);
 	}
 	public Estilo save(final Estilo estilo) {
-		return null;
+		return this.estiloRepository.save(estilo);
 	}
 	public void delete(final Estilo estilo) {
-		;
+		this.estiloRepository.delete(estilo);
 	}
 
 }

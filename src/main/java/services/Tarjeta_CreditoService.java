@@ -28,16 +28,16 @@ public class Tarjeta_CreditoService {
 		return null;
 	}
 	public Collection<Tarjeta_Credito> findAll() {
-		return null;
+		return this.tarjeta_CreditoRepository.findAll();
 	}
 	public Tarjeta_Credito findOne(final int tarjeta_CreditoId) {
-		return null;
+		return this.tarjeta_CreditoRepository.findOne(tarjeta_CreditoId);
 	}
 	public Tarjeta_Credito save(final Tarjeta_Credito tarjeta_Credito) {
-		return null;
+		return this.tarjeta_CreditoRepository.save(tarjeta_Credito);
 	}
 	public void delete(final Tarjeta_Credito tarjeta_Credito) {
-		;
+		this.tarjeta_CreditoRepository.delete(tarjeta_Credito);
 	}
 
 }

@@ -28,15 +28,16 @@ public class AdministradorService {
 	}
 
 	public Collection<Administrador> findAll() {
-		return null;
+		return this.administradorRepository.findAll();
 	}
 
 	public Administrador findOne(final int administradorId) {
-		return null;
+		return this.administradorRepository.findOne(administradorId);
 	}
 	public Administrador save(final Administrador administrador) {
-		return null;
+		return this.administradorRepository.save(administrador);
 	}
 	public void delete(final Administrador administrador) {
+		this.administradorRepository.delete(administrador);
 	}
 }

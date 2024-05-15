@@ -28,16 +28,16 @@ public class TutorialService {
 		return null;
 	}
 	public Collection<Tutorial> findAll() {
-		return null;
+		return this.tutorialRepository.findAll();
 	}
 	public Tutorial findOne(final int tutorialId) {
-		return null;
+		return this.tutorialRepository.findOne(tutorialId);
 	}
 	public Tutorial save(final Tutorial tutorial) {
-		return null;
+		return this.tutorialRepository.save(tutorial);
 	}
 	public void delete(final Tutorial tutorial) {
-		;
+		this.tutorialRepository.delete(tutorial);
 	}
 
 }

@@ -28,16 +28,16 @@ public class SolicitudService {
 		return null;
 	}
 	public Collection<Solicitud> findAll() {
-		return null;
+		return this.solicitudRepository.findAll();
 	}
 	public Solicitud findOne(final int solicitudId) {
-		return null;
+		return this.solicitudRepository.findOne(solicitudId);
 	}
 	public Solicitud save(final Solicitud solicitud) {
-		return null;
+		return this.solicitudRepository.save(solicitud);
 	}
 	public void delete(final Solicitud solicitud) {
-		;
+		this.solicitudRepository.delete(solicitud);
 	}
 
 }
