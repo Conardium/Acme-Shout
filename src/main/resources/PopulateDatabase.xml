@@ -299,50 +299,51 @@
 	<bean id="estilo1" class="domain.Estilo">
         <property name="descripcion" value="Estilo de baile latinoamericano que se caracteriza por sus movimientos sensuales y ritmos rápidos." />
         <property name="nombre" value="Salsa" />
-        <property name="imagenes">
-        	<list>
-            	<value>https://ejemplo.com/imagen1.jpg</value>
-            	<value>https://ejemplo.com/imagen2.jpg</value>
-        	</list>
-    	</property>
-    	<property name="videos">
-        	<list>
-            	<value>https://ejemplo.com/video1.mp4</value>
-            	<value>https://ejemplo.com/video2.mp4</value>
-        	</list>
-    	</property>
     </bean>
+    
     <bean id="estilo2" class="domain.Estilo">
-        <property name="descripcion" value="Estilo de baile latinoamericano que blablabla." />
-        <property name="nombre" value="Tango" />
-        <property name="imagenes">
-        	<list>
-            	<value>https://ejemplo.com/imagen11.jpg</value>
-            	<value>https://ejemplo.com/imagen22.jpg</value>
-        	</list>
-    	</property>
-    	<property name="videos">
-        	<list>
-            	<value>https://ejemplo.com/video11.mp4</value>
-            	<value>https://ejemplo.com/video22.mp4</value>
-        	</list>
-    	</property>
+        <property name="descripcion" value="Baile de origen cubano, precursor de la salsa, con movimientos más pausados." />
+        <property name="nombre" value="Mambo" />
     </bean>
+
     <bean id="estilo3" class="domain.Estilo">
-        <property name="descripcion" value="Estilo de baile sisisi nonono" />
+        <property name="descripcion" value="Baile de origen dominicano conocido por su ritmo romántico y pasos sensuales." />
         <property name="nombre" value="Bachata" />
-        <property name="imagenes">
-        	<list>
-            	<value>https://ejemplo.com/imagen111.jpg</value>
-            	<value>https://ejemplo.com/imagen222.jpg</value>
-        	</list>
-    	</property>
-    	<property name="videos">
-        	<list>
-            	<value>https://ejemplo.com/video111.mp4</value>
-            	<value>https://ejemplo.com/video222.mp4</value>
-        	</list>
-    	</property>
+    </bean>
+
+    <bean id="estilo4" class="domain.Estilo">
+        <property name="descripcion" value="Baile de ritmo rápido y alegre, popular en fiestas y celebraciones latinas." />
+        <property name="nombre" value="Pachanga" />
+    </bean>
+
+    <bean id="estilo5" class="domain.Estilo">
+        <property name="descripcion" value="Danza española tradicional, caracterizada por su compás binario y pasos firmes." />
+        <property name="nombre" value="Pasodoble" />
+    </bean>
+
+    <bean id="estilo6" class="domain.Estilo">
+        <property name="descripcion" value="Baile folclórico andaluz que se baila en pareja durante las ferias y romerías." />
+        <property name="nombre" value="Sevillanas" />
+    </bean>
+
+    <bean id="estilo7" class="domain.Estilo">
+        <property name="descripcion" value="Baile argentino de pareja que se distingue por su abrazo cerrado y movimientos apasionados." />
+        <property name="nombre" value="Tango" />
+    </bean>
+
+    <bean id="estilo8" class="domain.Estilo">
+        <property name="descripcion" value="Baile cubano de ritmo sincopado, conocido por sus pasos de triple tiempo." />
+        <property name="nombre" value="Chachachá" />
+    </bean>
+
+    <bean id="estilo9" class="domain.Estilo">
+        <property name="descripcion" value="Baile afro-cubano caracterizado por su ritmo complejo y movimientos expresivos." />
+        <property name="nombre" value="Rumba" />
+    </bean>
+
+    <bean id="estilo10" class="domain.Estilo">
+        <property name="descripcion" value="Baile angoleño conocido por su fluidez y conexión entre los bailarines." />
+        <property name="nombre" value="Kizomba" />
     </bean>
     <!--########################################################################################################-->
 	

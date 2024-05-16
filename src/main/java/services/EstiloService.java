@@ -19,9 +19,11 @@ public class EstiloService {
 	// Managed repository -------------------------------
 
 	@Autowired
-	private EstiloRepository estiloRepository;
+	private EstiloRepository	estiloRepository;
 
 	// Supporting services ------------------------------
+	@Autowired
+	private CursoService		cursoService;
 
 
 	// Simple CRUD methods ------------------------------
@@ -45,6 +47,7 @@ public class EstiloService {
 
 		return result;
 	}
+
 	public Estilo findOne(final int estiloId) {
 		Estilo result;
 
@@ -52,6 +55,7 @@ public class EstiloService {
 
 		return result;
 	}
+
 	public Estilo save(final Estilo estilo) {
 		Assert.assertNotNull(estilo);
 
@@ -61,9 +65,14 @@ public class EstiloService {
 
 		return result;
 	}
+
 	public void delete(final Estilo estilo) {
 		Assert.assertNotNull(estilo);
 		Assert.assertEquals(estilo.getId(), 0);
+
+		//¿¿¿¿¿¿ ESTO ESTA BIEN ?????
+		//Comprobamos antes de borrar el estilo que este no pertenezca a ningun curso
+		Assert.assertTrue(this.cursoService.existeCursoConEstilo(estilo));
 
 		this.estiloRepository.delete(estilo);
 	}

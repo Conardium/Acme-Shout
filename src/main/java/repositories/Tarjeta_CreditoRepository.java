@@ -14,4 +14,7 @@ public interface Tarjeta_CreditoRepository extends JpaRepository<Tarjeta_Credito
 
 	@Query("select t from Tarjeta_Credito t where t.id = ?1")
 	Collection<Tarjeta_Credito> findById(int Tarjeta_Credito);
+
+	@Query("select t from Alumno a join a.tarjetaCredito t where a.id = ?1")
+	Tarjeta_Credito findByTarjetasPorAlumno(int idAlumno);
 }

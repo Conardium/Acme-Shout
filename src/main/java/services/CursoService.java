@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import domain.Curso;
+import domain.Estilo;
 import repositories.CursoRepository;
 
 @Service
@@ -18,12 +19,9 @@ public class CursoService {
 
 	// Managed repository -------------------------------
 	@Autowired
-	private CursoRepository	cursoRepository;
+	private CursoRepository cursoRepository;
 
 	// Supporting services ------------------------------
-	//
-	@Autowired
-	private AcademiaService	academiaService;
 
 
 	// Simple CRUD methods ------------------------------
@@ -86,6 +84,62 @@ public class CursoService {
 		Collection<Curso> result;
 
 		result = this.cursoRepository.findByEstilo(estiloId);
+
+		return result;
+	}
+
+	public boolean existeCursoConEstilo(final Estilo estilo) {
+		boolean result;
+		Collection<Curso> cursos;
+
+		cursos = this.cursoRepository.findByEstilo(estilo.getId());
+		result = cursos.isEmpty();
+
+		return result;
+	}
+
+	//----- Busquedas de Min, Max, Avg y Std de Solicitudes ----
+	//--> MIN
+	public int findMinSolicitudesByCurso() {
+		int result = 0;
+
+		result = this.cursoRepository.findMinSolicitudesByCurso();
+
+		return result;
+	}
+
+	//--> AVG
+	public double findAvgSolicitudesByCurso() {
+		double result = 0f;
+
+		result = this.cursoRepository.findAvgSolicitudesByCurso();
+
+		return result;
+	}
+
+	//--> STD
+	public double findStdDevSolicitudesByCurso() {
+		double result = 0f;
+
+		result = this.cursoRepository.findStdDevSolicitudesByCurso();
+
+		return result;
+	}
+
+	//--> MAX
+	public int findMaxSolicitudesByCurso() {
+		int result = 0;
+
+		result = this.cursoRepository.findMaxSolicitudesByCurso();
+
+		return result;
+	}
+	//-------------------------------------------------------------------
+
+	public Collection<Curso> findCursosByFiltro(final String filtro) {
+		Collection<Curso> result;
+
+		result = this.findCursosByFiltro(filtro);
 
 		return result;
 	}

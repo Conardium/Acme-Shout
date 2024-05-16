@@ -20,4 +20,19 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
 
 	@Query("select c from Academia a join a.cursos c where a.id = ?1")
 	Collection<Curso> findByCursosporAcademia(int idAcademia);
+
+	@Query("select min(size(c.solicitudes)) from Curso c")
+	int findMinSolicitudesByCurso();
+
+	@Query("select avg(size(c.solicitudes)) from Curso c")
+	double findAvgSolicitudesByCurso();
+
+	@Query("select stddev(size(c.solicitudes)) from Curso c")
+	double findStdDevSolicitudesByCurso();
+
+	@Query("select max(size(c.solicitudes)) from Curso c")
+	int findMaxSolicitudesByCurso();
+
+	@Query("select distinct c from Curso c join c.estilo e where c.titulo like '%?1%' OR e.nombre LIKE '%?1%' OR e.descripcion LIKE '%?1%'")
+	Collection<Curso> findCursosByFiltro(String filtro);
 }

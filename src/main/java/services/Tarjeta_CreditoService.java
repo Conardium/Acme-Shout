@@ -67,4 +67,12 @@ public class Tarjeta_CreditoService {
 		this.tarjeta_CreditoRepository.delete(tarjeta_Credito);
 	}
 
+	// Not Simple CRUD methods ------------------------------
+	public Tarjeta_Credito findByTarjetasPorAlumno(final int idAlumno) {
+		Tarjeta_Credito result;
+
+		result = this.tarjeta_CreditoRepository.findByTarjetasPorAlumno(idAlumno);
+
+		return result;
+	}
 }
