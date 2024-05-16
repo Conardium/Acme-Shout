@@ -18,4 +18,10 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Integer> {
 	@Query("select s from Alumno a join a.suscritos s where a.id = ?1")
 	Collection<Alumno> findSuscritporByAlumno(int idAlumno);
 
+	@Query("select AVG(size(a.comentarios)) FROM Alumno a")
+	double findAvgComentariosPorAlumno();
+
+	@Query("select AVG(size(a.suscripciones)) FROM Alumno a")
+	double findAvgSuscripcionesPorAlumno();
+
 }

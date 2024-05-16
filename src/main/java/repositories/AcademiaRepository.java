@@ -48,4 +48,10 @@ public interface AcademiaRepository extends JpaRepository<Academia, Integer> {
 	@Query("select s from Academia a join a.suscritos s where a.id = ?1")
 	Collection<Academia> findSuscritporByAcademia(int idAcademia);
 
+	@Query("select AVG(size(a.comentarios)) FROM Academia a")
+	double findAvgComentariosPorAcademia();
+
+	@Query("select AVG(size(a.suscripciones)) FROM Academia a")
+	double findAvgSuscripcionesPorAcademia();
+
 }

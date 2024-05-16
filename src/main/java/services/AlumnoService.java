@@ -81,4 +81,20 @@ public class AlumnoService {
 		return result;
 	}
 
+	public double getAvgComentariosPorAlumno() {
+		double result = 0;
+
+		result = this.alumnoRepository.findAvgComentariosPorAlumno();
+
+		return result;
+	}
+
+	public double getAvgSuscripcionesPorAlumno() {
+		double result = 0;
+
+		result = this.alumnoRepository.findAvgSuscripcionesPorAlumno();
+
+		return result;
+	}
+
 }

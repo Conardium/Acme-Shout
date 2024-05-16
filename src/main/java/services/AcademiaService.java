@@ -142,4 +142,20 @@ public class AcademiaService {
 
 		return result;
 	}
+
+	public double getAvgComentariosPorAcademia() {
+		double result = 0;
+
+		result = this.academiaRepository.findAvgComentariosPorAcademia();
+
+		return result;
+	}
+
+	public double getAvgSuscripcionesPorAcademia() {
+		double result = 0;
+
+		result = this.academiaRepository.findAvgSuscripcionesPorAcademia();
+
+		return result;
+	}
 }
