@@ -58,7 +58,6 @@ public class AcademiaService {
 		result = this.academiaRepository.save(academia);
 
 		return result;
-
 	}
 
 	public void delete(final Academia academia) {
@@ -72,7 +71,7 @@ public class AcademiaService {
 	public Academia findAcademiaporCurso(final int cursoId) {
 		Academia result;
 
-		result = this.academiaRepository.findAcademiaporCurso(cursoId);
+		result = this.academiaRepository.findByAcademiaporCurso(cursoId);
 
 		return result;
 	}
