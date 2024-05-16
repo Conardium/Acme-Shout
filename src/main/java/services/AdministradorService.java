@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.transaction.Transactional;
 
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,19 +25,35 @@ public class AdministradorService {
 
 	// Simple CRUD methods ------------------------------
 	public Administrador create() {
-		return null;
+		Administrador result;
+
+		result = new Administrador();
+
+		return result;
 	}
 
 	public Collection<Administrador> findAll() {
-		return this.administradorRepository.findAll();
+		Collection<Administrador> result;
+
+		Assert.assertNotNull(this.administradorRepository);
+		result = this.administradorRepository.findAll();
+		Assert.assertNotNull(result);
+
+		return result;
 	}
 
 	public Administrador findOne(final int administradorId) {
-		return this.administradorRepository.findOne(administradorId);
+		Administrador result;
+
+		result = this.administradorRepository.findOne(administradorId);
+
+		return result;
 	}
+
 	public Administrador save(final Administrador administrador) {
 		return this.administradorRepository.save(administrador);
 	}
+
 	public void delete(final Administrador administrador) {
 		this.administradorRepository.delete(administrador);
 	}

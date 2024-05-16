@@ -25,7 +25,6 @@ public class AcademiaService {
 
 	// Simple CRUD methods ------------------------------
 	public Academia create(final Academia academia) {
-
 		Academia result;
 
 		result = new Academia();
@@ -50,6 +49,7 @@ public class AcademiaService {
 
 		return result;
 	}
+
 	public Academia save(final Academia academia) {
 		Assert.assertNotNull(academia);
 
@@ -60,6 +60,7 @@ public class AcademiaService {
 		return result;
 
 	}
+
 	public void delete(final Academia academia) {
 		Assert.assertNotNull(academia);
 		Assert.assertEquals(academia.getId(), 0);
@@ -68,7 +69,6 @@ public class AcademiaService {
 	}
 
 	// Not Simple CRUD methods ------------------------------
-
 	public Academia findAcademiaporCurso(final int cursoId) {
 		Academia result;
 
