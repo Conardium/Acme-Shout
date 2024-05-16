@@ -67,4 +67,54 @@ public class TutorialService {
 		this.tutorialRepository.delete(tutorial);
 	}
 
+	// No Simple CRUD methods ------------------------------
+
+	public Collection<Tutorial> findAllByAcademia(final int academiaId) {
+		Collection<Tutorial> result;
+
+		result = this.tutorialRepository.findAllByAcademia(academiaId);
+
+		return result;
+	}
+
+	public Tutorial findOneByAcademia(final int academiaId, final int tutorialId) {
+		Tutorial result;
+
+		result = this.tutorialRepository.findOneByAcademia(academiaId, tutorialId);
+
+		return result;
+	}
+	
+	public int findMinVecesMostrado() {
+		int result = 0;
+
+		result = this.tutorialRepository.findMinVecesMostrado();
+
+		return result;
+	}
+
+	public double findAvgVecesMostrado() {
+		double result = 0;
+
+		result = this.tutorialRepository.findAvgVecesMostrado();
+
+		return result;
+	}
+
+	public int findMaxVecesMostrado() {
+		int result = 0;
+
+		result = this.tutorialRepository.findMaxVecesMostrado();
+
+		return result;
+	}
+
+	public Collection<Tutorial> findAllOrderByVecesMostradoDesc() {
+		Collection<Tutorial> result;
+
+		result = this.tutorialRepository.findAllOrderByVecesMostradoDesc();
+
+		return result;
+	}
+
 }

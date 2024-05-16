@@ -79,5 +79,60 @@ public class AcademiaService {
 
 		return result;
 	}
+	public int findMinCursosByAcademia() {
+		int result = 0;
 
+		result = this.academiaRepository.findMinCursosByAcademia();
+
+		return result;
+	}
+
+	public double findAvgCursosByAcademia() {
+		double result = 0;
+
+		result = this.academiaRepository.findAvgCursosByAcademia();
+
+		return result;
+	}
+
+	public double findStdDevCursosByAcademia() {
+		double result = 0;
+
+		result = this.academiaRepository.findStdDevCursosByAcademia();
+
+		return result;
+	}
+
+	public int findMaxCursosByAcademia() {
+
+		int result = 0;
+
+		result = this.academiaRepository.findMaxCursosByAcademia();
+
+		return result;
+	}
+	public int findMinTutorialesByAcademia() {
+		int result = 0;
+
+		result = this.academiaRepository.findMinTutorialesByAcademia();
+
+		return result;
+	}
+
+	public double findAvgTutorialesByAcademia() {
+		double result = 0;
+
+		result = this.academiaRepository.findAvgTutorialesByAcademia();
+
+		return result;
+	}
+
+	public int findMaxTutorialesByAcademia() {
+
+		int result = 0;
+
+		result = this.academiaRepository.findMaxTutorialesByAcademia();
+
+		return result;
+	}
 }
