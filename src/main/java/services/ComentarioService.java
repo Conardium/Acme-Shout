@@ -72,5 +72,19 @@ public class ComentarioService {
 	}
 
 	// Not Simple CRUD methods ------------------------------
+	public Collection<Comentario> findAllComentariosByAlumno(final int idAlumno) {
+		Collection<Comentario> result;
 
+		result = this.comentarioRepository.findAllComentariosByAlumno(idAlumno);
+
+		return result;
+	}
+
+	public Collection<Comentario> findAllOrderByfechaPublicacionDesc() {
+		Collection<Comentario> result;
+
+		result = this.comentarioRepository.findAllOrderByfechaPublicacionDesc();
+
+		return result;
+	}
 }
