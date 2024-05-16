@@ -51,10 +51,22 @@ public class AdministradorService {
 	}
 
 	public Administrador save(final Administrador administrador) {
-		return this.administradorRepository.save(administrador);
+		Assert.assertNotNull(administrador);
+
+		Administrador result;
+
+		result = this.administradorRepository.save(administrador);
+
+		return result;
 	}
 
 	public void delete(final Administrador administrador) {
+		Assert.assertNotNull(administrador);
+		Assert.assertEquals(administrador.getId(), 0);
+
 		this.administradorRepository.delete(administrador);
 	}
+
+	// Not Simple CRUD methods ------------------------------
+
 }

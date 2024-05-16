@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.transaction.Transactional;
 
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,20 +25,48 @@ public class ComentarioService {
 
 	// Simple CRUD methods ------------------------------
 	public Comentario create() {
-		return null;
+		Comentario result;
+
+		result = new Comentario();
+
+		return result;
 	}
 
 	public Collection<Comentario> findAll() {
-		return this.comentarioRepository.findAll();
+		Collection<Comentario> result;
+
+		Assert.assertNotNull(this.comentarioRepository);
+		result = this.comentarioRepository.findAll();
+		Assert.assertNotNull(result);
+
+		return result;
 	}
 
 	public Comentario findOne(final int comentarioId) {
-		return this.comentarioRepository.findOne(comentarioId);
+		Comentario result;
+
+		result = this.comentarioRepository.findOne(comentarioId);
+
+		return result;
 	}
+
 	public Comentario save(final Comentario comentario) {
-		return this.comentarioRepository.save(comentario);
+		Assert.assertNotNull(comentario);
+
+		Comentario result;
+
+		result = this.comentarioRepository.save(comentario);
+
+		return result;
 	}
+
 	public void delete(final Comentario comentario) {
+		Assert.assertNotNull(comentario);
+		Assert.assertEquals(comentario.getId(), 0);
+
 		this.comentarioRepository.delete(comentario);
 	}
+
+	// Not Simple CRUD methods ------------------------------
+
 }
