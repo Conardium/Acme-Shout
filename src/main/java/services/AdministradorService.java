@@ -24,6 +24,10 @@ public class AdministradorService {
 
 
 	// Simple CRUD methods ------------------------------
+	public AdministradorService() {
+		super();
+	}
+
 	public Administrador create() {
 		Administrador result;
 

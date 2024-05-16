@@ -24,6 +24,10 @@ public class ComentarioService {
 
 
 	// Simple CRUD methods ------------------------------
+	public ComentarioService() {
+		super();
+	}
+
 	public Comentario create() {
 		Comentario result;
 

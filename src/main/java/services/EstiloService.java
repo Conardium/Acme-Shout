@@ -25,8 +25,16 @@ public class EstiloService {
 
 
 	// Simple CRUD methods ------------------------------
+	public EstiloService() {
+		super();
+	}
+
 	public Estilo create() {
-		return null;
+		Estilo result;
+
+		result = new Estilo();
+
+		return result;
 	}
 	public Collection<Estilo> findAll() {
 		Collection<Estilo> result;

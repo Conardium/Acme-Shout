@@ -24,6 +24,10 @@ public class AlumnoService {
 
 
 	// Simple CRUD methods ------------------------------
+	public AlumnoService() {
+		super();
+	}
+
 	public Alumno create() {
 		Alumno result;
 

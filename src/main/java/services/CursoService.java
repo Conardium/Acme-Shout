@@ -27,6 +27,10 @@ public class CursoService {
 
 
 	// Simple CRUD methods ------------------------------
+	public CursoService() {
+		super();
+	}
+
 	public Curso create() {
 		Curso result;
 

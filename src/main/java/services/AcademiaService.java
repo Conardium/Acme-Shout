@@ -24,6 +24,10 @@ public class AcademiaService {
 
 
 	// Simple CRUD methods ------------------------------
+	public AcademiaService() {
+		super();
+	}
+
 	public Academia create() {
 		Academia result;
 
