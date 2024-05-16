@@ -25,6 +25,9 @@ public class Tarjeta_CreditoService {
 
 
 	// Simple CRUD methods ------------------------------
+	public Tarjeta_CreditoService() {
+		super();
+	}
 	public Tarjeta_Credito create() {
 		Tarjeta_Credito result;
 

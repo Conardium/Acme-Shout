@@ -25,6 +25,9 @@ public class TutorialService {
 
 
 	// Simple CRUD methods ------------------------------
+	public TutorialService() {
+		super();
+	}
 	public Tutorial create() {
 		Tutorial result;
 

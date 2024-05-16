@@ -25,6 +25,9 @@ public class SolicitudService {
 
 
 	// Simple CRUD methods ------------------------------
+	public SolicitudService() {
+		super();
+	}
 	public Solicitud create() {
 		Solicitud result;
 
