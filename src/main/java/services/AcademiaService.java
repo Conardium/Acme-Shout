@@ -24,7 +24,7 @@ public class AcademiaService {
 
 
 	// Simple CRUD methods ------------------------------
-	public Academia create(final Academia academia) {
+	public Academia create() {
 		Academia result;
 
 		result = new Academia();

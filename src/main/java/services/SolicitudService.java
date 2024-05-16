@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.transaction.Transactional;
 
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,18 +26,41 @@ public class SolicitudService {
 
 	// Simple CRUD methods ------------------------------
 	public Solicitud create() {
-		return null;
+		Solicitud result;
+
+		result = new Solicitud();
+
+		return result;
 	}
 	public Collection<Solicitud> findAll() {
-		return this.solicitudRepository.findAll();
+		Collection<Solicitud> result;
+
+		Assert.assertNotNull(this.solicitudRepository);
+		result = this.solicitudRepository.findAll();
+		Assert.assertNotNull(result);
+
+		return result;
 	}
 	public Solicitud findOne(final int solicitudId) {
-		return this.solicitudRepository.findOne(solicitudId);
+		Solicitud result;
+
+		result = this.solicitudRepository.findOne(solicitudId);
+
+		return result;
 	}
 	public Solicitud save(final Solicitud solicitud) {
-		return this.solicitudRepository.save(solicitud);
+		Assert.assertNotNull(solicitud);
+
+		Solicitud result;
+
+		result = this.solicitudRepository.save(solicitud);
+
+		return result;
 	}
 	public void delete(final Solicitud solicitud) {
+		Assert.assertNotNull(solicitud);
+		Assert.assertEquals(solicitud.getId(), 0);
+
 		this.solicitudRepository.delete(solicitud);
 	}
 
