@@ -1,16 +1,15 @@
 
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
 
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import domain.Academia;
-import domain.Curso;
 import repositories.AcademiaRepository;
 
 @Service
@@ -25,41 +24,57 @@ public class AcademiaService {
 
 
 	// Simple CRUD methods ------------------------------
-	public Academia create() {
-		return null;
+	public Academia create(final Academia academia) {
+
+		Academia result;
+
+		result = new Academia();
+
+		return result;
 	}
 
 	public Collection<Academia> findAll() {
-		return this.academiaRepository.findAll();
+		Collection<Academia> result;
+
+		Assert.assertNotNull(this.academiaRepository);
+		result = this.academiaRepository.findAll();
+		Assert.assertNotNull(result);
+
+		return result;
 	}
 
 	public Academia findOne(final int academiaId) {
-		return this.academiaRepository.findOne(academiaId);
+		Academia result;
+
+		result = this.academiaRepository.findOne(academiaId);
+
+		return result;
 	}
 	public Academia save(final Academia academia) {
-		return this.academiaRepository.save(academia);
+		Assert.assertNotNull(academia);
+
+		Academia result;
+
+		result = this.academiaRepository.save(academia);
+
+		return result;
+
 	}
 	public void delete(final Academia academia) {
+		Assert.assertNotNull(academia);
+		Assert.assertEquals(academia.getId(), 0);
+
 		this.academiaRepository.delete(academia);
 	}
 
 	// Not Simple CRUD methods ------------------------------
 
 	public Academia findAcademiaporCurso(final int cursoId) {
+		Academia result;
 
-		final ArrayList<Academia> academias = new ArrayList<Academia>(this.academiaRepository.findAll());
-		final int numAcademias = academias.size();
+		result = this.academiaRepository.findAcademiaporCurso(cursoId);
 
-		for (int i = 0; i < numAcademias; i++) {
-			final ArrayList<Curso> cursos = new ArrayList<Curso>(academias.get(i).getCursos());
-			final int numCursos = cursos.size();
-
-			for (int j = 0; j < numCursos; j++)
-				if (cursos.get(j).getId() == cursoId)
-					return academias.get(i);
-		}
-
-		return null;
+		return result;
 	}
 
 }
