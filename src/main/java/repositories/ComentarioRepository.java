@@ -26,4 +26,5 @@ public interface ComentarioRepository extends JpaRepository<Comentario, Integer>
 
 	@Query("select c from Comentario c order by c.fechaPublicacion desc")
 	Collection<Comentario> findAllOrderByfechaPublicacionDesc();
+
 }

@@ -135,4 +135,11 @@ public class AcademiaService {
 
 		return result;
 	}
+	public Collection<Academia> findSuscritporByAcademia(final int academiaId) {
+		Collection<Academia> result;
+
+		result = this.academiaRepository.findSuscritporByAcademia(academiaId);
+
+		return result;
+	}
 }

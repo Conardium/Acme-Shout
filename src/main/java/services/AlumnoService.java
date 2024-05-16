@@ -73,4 +73,12 @@ public class AlumnoService {
 
 	// Not Simple CRUD methods ------------------------------
 
+	public Collection<Alumno> findSuscritporByAlumno(final int alumnoId) {
+		Collection<Alumno> result;
+
+		result = this.alumnoRepository.findSuscritporByAlumno(alumnoId);
+
+		return result;
+	}
+
 }

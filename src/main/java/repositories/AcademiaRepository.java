@@ -44,4 +44,8 @@ public interface AcademiaRepository extends JpaRepository<Academia, Integer> {
 
 	@Query("select MAX(size(a.tutoriales)) FROM Academia a")
 	int findMaxTutorialesByAcademia();
+
+	@Query("select s from Academia a join a.suscritos s where a.id = ?1")
+	Collection<Academia> findSuscritporByAcademia(int idAcademia);
+
 }
