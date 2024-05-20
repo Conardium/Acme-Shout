@@ -72,5 +72,4 @@ public class SolicitudService {
 
 		this.solicitudRepository.delete(solicitud);
 	}
-
 }
