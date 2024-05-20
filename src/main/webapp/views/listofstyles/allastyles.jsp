@@ -11,31 +11,25 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Lista de Academias</title>
+    <title>Lista de Estilos</title>
 </head>
 <body>
-    <h1>Lista de Academias</h1>
+    <h1>Lista de Estilos</h1>
     <table border="1">
         <thead>
             <tr>
-                <th>Nombre Comercial</th>
-                <th>Persona al cargo</th>
-                <th>Correo</th>
-                <th>Nombre Comercial</th>
-                <th>Dirección Postal</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
                 <th>Cursos</th>
             </tr>
         </thead>
         <tbody>
-            <jstl:forEach var="academia" items="${academias}">
+            <jstl:forEach var="estilo" items="${estilos}">
                 <tr>
-                    <td>${academia.nombreComercial}</td>
-                    <td>${academia.nombre} ${academia.apellidos}</td>
-                    <td>${academia.correo}</td>
-                    <td>${academia.telefono}</td>
-                    <td>${academia.direccionPostal}</td>
+                    <td>${estilo.nombre}</td>
+                    <td>${estilo.descripcion}</td>
                     <td>
-                        <form action="${pageContext.request.contextPath}/coursesbyacademy/${academia.id}" method="get">
+                        <form action="${pageContext.request.contextPath}/coursesbystyle/${estilo.id}" method="get">
                             <button type="submit">Ver Cursos</button>
                         </form>
                     </td>
