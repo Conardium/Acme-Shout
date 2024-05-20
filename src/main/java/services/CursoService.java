@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -56,6 +57,12 @@ public class CursoService {
 	}
 	public Curso save(final Curso curso) {
 		Assert.assertNotNull(curso);
+
+		Date currentMoment;
+		currentMoment = new Date();
+
+		Assert.assertTrue(curso.getFechaInicio().after(currentMoment));
+		Assert.assertTrue(curso.getFechaFin().after(curso.getFechaInicio()));
 
 		Curso result;
 
