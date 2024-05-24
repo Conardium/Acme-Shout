@@ -40,7 +40,7 @@ public class EstiloController extends AbstractController {
 
 	// Action-1 ---------------------------------------------------------------
 
-	@RequestMapping("/action-1")
+	@RequestMapping("/action-1D")
 	public ModelAndView action1() {
 		ModelAndView result;
 
@@ -51,7 +51,7 @@ public class EstiloController extends AbstractController {
 
 	// Action-2 ---------------------------------------------------------------
 
-	@RequestMapping("/action-2")
+	@RequestMapping("/action-2D")
 	public ModelAndView action2() {
 		ModelAndView result;
 

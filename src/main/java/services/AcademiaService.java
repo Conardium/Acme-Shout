@@ -135,13 +135,6 @@ public class AcademiaService {
 
 		return result;
 	}
-	public Collection<Academia> findSuscritporByAcademia(final int academiaId) {
-		Collection<Academia> result;
-
-		result = this.academiaRepository.findSuscritporByAcademia(academiaId);
-
-		return result;
-	}
 
 	public double getAvgComentariosPorAcademia() {
 		double result = 0;
@@ -151,10 +144,10 @@ public class AcademiaService {
 		return result;
 	}
 
-	public double getAvgSuscripcionesPorAcademia() {
+	public double getAvgSolicitudesPorAcademia() {
 		double result = 0;
 
-		result = this.academiaRepository.findAvgSuscripcionesPorAcademia();
+		result = this.academiaRepository.findAvgSuscriptoresPorAcademia();
 
 		return result;
 	}

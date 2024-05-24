@@ -72,4 +72,12 @@ public class SolicitudService {
 
 		this.solicitudRepository.delete(solicitud);
 	}
+
+	public Collection<Solicitud> findAllSolicitudesByAcademia(final int academiaId) {
+		Collection<Solicitud> result;
+
+		result = this.solicitudRepository.findAllSolicitudesByAcademia(academiaId);
+
+		return result;
+	}
 }

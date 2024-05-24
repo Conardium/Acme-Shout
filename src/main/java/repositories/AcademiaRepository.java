@@ -24,34 +24,31 @@ public interface AcademiaRepository extends JpaRepository<Academia, Integer> {
 	@Query("select a from Academia a join a.tutoriales t where t.id = ?1")
 	Academia findByAcademiaporTutorial(int idTutorial);
 
-	@Query("select MIN(size(a.cursos)) FROM Academia a")
+	@Query("select MIN((a.cursos.size)) FROM Academia a")
 	int findMinCursosByAcademia();
 
-	@Query("select AVG(size(a.cursos)) FROM Academia a")
+	@Query("select AVG((a.cursos.size)) FROM Academia a")
 	double findAvgCursosByAcademia();
 
-	@Query("select STDDEV(size(a.cursos)) FROM Academia a")
+	@Query("select STDDEV((a.cursos.size)) FROM Academia a")
 	double findStdDevCursosByAcademia();
 
-	@Query("select MAX(size(a.cursos)) FROM Academia a")
+	@Query("select MAX((a.cursos.size)) FROM Academia a")
 	int findMaxCursosByAcademia();
 
-	@Query("select MIN(size(a.tutoriales)) FROM Academia a")
+	@Query("select MIN((a.tutoriales.size)) FROM Academia a")
 	int findMinTutorialesByAcademia();
 
-	@Query("select AVG(size(a.tutoriales)) FROM Academia a")
+	@Query("select AVG((a.tutoriales.size)) FROM Academia a")
 	double findAvgTutorialesByAcademia();
 
-	@Query("select MAX(size(a.tutoriales)) FROM Academia a")
+	@Query("select MAX((a.tutoriales.size)) FROM Academia a")
 	int findMaxTutorialesByAcademia();
 
-	@Query("select s from Academia a join a.suscritos s where a.id = ?1")
-	Collection<Academia> findSuscritporByAcademia(int idAcademia);
-
-	@Query("select AVG(size(a.comentarios)) FROM Academia a")
+	@Query("select AVG((a.comentarios.size)) FROM Academia a")
 	double findAvgComentariosPorAcademia();
 
-	@Query("select AVG(size(a.suscripciones)) FROM Academia a")
-	double findAvgSuscripcionesPorAcademia();
+	@Query("select AVG((a.suscritos.size)) FROM Academia a")
+	double findAvgSuscriptoresPorAcademia();
 
 }

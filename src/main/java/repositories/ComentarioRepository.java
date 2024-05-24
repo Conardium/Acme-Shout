@@ -15,9 +15,6 @@ public interface ComentarioRepository extends JpaRepository<Comentario, Integer>
 	@Query("select c from Comentario c where c.id = ?1")
 	Collection<Comentario> findById(int idComentario);
 
-	@Query("select c.* from Comentario c inner join Alumno a ON c.actor_id = a.id where a.id = ?1")
-	Collection<Comentario> findByIdAlumno(int idAlumno);
-
 	@Query("select c from Alumno a join a.comentarios c where a.id = ?1")
 	Collection<Comentario> findAllComentariosByAlumno(int idAlumno);
 

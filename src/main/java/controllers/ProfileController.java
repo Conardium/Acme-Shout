@@ -1,8 +1,8 @@
 /*
  * ProfileController.java
- * 
+ *
  * Copyright (C) 2018 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -18,9 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/profile")
 public class ProfileController extends AbstractController {
 
-	// Action-1 ---------------------------------------------------------------		
+	// Action-1 ---------------------------------------------------------------
 
-	@RequestMapping("/action-1")
+	@RequestMapping("/action-1E")
 	public ModelAndView action1() {
 		ModelAndView result;
 
@@ -29,9 +29,9 @@ public class ProfileController extends AbstractController {
 		return result;
 	}
 
-	// Action-2 ---------------------------------------------------------------		
+	// Action-2 ---------------------------------------------------------------
 
-	@RequestMapping("/action-2")
+	@RequestMapping("/action-2E")
 	public ModelAndView action2() {
 		ModelAndView result;
 
@@ -40,7 +40,7 @@ public class ProfileController extends AbstractController {
 		return result;
 	}
 
-	// Action-2 ---------------------------------------------------------------		
+	// Action-2 ---------------------------------------------------------------
 
 	@RequestMapping("/action-3")
 	public ModelAndView action3() {
