@@ -18,11 +18,13 @@
 				<td><form:input path="titulo" />${requestScope.Curso.titulo}</td>
 				<td><form:errors path="titulo" cssClass="error" /></td>
 			</tr>
-			<td><form:label path="estilo">Estilo:</form:label></td>
-			<td><form:select path="estilo">
-					<form:options items="${estilos}" itemValue="id" itemLabel="nombre" />
-				</form:select></td>
-			<td><form:errors path="estilo" cssClass="error" /></td>
+			<tr>
+				<td><form:label path="estilo">Estilo:</form:label></td>
+				<td><form:select path="estilo">
+						<form:options items="${estilos}" itemValue="id" itemLabel="nombre" />
+					</form:select></td>
+				<td><form:errors path="estilo" cssClass="error" /></td>
+			</tr>
 			<tr>
 				<td><form:label path="nivel">Nivel:</form:label></td>
 				<td><form:input path="nivel" />${requestScope.Curso.nivel}</td>
