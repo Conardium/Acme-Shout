@@ -46,7 +46,7 @@ public class ComentarioController {
 		return "redirect:/comentarios";
 	}
 
-	@RequestMapping("/borrar/{id")
+	@RequestMapping("/borrar/{id}")
 	public String borrarComentario(@PathVariable("id") final int id) {
 		this.comentarioService.delete(id);
 		return "redirect:/comentarios";
