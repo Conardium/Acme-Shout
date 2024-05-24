@@ -1,8 +1,8 @@
 /*
  * WelcomeController.java
- * 
+ *
  * Copyright (C) 2018 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -28,10 +28,11 @@ public class WelcomeController extends AbstractController {
 		super();
 	}
 
-	// Index ------------------------------------------------------------------		
+	// Index ------------------------------------------------------------------
 
 	@RequestMapping(value = "/index")
-	public ModelAndView index(@RequestParam(required = false, defaultValue = "John Doe") final String name) {
+	public ModelAndView index(@RequestParam(required = false, defaultValue = "Anonimo") final String name) {
+
 		ModelAndView result;
 		SimpleDateFormat formatter;
 		String moment;
