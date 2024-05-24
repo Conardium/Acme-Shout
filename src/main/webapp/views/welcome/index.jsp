@@ -1,12 +1,3 @@
-<%--
- * index.jsp
- *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- --%>
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
@@ -19,3 +10,55 @@
 <p><spring:message code="welcome.greeting.prefix" /> ${name}<spring:message code="welcome.greeting.suffix" /></p>
 
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menú Principal</title>
+    <style>
+        .button-container {
+            margin: 20px;
+        }
+        .button-container h3 {
+            margin-bottom: 10px;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Menú Principal</h1>
+
+    <div class="button-container">
+        <h3>Registrarse en el sistema como academia o alumno/a</h3>
+        <form action="${pageContext.request.contextPath}/iniciarSesion" method="get">
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+
+    <div class="button-container">
+        <h3>Navegar por el catálogo de academias</h3>
+        <form action="${pageContext.request.contextPath}/listaAcademia" method="get">
+            <button type="submit">Ver Academias</button>
+        </form>
+    </div>
+
+    <div class="button-container">
+        <h3>Navegar por el catálogo de cursos</h3>
+        <form action="${pageContext.request.contextPath}/listaCurso" method="get">
+            <button type="submit">Ver Cursos</button>
+        </form>
+    </div>
+
+    <div class="button-container">
+        <h3>Navegar por la tipología de estilos</h3>
+        <form action="${pageContext.request.contextPath}/listaEstilos" method="get">
+            <button type="submit">Ver Estilos</button>
+        </form>
+    </div>
+
+</body>
+</html>

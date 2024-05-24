@@ -59,4 +59,5 @@ public class Tutorial extends DomainEntity {
 	public void setContador(final int contador) {
 		this.contador = contador;
 	}
+
 }
