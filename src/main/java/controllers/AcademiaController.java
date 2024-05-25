@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AcademiaService;
 
 @Controller
-@RequestMapping("/customer")
+@RequestMapping("/academia/*")
 public class AcademiaController extends AbstractController {
 
 	@Autowired
@@ -33,11 +33,11 @@ public class AcademiaController extends AbstractController {
 
 	// AllAcademies ---------------------------------------------------------------
 
-	@RequestMapping("/allacademies")
+	@RequestMapping(value = "/allacademies")
 	public ModelAndView action1() {
 		ModelAndView result;
 
-		result = new ModelAndView("listofacademies/allacademies");
+		result = new ModelAndView("/listofacademies/allacademies");
 		result.addObject("academias", this.academiaService.findAll());
 
 		return result;

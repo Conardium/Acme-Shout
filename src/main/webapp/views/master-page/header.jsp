@@ -1,12 +1,3 @@
-<%--
- * header.jsp
- *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- --%>
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
@@ -30,7 +21,17 @@
 			</li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('CUSTOMER')">
+		<security:authorize access="hasRole('ESTUDIANTE')">
+			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
+					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
+				</ul>
+			</li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('ACADEMIA')">
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
 				<ul>
 					<li class="arrow"></li>
