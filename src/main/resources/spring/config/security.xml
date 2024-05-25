@@ -40,8 +40,10 @@
 		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
 		
 		<security:intercept-url pattern="/views/create_edit_actor/sing_up_academy.jsp" access="permitAll" />
-		<security:intercept-url pattern="/views/create_edit_actor/sing_up_student.jsp" access="permitAll" /> 
-		<security:intercept-url pattern="/views/listofacademies/allacademies.jsp" access="permitAll" /> 
+		<security:intercept-url pattern="/views/create_edit_actor/sing_up_student.jsp" access="permitAll" />
+		
+		<security:intercept-url pattern="/academia/allacademies.do" access="permitAll" />
+				
 		<security:intercept-url pattern="/views/listofcourses/allcourses.jsp" access="permitAll" /> 
 		<security:intercept-url pattern="/views/listofstyles/allstyles.jsp" access="permitAll" />
 		<security:intercept-url pattern="/views/listofcourses/allcoursesfromacademy.jsp" access="permitAll" /> 

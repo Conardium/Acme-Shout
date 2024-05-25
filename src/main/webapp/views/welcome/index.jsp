@@ -41,7 +41,7 @@
 
     <div class="button-container">
         <h3>Navegar por el catálogo de academias</h3>
-        <form action="${pageContext.request.contextPath}/academia/allacademies" method="get">
+        <form action="${pageContext.request.contextPath}/academia/allacademies.do" method="get">
             <button type="submit">Ver Academias</button>
         </form>
     </div>
