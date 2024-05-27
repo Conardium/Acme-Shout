@@ -14,6 +14,7 @@
     <title>Lista de Estilos</title>
 </head>
 <body>
+<button type="button" onclick="goBack()">Volver</button>
     <h1>Lista de Estilos</h1>
     <table border="1">
         <thead>
@@ -38,5 +39,6 @@
             </jstl:forEach>
         </tbody>
     </table>
+    	<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>

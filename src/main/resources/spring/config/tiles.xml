@@ -30,7 +30,6 @@
 		<value>/views/dashboard/tiles.xml</value>
 		
 		<value>/views/create_application/tiles.xml</value>
-		<value>/views/create_application/tiles.xml</value>
 		<value>/views/create_comment/tiles.xml</value>
 		
 		<value>/views/create_edit_actor/tiles.xml</value>

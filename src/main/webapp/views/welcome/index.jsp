@@ -34,8 +34,11 @@
 
     <div class="button-container">
         <h3>Registrarse en el sistema como academia o alumno/a</h3>
-        <form action="${pageContext.request.contextPath}/iniciarSesion" method="get">
-            <button type="submit">Registrarse</button>
+        <form action="${pageContext.request.contextPath}/alumno/form_sing_up_student.do" method="get">
+            <button type="submit">Registrarse como Alumno</button>
+        </form>
+        <form action="${pageContext.request.contextPath}/academia/form_sing_up_academy.do" method="get">
+            <button type="submit">Registrarse como Academia</button>
         </form>
     </div>
 

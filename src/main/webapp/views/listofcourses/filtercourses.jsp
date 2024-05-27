@@ -16,6 +16,7 @@
 <title>Filtro de Cursos</title>
 </head>
 <body>
+<button type="button" onclick="goBack()">Volver</button>
     <h1>Lista de Cursos</h1>
     
     <!-- Formulario de búsqueda -->
@@ -67,5 +68,7 @@
             </c:forEach>
         </tbody>
     </table>
+    	<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
+    
 </body>
 </html>

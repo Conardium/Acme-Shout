@@ -1,22 +1,23 @@
-/*
- * AdministratorController.java
- *
- * Copyright (C) 2018 Universidad de Sevilla
- *
- * The use of this project is hereby constrained to the conditions of the
- * TDG Licence, a copy of which you may download from
- * http://www.tdg-seville.info/License.html
- */
 
 package controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Alumno;
+import services.AlumnoService;
+
 @Controller
-@RequestMapping("/administrator")
+@RequestMapping("/alumno")
 public class AlumnoController extends AbstractController {
+
+	@Autowired
+	private AlumnoService alumnoService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -24,13 +25,30 @@ public class AlumnoController extends AbstractController {
 		super();
 	}
 
-	// Action-1 ---------------------------------------------------------------
+	// Crear alumno form ---------------------------------------------------------------
 
-	@RequestMapping("/action-1A")
-	public ModelAndView action1() {
+	@RequestMapping("/form_sing_up_student")
+	public ModelAndView form_sing_up_student() {
 		ModelAndView result;
 
-		result = new ModelAndView("administrator/action-1");
+		result = new ModelAndView("create_edit_actor/form_sing_up_student");
+		result.addObject("alumno", this.alumnoService.create());
+
+		return result;
+	}
+
+	// Crear alumno ---------------------------------------------------------------
+
+	@RequestMapping("/sing_up_student")
+	public ModelAndView sing_up_student(@ModelAttribute("alumno") final Alumno alumno, final BindingResult resultado) {
+		ModelAndView result;
+
+		result = new ModelAndView("welcome/index");
+
+		if (resultado.hasErrors())
+			result = new ModelAndView("create_edit_actor/form_sing_up_student");
+		else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}

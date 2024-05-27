@@ -14,6 +14,7 @@
 <title>Academia</title>
 </head>
 <body>
+<button type="button" onclick="goBack()">Volver</button>
 	<h2>Academia</h2>
 	<table>
 		<!-- Campos Actor -->
@@ -44,5 +45,7 @@
 			<td><jstl:out value="${academia.nombreComercial}" /></td>
 		</tr>
 	</table>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
+	
 </body>
 </html>
