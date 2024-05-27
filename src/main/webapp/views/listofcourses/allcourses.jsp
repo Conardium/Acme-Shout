@@ -29,9 +29,9 @@
 				<th>Día de la Semana</th>
 				<th>Hora</th>
 				<th>Academia</th>
-				<!--<jstl:if test="${session de alumno}">
+				<jstl:if test="${session de alumno}">
 					<th>Solicitud</th>
-				</jstl:if>-->
+				</jstl:if>
 			</tr>
 		</thead>
 		<tbody>
@@ -53,7 +53,7 @@
 							<button type="submit">Ver Academia</button>
 						</form>
 					</td>
-					<!--<jstl:if test="${session de alumno && no existe solicitud ya establecida}  ">
+					<jstl:if test="${session de alumno && no existe solicitud ya establecida}  ">
 						<td>
 							<form
 								action="${pageContext.request.contextPath}/applicationcourse/${curso.id}"
@@ -61,7 +61,7 @@
 								<button type="submit">Solicitar</button>
 							</form>
 						</td>
-					</jstl:if> -->
+					</jstl:if>					
 				</tr>
 			</jstl:forEach>
 		</tbody>
