@@ -29,7 +29,7 @@
 				<th>Día de la Semana</th>
 				<th>Hora</th>
 				<th>Academia</th>
-				<jstl:if test="${session de alumno}">
+				<jstl:if test="${esAlumno}">
 					<th>Solicitud</th>
 				</jstl:if>
 			</tr>
@@ -48,12 +48,13 @@
 					<td><fmt:formatDate value="${curso.hora}" pattern="HH:mm:ss" /></td>
 					<td>
 						<form
-							action="${pageContext.request.contextPath}/academiesbycourse/${curso.id}"
+							action="${pageContext.request.contextPath}/academia/academybycourse.do"
 							method="get">
+							<input type="hidden" name="cursoId" value="${curso.id}" />
 							<button type="submit">Ver Academia</button>
 						</form>
 					</td>
-					<jstl:if test="${session de alumno && no existe solicitud ya establecida}  ">
+					<jstl:if test="${esAlumno && !yaSolicitada && !yaInscrito}  ">
 						<td>
 							<form
 								action="${pageContext.request.contextPath}/applicationcourse/${curso.id}"

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AcademiaService;
@@ -28,12 +29,21 @@ public class AcademiaController extends AbstractController {
 	@RequestMapping(value = "/allacademies", method = RequestMethod.GET)
 	public ModelAndView allacademies() {
 
-		System.out.println("Entro2");
-
 		ModelAndView result;
 
 		result = new ModelAndView("listofacademies/allacademies");
 		result.addObject("academias", this.academiaService.findAll());
+
+		return result;
+	}
+
+	@RequestMapping(value = "/academybycourse", method = RequestMethod.GET)
+	public ModelAndView academybycourse(@RequestParam(required = true) final int cursoId) {
+
+		ModelAndView result;
+
+		result = new ModelAndView("academia/academybycourse");
+		result.addObject("academia", this.academiaService.findAcademiaporCurso(cursoId));
 
 		return result;
 	}

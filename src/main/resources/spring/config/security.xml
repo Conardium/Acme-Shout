@@ -45,7 +45,10 @@
 		<security:intercept-url pattern="/academia/allacademies.do" access="permitAll" />
 		<security:intercept-url pattern="/curso/allcourses.do" access="permitAll" />
 		<security:intercept-url pattern="/estilo/allstyles.do" access="permitAll" />
-
+		
+		<security:intercept-url pattern="/curso/allcoursesfromacademy.do" access="permitAll" />
+		<security:intercept-url pattern="/academia/academybycourse.do" access="permitAll" />
+		<security:intercept-url pattern="/curso/allcoursesfromstyle.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 

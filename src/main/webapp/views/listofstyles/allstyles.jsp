@@ -29,7 +29,8 @@
                     <td>${estilo.nombre}</td>
                     <td>${estilo.descripcion}</td>
                     <td>
-                        <form action="${pageContext.request.contextPath}/coursesbystyle/${estilo.id}" method="get">
+                        <form action="${pageContext.request.contextPath}/curso/allcoursesfromstyle.do" method="get">
+                        	<input type="hidden" name="estiloId" value="${estilo.id}" />
                             <button type="submit">Ver Cursos</button>
                         </form>
                     </td>

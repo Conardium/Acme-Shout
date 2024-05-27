@@ -28,10 +28,10 @@
 				<th>Fecha de Fin</th>
 				<th>Día de la Semana</th>
 				<th>Hora</th>
-				<jstl:if test="${session de alumno}">
+				<jstl:if test="${esAlumno}">
 					<th>Solicitud</th>
 				</jstl:if>
-				<jstl:if test="${session de academia que sea esta}  ">
+				<jstl:if test="${esAcademia}  ">
 					<th>Editar</th>
 					<th>Borrar</th>
 				</jstl:if>
@@ -50,7 +50,7 @@
 					<td>${curso.diaSemana}</td>
 					<td><fmt:formatDate value="${curso.hora}" pattern="HH:mm:ss" /></td>
 					<jstl:if
-						test="${session de alumno && no existe solicitud ya establecida}  ">
+						test="${esAlumno && !yaSolicitada && !yaInscrito}  ">
 						<td>
 							<form
 								action="${pageContext.request.contextPath}/applicationcourse/${curso.id}"
@@ -59,7 +59,7 @@
 							</form>
 						</td>
 					</jstl:if>
-					<jstl:if test="${session de academia que sea esta}  ">
+					<jstl:if test="${esAcademia}  ">
 						<td>
 							<form
 								action="${pageContext.request.contextPath}/editcourse/${curso.id}"
