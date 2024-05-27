@@ -24,8 +24,12 @@ import domain.Estilo;
 import services.EstiloService;
 
 @Controller
-@RequestMapping("/administrator")
+@RequestMapping("/estilo")
 public class EstiloController extends AbstractController {
+
+	@Autowired
+	private EstiloService estiloService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -33,18 +37,15 @@ public class EstiloController extends AbstractController {
 		super();
 	}
 
-
-	@Autowired
-	private EstiloService estiloService;  // Servicio para obtener estilos
-
-
 	// Action-1 ---------------------------------------------------------------
 
-	@RequestMapping("/action-1D")
+	@RequestMapping("/allstyles")
 	public ModelAndView action1() {
+
 		ModelAndView result;
 
-		result = new ModelAndView("administrator/action-1");
+		result = new ModelAndView("listofstyles/allstyles");
+		result.addObject("estilos", this.estiloService.findAll());
 
 		return result;
 	}

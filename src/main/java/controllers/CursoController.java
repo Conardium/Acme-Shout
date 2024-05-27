@@ -10,13 +10,20 @@
 
 package controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CursoService;
+
 @Controller
-@RequestMapping("/administrator")
+@RequestMapping("/curso")
 public class CursoController extends AbstractController {
+
+	@Autowired
+	private CursoService cursoService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -26,11 +33,13 @@ public class CursoController extends AbstractController {
 
 	// Action-1 ---------------------------------------------------------------
 
-	@RequestMapping("/action-1B")
+	@RequestMapping("/allcourses")
 	public ModelAndView action1() {
+
 		ModelAndView result;
 
-		result = new ModelAndView("administrator/action-1");
+		result = new ModelAndView("listofcourses/allcourses");
+		result.addObject("cursos", this.cursoService.findAll());
 
 		return result;
 	}

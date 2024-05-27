@@ -43,6 +43,8 @@
 		<security:intercept-url pattern="/views/create_edit_actor/sing_up_student.jsp" access="permitAll" />
 		
 		<security:intercept-url pattern="/academia/allacademies.do" access="permitAll" />
+		<security:intercept-url pattern="/curso/allcourses.do" access="permitAll" />
+		<security:intercept-url pattern="/estilo/allstyles.do" access="permitAll" />
 				
 		<security:intercept-url pattern="/views/listofcourses/allcourses.jsp" access="permitAll" /> 
 		<security:intercept-url pattern="/views/listofstyles/allstyles.jsp" access="permitAll" />

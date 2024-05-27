@@ -48,14 +48,14 @@
 
     <div class="button-container">
         <h3>Navegar por el catálogo de cursos</h3>
-        <form action="${pageContext.request.contextPath}/listaCurso" method="get">
+        <form action="${pageContext.request.contextPath}/curso/allcourses.do" method="get">
             <button type="submit">Ver Cursos</button>
         </form>
     </div>
 
     <div class="button-container">
         <h3>Navegar por la tipología de estilos</h3>
-        <form action="${pageContext.request.contextPath}/listaEstilos" method="get">
+        <form action="${pageContext.request.contextPath}/estilo/allstyles.do" method="get">
             <button type="submit">Ver Estilos</button>
         </form>
     </div>
