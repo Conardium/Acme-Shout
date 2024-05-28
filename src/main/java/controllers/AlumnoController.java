@@ -22,6 +22,18 @@ public class AlumnoController extends AbstractController {
 	private SolicitudService	solicitudService;
 
 
+	//Mostrar alumno
+
+	@RequestMapping("/show_student")
+	public ModelAndView show_academy(@RequestParam(required = true) final int studentId) {
+		ModelAndView result;
+
+		result = new ModelAndView("student/student");
+		result.addObject("student", this.alumnoService.findOne(studentId));
+
+		return result;
+	}
+
 	// Constructors -----------------------------------------------------------
 
 	public AlumnoController() {
@@ -79,7 +91,7 @@ public class AlumnoController extends AbstractController {
 		else
 			result = new ModelAndView("alumno/alumno");
 
-		this.alumnoService.save(alumno); //
+		this.alumnoService.save(alumno);
 
 		return result;
 	}

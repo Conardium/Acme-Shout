@@ -11,40 +11,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Academia</title>
+<title>Administrador</title>
 </head>
 <body>
-	<h2>Estudiante</h2>
+	<h2>Administrador</h2>
 
 	<table>
 		<!-- Campos Actor -->
 		<tr>
 			<td>Nombre:</td>
-			<td><jstl:out value="${alumno.nombre}" /></td>
+			<td><jstl:out value="${admin.nombre}" /></td>
 		</tr>
 		<tr>
 			<td>Apellidos:</td>
-			<td><jstl:out value="${alumno.apellidos}" /></td>
+			<td><jstl:out value="${admin.apellidos}" /></td>
 		</tr>
 		<tr>
 			<td>Correo:</td>
-			<td><jstl:out value="${alumno.correo}" /></td>
+			<td><jstl:out value="${admin.correo}" /></td>
 		</tr>
 		<tr>
 			<td>Teléfono:</td>
-			<td><jstl:out value="${alumno.telefono}" /></td>
+			<td><jstl:out value="${admin.telefono}" /></td>
 		</tr>
 		<tr>
 			<td>Dirección Postal:</td>
-			<td><jstl:out value="${alumno.direccionPostal}" /></td>
+			<td><jstl:out value="${admin.direccionPostal}" /></td>
 		</tr>
 	</table>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/alumno/form_edit_alumno.do'">Modificar
+		onclick="location.href='${pageContext.request.contextPath}/admin/form_edit_admin.do'">Modificar
 		Alumno</button>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/tarjeta/form_edit_tarjeta.do'">Modificar
-		Tarjeta</button>
+		onclick="location.href='${pageContext.request.contextPath}/admin/dashboard.do'">Dashboard
+		Alumno</button>
 	<button type="button" onclick="goBack()">Volver</button>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
