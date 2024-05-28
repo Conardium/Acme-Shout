@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Academia</title>
+<title>Estudiante</title>
 </head>
 <body>
 	<h2>Estudiante</h2>
@@ -45,6 +45,9 @@
 	<button type="button"
 		onclick="location.href='${pageContext.request.contextPath}/tarjeta/form_edit_tarjeta.do'">Modificar
 		Tarjeta</button>
+	<button type="button"
+		onclick="location.href='${pageContext.request.contextPath}/alumno/listarsolicitudesAlumno.do?idAlumno=${alumno.id}'">Listar Solicitudes
+	</button>
 	<button type="button" onclick="goBack()">Volver</button>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>

@@ -80,4 +80,12 @@ public class SolicitudService {
 
 		return result;
 	}
+
+	public Collection<Solicitud> findAllSolicitudesByAlumno(final int idAlumno) {
+		Collection<Solicitud> result;
+
+		result = this.solicitudRepository.findSolicitudPorAlumno(idAlumno);
+
+		return result;
+	}
 }

@@ -11,13 +11,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Alumno;
 import services.AlumnoService;
+import services.SolicitudService;
 
 @Controller
 @RequestMapping("/alumno")
 public class AlumnoController extends AbstractController {
 
 	@Autowired
-	private AlumnoService alumnoService;
+	private AlumnoService		alumnoService;
+	private SolicitudService	solicitudService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -78,6 +80,18 @@ public class AlumnoController extends AbstractController {
 			result = new ModelAndView("alumno/alumno");
 
 		this.alumnoService.save(alumno); //
+
+		return result;
+	}
+
+	//Listar Solicitudes por Alumno
+
+	@RequestMapping(value = "/listarsolicitudesAlumno")
+	public ModelAndView solicitudesPorAlumno(@RequestParam("idAlumno") final int idAlumno) {
+		ModelAndView result;
+
+		result = new ModelAndView("listofapplication/applicationbyalumn");
+		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
 
 		return result;
 	}

@@ -23,5 +23,4 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Integer> {
 
 	@Query("select AVG((a.suscritos.size)) FROM Alumno a")
 	double findAvgSuscripcionesPorAlumno();
-
 }

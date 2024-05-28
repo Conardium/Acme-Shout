@@ -53,7 +53,9 @@
 		
 		<value>/views/sign_up_in/tiles.xml</value>
 		<value>/views/style/tiles.xml</value>
-		<value>/views/tutorial/tiles.xml</value>	
+		<value>/views/tutorial/tiles.xml</value>
+		<value>/views/administrator/tiles.xml</value>
+		<value>/views/student/tiles.xml</value>	
 		
 	</util:list>
 
