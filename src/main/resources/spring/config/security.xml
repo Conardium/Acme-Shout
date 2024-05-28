@@ -35,6 +35,7 @@
 		<security:intercept-url pattern="/styles/**" access="permitAll" /> 
 
 
+		<security:intercept-url pattern="/views/**" access="permitAll" /> 
 	<!-- Vistas para todos -->
 
 		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
@@ -53,6 +54,8 @@
 		<security:intercept-url pattern="/alumno/form_sing_up_student.do" access="permitAll" />
 		<security:intercept-url pattern="/academia/sing_up_student.do" access="permitAll" />
 		<security:intercept-url pattern="/alumno/sing_up_student.do" access="permitAll" />
+		
+		<security:intercept-url pattern="/academy/show_academy.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 

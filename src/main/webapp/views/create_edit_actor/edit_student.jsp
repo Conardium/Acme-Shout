@@ -12,10 +12,10 @@
     <title>Modificar Alumno</title>
 </head>
 <body>
-
+<button type="button" onclick="goBack()">Volver</button>
 <h2>Modificar Alumno</h2>
 
-<form:form modelAttribute="alumno" method="post" action="modificar">
+<form:form modelAttribute="alumno" method="post" action="${pageContext.request.contextPath}/alumno/edit_alumno">
     <table>
         <!-- Campos Actor -->
         <tr>
@@ -61,6 +61,7 @@
         </tr>
     </table>
 </form:form>
-
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>

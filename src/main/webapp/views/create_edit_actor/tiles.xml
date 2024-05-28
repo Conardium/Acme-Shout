@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- 
- * tiles.xml
- *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
-
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
@@ -24,6 +14,20 @@
 	<definition name="create_edit_actor/form_sing_up_student" extends="master.page">	
 		<put-attribute name="title" value="Create Student" />
 		<put-attribute name="body" value="/views/create_edit_actor/sing_up_student.jsp" />
+	</definition>
+	
+		<definition name="create_edit_actor/form_edit_academy"
+		extends="master.page">
+		<put-attribute name="title" value="Modify Academy" />
+		<put-attribute name="body"
+			value="/views/create_edit_actor/edit_academy.jsp" />
+	</definition>
+
+	<definition name="create_edit_actor/form_edit_student"
+		extends="master.page">
+		<put-attribute name="title" value="Modify Student" />
+		<put-attribute name="body"
+			value="/views/create_edit_actor/edit_student.jsp" />
 	</definition>
 	
 </tiles-definitions>

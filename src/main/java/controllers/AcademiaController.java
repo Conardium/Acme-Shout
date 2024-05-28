@@ -27,10 +27,22 @@ public class AcademiaController extends AbstractController {
 		super();
 	}
 
+	//Mostrar academia
+
+	@RequestMapping("/show_academy")
+	public ModelAndView show_academy(@RequestParam(required = true) final int academiaId) {
+		ModelAndView result;
+
+		result = new ModelAndView("academy/academy");
+		result.addObject("academia", this.academiaService.findOne(academiaId));
+
+		return result;
+	}
+
 	//Crear academia form
 
 	@RequestMapping("/form_sing_up_academy")
-	public ModelAndView form_sing_up_student() {
+	public ModelAndView form_sing_up_academy() {
 		ModelAndView result;
 
 		result = new ModelAndView("create_edit_actor/form_sing_up_academy");
@@ -39,10 +51,22 @@ public class AcademiaController extends AbstractController {
 		return result;
 	}
 
+	//Modificar academia form
+
+	@RequestMapping("/form_edit_academy")
+	public ModelAndView form_edit_academy(@RequestParam(required = true) final int academiaId) {
+		ModelAndView result;
+
+		result = new ModelAndView("create_edit_actor/form_edit_academy");
+		result.addObject("academia", this.academiaService.findOne(academiaId));
+
+		return result;
+	}
+
 	//Crear academia
 
 	@RequestMapping("/sing_up_academy")
-	public ModelAndView sing_up_student(@ModelAttribute("academia") final Academia academia, final BindingResult resultado) {
+	public ModelAndView sing_up_academy(@ModelAttribute("academia") final Academia academia, final BindingResult resultado) {
 		ModelAndView result;
 
 		if (resultado.hasErrors())
@@ -50,10 +74,28 @@ public class AcademiaController extends AbstractController {
 		else
 			result = new ModelAndView("welcome/index");
 
+		this.academiaService.save(academia);
+
 		return result;
 	}
 
-	// AllAcademies ---------------------------------------------------------------
+	//Modificar academia
+
+	@RequestMapping("/edit_academy")
+	public ModelAndView edit_academy(@ModelAttribute("academia") final Academia academia, final BindingResult resultado) {
+		ModelAndView result;
+
+		if (resultado.hasErrors())
+			result = new ModelAndView("create_edit_actor/form_edit_academy");
+		else
+			result = new ModelAndView("academy/academy");
+
+		this.academiaService.save(academia);
+
+		return result;
+	}
+
+	// Todas las academias ---------------------------------------------------------------
 
 	@RequestMapping(value = "/allacademies", method = RequestMethod.GET)
 	public ModelAndView allacademies() {
@@ -65,6 +107,8 @@ public class AcademiaController extends AbstractController {
 
 		return result;
 	}
+
+	//Academia por curso
 
 	@RequestMapping(value = "/academybycourse", method = RequestMethod.GET)
 	public ModelAndView academybycourse(@RequestParam(required = true) final int cursoId) {
