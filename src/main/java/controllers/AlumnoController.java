@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Alumno;
@@ -53,13 +54,30 @@ public class AlumnoController extends AbstractController {
 		return result;
 	}
 
-	// Action-2 ---------------------------------------------------------------
+	//Modificar alumno form
 
-	@RequestMapping("/action-2A")
-	public ModelAndView action2() {
+	@RequestMapping("/form_edit_alumno")
+	public ModelAndView form_edit_alumno(@RequestParam(required = true) final int alumnoId) {
 		ModelAndView result;
 
-		result = new ModelAndView("administrator/action-2");
+		result = new ModelAndView("create_edit_actor/form_edit_alumno");
+		result.addObject("alumno", this.alumnoService.findOne(alumnoId));
+
+		return result;
+	}
+
+	//Modificar alumno
+
+	@RequestMapping("/edit_alumno")
+	public ModelAndView edit_alumno(@ModelAttribute("alumno") final Alumno alumno, final BindingResult resultado) {
+		ModelAndView result;
+
+		if (resultado.hasErrors())
+			result = new ModelAndView("create_edit_actor/form_edit_alumno");
+		else
+			result = new ModelAndView("alumno/alumno");
+
+		this.alumnoService.save(alumno); //
 
 		return result;
 	}
