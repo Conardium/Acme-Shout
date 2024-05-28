@@ -13,7 +13,7 @@ import domain.Solicitud;
 public interface SolicitudRepository extends JpaRepository<Solicitud, Integer> {
 
 	@Query("select s from Solicitud s where s.id = ?1")
-	Collection<Solicitud> findById(int idSolicitud);
+	Solicitud findById(int idSolicitud);
 
 	@Query("select s from Academia a join a.solicitudes s where a.id = ?1")
 	Collection<Solicitud> findAllSolicitudesByAcademia(int idAcademia);
