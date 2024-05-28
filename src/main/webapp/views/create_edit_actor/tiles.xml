@@ -3,20 +3,24 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+
 <tiles-definitions>
 
-	<definition name="create_edit_actor/form_sing_up_academy" extends="master.page">	
+	<definition name="create_edit_actor/form_sing_up_academy"
+		extends="master.page">
 		<put-attribute name="title" value="Create Academy" />
-		<put-attribute name="body" value="/views/create_edit_actor/sing_up_academy.jsp" />
+		<put-attribute name="body"
+			value="/views/create_edit_actor/sing_up_academy.jsp" />
 	</definition>
-	
-	<definition name="create_edit_actor/form_sing_up_student" extends="master.page">	
+
+	<definition name="create_edit_actor/form_sing_up_student"
+		extends="master.page">
 		<put-attribute name="title" value="Create Student" />
-		<put-attribute name="body" value="/views/create_edit_actor/sing_up_student.jsp" />
+		<put-attribute name="body"
+			value="/views/create_edit_actor/sing_up_student.jsp" />
 	</definition>
-	
-		<definition name="create_edit_actor/form_edit_academy"
+
+	<definition name="create_edit_actor/form_edit_academy"
 		extends="master.page">
 		<put-attribute name="title" value="Modify Academy" />
 		<put-attribute name="body"
@@ -29,5 +33,5 @@
 		<put-attribute name="body"
 			value="/views/create_edit_actor/edit_student.jsp" />
 	</definition>
-	
+
 </tiles-definitions>
