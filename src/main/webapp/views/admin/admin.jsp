@@ -41,10 +41,10 @@
 	</table>
 	<button type="button"
 		onclick="location.href='${pageContext.request.contextPath}/admin/form_edit_admin.do'">Modificar
-		Alumno</button>
+		</button>
 	<button type="button"
 		onclick="location.href='${pageContext.request.contextPath}/admin/dashboard.do'">Dashboard
-		Alumno</button>
+		</button>
 	<button type="button" onclick="goBack()">Volver</button>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>

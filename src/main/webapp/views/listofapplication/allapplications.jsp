@@ -32,7 +32,7 @@
 				<th>Fecha</th>
 				<th>Curso</th>
 				<th>Aceptar</th>
-				<th>Aceptar</th>
+				<th>Rechazar</th>
 			</tr>
 		</thead>
 		<tbody>

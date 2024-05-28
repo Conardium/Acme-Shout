@@ -16,10 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Curso;
 import security.Authority;
 import services.CursoService;
 
@@ -35,6 +38,76 @@ public class CursoController extends AbstractController {
 
 	public CursoController() {
 		super();
+	}
+
+	//Mostrar Curso
+
+	@RequestMapping("/show_curso")
+	public ModelAndView show_academy(@RequestParam(required = true) final int courseId) {
+		ModelAndView result;
+
+		result = new ModelAndView("course/course");
+		result.addObject("student", this.cursoService.findOne(courseId));
+
+		return result;
+	}
+
+	// Crear Curso form ---------------------------------------------------------------
+
+	@RequestMapping("/form_create_course")
+	public ModelAndView form_sing_up_student() {
+		ModelAndView result;
+
+		result = new ModelAndView("create_edit_course/form_create_course");
+		result.addObject("alumno", this.cursoService.create());
+
+		return result;
+	}
+
+	// Crear Curso ---------------------------------------------------------------
+
+	@RequestMapping("/create_course")
+	public ModelAndView sing_up_student(@ModelAttribute("Curso") final Curso curso, final BindingResult resultado) {
+		ModelAndView result;
+
+		result = new ModelAndView("welcome/index");
+
+		if (resultado.hasErrors())
+			result = new ModelAndView("create_edit_course/form_create_course");
+		else
+			result = new ModelAndView("welcome/index");
+
+		this.cursoService.save(curso);
+
+		return result;
+	}
+
+	//Modificar Curso form
+
+	@RequestMapping("/form_edit_course")
+	public ModelAndView form_edit_alumno(@RequestParam(required = true) final int cursoId) {
+		ModelAndView result;
+
+		result = new ModelAndView("create_edit_course/form_edit_course");
+		result.addObject("curso", this.cursoService.findOne(cursoId));
+
+		return result;
+	}
+
+	//Modificar Curso
+
+	@RequestMapping("/edit_course")
+	public ModelAndView edit_alumno(@ModelAttribute("curso") final Curso curso, final BindingResult resultado) {
+		ModelAndView result;
+
+		if (resultado.hasErrors())
+			result = new ModelAndView("create_edit_course/form_edit_course");
+		else
+			result = new ModelAndView("welcome/index");
+
+		this.cursoService.save(curso);
+
+		return result;
 	}
 
 	// Action-1 ---------------------------------------------------------------

@@ -70,7 +70,7 @@
 						</td>
 						<td>
 							<form
-								action="${pageContext.request.contextPath}/deletecourse/${curso.id}"
+								action="${pageContext.request.contextPath}/delete/${curso.id}"
 								method="get">
 								<button type="submit">Borrar</button>
 							</form>
@@ -80,6 +80,7 @@
 			</jstl:forEach>
 		</tbody>
 	</table>
+		<button type="button" onclick="location.href='${pageContext.request.contextPath}/curso/form_create_course.do'">Volver</button>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>
