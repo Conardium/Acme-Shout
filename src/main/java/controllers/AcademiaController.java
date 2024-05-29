@@ -131,7 +131,7 @@ public class AcademiaController extends AbstractController {
 		//aunque se puede hacer un collection de Actores;
 
 		result = new ModelAndView("listofsubs/listofsubsbyalumn");
-		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
+		//result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
 
 		return result;
 	}
