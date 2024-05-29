@@ -16,12 +16,12 @@
       
 <tiles-definitions>
 
-	<definition name="academia/academy" extends="master.page">	
+	<definition name="academy/academy" extends="master.page">	
 		<put-attribute name="title" value="Academia" />
 		<put-attribute name="body" value="/views/academy/academy.jsp" />
 	</definition>
 	
-	<definition name="academia/academybycourse" extends="master.page">	
+	<definition name="academy/academybycourse" extends="master.page">	
 		<put-attribute name="title" value="Academia por Curso" />
 		<put-attribute name="body" value="/views/academy/academybycourse.jsp" />
 	</definition>

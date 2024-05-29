@@ -47,20 +47,9 @@ public class SolicitudController extends AbstractController {
 		return result;
 	}
 
-	// MOSTAR TODAS LAS SOLICITUDES -------------------------------------------
-	@RequestMapping(value = "/allapplications")
-	public ModelAndView ListarSolicitudesPorAcademia() {
-		ModelAndView result;
-
-		result = new ModelAndView("listofapplication/allapplications");
-		result.addObject("solicitudes", this.solicitudService.findAll());
-
-		return result;
-	}
-
 	// RECHAZAR SOLICITUD -----------------
 	@RequestMapping(value = "/rejectapplication")
-	public ModelAndView RechazarSolicitud(@RequestParam("idSolicitud") final int idSolicitud) {
+	public ModelAndView RechazarSolicitud(@RequestParam(required = true) final int idSolicitud) {
 		ModelAndView result;
 
 		final Solicitud solicitud = this.solicitudService.findOne(idSolicitud);
@@ -69,14 +58,14 @@ public class SolicitudController extends AbstractController {
 			this.solicitudService.save(solicitud);
 		}
 
-		result = new ModelAndView("listofapplication/allapplications");
+		result = new ModelAndView("listofapplication/allapplicationsbyacademy");
 		result.addObject("solicitudes", this.solicitudService.findAll());
 		return result;
 	}
 
 	// ACEPTAR SOLICITUD -----------------
 	@RequestMapping(value = "/acceptapplication")
-	public ModelAndView aceptarSolicitud(@RequestParam("idSolicitud") final int idSolicitud) {
+	public ModelAndView aceptarSolicitud(@RequestParam(required = true) final int idSolicitud) {
 		ModelAndView result;
 
 		final Solicitud solicitud = this.solicitudService.findOne(idSolicitud);
@@ -85,7 +74,7 @@ public class SolicitudController extends AbstractController {
 			this.solicitudService.save(solicitud);
 		}
 
-		result = new ModelAndView("listofapplication/allapplications");
+		result = new ModelAndView("listofapplication/allapplicationsbyacademy");
 		result.addObject("solicitudes", this.solicitudService.findAll());
 		return result;
 	}

@@ -75,7 +75,7 @@ public class AdministratorController extends AbstractController {
 		return result;
 	}
 
-	//Modificar admin
+	//Dashboard admin
 
 	@RequestMapping("/dashboard")
 	public ModelAndView dashboard() {

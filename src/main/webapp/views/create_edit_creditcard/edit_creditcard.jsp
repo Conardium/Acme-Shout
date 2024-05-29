@@ -12,7 +12,7 @@
     <title>Modificar Tarjeta de Credito</title>
 </head>
 <body>
-
+<button type="button" onclick="goBack()">Volver</button>
 <h2>Modificar Tarjeta de Credito</h2>
 
 <form:form modelAttribute="alumno" method="post" action="register">
@@ -34,10 +34,11 @@
             <td><form:errors path="tarjetaCredito.codigoSeguridad" cssClass="error" /></td>
         </tr>
         <tr>
-            <td colspan="3"><input type="submit" value="Registrar" /></td>
+            <td colspan="3"><input type="submit" value="Modificar" /></td>
         </tr>
     </table>
 </form:form>
-
+<script type="text/javascript"
+		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>

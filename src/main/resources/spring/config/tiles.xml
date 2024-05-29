@@ -1,43 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
-  * tiles.xml 
-  * 
-  * Copyright (C) 2018 Universidad de Sevilla 
-  * 
-  * The use of this project is hereby constrained to the conditions of the 
-  * TDG Licence, a copy of which you may download from 
-  * http://www.tdg-seville.info/License.html 
--->
+<!-- * tiles.xml * * Copyright (C) 2018 Universidad de Sevilla * * The use 
+	of this project is hereby constrained to the conditions of the * TDG Licence, 
+	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
 	">
 
 	<util:list id="tiles">
-		<value>/views/administrator/tiles.xml</value>
-		<value>/views/customer/tiles.xml</value>
-		<value>/views/profile/tiles.xml</value>
-		
 		<value>/views/academy/tiles.xml</value>
-		<value>/views/administrator/tiles.xml</value>
+		<value>/views/admin/tiles.xml</value>
+		<value>/views/student/tiles.xml</value>
+		<value>/views/sign_up_in/tiles.xml</value>
+
 		<value>/views/application/tiles.xml</value>
 		<value>/views/course/tiles.xml</value>
 		<value>/views/creditcard/tiles.xml</value>
 		<value>/views/dashboard/tiles.xml</value>
-		
-		<value>/views/create_application/tiles.xml</value>
+		<value>/views/style/tiles.xml</value>
+		<value>/views/tutorial/tiles.xml</value>
+
 		<value>/views/create_comment/tiles.xml</value>
-		
 		<value>/views/create_edit_actor/tiles.xml</value>
 		<value>/views/create_edit_course/tiles.xml</value>
 		<value>/views/create_edit_creditcard/tiles.xml</value>
 		<value>/views/create_edit_style/tiles.xml</value>
 		<value>/views/create_edit_tutorials/tiles.xml</value>
-		
+
 		<value>/views/listofacademies/tiles.xml</value>
 		<value>/views/listofapplication/tiles.xml</value>
 		<value>/views/listofcomment/tiles.xml</value>
@@ -45,18 +39,12 @@
 		<value>/views/listofstyles/tiles.xml</value>
 		<value>/views/listofsubs/tiles.xml</value>
 		<value>/views/listoftutorial/tiles.xml</value>
-		
-		<value>/views/master-page/tiles.xml</value>		
-		<value>/views/misc/tiles.xml</value>	
+
+		<value>/views/master-page/tiles.xml</value>
+		<value>/views/misc/tiles.xml</value>
 		<value>/views/security/tiles.xml</value>
 		<value>/views/welcome/tiles.xml</value>
-		
-		<value>/views/sign_up_in/tiles.xml</value>
-		<value>/views/style/tiles.xml</value>
-		<value>/views/tutorial/tiles.xml</value>
-		<value>/views/administrator/tiles.xml</value>
-		<value>/views/student/tiles.xml</value>	
-		
+
 	</util:list>
 
 </beans>

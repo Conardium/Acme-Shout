@@ -42,7 +42,7 @@ public class CursoController extends AbstractController {
 
 	//Mostrar Curso
 
-	@RequestMapping("/show_curso")
+	@RequestMapping("/show_course")
 	public ModelAndView show_academy(@RequestParam(required = true) final int courseId) {
 		ModelAndView result;
 
@@ -232,7 +232,7 @@ public class CursoController extends AbstractController {
 
 		ModelAndView result;
 
-		result = new ModelAndView("listofcourses/allcoursesfromstyle");
+		result = new ModelAndView("listofcourses/allcoursesfromfilter");
 		result.addObject("cursos", this.cursoService.findCursosByFiltro(filtro));
 
 		// Verificar si el usuario está autenticado

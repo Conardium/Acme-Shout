@@ -12,13 +12,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Academia;
 import services.AcademiaService;
+import services.SolicitudService;
 
 @Controller
 @RequestMapping("/academia")
 public class AcademiaController extends AbstractController {
 
 	@Autowired
-	private AcademiaService academiaService;
+	private AcademiaService		academiaService;
+	private SolicitudService	solicitudService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -115,22 +117,34 @@ public class AcademiaController extends AbstractController {
 
 		ModelAndView result;
 
-		result = new ModelAndView("academia/academybycourse");
+		result = new ModelAndView("academy/academybycourse");
 		result.addObject("academia", this.academiaService.findAcademiaporCurso(cursoId));
+
+		return result;
+	}
+
+	//Listar Solicitudes por Academia
+
+	@RequestMapping(value = "/listofapplicationbyacademy")
+	public ModelAndView solicitudesPorAlumno(@RequestParam(required = true) final int academiaId) {
+		ModelAndView result;
+
+		result = new ModelAndView("listofapplication/listofapplicationbyacademy");
+		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAcademia(academiaId));
 
 		return result;
 	}
 
 	//Mostrar suscriptores
 
-	@RequestMapping(value = "/listofsubsbyalumn")
+	@RequestMapping(value = "/listofsubsbyacademy")
 	public ModelAndView subbystudent(@RequestParam(required = true) final int idAlumno) {
 		ModelAndView result;
 
 		//hace falta recoger tanto academias como alumnos para pasarlos los dos
 		//aunque se puede hacer un collection de Actores;
 
-		result = new ModelAndView("listofsubs/listofsubsbyalumn");
+		result = new ModelAndView("listofsubs/listofsubsbyacademy");
 		//result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
 
 		return result;
@@ -138,7 +152,7 @@ public class AcademiaController extends AbstractController {
 
 	//Suscribirse
 
-	@RequestMapping("/sub_student")
+	@RequestMapping("/sub_academy")
 	public ModelAndView sub_academy(@RequestParam(required = true) final int actorId) {
 		ModelAndView result;
 

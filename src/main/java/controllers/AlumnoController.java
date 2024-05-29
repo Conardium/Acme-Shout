@@ -22,6 +22,12 @@ public class AlumnoController extends AbstractController {
 	private SolicitudService	solicitudService;
 
 
+	// Constructors -----------------------------------------------------------
+
+	public AlumnoController() {
+		super();
+	}
+
 	//Mostrar alumno
 
 	@RequestMapping("/show_student")
@@ -32,12 +38,6 @@ public class AlumnoController extends AbstractController {
 		result.addObject("student", this.alumnoService.findOne(studentId));
 
 		return result;
-	}
-
-	// Constructors -----------------------------------------------------------
-
-	public AlumnoController() {
-		super();
 	}
 
 	// Crear alumno form ---------------------------------------------------------------
@@ -98,11 +98,11 @@ public class AlumnoController extends AbstractController {
 
 	//Listar Solicitudes por Alumno
 
-	@RequestMapping(value = "/listofapplicationbyalumn")
+	@RequestMapping(value = "/listofapplicationbystudent")
 	public ModelAndView solicitudesPorAlumno(@RequestParam(required = true) final int idAlumno) {
 		ModelAndView result;
 
-		result = new ModelAndView("listofapplication/listofapplicationbyalumn");
+		result = new ModelAndView("listofapplication/listofapplicationbystudent");
 		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
 
 		return result;
@@ -110,14 +110,14 @@ public class AlumnoController extends AbstractController {
 
 	//Mostrar suscriptores
 
-	@RequestMapping(value = "/listofsubsbyalumn")
+	@RequestMapping(value = "/listofsubsbystudent")
 	public ModelAndView subbystudent(@RequestParam(required = true) final int idAlumno) {
 		ModelAndView result;
 
 		//hace falta recoger tanto academias como alumnos para pasarlos los dos
 		//aunque se puede hacer un collection de Actores;
 
-		result = new ModelAndView("listofsubs/listofsubsbyalumn");
+		result = new ModelAndView("listofsubs/listofsubsbystudent");
 		//result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
 
 		return result;

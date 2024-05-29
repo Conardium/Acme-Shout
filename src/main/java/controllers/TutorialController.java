@@ -130,7 +130,7 @@ public class TutorialController extends AbstractController {
 
 		ModelAndView result;
 
-		result = new ModelAndView("listofcourses/allcoursesfromacademy");
+		result = new ModelAndView("listoftutorial/alltutorialfromacademy");
 		result.addObject("tutorial", this.tutorialService.findAllByAcademia(tutorialId));
 
 		// Verificar si el usuario está autenticado
@@ -158,5 +158,4 @@ public class TutorialController extends AbstractController {
 
 		return result;
 	}
-
 }

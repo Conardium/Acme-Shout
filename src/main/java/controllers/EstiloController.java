@@ -48,7 +48,7 @@ public class EstiloController extends AbstractController {
 		return result;
 	}
 
-	// Crear Curso form ---------------------------------------------------------------
+	// Crear Estilo form ---------------------------------------------------------------
 
 	@RequestMapping("/form_create_style")
 	public ModelAndView form_sing_up_student() {
@@ -60,7 +60,7 @@ public class EstiloController extends AbstractController {
 		return result;
 	}
 
-	// Crear estilo ---------------------------------------------------------------
+	// Crear Estilo ---------------------------------------------------------------
 
 	@RequestMapping("/create_style")
 	public ModelAndView sing_up_student(@ModelAttribute("Estilo") final Estilo estilo, final BindingResult resultado) {

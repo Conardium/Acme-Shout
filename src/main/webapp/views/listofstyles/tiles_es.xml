@@ -21,11 +21,4 @@
 		<put-attribute name="body" value="/views/listofstyles/allstyles.jsp" />
 	</definition>
 	
-		<definition name="listofcourses/allcoursesfromacademy"
-		extends="master.page">
-		<put-attribute name="title" value="Courses" />
-		<put-attribute name="body"
-			value="/views/listofcourses/allcoursesfromacademy.jsp" />
-	</definition>
-	
 </tiles-definitions>

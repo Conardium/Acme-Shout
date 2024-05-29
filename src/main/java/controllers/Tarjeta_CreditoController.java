@@ -35,13 +35,25 @@ public class Tarjeta_CreditoController extends AbstractController {
 		super();
 	}
 
+	//Mostrar Tarjeta
+
+	@RequestMapping("/show_creditcard")
+	public ModelAndView show_academy(@RequestParam(required = true) final int tarjetaId) {
+		ModelAndView result;
+
+		result = new ModelAndView("creditcard/creditcard");
+		result.addObject("tarjeta", this.tarjetaService.findOne(tarjetaId));
+
+		return result;
+	}
+
 	//Modificar Tarjeta form
 
-	@RequestMapping("/form_edit_tarjeta")
+	@RequestMapping("/form_edit_creditcard")
 	public ModelAndView form_edit_course(@RequestParam(required = true) final int tarjetaId) {
 		ModelAndView result;
 
-		result = new ModelAndView("create_edit_tarjeta/form_edit_tarjeta");
+		result = new ModelAndView("create_edit_creditcard/form_edit_creditcard");
 		result.addObject("tarjeta", this.tarjetaService.findOne(tarjetaId));
 
 		return result;
@@ -49,12 +61,12 @@ public class Tarjeta_CreditoController extends AbstractController {
 
 	//Modificar Tarjeta
 
-	@RequestMapping("/edit_tutorial")
+	@RequestMapping("/edit_creditcard")
 	public ModelAndView edit_course(@ModelAttribute("Tarjeta") final Tarjeta_Credito tarjeta, final BindingResult resultado) {
 		ModelAndView result;
 
 		if (resultado.hasErrors())
-			result = new ModelAndView("create_edit_tarjeta/form_edit_tarjeta");
+			result = new ModelAndView("create_edit_creditcard/form_edit_creditcard");
 		else
 			result = new ModelAndView("welcome/index");
 

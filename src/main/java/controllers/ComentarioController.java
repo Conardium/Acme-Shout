@@ -27,7 +27,7 @@ public class ComentarioController {
 		ModelAndView result;
 
 		result = new ModelAndView("comment/comment");
-		result.addObject("curso", this.comentarioService.findOne(comentarioId));
+		result.addObject("comentario", this.comentarioService.findOne(comentarioId));
 
 		return result;
 	}
@@ -38,7 +38,7 @@ public class ComentarioController {
 	public ModelAndView form_sing_up_student() {
 		ModelAndView result;
 
-		result = new ModelAndView("create_edit_comment/form_create_comment");
+		result = new ModelAndView("create_comment/form_create_comment");
 		result.addObject("comentario", this.comentarioService.create());
 
 		return result;
@@ -53,7 +53,7 @@ public class ComentarioController {
 		result = new ModelAndView("welcome/index");
 
 		if (resultado.hasErrors())
-			result = new ModelAndView("create_edit_comment/form_create_comment");
+			result = new ModelAndView("create_comment/form_create_comment");
 		else
 			result = new ModelAndView("welcome/index");
 
