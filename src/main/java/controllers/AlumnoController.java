@@ -25,7 +25,7 @@ public class AlumnoController extends AbstractController {
 	//Mostrar alumno
 
 	@RequestMapping("/show_student")
-	public ModelAndView show_academy(@RequestParam(required = true) final int studentId) {
+	public ModelAndView show_student(@RequestParam(required = true) final int studentId) {
 		ModelAndView result;
 
 		result = new ModelAndView("student/student");
@@ -70,7 +70,7 @@ public class AlumnoController extends AbstractController {
 
 	//Modificar alumno form
 
-	@RequestMapping("/form_edit_alumno")
+	@RequestMapping("/form_edit_student")
 	public ModelAndView form_edit_alumno(@RequestParam(required = true) final int alumnoId) {
 		ModelAndView result;
 
@@ -82,14 +82,14 @@ public class AlumnoController extends AbstractController {
 
 	//Modificar alumno
 
-	@RequestMapping("/edit_alumno")
-	public ModelAndView edit_alumno(@ModelAttribute("alumno") final Alumno alumno, final BindingResult resultado) {
+	@RequestMapping("/edit_student")
+	public ModelAndView edit_student(@ModelAttribute("Alumno") final Alumno alumno, final BindingResult resultado) {
 		ModelAndView result;
 
 		if (resultado.hasErrors())
-			result = new ModelAndView("create_edit_actor/form_edit_alumno");
+			result = new ModelAndView("create_edit_actor/form_edit_student");
 		else
-			result = new ModelAndView("alumno/alumno");
+			result = new ModelAndView("student/student");
 
 		this.alumnoService.save(alumno);
 
@@ -98,12 +98,41 @@ public class AlumnoController extends AbstractController {
 
 	//Listar Solicitudes por Alumno
 
-	@RequestMapping(value = "/listarsolicitudesAlumno")
-	public ModelAndView solicitudesPorAlumno(@RequestParam("idAlumno") final int idAlumno) {
+	@RequestMapping(value = "/listofapplicationbyalumn")
+	public ModelAndView solicitudesPorAlumno(@RequestParam(required = true) final int idAlumno) {
 		ModelAndView result;
 
-		result = new ModelAndView("listofapplication/applicationbyalumn");
+		result = new ModelAndView("listofapplication/listofapplicationbyalumn");
 		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
+
+		return result;
+	}
+
+	//Mostrar suscriptores
+
+	@RequestMapping(value = "/listofsubsbyalumn")
+	public ModelAndView subbystudent(@RequestParam(required = true) final int idAlumno) {
+		ModelAndView result;
+
+		//hace falta recoger tanto academias como alumnos para pasarlos los dos
+		//aunque se puede hacer un collection de Actores;
+
+		result = new ModelAndView("listofsubs/listofsubsbyalumn");
+		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
+
+		return result;
+	}
+
+	//Suscribirse
+
+	@RequestMapping("/sub_student")
+	public ModelAndView sub_student(@RequestParam(required = true) final int actorId) {
+		ModelAndView result;
+
+		//hace falta comprobar si el actor es academia o alumno y luego ya añadirlo según sea.
+
+		result = new ModelAndView("student/student");
+		//result.addObject("student", this.alumnoService();Nose que poner
 
 		return result;
 	}

@@ -10,13 +10,24 @@
 
 package controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Tarjeta_Credito;
+import services.Tarjeta_CreditoService;
+
 @Controller
-@RequestMapping("/administrator")
+@RequestMapping("/tarjeta")
 public class Tarjeta_CreditoController extends AbstractController {
+
+	@Autowired
+	private Tarjeta_CreditoService tarjetaService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -24,24 +35,30 @@ public class Tarjeta_CreditoController extends AbstractController {
 		super();
 	}
 
-	// Action-1 ---------------------------------------------------------------
+	//Modificar Tarjeta form
 
-	@RequestMapping("/action-1F")
-	public ModelAndView action1() {
+	@RequestMapping("/form_edit_tarjeta")
+	public ModelAndView form_edit_course(@RequestParam(required = true) final int tarjetaId) {
 		ModelAndView result;
 
-		result = new ModelAndView("administrator/action-1");
+		result = new ModelAndView("create_edit_tarjeta/form_edit_tarjeta");
+		result.addObject("tarjeta", this.tarjetaService.findOne(tarjetaId));
 
 		return result;
 	}
 
-	// Action-2 ---------------------------------------------------------------
+	//Modificar Tarjeta
 
-	@RequestMapping("/action-2F")
-	public ModelAndView action2() {
+	@RequestMapping("/edit_tutorial")
+	public ModelAndView edit_course(@ModelAttribute("Tarjeta") final Tarjeta_Credito tarjeta, final BindingResult resultado) {
 		ModelAndView result;
 
-		result = new ModelAndView("administrator/action-2");
+		if (resultado.hasErrors())
+			result = new ModelAndView("create_edit_tarjeta/form_edit_tarjeta");
+		else
+			result = new ModelAndView("welcome/index");
+
+		this.tarjetaService.save(tarjeta);
 
 		return result;
 	}

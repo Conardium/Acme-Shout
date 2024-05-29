@@ -47,7 +47,7 @@ public class CursoController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("course/course");
-		result.addObject("student", this.cursoService.findOne(courseId));
+		result.addObject("curso", this.cursoService.findOne(courseId));
 
 		return result;
 	}
@@ -59,7 +59,7 @@ public class CursoController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("create_edit_course/form_create_course");
-		result.addObject("alumno", this.cursoService.create());
+		result.addObject("curso", this.cursoService.create());
 
 		return result;
 	}
@@ -67,7 +67,7 @@ public class CursoController extends AbstractController {
 	// Crear Curso ---------------------------------------------------------------
 
 	@RequestMapping("/create_course")
-	public ModelAndView sing_up_student(@ModelAttribute("Curso") final Curso curso, final BindingResult resultado) {
+	public ModelAndView sing_up_course(@ModelAttribute("Curso") final Curso curso, final BindingResult resultado) {
 		ModelAndView result;
 
 		result = new ModelAndView("welcome/index");
@@ -85,7 +85,7 @@ public class CursoController extends AbstractController {
 	//Modificar Curso form
 
 	@RequestMapping("/form_edit_course")
-	public ModelAndView form_edit_alumno(@RequestParam(required = true) final int cursoId) {
+	public ModelAndView form_edit_course(@RequestParam(required = true) final int cursoId) {
 		ModelAndView result;
 
 		result = new ModelAndView("create_edit_course/form_edit_course");
@@ -97,7 +97,7 @@ public class CursoController extends AbstractController {
 	//Modificar Curso
 
 	@RequestMapping("/edit_course")
-	public ModelAndView edit_alumno(@ModelAttribute("curso") final Curso curso, final BindingResult resultado) {
+	public ModelAndView edit_course(@ModelAttribute("Curso") final Curso curso, final BindingResult resultado) {
 		ModelAndView result;
 
 		if (resultado.hasErrors())
@@ -110,10 +110,23 @@ public class CursoController extends AbstractController {
 		return result;
 	}
 
-	// Action-1 ---------------------------------------------------------------
+	//Borrar Curso
+
+	@RequestMapping("/delete_course")
+	public ModelAndView delete_course(@ModelAttribute("Curso") final Curso curso) {
+		ModelAndView result;
+
+		result = new ModelAndView("welcome/index");
+
+		this.cursoService.delete(curso);
+
+		return result;
+	}
+
+	// Listar todos los cursos ---------------------------------------------------------------
 
 	@RequestMapping("/allcourses")
-	public ModelAndView action1() {
+	public ModelAndView listofall() {
 
 		ModelAndView result;
 
@@ -147,7 +160,7 @@ public class CursoController extends AbstractController {
 	// Action-2 ---------------------------------------------------------------
 
 	@RequestMapping("/allcoursesfromacademy")
-	public ModelAndView action2(@RequestParam(required = true) final int academiaId) {
+	public ModelAndView listbyacademy(@RequestParam(required = true) final int academiaId) {
 
 		ModelAndView result;
 
@@ -181,12 +194,46 @@ public class CursoController extends AbstractController {
 	}
 
 	@RequestMapping("/allcoursesfromstyle")
-	public ModelAndView action3(@RequestParam(required = true) final int estiloId) {
+	public ModelAndView listbystyle(@RequestParam(required = true) final int estiloId) {
 
 		ModelAndView result;
 
 		result = new ModelAndView("listofcourses/allcoursesfromstyle");
 		result.addObject("cursos", this.cursoService.findCursosporEstilo(estiloId));
+
+		// Verificar si el usuario está autenticado
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		final boolean isAuthenticated = auth.isAuthenticated() && !auth.getName().equalsIgnoreCase("anonymousUser");
+		boolean esAlumno = false;
+
+		// Obtener el nombre de usuario y los roles del usuario
+		if (isAuthenticated) {
+			final Collection<Authority> authorities = (Collection<Authority>) auth.getAuthorities();
+			for (final Authority authority : authorities)
+				if (authority.getAuthority().equalsIgnoreCase("ALUMNO")) {
+					esAlumno = true;
+					break;
+				}
+		}
+
+		result.addObject("esAlumno", esAlumno);
+
+		result.addObject("esAcademia", false);
+
+		result.addObject("yaSolicitada", false);
+
+		result.addObject("yaInscrito", false);
+
+		return result;
+	}
+
+	@RequestMapping("/allcoursesfromfilter")
+	public ModelAndView listbyfilter(@RequestParam(required = true) final String filtro) {
+
+		ModelAndView result;
+
+		result = new ModelAndView("listofcourses/allcoursesfromstyle");
+		result.addObject("cursos", this.cursoService.findCursosByFiltro(filtro));
 
 		// Verificar si el usuario está autenticado
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -10,16 +10,14 @@
 
 package controllers;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Curso;
 import domain.Estilo;
 import services.EstiloService;
 
@@ -37,10 +35,10 @@ public class EstiloController extends AbstractController {
 		super();
 	}
 
-	// Action-1 ---------------------------------------------------------------
+	// Listar todos los estilos ---------------------------------------------------------------
 
 	@RequestMapping("/allstyles")
-	public ModelAndView action1() {
+	public ModelAndView ListarTodosLosEstilos() {
 
 		ModelAndView result;
 
@@ -50,35 +48,75 @@ public class EstiloController extends AbstractController {
 		return result;
 	}
 
-	// Action-2 ---------------------------------------------------------------
+	// Crear Curso form ---------------------------------------------------------------
 
-	@RequestMapping("/action-2D")
-	public ModelAndView action2() {
+	@RequestMapping("/form_create_style")
+	public ModelAndView form_sing_up_student() {
 		ModelAndView result;
 
-		result = new ModelAndView("administrator/action-2");
+		result = new ModelAndView("create_edit_style/form_create_style");
+		result.addObject("estilo", this.estiloService.create());
 
 		return result;
 	}
 
-	@RequestMapping(value = "/registerCurso", method = RequestMethod.GET)
-	public ModelAndView crearCurso() {
+	// Crear estilo ---------------------------------------------------------------
+
+	@RequestMapping("/create_style")
+	public ModelAndView sing_up_student(@ModelAttribute("Estilo") final Estilo estilo, final BindingResult resultado) {
 		ModelAndView result;
 
-		result = new ModelAndView("create_edit_course/create_course");
+		result = new ModelAndView("welcome/index");
 
-		final Collection<Estilo> estilos = this.estiloService.findAll();  // Obtener todos los estilos
+		if (resultado.hasErrors())
+			result = new ModelAndView("create_edit_style/form_create_style");
+		else
+			result = new ModelAndView("welcome/index");
 
-		result.addObject("estilos", estilos);
-		result.addObject("curso", new Curso());
+		this.estiloService.save(estilo);
 
 		return result;
 	}
 
-	@RequestMapping(value = "/registerCurso", method = RequestMethod.POST)
-	public String submit(@ModelAttribute("curso") final Curso curso) {
+	//Modificar Estilo form
 
-		return "cursoRegistrado";
+	@RequestMapping("/form_edit_style")
+	public ModelAndView form_edit_alumno(@RequestParam(required = true) final int cursoId) {
+		ModelAndView result;
+
+		result = new ModelAndView("create_edit_style/form_edit_style");
+		result.addObject("estilo", this.estiloService.findOne(cursoId));
+
+		return result;
+	}
+
+	//Modificar Estilo
+
+	@RequestMapping("/edit_style")
+	public ModelAndView edit_alumno(@ModelAttribute("Estilo") final Estilo estilo, final BindingResult resultado) {
+		ModelAndView result;
+
+		if (resultado.hasErrors())
+			result = new ModelAndView("create_edit_style/form_edit_style");
+		else
+			result = new ModelAndView("welcome/index");
+
+		this.estiloService.save(estilo);
+
+		return result;
+	}
+
+	//Borrar Estilo
+
+	@RequestMapping("/delete_style")
+	public ModelAndView delete_style(@ModelAttribute("Estilo") final Estilo estilo) {
+		ModelAndView result;
+
+		result = new ModelAndView("welcome/index");
+
+		this.estiloService.delete(estilo);
+
+		return result;
 	}
 
 }

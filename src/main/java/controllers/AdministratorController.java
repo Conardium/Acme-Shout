@@ -81,7 +81,7 @@ public class AdministratorController extends AbstractController {
 	public ModelAndView dashboard() {
 		ModelAndView result;
 
-		result = new ModelAndView("admin/dashboard");
+		result = new ModelAndView("dashboard/dashboard");
 
 		return result;
 	}

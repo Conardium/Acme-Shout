@@ -64,11 +64,11 @@ public class ComentarioService {
 		return result;
 	}
 
-	public void delete(final int id) {
-		Assert.assertNotNull(id);
-		Assert.assertEquals(id, 0);
+	public void delete(final Comentario comentario) {
+		Assert.assertNotNull(comentario);
+		Assert.assertEquals(comentario.getId(), 0);
 
-		this.comentarioRepository.delete(id);
+		this.comentarioRepository.delete(comentario);
 	}
 
 	// Not Simple CRUD methods ------------------------------

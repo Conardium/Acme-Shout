@@ -36,6 +36,17 @@ public class SolicitudController extends AbstractController {
 	private SolicitudService solicitudService;
 
 
+	// Solicitar -------------------------------------------
+	@RequestMapping(value = "/applay")
+	public ModelAndView Solicitar() {
+		ModelAndView result;
+
+		result = new ModelAndView("listofcourses/allcourses");
+		//result.addObject("solicitudes", this.solicitudService.findAll());
+
+		return result;
+	}
+
 	// MOSTAR TODAS LAS SOLICITUDES -------------------------------------------
 	@RequestMapping(value = "/allapplications")
 	public ModelAndView ListarSolicitudesPorAcademia() {

@@ -120,4 +120,33 @@ public class AcademiaController extends AbstractController {
 
 		return result;
 	}
+
+	//Mostrar suscriptores
+
+	@RequestMapping(value = "/listofsubsbyalumn")
+	public ModelAndView subbystudent(@RequestParam(required = true) final int idAlumno) {
+		ModelAndView result;
+
+		//hace falta recoger tanto academias como alumnos para pasarlos los dos
+		//aunque se puede hacer un collection de Actores;
+
+		result = new ModelAndView("listofsubs/listofsubsbyalumn");
+		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
+
+		return result;
+	}
+
+	//Suscribirse
+
+	@RequestMapping("/sub_student")
+	public ModelAndView sub_academy(@RequestParam(required = true) final int actorId) {
+		ModelAndView result;
+
+		//hace falta comprobar si el actor es academia o alumno y luego ya añadirlo según sea.
+
+		result = new ModelAndView("academy/academy");
+		//result.addObject("student", this.alumnoService();Nose que poner
+
+		return result;
+	}
 }
