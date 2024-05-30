@@ -1,8 +1,8 @@
 /*
  * LoginService.java
- * 
+ *
  * Copyright (C) 2018 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -28,7 +28,7 @@ public class LoginService implements UserDetailsService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	UserAccountRepository	userRepository;
+	UserAccountRepository userRepository;
 
 
 	// Business methods -------------------------------------------------------
@@ -70,6 +70,27 @@ public class LoginService implements UserDetailsService {
 		result = (UserAccount) principal;
 		Assert.notNull(result);
 		Assert.isTrue(result.getId() != 0);
+
+		return result;
+	}
+
+	//Añadidos necesarios
+
+	public UserAccount create() {
+		UserAccount result;
+
+		result = new UserAccount();
+
+		return result;
+	}
+
+	public UserAccount save(final UserAccount userAccount) {
+		Assert.notNull(userAccount);
+
+		UserAccount result;
+
+		result = this.userRepository.save(userAccount);
+		System.out.println("UserAccount guardado con ID: " + result.getId());
 
 		return result;
 	}

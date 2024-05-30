@@ -25,8 +25,14 @@ public class AcademiaController extends AbstractController {
 
 	@Autowired
 	private AcademiaService		academiaService;
+	@Autowired
 	private SolicitudService	solicitudService;
+	@Autowired
 	private AlumnoService		alumnoService;
+	@Autowired
+	private LoginService		loginService;
+
+	//todas necesitan.
 
 
 	// Constructors -----------------------------------------------------------
@@ -82,7 +88,26 @@ public class AcademiaController extends AbstractController {
 		else
 			result = new ModelAndView("welcome/index");
 
+		System.out.println(academia.getUserAccount().getUsername());
+
+		final UserAccount cuenta = this.loginService.create();
+		cuenta.setUsername(academia.getUserAccount().getUsername());
+		cuenta.setPassword(academia.getUserAccount().getPassword());
+
+		final Authority auth = new Authority();
+		auth.setAuthority(Authority.ACADEMIA);
+		cuenta.addAuthority(auth);
+
+		try {
+			academia.setUserAccount(this.loginService.save(cuenta));
+		} catch (final Exception e) {
+			System.err.println("Error al guardar el UserAccount: " + e.getMessage());
+			e.printStackTrace();
+		}
+
 		this.academiaService.save(academia);
+
+		//Que te mande al login
 
 		return result;
 	}

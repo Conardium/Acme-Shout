@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import domain.Academia;
 import domain.Actor;
 import repositories.AcademiaRepository;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -19,9 +20,11 @@ public class AcademiaService {
 
 	// Managed repository -------------------------------
 	@Autowired
-	private AcademiaRepository academiaRepository;
+	private AcademiaRepository	academiaRepository;
 
 	// Supporting services ------------------------------
+	@Autowired
+	private LoginService		loginService;
 
 
 	// Simple CRUD methods ------------------------------

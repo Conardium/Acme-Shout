@@ -17,7 +17,7 @@
 
 	<h2>Registro de Academia</h2>
 
-	<form:form modelAttribute="academia" method="post" action="register">
+	<form:form modelAttribute="academia" method="post" action="academia/sing_up_academy.do">
 		<table>
 			<!-- Campos Actor -->
 			<tr>
