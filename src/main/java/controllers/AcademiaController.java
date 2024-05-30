@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Academia;
-import domain.Alumno;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
@@ -136,29 +135,6 @@ public class AcademiaController extends AbstractController {
 		result = new ModelAndView("listofacademies/allacademies");
 		result.addObject("academias", this.academiaService.findAll());
 
-		boolean esAlumno = false, esAcademia = false, esAdmin = false;
-
-		// Verificar si el usuario está autenticado
-		try {
-
-			final UserAccount user = LoginService.getPrincipal();
-
-			for (final Authority authority : user.getAuthorities())
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-					esAlumno = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-					esAcademia = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-					esAdmin = true;
-
-		} catch (final Exception ex) {
-			//No esta conectado
-		}
-
-		result.addObject("esAlumno", esAlumno);
-		result.addObject("esAcademia", esAcademia);
-		result.addObject("esAdmin", esAdmin);
-
 		return result;
 	}
 
@@ -172,43 +148,17 @@ public class AcademiaController extends AbstractController {
 		result = new ModelAndView("academy/academybycourse");
 		result.addObject("academia", this.academiaService.findAcademiaporCurso(cursoId));
 
-		boolean esAlumno = false, esAcademia = false, esAdmin = false;
-
-		// Verificar si el usuario está autenticado
-		try {
-
-			final UserAccount user = LoginService.getPrincipal();
-
-			for (final Authority authority : user.getAuthorities())
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-					esAlumno = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-					esAcademia = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-					esAdmin = true;
-
-		} catch (final Exception ex) {
-			//No esta conectado
-		}
-
-		result.addObject("esAlumno", esAlumno);
-		result.addObject("esAcademia", esAcademia);
-		result.addObject("esAdmin", esAdmin);
-
 		return result;
 	}
 
 	//Listar Solicitudes por Academia
 
 	@RequestMapping(value = "/listofapplicationbyacademy")
-	public ModelAndView solicitudesPorAlumno() {
+	public ModelAndView solicitudesPorAlumno(@RequestParam(required = true) final int academiaId) {
 		ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Academia actual = this.academiaService.findByAccountId(user.getId());
-
 		result = new ModelAndView("listofapplication/listofapplicationbyacademy");
-		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAcademia(actual.getId()));
+		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAcademia(academiaId));
 
 		return result;
 	}
@@ -216,14 +166,14 @@ public class AcademiaController extends AbstractController {
 	//Mostrar suscriptores
 
 	@RequestMapping(value = "/listofsubsbyacademy")
-	public ModelAndView subbystudent() {
+	public ModelAndView subbystudent(@RequestParam(required = true) final int idAlumno) {
 		ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Academia actual = this.academiaService.findByAccountId(user.getId());
+		//hace falta recoger tanto academias como alumnos para pasarlos los dos
+		//aunque se puede hacer un collection de Actores;
 
 		result = new ModelAndView("listofsubs/listofsubsbyacademy");
-		result.addObject("suscriptores", this.solicitudService.findAllSolicitudesByAcademia(actual.getId()));
+		//result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
 
 		return result;
 	}
@@ -234,20 +184,10 @@ public class AcademiaController extends AbstractController {
 	public ModelAndView sub_academy(@RequestParam(required = true) final int actorId) {
 		ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Academia actual = this.academiaService.findByAccountId(user.getId());
-
-		if (this.academiaService.findOne(actorId) != null) {
-			final Academia actor = this.academiaService.findOne(actorId);
-			actual.addSuscritos(actor);
-		} else {
-			final Alumno actor = this.alumnoService.findOne(actorId);
-			actual.addSuscritos(actor);
-		}
-
-		this.academiaService.save(actual);
+		//hace falta comprobar si el actor es academia o alumno y luego ya añadirlo según sea.
 
 		result = new ModelAndView("academy/academy");
+		//result.addObject("student", this.alumnoService();Nose que poner
 
 		return result;
 	}

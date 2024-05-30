@@ -17,7 +17,7 @@
 
 	<h2>Registro de Alumno</h2>
 
-	<form:form modelAttribute="alumno" method="post" action="register">
+	<form:form modelAttribute="alumno" method="post" action="alumno/sing_up_student.do">
 		<table>
 			<!-- Campos Actor -->
 			<tr>
