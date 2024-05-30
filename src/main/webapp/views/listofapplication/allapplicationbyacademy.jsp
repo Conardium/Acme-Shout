@@ -43,7 +43,7 @@
 							pattern="dd/MM/yyyy HH:mm" /></td>
 					<td>${solicitud.curso.nombre}</td>
 					<td>
-						<form action="${pageContext.request.contextPath}/aceptarSolicitud/"
+						<form action="${pageContext.request.contextPath}/solicitud/acceptapplication.do"
 							method="post">
 							<input type="hidden" name="solicitudId" value="${solicitud.id}" />
 							<button type="submit">Aceptar</button>

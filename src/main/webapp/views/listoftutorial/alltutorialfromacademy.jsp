@@ -26,10 +26,14 @@
                     <td>${tutorial.titulo}</td>
                     <td>${tutorial.descripcion}</td>
                     <td>
-                        <form action="${pageContext.request.contextPath}/edittutorial/${tutorial.id}" method="get">
+                        <form action="${pageContext.request.contextPath}/edittutorial/${tutorial.id}" 
+                        method="get">
+                        <input type="hidden" name="tutorialId" value="${tutorial.id}" />
                             <button type="submit">Editar</button>
                         </form>
-                        <form action="${pageContext.request.contextPath}/deletetutorial/${tutorial.id}" method="get">
+                        <form action="${pageContext.request.contextPath}/deletetutorial/${tutorial.id}" 
+                        method="get">
+                        <input type="hidden" name="tutorialId" value="${tutorial.id}" />
                             <button type="submit">Borrar</button>
                         </form>
                     </td>

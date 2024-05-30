@@ -45,6 +45,5 @@
             </jstl:forEach>
         </tbody>
     </table>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>

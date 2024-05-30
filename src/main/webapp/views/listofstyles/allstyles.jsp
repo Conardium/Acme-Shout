@@ -30,7 +30,8 @@
                     <td>${estilo.nombre}</td>
                     <td>${estilo.descripcion}</td>
                     <td>
-                        <form action="${pageContext.request.contextPath}/curso/allcoursesfromstyle.do" method="get">
+                        <form action="${pageContext.request.contextPath}/curso/allcoursesfromstyle.do" 
+                        method="get">
                         	<input type="hidden" name="estiloId" value="${estilo.id}" />
                             <button type="submit">Ver Cursos</button>
                         </form>
@@ -39,6 +40,5 @@
             </jstl:forEach>
         </tbody>
     </table>
-    	<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>

@@ -37,7 +37,7 @@ public class SolicitudController extends AbstractController {
 
 
 	// Solicitar -------------------------------------------
-	@RequestMapping(value = "/applay")
+	@RequestMapping(value = "/apply")
 	public ModelAndView Solicitar() {
 		ModelAndView result;
 
