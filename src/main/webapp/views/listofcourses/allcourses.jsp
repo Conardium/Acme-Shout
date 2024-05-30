@@ -58,8 +58,9 @@
 					<jstl:if test="${esAlumno && !yaSolicitada && !yaInscrito}  ">
 						<td>
 							<form
-								action="${pageContext.request.contextPath}/applicationcourse/${curso.id}"
+								action="${pageContext.request.contextPath}/apply.do"
 								method="get">
+								<input type="hidden" name="cursoId" value="${curso.id}" />
 								<button type="submit">Solicitar</button>
 							</form>
 						</td>
@@ -68,6 +69,5 @@
 			</jstl:forEach>
 		</tbody>
 	</table>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>

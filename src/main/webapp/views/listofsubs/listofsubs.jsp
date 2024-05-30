@@ -36,7 +36,8 @@
                     <td>${academia.telefono}</td>
                     <td>${academia.direccionPostal}</td>
                     <td>
-                        <form action="${pageContext.request.contextPath}/curso/allcoursesfromacademy.do" method="get">
+                        <form action="${pageContext.request.contextPath}/curso/allcoursesfromacademy.do" 
+                        method="get">
                         	<input type="hidden" name="academiaId" value="${academia.id}" />
                             <button type="submit">Ver Cursos</button>
                         </form>

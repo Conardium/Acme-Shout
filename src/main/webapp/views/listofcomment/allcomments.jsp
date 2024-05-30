@@ -36,7 +36,8 @@
 					<td>${comentario.texto}</td>
 					<td>${comentario.actor.nombre}</td>
 					<td><form
-							action="${pageContext.request.contextPath}/suscribirseUser/${comentario.id}"method="post">
+							action="${pageContext.request.contextPath}/comentario/suscribirseUser" method="post">
+							<input type="hidden" name="comentarioId" value="${comentario.id}" />
 							<input type="submit" value="Suscribirse" />
 						</form>
 					</td>
