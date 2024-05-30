@@ -88,8 +88,6 @@ public class AcademiaController extends AbstractController {
 		else
 			result = new ModelAndView("welcome/index");
 
-		System.out.println(academia.getUserAccount().getUsername());
-
 		final UserAccount cuenta = this.loginService.create();
 		cuenta.setUsername(academia.getUserAccount().getUsername());
 		cuenta.setPassword(academia.getUserAccount().getPassword());
