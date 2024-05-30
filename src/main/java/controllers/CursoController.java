@@ -10,11 +10,7 @@
 
 package controllers;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Curso;
 import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 import services.CursoService;
 
 @Controller
@@ -48,6 +46,23 @@ public class CursoController extends AbstractController {
 
 		result = new ModelAndView("course/course");
 		result.addObject("curso", this.cursoService.findOne(courseId));
+
+		boolean esAlumno = false, esAcademia = false, esAdmin = false;
+
+		// Verificar si el usuario está autenticado
+		final UserAccount user = LoginService.getPrincipal();
+
+		for (final Authority authority : user.getAuthorities())
+			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+				esAlumno = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+				esAcademia = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+				esAdmin = true;
+
+		result.addObject("esAlumno", esAlumno);
+		result.addObject("esAcademia", esAcademia);
+		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}
@@ -133,26 +148,22 @@ public class CursoController extends AbstractController {
 		result = new ModelAndView("listofcourses/allcourses");
 		result.addObject("cursos", this.cursoService.findAll());
 
-		// Verificar si el usuario está autenticado
-		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		final boolean isAuthenticated = auth.isAuthenticated() && !auth.getName().equalsIgnoreCase("anonymousUser");
-		boolean esAlumno = false;
+		boolean esAlumno = false, esAcademia = false, esAdmin = false;
 
-		// Obtener el nombre de usuario y los roles del usuario
-		if (isAuthenticated) {
-			final Collection<Authority> authorities = (Collection<Authority>) auth.getAuthorities();
-			for (final Authority authority : authorities)
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO")) {
-					esAlumno = true;
-					break;
-				}
-		}
+		// Verificar si el usuario está autenticado
+		final UserAccount user = LoginService.getPrincipal();
+
+		for (final Authority authority : user.getAuthorities())
+			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+				esAlumno = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+				esAcademia = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+				esAdmin = true;
 
 		result.addObject("esAlumno", esAlumno);
-
-		result.addObject("yaSolicitada", false);
-
-		result.addObject("yaInscrito", false);
+		result.addObject("esAcademia", esAcademia);
+		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}
@@ -167,28 +178,22 @@ public class CursoController extends AbstractController {
 		result = new ModelAndView("listofcourses/allcoursesfromacademy");
 		result.addObject("cursos", this.cursoService.findCursosporAcademia(academiaId));
 
-		// Verificar si el usuario está autenticado
-		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		final boolean isAuthenticated = auth.isAuthenticated() && !auth.getName().equalsIgnoreCase("anonymousUser");
-		boolean esAlumno = false;
+		boolean esAlumno = false, esAcademia = false, esAdmin = false;
 
-		// Obtener el nombre de usuario y los roles del usuario
-		if (isAuthenticated) {
-			final Collection<Authority> authorities = (Collection<Authority>) auth.getAuthorities();
-			for (final Authority authority : authorities)
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO")) {
-					esAlumno = true;
-					break;
-				}
-		}
+		// Verificar si el usuario está autenticado
+		final UserAccount user = LoginService.getPrincipal();
+
+		for (final Authority authority : user.getAuthorities())
+			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+				esAlumno = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+				esAcademia = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+				esAdmin = true;
 
 		result.addObject("esAlumno", esAlumno);
-
-		result.addObject("esAcademia", false);
-
-		result.addObject("yaSolicitada", false);
-
-		result.addObject("yaInscrito", false);
+		result.addObject("esAcademia", esAcademia);
+		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}
@@ -201,28 +206,22 @@ public class CursoController extends AbstractController {
 		result = new ModelAndView("listofcourses/allcoursesfromstyle");
 		result.addObject("cursos", this.cursoService.findCursosporEstilo(estiloId));
 
-		// Verificar si el usuario está autenticado
-		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		final boolean isAuthenticated = auth.isAuthenticated() && !auth.getName().equalsIgnoreCase("anonymousUser");
-		boolean esAlumno = false;
+		boolean esAlumno = false, esAcademia = false, esAdmin = false;
 
-		// Obtener el nombre de usuario y los roles del usuario
-		if (isAuthenticated) {
-			final Collection<Authority> authorities = (Collection<Authority>) auth.getAuthorities();
-			for (final Authority authority : authorities)
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO")) {
-					esAlumno = true;
-					break;
-				}
-		}
+		// Verificar si el usuario está autenticado
+		final UserAccount user = LoginService.getPrincipal();
+
+		for (final Authority authority : user.getAuthorities())
+			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+				esAlumno = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+				esAcademia = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+				esAdmin = true;
 
 		result.addObject("esAlumno", esAlumno);
-
-		result.addObject("esAcademia", false);
-
-		result.addObject("yaSolicitada", false);
-
-		result.addObject("yaInscrito", false);
+		result.addObject("esAcademia", esAcademia);
+		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}
@@ -235,28 +234,22 @@ public class CursoController extends AbstractController {
 		result = new ModelAndView("listofcourses/allcoursesfromfilter");
 		result.addObject("cursos", this.cursoService.findCursosByFiltro(filtro));
 
-		// Verificar si el usuario está autenticado
-		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		final boolean isAuthenticated = auth.isAuthenticated() && !auth.getName().equalsIgnoreCase("anonymousUser");
-		boolean esAlumno = false;
+		boolean esAlumno = false, esAcademia = false, esAdmin = false;
 
-		// Obtener el nombre de usuario y los roles del usuario
-		if (isAuthenticated) {
-			final Collection<Authority> authorities = (Collection<Authority>) auth.getAuthorities();
-			for (final Authority authority : authorities)
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO")) {
-					esAlumno = true;
-					break;
-				}
-		}
+		// Verificar si el usuario está autenticado
+		final UserAccount user = LoginService.getPrincipal();
+
+		for (final Authority authority : user.getAuthorities())
+			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+				esAlumno = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+				esAcademia = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+				esAdmin = true;
 
 		result.addObject("esAlumno", esAlumno);
-
-		result.addObject("esAcademia", false);
-
-		result.addObject("yaSolicitada", false);
-
-		result.addObject("yaInscrito", false);
+		result.addObject("esAcademia", esAcademia);
+		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}
