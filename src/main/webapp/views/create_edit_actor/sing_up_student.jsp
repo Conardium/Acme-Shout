@@ -59,9 +59,7 @@
 						cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="tarjetaCredito.anio">Año de Expiración:</
-				
-				form:label></td>
+				<td><form:label path="tarjetaCredito.anio">Año de Expiración:</form:label></td>
 				<td><form:input path="tarjetaCredito.anio" value="2025" /></td>
 				<td><form:errors path="tarjetaCredito.anio"
 						cssClass="error" /></td>
