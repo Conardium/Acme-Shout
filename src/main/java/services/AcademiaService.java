@@ -154,7 +154,7 @@ public class AcademiaService {
 		return result;
 	}
 
-	public double getAvgSolicitudesPorAcademia() {
+	public double getAvgSuscriptoresPorAcademia() {
 		double result = 0;
 
 		result = this.academiaRepository.findAvgSuscriptoresPorAcademia();

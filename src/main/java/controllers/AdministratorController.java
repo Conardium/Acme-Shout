@@ -19,14 +19,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Administrador;
+import services.AcademiaService;
 import services.AdministradorService;
+import services.AlumnoService;
+import services.CursoService;
+import services.SolicitudService;
+import services.TutorialService;
 
 @Controller
 @RequestMapping("/admin")
 public class AdministratorController extends AbstractController {
 
 	@Autowired
-	private AdministradorService adminService;
+	private AdministradorService	adminService;
+	private CursoService			cursoService;
+	private AcademiaService			academiaService;
+	private SolicitudService		solicitudService;
+	private TutorialService			tutorialService;
+	private AlumnoService			alumnoService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -82,6 +92,39 @@ public class AdministratorController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("dashboard/dashboard");
+
+		//CURSO POR ACADEMIA
+		result.addObject("minimoCursoPorAcademia", this.academiaService.findMinCursosByAcademia());
+		result.addObject("mediaCursoPorAcademia", this.academiaService.findAvgCursosByAcademia());
+		result.addObject("stdDevCursoPorAcademia", this.academiaService.findStdDevCursosByAcademia());
+		result.addObject("maxCursoPorAcademia", this.academiaService.findMaxCursosByAcademia());
+
+		//SOLICITUD POR CURSO
+		result.addObject("minSolicitudPorCurso", this.cursoService.findMinSolicitudesByCurso());
+		result.addObject("mediaSolicitudPorCuros", this.cursoService.findAvgSolicitudesByCurso());
+		result.addObject("minSolicitudPorCurso", this.cursoService.findStdDevSolicitudesByCurso());
+		result.addObject("minSolicitudPorCurso", this.cursoService.findMaxSolicitudesByCurso());
+
+		//TUTORIAL POR ACADEMIA
+		result.addObject("minTutorialPorAcademia", this.academiaService.findMinTutorialesByAcademia());
+		result.addObject("mediaTutorialPorAcademia", this.academiaService.findAvgTutorialesByAcademia());
+		result.addObject("maxTutorialPorAcademia", this.academiaService.findMaxTutorialesByAcademia());
+
+		//VECES QUE SE MUESTRAN TUTORIALES
+		result.addObject("minTutorialVecesMostrado", this.tutorialService.findMinVecesMostrado());
+		result.addObject("mediaTutorialVecesMostrado", this.tutorialService.findAvgVecesMostrado());
+		result.addObject("maxTutorialVecesMostrado", this.tutorialService.findMaxVecesMostrado());
+
+		//LISTADO DE TUTORIALES ORDENADOS DESCENDENTE
+		result.addObject("listaTutoriales", this.tutorialService.findAllOrderByVecesMostradoDesc());
+
+		//NUMERO MEDIO DE COMENTARIOS POR ACTOR
+		final double mediaComentarios = this.academiaService.getAvgComentariosPorAcademia() + this.alumnoService.getAvgComentariosPorAlumno();
+		result.addObject("mediaComentariosPorActor", mediaComentarios);
+
+		//NUMERO MEDIO DE SUSCRIPTORES POR ACTOR
+		final double mediaSuscriptores = this.academiaService.getAvgSuscriptoresPorAcademia() + this.alumnoService.getAvgSuscripcionesPorAlumno();
+		result.addObject("mediaComentariosPorActor", mediaSuscriptores);
 
 		return result;
 	}
