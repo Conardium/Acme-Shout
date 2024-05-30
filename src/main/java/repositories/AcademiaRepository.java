@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Academia;
+import domain.Actor;
 
 @Repository
 public interface AcademiaRepository extends JpaRepository<Academia, Integer> {
@@ -23,6 +24,9 @@ public interface AcademiaRepository extends JpaRepository<Academia, Integer> {
 
 	@Query("select a from Academia a join a.tutoriales t where t.id = ?1")
 	Academia findByAcademiaporTutorial(int idTutorial);
+
+	@Query("select s from Academia a join a.suscritos s where a.id = ?1")
+	Collection<Actor> findSuscriptorByAcademia(int idAcademia);
 
 	@Query("select MIN((a.cursos.size)) FROM Academia a")
 	int findMinCursosByAcademia();
@@ -48,7 +52,7 @@ public interface AcademiaRepository extends JpaRepository<Academia, Integer> {
 	@Query("select AVG((a.comentarios.size)) FROM Academia a")
 	double findAvgComentariosPorAcademia();
 
-	@Query("select AVG((a.suscritos.size)) FROM Academia a")
+	@Query("select AVG((a.suscriptores.size)) FROM Academia a")
 	double findAvgSuscriptoresPorAcademia();
 
 }

@@ -9,3 +9,5 @@
 <hr />
 
 <b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme Dancer Co., Inc.</b>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>

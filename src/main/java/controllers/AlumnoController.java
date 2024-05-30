@@ -19,6 +19,7 @@ public class AlumnoController extends AbstractController {
 
 	@Autowired
 	private AlumnoService		alumnoService;
+	private SolicitudService	academiaService;
 	private SolicitudService	solicitudService;
 
 
@@ -111,14 +112,14 @@ public class AlumnoController extends AbstractController {
 	//Mostrar suscriptores
 
 	@RequestMapping(value = "/listofsubsbystudent")
-	public ModelAndView subbystudent(@RequestParam(required = true) final int idAlumno) {
+	public ModelAndView subbystudent(@RequestParam(required = true) final int alumnoId) {
 		ModelAndView result;
 
 		//hace falta recoger tanto academias como alumnos para pasarlos los dos
 		//aunque se puede hacer un collection de Actores;
 
 		result = new ModelAndView("listofsubs/listofsubsbystudent");
-		//result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
+		result.addObject("suscriptores", this.alumnoService.findSuscritporByAlumno(alumnoId));
 
 		return result;
 	}
