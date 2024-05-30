@@ -124,7 +124,7 @@ public class AdministratorController extends AbstractController {
 
 		//NUMERO MEDIO DE SUSCRIPTORES POR ACTOR
 		final double mediaSuscriptores = this.academiaService.getAvgSuscriptoresPorAcademia() + this.alumnoService.getAvgSuscripcionesPorAlumno();
-		result.addObject("mediaComentariosPorActor", mediaSuscriptores);
+		result.addObject("mediaSuscriptoresPorActor", mediaSuscriptores);
 
 		return result;
 	}

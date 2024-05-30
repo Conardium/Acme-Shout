@@ -62,7 +62,7 @@
         </tr>
     </thead>
     <tbody>
-        <jstl:forEach var="tutorial" items="${tutorialsList}">
+        <jstl:forEach var="tutorial" items="${listaTutoriales}">
             <tr>
                 <td>${tutorial.title}</td>
                 <td>${tutorial.views}</td>
@@ -73,12 +73,12 @@
 
 <h2>Comentarios por Actor</h2>
 <ul>
-    <li>Media: ${averageCommentsPerActor}</li>
+    <li>Media: ${mediaComentariosPorActor}</li>
 </ul>
 
 <h2>Suscripciones por Actor</h2>
 <ul>
-    <li>Media: ${averageSubscriptionsPerActor}</li>
+    <li>Media: ${mediaSuscriptoresPorActor}</li>
 </ul>
 -->
 </body>
