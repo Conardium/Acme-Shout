@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Estilo;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 import services.EstiloService;
 
 @Controller
@@ -44,6 +47,23 @@ public class EstiloController extends AbstractController {
 
 		result = new ModelAndView("listofstyles/allstyles");
 		result.addObject("estilos", this.estiloService.findAll());
+
+		boolean esAlumno = false, esAcademia = false, esAdmin = false;
+
+		// Verificar si el usuario está autenticado
+		final UserAccount user = LoginService.getPrincipal();
+
+		for (final Authority authority : user.getAuthorities())
+			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+				esAlumno = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+				esAcademia = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+				esAdmin = true;
+
+		result.addObject("esAlumno", esAlumno);
+		result.addObject("esAcademia", esAcademia);
+		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}
@@ -113,6 +133,10 @@ public class EstiloController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("welcome/index");
+
+		//Ningun Curso debe tener este estilo
+		if (this.estiloService.existeCursoConEstilo(estilo))
+			return result;
 
 		this.estiloService.delete(estilo);
 

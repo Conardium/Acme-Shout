@@ -66,6 +66,14 @@ public class EstiloService {
 		return result;
 	}
 
+	public boolean existeCursoConEstilo(final Estilo estilo) {
+		boolean result;
+
+		result = this.cursoService.existeCursoConEstilo(estilo);
+
+		return result;
+	}
+
 	public void delete(final Estilo estilo) {
 		Assert.assertNotNull(estilo);
 		Assert.assertEquals(estilo.getId(), 0);

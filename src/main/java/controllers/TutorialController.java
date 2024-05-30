@@ -10,11 +10,7 @@
 
 package controllers;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Tutorial;
 import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 import services.TutorialService;
 
 @Controller
@@ -85,11 +83,11 @@ public class TutorialController extends AbstractController {
 	//Modificar Tutorial form
 
 	@RequestMapping("/form_edit_tutorial")
-	public ModelAndView form_edit_course(@RequestParam(required = true) final int cursoId) {
+	public ModelAndView form_edit_course(@RequestParam(required = true) final int tutorialId) {
 		ModelAndView result;
 
 		result = new ModelAndView("create_edit_tutorial/form_edit_tutorial");
-		result.addObject("tutorial", this.tutorialService.findOne(cursoId));
+		result.addObject("tutorial", this.tutorialService.findOne(tutorialId));
 
 		return result;
 	}
@@ -113,12 +111,12 @@ public class TutorialController extends AbstractController {
 	//Borrar Tutorial
 
 	@RequestMapping("/delete_tutorial")
-	public ModelAndView delete_course(@ModelAttribute("Tutorial") final Tutorial tutorial) {
+	public ModelAndView delete_course(@RequestParam(required = true) final int tutorialId) {
 		ModelAndView result;
 
 		result = new ModelAndView("welcome/index");
 
-		this.tutorialService.delete(tutorial);
+		this.tutorialService.delete(this.tutorialService.findOne(tutorialId));
 
 		return result;
 	}
@@ -131,30 +129,24 @@ public class TutorialController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("listoftutorial/alltutorialfromacademy");
-		result.addObject("tutorial", this.tutorialService.findAllByAcademia(tutorialId));
+		result.addObject("tutoriales", this.tutorialService.findAllByAcademia(tutorialId));
+
+		boolean esAlumno = false, esAcademia = false, esAdmin = false;
 
 		// Verificar si el usuario está autenticado
-		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		final boolean isAuthenticated = auth.isAuthenticated() && !auth.getName().equalsIgnoreCase("anonymousUser");
-		boolean esAlumno = false;
+		final UserAccount user = LoginService.getPrincipal();
 
-		// Obtener el nombre de usuario y los roles del usuario
-		if (isAuthenticated) {
-			final Collection<Authority> authorities = (Collection<Authority>) auth.getAuthorities();
-			for (final Authority authority : authorities)
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO")) {
-					esAlumno = true;
-					break;
-				}
-		}
+		for (final Authority authority : user.getAuthorities())
+			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+				esAlumno = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+				esAcademia = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+				esAdmin = true;
 
 		result.addObject("esAlumno", esAlumno);
-
-		result.addObject("esAcademia", false);
-
-		result.addObject("yaSolicitada", false);
-
-		result.addObject("yaInscrito", false);
+		result.addObject("esAcademia", esAcademia);
+		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}

@@ -42,7 +42,6 @@ public class SolicitudController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("listofcourses/allcourses");
-		//result.addObject("solicitudes", this.solicitudService.findAll());
 
 		return result;
 	}
