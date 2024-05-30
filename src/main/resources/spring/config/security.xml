@@ -45,7 +45,6 @@
 				<security:intercept-url pattern="/academia/allacademies.do" access="permitAll" />
 				<security:intercept-url pattern="/academia/sing_up_academy.do" access="permitAll" />
 				<security:intercept-url pattern="/academia/form_sing_up_academy.do" access="permitAll" />
-				<security:intercept-url pattern="/academia/sing_up_academy.do" access="permitAll" />
 		<!-- Vistas de Administrador -->
 		<!-- Vistas de Alumno -->
 				<security:intercept-url pattern="/alumno/sing_up_student.do" access="permitAll" />

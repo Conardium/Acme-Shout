@@ -51,15 +51,19 @@ public class EstiloController extends AbstractController {
 		boolean esAlumno = false, esAcademia = false, esAdmin = false;
 
 		// Verificar si el usuario está autenticado
-		final UserAccount user = LoginService.getPrincipal();
+		try {
+			final UserAccount user = LoginService.getPrincipal();
 
-		for (final Authority authority : user.getAuthorities())
-			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-				esAlumno = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-				esAcademia = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-				esAdmin = true;
+			for (final Authority authority : user.getAuthorities())
+				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+					esAlumno = true;
+				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+					esAcademia = true;
+				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+					esAdmin = true;
+		} catch (final Exception ex) {
+			//No esta conectado
+		}
 
 		result.addObject("esAlumno", esAlumno);
 		result.addObject("esAcademia", esAcademia);

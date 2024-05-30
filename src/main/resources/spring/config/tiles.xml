@@ -16,13 +16,11 @@
 		<value>/views/academy/tiles.xml</value>
 		<value>/views/admin/tiles.xml</value>
 		<value>/views/student/tiles.xml</value>
-		<value>/views/sign_up_in/tiles.xml</value>
-
-		<value>/views/application/tiles.xml</value>
+		
+		<value>/views/comment/tiles.xml</value>
 		<value>/views/course/tiles.xml</value>
 		<value>/views/creditcard/tiles.xml</value>
 		<value>/views/dashboard/tiles.xml</value>
-		<value>/views/style/tiles.xml</value>
 		<value>/views/tutorial/tiles.xml</value>
 
 		<value>/views/create_comment/tiles.xml</value>

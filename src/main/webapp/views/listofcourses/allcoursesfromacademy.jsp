@@ -80,7 +80,5 @@
 			</jstl:forEach>
 		</tbody>
 	</table>
-		<button type="button" onclick="location.href='${pageContext.request.contextPath}/curso/form_create_course.do'">Volver</button>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>

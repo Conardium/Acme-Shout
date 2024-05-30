@@ -54,13 +54,15 @@
 			</tr>
 			<tr>
 				<td><form:label path="tarjetaCredito.mes">Mes de Expiración:</form:label></td>
-				<td><form:input path="tarjetaCredito.mes" />1</td>
+				<td><form:input path="tarjetaCredito.mes" value="1"/></td>
 				<td><form:errors path="tarjetaCredito.mes"
 						cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="tarjetaCredito.anio">Año de Expiración:</form:label></td>
-				<td><form:input path="tarjetaCredito.anio" />2025</td>
+				<td><form:label path="tarjetaCredito.anio">Año de Expiración:</
+				
+				form:label></td>
+				<td><form:input path="tarjetaCredito.anio" value="2025" /></td>
 				<td><form:errors path="tarjetaCredito.anio"
 						cssClass="error" /></td>
 			</tr>

@@ -50,15 +50,19 @@ public class CursoController extends AbstractController {
 		boolean esAlumno = false, esAcademia = false, esAdmin = false;
 
 		// Verificar si el usuario está autenticado
-		final UserAccount user = LoginService.getPrincipal();
+		try {
+			final UserAccount user = LoginService.getPrincipal();
 
-		for (final Authority authority : user.getAuthorities())
-			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-				esAlumno = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-				esAcademia = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-				esAdmin = true;
+			for (final Authority authority : user.getAuthorities())
+				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+					esAlumno = true;
+				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+					esAcademia = true;
+				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+					esAdmin = true;
+		} catch (final Exception ex) {
+			//No esta conectado
+		}
 
 		result.addObject("esAlumno", esAlumno);
 		result.addObject("esAcademia", esAcademia);
@@ -151,15 +155,19 @@ public class CursoController extends AbstractController {
 		boolean esAlumno = false, esAcademia = false, esAdmin = false;
 
 		// Verificar si el usuario está autenticado
-		final UserAccount user = LoginService.getPrincipal();
+		try {
+			final UserAccount user = LoginService.getPrincipal();
 
-		for (final Authority authority : user.getAuthorities())
-			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-				esAlumno = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-				esAcademia = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-				esAdmin = true;
+			for (final Authority authority : user.getAuthorities())
+				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+					esAlumno = true;
+				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+					esAcademia = true;
+				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+					esAdmin = true;
+		} catch (final Exception ex) {
+			//No esta conectado
+		}
 
 		result.addObject("esAlumno", esAlumno);
 		result.addObject("esAcademia", esAcademia);
@@ -168,7 +176,7 @@ public class CursoController extends AbstractController {
 		return result;
 	}
 
-	// Action-2 ---------------------------------------------------------------
+	// Cursos por academia ---------------------------------------------------------------
 
 	@RequestMapping("/allcoursesfromacademy")
 	public ModelAndView listbyacademy(@RequestParam(required = true) final int academiaId) {
@@ -181,15 +189,19 @@ public class CursoController extends AbstractController {
 		boolean esAlumno = false, esAcademia = false, esAdmin = false;
 
 		// Verificar si el usuario está autenticado
-		final UserAccount user = LoginService.getPrincipal();
+		try {
+			final UserAccount user = LoginService.getPrincipal();
 
-		for (final Authority authority : user.getAuthorities())
-			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-				esAlumno = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-				esAcademia = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-				esAdmin = true;
+			for (final Authority authority : user.getAuthorities())
+				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+					esAlumno = true;
+				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+					esAcademia = true;
+				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+					esAdmin = true;
+		} catch (final Exception ex) {
+			//No esta conectado
+		}
 
 		result.addObject("esAlumno", esAlumno);
 		result.addObject("esAcademia", esAcademia);
@@ -197,6 +209,8 @@ public class CursoController extends AbstractController {
 
 		return result;
 	}
+
+	// Cursos por estilo --------------------------------------
 
 	@RequestMapping("/allcoursesfromstyle")
 	public ModelAndView listbystyle(@RequestParam(required = true) final int estiloId) {
@@ -209,15 +223,19 @@ public class CursoController extends AbstractController {
 		boolean esAlumno = false, esAcademia = false, esAdmin = false;
 
 		// Verificar si el usuario está autenticado
-		final UserAccount user = LoginService.getPrincipal();
+		try {
+			final UserAccount user = LoginService.getPrincipal();
 
-		for (final Authority authority : user.getAuthorities())
-			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-				esAlumno = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-				esAcademia = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-				esAdmin = true;
+			for (final Authority authority : user.getAuthorities())
+				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+					esAlumno = true;
+				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+					esAcademia = true;
+				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+					esAdmin = true;
+		} catch (final Exception ex) {
+			//No esta conectado
+		}
 
 		result.addObject("esAlumno", esAlumno);
 		result.addObject("esAcademia", esAcademia);
@@ -225,6 +243,8 @@ public class CursoController extends AbstractController {
 
 		return result;
 	}
+
+	//Cursos por filtro -------------------
 
 	@RequestMapping("/allcoursesfromfilter")
 	public ModelAndView listbyfilter(@RequestParam(required = true) final String filtro) {
@@ -237,15 +257,19 @@ public class CursoController extends AbstractController {
 		boolean esAlumno = false, esAcademia = false, esAdmin = false;
 
 		// Verificar si el usuario está autenticado
-		final UserAccount user = LoginService.getPrincipal();
+		try {
+			final UserAccount user = LoginService.getPrincipal();
 
-		for (final Authority authority : user.getAuthorities())
-			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-				esAlumno = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-				esAcademia = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-				esAdmin = true;
+			for (final Authority authority : user.getAuthorities())
+				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+					esAlumno = true;
+				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+					esAcademia = true;
+				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+					esAdmin = true;
+		} catch (final Exception ex) {
+			//No esta conectado
+		}
 
 		result.addObject("esAlumno", esAlumno);
 		result.addObject("esAcademia", esAcademia);
