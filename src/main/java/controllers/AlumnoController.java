@@ -70,6 +70,7 @@ public class AlumnoController extends AbstractController {
 		else
 			result = new ModelAndView("welcome/index");
 
+		this.alumnoService.save(alumno);
 		return result;
 	}
 
