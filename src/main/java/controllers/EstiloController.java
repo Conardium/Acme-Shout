@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Estilo;
-import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import services.EstiloService;
@@ -48,26 +47,15 @@ public class EstiloController extends AbstractController {
 		result = new ModelAndView("listofstyles/allstyles");
 		result.addObject("estilos", this.estiloService.findAll());
 
-		boolean esAlumno = false, esAcademia = false, esAdmin = false;
-
 		// Verificar si el usuario está autenticado
 		try {
 			final UserAccount user = LoginService.getPrincipal();
+			result.addObject("autoridad", user.getAuth());
 
-			for (final Authority authority : user.getAuthorities())
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-					esAlumno = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-					esAcademia = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-					esAdmin = true;
 		} catch (final Exception ex) {
 			//No esta conectado
+			result.addObject("autoridad", "NADA");
 		}
-
-		result.addObject("esAlumno", esAlumno);
-		result.addObject("esAcademia", esAcademia);
-		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}

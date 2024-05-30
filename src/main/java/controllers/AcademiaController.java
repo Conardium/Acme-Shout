@@ -89,7 +89,7 @@ public class AcademiaController extends AbstractController {
 
 		final UserAccount cuenta = this.loginService.create();
 		cuenta.setUsername(academia.getUserAccount().getUsername());
-		cuenta.setPassword(academia.getUserAccount().getPassword());
+		UserAccount.generateMD5Hash(academia.getUserAccount().getPassword(), cuenta);
 
 		final Authority auth = new Authority();
 		auth.setAuthority(Authority.ACADEMIA);

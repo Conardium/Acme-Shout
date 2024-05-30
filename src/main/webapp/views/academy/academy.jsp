@@ -48,7 +48,5 @@
 	<button type="button"
 		onclick="location.href='${pageContext.request.contextPath}/academia/form_edit_academy.do'">Modificar</button>
 	<button type="button" onclick="goBack()">Volver</button>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>

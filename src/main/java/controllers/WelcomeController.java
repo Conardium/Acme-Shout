@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
+import security.UserAccount;
+
 @Controller
 @RequestMapping("/welcome")
 public class WelcomeController extends AbstractController {
@@ -43,6 +46,16 @@ public class WelcomeController extends AbstractController {
 		result = new ModelAndView("welcome/index");
 		result.addObject("name", name);
 		result.addObject("moment", moment);
+
+		// Verificar si el usuario está autenticado
+		try {
+			final UserAccount user = LoginService.getPrincipal();
+			result.addObject("autoridad", user.getAuth());
+
+		} catch (final Exception ex) {
+			//No esta conectado
+			result.addObject("autoridad", "NADA");
+		}
 
 		return result;
 	}
