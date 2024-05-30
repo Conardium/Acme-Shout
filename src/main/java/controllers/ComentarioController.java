@@ -52,6 +52,36 @@ public class ComentarioController {
 		return result;
 	}
 
+	// Listar todos los comentarios ---------------------------------------------------------------
+
+	@RequestMapping("/allcomments")
+	public ModelAndView listofall() {
+
+		ModelAndView result;
+
+		result = new ModelAndView("listofcomment/allcomments");
+		result.addObject("comentarios", this.comentarioService.findAll());
+
+		boolean esAlumno = false, esAcademia = false, esAdmin = false;
+
+		// Verificar si el usuario está autenticado
+		final UserAccount user = LoginService.getPrincipal();
+
+		for (final Authority authority : user.getAuthorities())
+			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
+				esAlumno = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
+				esAcademia = true;
+			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
+				esAdmin = true;
+
+		result.addObject("esAlumno", esAlumno);
+		result.addObject("esAcademia", esAcademia);
+		result.addObject("esAdmin", esAdmin);
+
+		return result;
+	}
+
 	// Crear Comentario form ---------------------------------------------------------------
 
 	@RequestMapping("/form_create_comment")
