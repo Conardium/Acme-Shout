@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Academia;
 import domain.Alumno;
+import security.LoginService;
+import security.UserAccount;
+import services.AcademiaService;
 import services.AlumnoService;
 import services.SolicitudService;
 
@@ -19,7 +23,7 @@ public class AlumnoController extends AbstractController {
 
 	@Autowired
 	private AlumnoService		alumnoService;
-	private SolicitudService	academiaService;
+	private AcademiaService		academiaService;
 	private SolicitudService	solicitudService;
 
 
@@ -115,9 +119,6 @@ public class AlumnoController extends AbstractController {
 	public ModelAndView subbystudent(@RequestParam(required = true) final int alumnoId) {
 		ModelAndView result;
 
-		//hace falta recoger tanto academias como alumnos para pasarlos los dos
-		//aunque se puede hacer un collection de Actores;
-
 		result = new ModelAndView("listofsubs/listofsubsbystudent");
 		result.addObject("suscriptores", this.alumnoService.findSuscritporByAlumno(alumnoId));
 
@@ -128,14 +129,24 @@ public class AlumnoController extends AbstractController {
 
 	@RequestMapping("/sub_student")
 	public ModelAndView sub_student(@RequestParam(required = true) final int actorId) {
-		ModelAndView result;
+		final ModelAndView result;
 
 		//hace falta comprobar si el actor es academia o alumno y luego ya añadirlo según sea.
+		final UserAccount user = LoginService.getPrincipal();
+		final Alumno actual = this.alumnoService.findByAccountId(actorId);
+
+		if (this.academiaService.findOne(actorId) != null) {
+			final Academia actor = this.academiaService.findOne(actorId);
+			actual.addSuscritos(actor);
+		} else {
+			final Alumno actor = this.alumnoService.findOne(actorId);
+			actual.addSuscritos(actor);
+		}
+
+		this.alumnoService.save(actual);
 
 		result = new ModelAndView("student/student");
-		//result.addObject("student", this.alumnoService();Nose que poner
 
 		return result;
 	}
-	//est y dashboard (tambien en academia)
 }

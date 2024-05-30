@@ -73,6 +73,15 @@ public class AcademiaService {
 	}
 
 	// Not Simple CRUD methods ------------------------------
+
+	public Academia findByAccountId(final int academiaId) {
+		Academia result;
+
+		result = this.academiaRepository.findByAccountId(academiaId);
+
+		return result;
+	}
+
 	public Academia findAcademiaporCurso(final int cursoId) {
 		Academia result;
 

@@ -67,6 +67,10 @@ public abstract class Actor extends DomainEntity {
 		this.suscritos = suscritos;
 	}
 
+	public void addSuscritos(final Actor suscriptor) {
+		this.suscritos.add(suscriptor);
+	}
+
 	//----------------Nombre
 	@NotBlank(message = "El nombre no puede estar en blanco")
 	public String getNombre() {

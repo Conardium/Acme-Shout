@@ -73,4 +73,11 @@ public class AdministradorService {
 
 	// Not Simple CRUD methods ------------------------------
 
+	public Administrador findByAccountId(final int administradorId) {
+		Administrador result;
+
+		result = this.administradorRepository.findByAccountId(administradorId);
+
+		return result;
+	}
 }
