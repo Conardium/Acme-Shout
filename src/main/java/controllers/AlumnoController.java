@@ -104,11 +104,14 @@ public class AlumnoController extends AbstractController {
 	//Listar Solicitudes por Alumno
 
 	@RequestMapping(value = "/listofapplicationbystudent")
-	public ModelAndView solicitudesPorAlumno(@RequestParam(required = true) final int idAlumno) {
+	public ModelAndView solicitudesPorAlumno() {
 		ModelAndView result;
 
+		final UserAccount user = LoginService.getPrincipal();
+		final Alumno actual = this.alumnoService.findByAccountId(user.getId());
+
 		result = new ModelAndView("listofapplication/listofapplicationbystudent");
-		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
+		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(actual.getId()));
 
 		return result;
 	}
@@ -119,8 +122,11 @@ public class AlumnoController extends AbstractController {
 	public ModelAndView subbystudent(@RequestParam(required = true) final int alumnoId) {
 		ModelAndView result;
 
+		final UserAccount user = LoginService.getPrincipal();
+		final Alumno actual = this.alumnoService.findByAccountId(user.getId());
+
 		result = new ModelAndView("listofsubs/listofsubsbystudent");
-		result.addObject("suscriptores", this.alumnoService.findSuscritporByAlumno(alumnoId));
+		result.addObject("suscriptores", this.alumnoService.findSuscritporByAlumno(actual.getId()));
 
 		return result;
 	}
@@ -131,9 +137,8 @@ public class AlumnoController extends AbstractController {
 	public ModelAndView sub_student(@RequestParam(required = true) final int actorId) {
 		final ModelAndView result;
 
-		//hace falta comprobar si el actor es academia o alumno y luego ya añadirlo según sea.
 		final UserAccount user = LoginService.getPrincipal();
-		final Alumno actual = this.alumnoService.findByAccountId(actorId);
+		final Alumno actual = this.alumnoService.findByAccountId(user.getId());
 
 		if (this.academiaService.findOne(actorId) != null) {
 			final Academia actor = this.academiaService.findOne(actorId);

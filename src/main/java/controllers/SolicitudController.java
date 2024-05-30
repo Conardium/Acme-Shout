@@ -10,14 +10,21 @@
 
 package controllers;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Alumno;
 import domain.Estado;
 import domain.Solicitud;
+import security.LoginService;
+import security.UserAccount;
+import services.AlumnoService;
+import services.CursoService;
 import services.SolicitudService;
 
 @Controller
@@ -33,13 +40,29 @@ public class SolicitudController extends AbstractController {
 
 	// Services --------------------------------------------------------------
 	@Autowired
-	private SolicitudService solicitudService;
+	private SolicitudService	solicitudService;
+	private AlumnoService		alumnoService;
+	private CursoService		cursoService;
 
 
 	// Solicitar -------------------------------------------
-	@RequestMapping(value = "/applay")
-	public ModelAndView Solicitar() {
+	@RequestMapping(value = "/apply")
+	public ModelAndView Solicitar(@RequestParam(required = true) final int idCurso) {
 		ModelAndView result;
+
+		final UserAccount user = LoginService.getPrincipal();
+		final Alumno actual = this.alumnoService.findByAccountId(user.getId());
+
+		final Solicitud nuevaSolicitud = this.solicitudService.create();
+
+		nuevaSolicitud.setCurso(this.cursoService.findOne(idCurso));
+		nuevaSolicitud.setEstado(Estado.Pendiente);
+		nuevaSolicitud.setFecha(new Date());
+
+		actual.addSolicitud(nuevaSolicitud);
+
+		this.solicitudService.save(nuevaSolicitud);
+		this.alumnoService.save(actual);
 
 		result = new ModelAndView("listofcourses/allcourses");
 

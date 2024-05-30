@@ -23,7 +23,6 @@ import services.AcademiaService;
 import services.AdministradorService;
 import services.AlumnoService;
 import services.CursoService;
-import services.SolicitudService;
 import services.TutorialService;
 
 @Controller
@@ -34,7 +33,6 @@ public class AdministratorController extends AbstractController {
 	private AdministradorService	adminService;
 	private CursoService			cursoService;
 	private AcademiaService			academiaService;
-	private SolicitudService		solicitudService;
 	private TutorialService			tutorialService;
 	private AlumnoService			alumnoService;
 
@@ -119,11 +117,11 @@ public class AdministratorController extends AbstractController {
 		result.addObject("listaTutoriales", this.tutorialService.findAllOrderByVecesMostradoDesc());
 
 		//NUMERO MEDIO DE COMENTARIOS POR ACTOR
-		final double mediaComentarios = this.academiaService.getAvgComentariosPorAcademia() + this.alumnoService.getAvgComentariosPorAlumno();
+		final double mediaComentarios = (this.academiaService.getAvgComentariosPorAcademia() + this.alumnoService.getAvgComentariosPorAlumno()) / 2;
 		result.addObject("mediaComentariosPorActor", mediaComentarios);
 
 		//NUMERO MEDIO DE SUSCRIPTORES POR ACTOR
-		final double mediaSuscriptores = this.academiaService.getAvgSuscriptoresPorAcademia() + this.alumnoService.getAvgSuscripcionesPorAlumno();
+		final double mediaSuscriptores = (this.academiaService.getAvgSuscriptoresPorAcademia() + this.alumnoService.getAvgSuscripcionesPorAlumno()) / 2;
 		result.addObject("mediaSuscriptoresPorActor", mediaSuscriptores);
 
 		return result;

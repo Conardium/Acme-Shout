@@ -195,11 +195,14 @@ public class AcademiaController extends AbstractController {
 	//Mostrar suscriptores
 
 	@RequestMapping(value = "/listofsubsbyacademy")
-	public ModelAndView subbystudent(@RequestParam(required = true) final int Academiaid) {
+	public ModelAndView subbystudent() {
 		ModelAndView result;
 
+		final UserAccount user = LoginService.getPrincipal();
+		final Academia actual = this.academiaService.findByAccountId(user.getId());
+
 		result = new ModelAndView("listofsubs/listofsubsbyacademy");
-		result.addObject("suscriptores", this.solicitudService.findAllSolicitudesByAcademia(Academiaid));
+		result.addObject("suscriptores", this.solicitudService.findAllSolicitudesByAcademia(actual.getId()));
 
 		return result;
 	}
@@ -211,7 +214,7 @@ public class AcademiaController extends AbstractController {
 		ModelAndView result;
 
 		final UserAccount user = LoginService.getPrincipal();
-		final Academia actual = this.academiaService.findByAccountId(actorId);
+		final Academia actual = this.academiaService.findByAccountId(user.getId());
 
 		if (this.academiaService.findOne(actorId) != null) {
 			final Academia actor = this.academiaService.findOne(actorId);
