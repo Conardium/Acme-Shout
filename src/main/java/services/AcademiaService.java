@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import domain.Academia;
+import domain.Actor;
 import repositories.AcademiaRepository;
 
 @Service
@@ -79,6 +80,15 @@ public class AcademiaService {
 
 		return result;
 	}
+
+	public Collection<Actor> findSuscritporByAcademia(final int academiaId) {
+		Collection<Actor> result;
+
+		result = this.academiaRepository.findSuscriptorByAcademia(academiaId);
+
+		return result;
+	}
+
 	public int findMinCursosByAcademia() {
 		int result = 0;
 

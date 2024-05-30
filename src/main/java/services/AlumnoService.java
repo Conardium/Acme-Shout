@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import domain.Actor;
 import domain.Alumno;
 import repositories.AlumnoRepository;
 
@@ -73,10 +74,10 @@ public class AlumnoService {
 
 	// Not Simple CRUD methods ------------------------------
 
-	public Collection<Alumno> findSuscritporByAlumno(final int alumnoId) {
-		Collection<Alumno> result;
+	public Collection<Actor> findSuscritporByAlumno(final int alumnoId) {
+		Collection<Actor> result;
 
-		result = this.alumnoRepository.findSuscritporByAlumno(alumnoId);
+		result = this.alumnoRepository.findSuscriptorByAlumno(alumnoId);
 
 		return result;
 	}
