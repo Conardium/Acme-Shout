@@ -1,11 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<!DOCTYPE html>
-<html>
-
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -21,8 +13,6 @@
 </head>
 <body>
 
-<h1>Dashboard</h1>
-<!--  
 <h2>Cursos por Academia</h2>
 <ul>
     <li>Mínimo: ${minimoCursoPorAcademia}</li>
@@ -53,7 +43,7 @@
     <li>Máximo: ${maxTutorialVecesMostrado}</li>
 </ul>
 
-<h2>Listado de Tutoriales (Orden Descendente por Visualizaciones)</h2>
+<h2>Listado de Tutoriales (Orden Descendente por Visualizaciones</h2>
 <table>
     <thead>
         <tr>
@@ -64,8 +54,8 @@
     <tbody>
         <jstl:forEach var="tutorial" items="${listaTutoriales}">
             <tr>
-                <td>${tutorial.title}</td>
-                <td>${tutorial.views}</td>
+                <td>${tutorial.titulo}</td>
+                <td>${tutorial.contador}</td>
             </tr>
         </jstl:forEach>
     </tbody>
@@ -80,7 +70,7 @@
 <ul>
     <li>Media: ${mediaSuscriptoresPorActor}</li>
 </ul>
--->
+
 </body>
 </html>
 
