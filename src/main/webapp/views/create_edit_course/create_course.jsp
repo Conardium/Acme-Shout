@@ -9,8 +9,6 @@
 </head>
 <body>
 
-	<h2>Registro de Curso</h2>
-
 	<form:form modelAttribute="curso" method="post" action="registerCurso">
 		<table>
 			<tr>
@@ -19,11 +17,11 @@
 				<td><form:errors path="titulo" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="estilo">Estilo:</form:label></td>
-				<td><form:select path="estilo">
+				<td><form:label path="estilo.id">Estilo:</form:label></td>
+				<td><form:select path="estilo.id">
 					<form:options items="${estilos}" itemValue="id" itemLabel="nombre" />
 				</form:select></td>
-				<td><form:errors path="estilo" cssClass="error" /></td>
+				<td><form:errors path="estilo.id" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="nivel">Nivel:</form:label></td>

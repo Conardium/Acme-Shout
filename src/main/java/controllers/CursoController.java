@@ -10,6 +10,8 @@
 
 package controllers;
 
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -31,12 +33,14 @@ import services.EstiloService;
 @RequestMapping("/curso")
 public class CursoController extends AbstractController {
 
+	private static final SimpleDateFormat	timeFormat	= new SimpleDateFormat("HH:mm:ss");
+
 	@Autowired
-	private CursoService	cursoService;
+	private CursoService					cursoService;
 	@Autowired
-	private AcademiaService	academiaService;
+	private AcademiaService					academiaService;
 	@Autowired
-	private EstiloService	estiloService;
+	private EstiloService					estiloService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -54,26 +58,14 @@ public class CursoController extends AbstractController {
 		result = new ModelAndView("course/course");
 		result.addObject("curso", this.cursoService.findOne(courseId));
 
-		boolean esAlumno = false, esAcademia = false, esAdmin = false;
-
 		// Verificar si el usuario está autenticado
 		try {
 			final UserAccount user = LoginService.getPrincipal();
-
-			for (final Authority authority : user.getAuthorities())
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-					esAlumno = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-					esAcademia = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-					esAdmin = true;
+			result.addObject("autoridad", user.getAuth());
 		} catch (final Exception ex) {
 			//No esta conectado
+			result.addObject("autoridad", "nada");
 		}
-
-		result.addObject("esAlumno", esAlumno);
-		result.addObject("esAcademia", esAcademia);
-		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}
@@ -86,6 +78,7 @@ public class CursoController extends AbstractController {
 
 		result = new ModelAndView("create_edit_course/form_create_course");
 		result.addObject("curso", this.cursoService.create());
+		result.addObject("estilos", this.estiloService.findAll());
 
 		return result;
 	}
@@ -95,8 +88,6 @@ public class CursoController extends AbstractController {
 	@RequestMapping("/create_course")
 	public ModelAndView sing_up_course(@ModelAttribute("Curso") final Curso curso, final BindingResult resultado) {
 		ModelAndView result;
-
-		result = new ModelAndView("welcome/index");
 
 		if (resultado.hasErrors())
 			result = new ModelAndView("create_edit_course/form_create_course");
@@ -120,7 +111,7 @@ public class CursoController extends AbstractController {
 	public ModelAndView form_edit_course(@RequestParam(required = true) final int cursoId) {
 		ModelAndView result;
 
-		result = new ModelAndView("create_edit_course/edit_course");
+		result = new ModelAndView("create_edit_course/form_edit_course");
 		result.addObject("curso", this.cursoService.findOne(cursoId));
 		result.addObject("estilos", this.estiloService.findAll());
 
@@ -130,7 +121,7 @@ public class CursoController extends AbstractController {
 	//Modificar Curso
 
 	@RequestMapping("/edit_course")
-	public ModelAndView edit_course(@ModelAttribute("Curso") final Curso curso, final BindingResult resultado) {
+	public ModelAndView edit_course(@ModelAttribute("Curso") final Curso curso, @RequestParam("estiloId") int estiloId, final BindingResult resultado) {
 		ModelAndView result;
 
 		if (resultado.hasErrors()) {
@@ -138,14 +129,17 @@ public class CursoController extends AbstractController {
 			result.addObject("curso", curso);
 			result.addObject("estilos", this.estiloService.findAll());
 		} else {
-			Estilo est = this.estiloService.findOne(curso.getEstilo().getId());
+
+			Estilo est = this.estiloService.findOne(estiloId);
 			curso.setEstilo(est);
+			this.cursoService.save(curso);
+
 			result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
-			result.addObject("curso", this.cursoService.save(curso));
 
 			final UserAccount user = LoginService.getPrincipal();
+			result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(user.getId()).getId()));
 			result.addObject("autoridad", user.getAuth());
-			this.cursoService.save(curso);
+
 		}
 
 		return result;
@@ -174,26 +168,14 @@ public class CursoController extends AbstractController {
 		result = new ModelAndView("listofcourses/allcourses");
 		result.addObject("cursos", this.cursoService.findAll());
 
-		boolean esAlumno = false, esAcademia = false, esAdmin = false;
-
 		// Verificar si el usuario está autenticado
 		try {
 			final UserAccount user = LoginService.getPrincipal();
-
-			for (final Authority authority : user.getAuthorities())
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-					esAlumno = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-					esAcademia = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-					esAdmin = true;
+			result.addObject("autoridad", user.getAuth());
 		} catch (final Exception ex) {
 			//No esta conectado
+			result.addObject("autoridad", "nada");
 		}
-
-		result.addObject("esAlumno", esAlumno);
-		result.addObject("esAcademia", esAcademia);
-		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}
@@ -208,26 +190,14 @@ public class CursoController extends AbstractController {
 		result = new ModelAndView("listofcourses/allcoursesfromacademy");
 		result.addObject("cursos", this.cursoService.findCursosporAcademia(academiaId));
 
-		boolean esAlumno = false, esAcademia = false, esAdmin = false;
-
 		// Verificar si el usuario está autenticado
 		try {
 			final UserAccount user = LoginService.getPrincipal();
-
-			for (final Authority authority : user.getAuthorities())
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-					esAlumno = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-					esAcademia = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-					esAdmin = true;
+			result.addObject("autoridad", user.getAuth());
 		} catch (final Exception ex) {
 			//No esta conectado
+			result.addObject("autoridad", "nada");
 		}
-
-		result.addObject("esAlumno", esAlumno);
-		result.addObject("esAcademia", esAcademia);
-		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}
@@ -257,26 +227,14 @@ public class CursoController extends AbstractController {
 		result = new ModelAndView("listofcourses/allcoursesfromstyle");
 		result.addObject("cursos", this.cursoService.findCursosporEstilo(estiloId));
 
-		boolean esAlumno = false, esAcademia = false, esAdmin = false;
-
 		// Verificar si el usuario está autenticado
 		try {
 			final UserAccount user = LoginService.getPrincipal();
-
-			for (final Authority authority : user.getAuthorities())
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-					esAlumno = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-					esAcademia = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-					esAdmin = true;
+			result.addObject("autoridad", user.getAuth());
 		} catch (final Exception ex) {
 			//No esta conectado
+			result.addObject("autoridad", "nada");
 		}
-
-		result.addObject("esAlumno", esAlumno);
-		result.addObject("esAcademia", esAcademia);
-		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}
@@ -291,26 +249,14 @@ public class CursoController extends AbstractController {
 		result = new ModelAndView("listofcourses/allcoursesfromfilter");
 		result.addObject("cursos", this.cursoService.findCursosByFiltro(filtro));
 
-		boolean esAlumno = false, esAcademia = false, esAdmin = false;
-
 		// Verificar si el usuario está autenticado
 		try {
 			final UserAccount user = LoginService.getPrincipal();
-
-			for (final Authority authority : user.getAuthorities())
-				if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-					esAlumno = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-					esAcademia = true;
-				else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-					esAdmin = true;
+			result.addObject("autoridad", user.getAuth());
 		} catch (final Exception ex) {
 			//No esta conectado
+			result.addObject("autoridad", "nada");
 		}
-
-		result.addObject("esAlumno", esAlumno);
-		result.addObject("esAcademia", esAcademia);
-		result.addObject("esAdmin", esAdmin);
 
 		return result;
 	}
