@@ -17,7 +17,8 @@
 
 	<h2>Registro de Alumno</h2>
 
-	<form:form modelAttribute="alumno" method="post" action="alumno/sing_up_student.do">
+	<form:form modelAttribute="alumno" method="post"
+		action="alumno/sing_up_student.do">
 		<table>
 			<!-- Campos Actor -->
 			<tr>
@@ -32,12 +33,14 @@
 			</tr>
 			<tr>
 				<td><form:label path="correo">Correo:</form:label></td>
-				<td><form:input path="correo" /></td>
+				<td><form:input path="correo" pattern=".+@.+\\..+"
+						title="El correo debe seguir el formato 'usuario@dominio.com'" /></td>
 				<td><form:errors path="correo" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="telefono">Teléfono:</form:label></td>
-				<td><form:input path="telefono" /></td>
+				<td><form:input path="telefono" pattern="\\d{2}\\s\\d{4,}"
+						title="El teléfono debe seguir el formato 'xx xxxx...'" /></td>
 				<td><form:errors path="telefono" cssClass="error" /></td>
 			</tr>
 			<tr>
@@ -47,29 +50,39 @@
 			</tr>
 
 			<!-- Campos Alumno -->
+			<!-- Número de Tarjeta de Crédito -->
 			<tr>
 				<td><form:label path="tarjetaCredito.numero">Número de Tarjeta de Crédito:</form:label></td>
-				<td><form:input path="tarjetaCredito.numero" /></td>
+				<td><form:input path="tarjetaCredito.numero" pattern="\d{16}"
+						title="El número de tarjeta debe tener 16 dígitos" required /></td>
 				<td><form:errors path="tarjetaCredito.numero" cssClass="error" /></td>
 			</tr>
+
+			<!-- Mes de Expiración -->
 			<tr>
 				<td><form:label path="tarjetaCredito.mes">Mes de Expiración:</form:label></td>
-				<td><form:input path="tarjetaCredito.mes" value="1"/></td>
-				<td><form:errors path="tarjetaCredito.mes"
-						cssClass="error" /></td>
+				<td><form:input path="tarjetaCredito.mes" type="number" min="1"
+						max="12" required /></td>
+				<td><form:errors path="tarjetaCredito.mes" cssClass="error" /></td>
 			</tr>
+
+			<!-- Año de Expiración -->
 			<tr>
 				<td><form:label path="tarjetaCredito.anio">Año de Expiración:</form:label></td>
-				<td><form:input path="tarjetaCredito.anio" value="2025" /></td>
-				<td><form:errors path="tarjetaCredito.anio"
-						cssClass="error" /></td>
+				<td><form:input path="tarjetaCredito.anio" type="number"
+						min="2024" required /></td>
+				<td><form:errors path="tarjetaCredito.anio" cssClass="error" /></td>
 			</tr>
+
+			<!-- CVV -->
 			<tr>
 				<td><form:label path="tarjetaCredito.codigoCVV">CVV:</form:label></td>
-				<td><form:input path="tarjetaCredito.codigoCVV" /></td>
+				<td><form:input path="tarjetaCredito.codigoCVV" pattern="\d{3}"
+						title="El CVV debe tener 3 dígitos" required /></td>
 				<td><form:errors path="tarjetaCredito.codigoCVV"
 						cssClass="error" /></td>
 			</tr>
+
 
 			<!-- Campos UserAccount -->
 			<tr>
