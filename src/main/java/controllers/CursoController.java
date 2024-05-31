@@ -22,6 +22,7 @@ import domain.Curso;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import services.AcademiaService;
 import services.CursoService;
 
 @Controller
@@ -29,7 +30,9 @@ import services.CursoService;
 public class CursoController extends AbstractController {
 
 	@Autowired
-	private CursoService cursoService;
+	private CursoService	cursoService;
+	@Autowired
+	private AcademiaService	academiaService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -207,6 +210,21 @@ public class CursoController extends AbstractController {
 		result.addObject("esAcademia", esAcademia);
 		result.addObject("esAdmin", esAdmin);
 
+		return result;
+	}
+
+	// Cursos del usuario logueado como academia -------------------------------------------
+	@RequestMapping("/coursesbyacademyprofile")
+	public ModelAndView coursesofacademyprofile() {
+
+		ModelAndView result;
+		final UserAccount aux = LoginService.getPrincipal();
+
+		if (aux.getAuth() == Authority.ACADEMIA) {
+			result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
+			result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(aux.getId()).getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 		return result;
 	}
 

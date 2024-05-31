@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Administrador;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 import services.AcademiaService;
 import services.AdministradorService;
 import services.AlumnoService;
@@ -31,9 +34,13 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministradorService	adminService;
+	@Autowired
 	private CursoService			cursoService;
+	@Autowired
 	private AcademiaService			academiaService;
+	@Autowired
 	private TutorialService			tutorialService;
+	@Autowired
 	private AlumnoService			alumnoService;
 
 
@@ -43,14 +50,23 @@ public class AdministratorController extends AbstractController {
 		super();
 	}
 
-	//Mostrar admin
+	//Mostrar perfil
 
-	@RequestMapping("/show_admin")
-	public ModelAndView show_admin(@RequestParam(required = true) final int adminId) {
+	@RequestMapping("/show_profile")
+	public ModelAndView show_profile() {
 		ModelAndView result;
 
-		result = new ModelAndView("admin/admin");
-		result.addObject("admin", this.adminService.findOne(adminId));
+		final UserAccount aux = LoginService.getPrincipal();
+
+		if (aux.getAuth() == Authority.ADMINISTRADOR) {
+			result = new ModelAndView("admin/admin");
+			result.addObject("esAlumno", false);
+			result.addObject("esAcademia", false);
+			result.addObject("esAdmin", true);
+		} else
+			result = new ModelAndView("welcome/index");
+
+		result.addObject("admin", this.adminService.findByAccountId(aux.getId()));
 
 		return result;
 	}

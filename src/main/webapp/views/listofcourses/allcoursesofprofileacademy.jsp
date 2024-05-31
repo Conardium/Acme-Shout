@@ -14,10 +14,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Lista de Cursos</title>
+<title>Lista de sus Cursos</title>
 </head>
 <body>
-<button type="button" onclick="goBack()">Volver</button>
 	<table border="1">
 		<thead>
 			<tr>
@@ -28,10 +27,9 @@
 				<th>Fecha de Fin</th>
 				<th>Día de la Semana</th>
 				<th>Hora</th>
-				<th>Academia</th>
-				<jstl:if test="${esAlumno}">
-					<th>Solicitud</th>
-				</jstl:if>
+
+				<th>Editar</th>
+				<th>Borrar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,24 +44,22 @@
 							pattern="dd/MM/yyyy HH:mm" /></td>
 					<td>${curso.diaSemana}</td>
 					<td><fmt:formatDate value="${curso.hora}" pattern="HH:mm:ss" /></td>
+
+
 					<td>
 						<form
-							action="${pageContext.request.contextPath}/academia/academybycourse.do"
+							action="${pageContext.request.contextPath}/editcourse/${curso.id}"
 							method="get">
-							<input type="hidden" name="cursoId" value="${curso.id}" />
-							<button type="submit">Ver Academia</button>
+							<button type="submit">Editar</button>
 						</form>
 					</td>
-					<jstl:if test="${esAlumno && !yaSolicitada && !yaInscrito}  ">
-						<td>
-							<form
-								action="${pageContext.request.contextPath}/apply.do"
-								method="get">
-								<input type="hidden" name="cursoId" value="${curso.id}" />
-								<button type="submit">Solicitar</button>
-							</form>
-						</td>
-					</jstl:if>					
+					<td>
+						<form
+							action="${pageContext.request.contextPath}/delete/${curso.id}"
+							method="get">
+							<button type="submit">Borrar</button>
+						</form>
+					</td>
 				</tr>
 			</jstl:forEach>
 		</tbody>

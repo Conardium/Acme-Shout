@@ -3,6 +3,7 @@ package controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,13 +32,32 @@ public class AcademiaController extends AbstractController {
 	@Autowired
 	private LoginService		loginService;
 
-	//todas necesitan.
-
 
 	// Constructors -----------------------------------------------------------
 
 	public AcademiaController() {
 		super();
+	}
+
+	//Mostrar perfil
+
+	@RequestMapping("/show_profile")
+	public ModelAndView show_profile() {
+		ModelAndView result;
+
+		final UserAccount aux = LoginService.getPrincipal();
+
+		if (aux.getAuth() == Authority.ACADEMIA) {
+			result = new ModelAndView("academy/academy");
+			result.addObject("esAlumno", false);
+			result.addObject("esAcademia", true);
+			result.addObject("esAdmin", false);
+		} else
+			result = new ModelAndView("welcome/index");
+
+		result.addObject("academia", this.academiaService.findByAccountId(aux.getId()));
+
+		return result;
 	}
 
 	//Mostrar academia
@@ -79,33 +99,38 @@ public class AcademiaController extends AbstractController {
 	//Crear academia
 
 	@RequestMapping("/sing_up_academy")
+	@Transactional
 	public ModelAndView sing_up_academy(@ModelAttribute("academia") final Academia academia, final BindingResult resultado) {
 		ModelAndView result;
 
 		if (resultado.hasErrors())
 			result = new ModelAndView("create_edit_actor/form_sing_up_academy");
-		else
-			result = new ModelAndView("welcome/index");
+		else {
 
-		final UserAccount cuenta = this.loginService.create();
-		cuenta.setUsername(academia.getUserAccount().getUsername());
-		UserAccount.generateMD5Hash(academia.getUserAccount().getPassword(), cuenta);
+			final UserAccount cuenta = this.loginService.create();
+			cuenta.setUsername(academia.getUserAccount().getUsername());
+			UserAccount.generateMD5Hash(academia.getUserAccount().getPassword(), cuenta);
 
-		final Authority auth = new Authority();
-		auth.setAuthority(Authority.ACADEMIA);
-		cuenta.addAuthority(auth);
+			final Authority auth = new Authority();
+			auth.setAuthority(Authority.ACADEMIA);
+			cuenta.addAuthority(auth);
 
-		try {
-			academia.setUserAccount(this.loginService.save(cuenta));
-		} catch (final Exception e) {
-			System.err.println("Error al guardar el UserAccount: " + e.getMessage());
-			e.printStackTrace();
+			try {
+				academia.setUserAccount(this.loginService.save(cuenta));
+			} catch (final Exception e) {
+				System.err.println("Error al guardar el UserAccount: " + e.getMessage());
+				result = new ModelAndView("create_edit_actor/form_sing_up_academy");
+			}
+
+			try {
+				this.academiaService.save(academia);
+			} catch (final Exception e) {
+				System.err.println("Error al guardar la Academia: " + e.getMessage());
+				result = new ModelAndView("create_edit_actor/form_sing_up_academy");
+			}
+			//Te mande al login
+			result = new ModelAndView("security/login");
 		}
-
-		this.academiaService.save(academia);
-
-		//Que te mande al login
-
 		return result;
 	}
 

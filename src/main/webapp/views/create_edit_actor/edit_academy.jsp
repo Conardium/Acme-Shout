@@ -29,15 +29,15 @@
             <td><form:errors path="apellidos" cssClass="error" /></td>
         </tr>
         <tr>
-            <td><form:label path="correo">Correo:</form:label></td>
-            <td><form:input path="correo" />${academia.correo}</td>
-            <td><form:errors path="correo" cssClass="error" /></td>
-        </tr>
-        <tr>
-            <td><form:label path="telefono">Teléfono:</form:label></td>
-            <td><form:input path="telefono" />${academia.telefono}</td>
-            <td><form:errors path="telefono" cssClass="error" /></td>
-        </tr>
+				<td><form:label path="correo">Correo:</form:label></td>
+                <td><form:input path="correo" pattern=".+@.+\\..+" title="El correo debe seguir el formato 'usuario@dominio.com'" /></td>
+                <td><form:errors path="correo" cssClass="error" /></td>
+			</tr>
+			<tr>
+				<td><form:label path="telefono">Teléfono:</form:label></td>
+                <td><form:input path="telefono" pattern="\\d{2}\\s\\d{4,}" title="El teléfono debe seguir el formato 'xx xxxx...'" /></td>
+                <td><form:errors path="telefono" cssClass="error" /></td>
+			</tr>
         <tr>
             <td><form:label path="direccionPostal">Dirección Postal:</form:label></td>
             <td><form:input path="direccionPostal" />${academia.direccionPostal}</td>

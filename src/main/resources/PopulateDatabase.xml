@@ -32,7 +32,7 @@
 
 	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="alumno1" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="password" value="c6865cf98b133f1f3de596a4a2894630" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -43,7 +43,7 @@
 	</bean>
 	<bean id="userAccount21" class="security.UserAccount">
 		<property name="username" value="alumno2" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="password" value="c6865cf98b133f1f3de596a4a2894630" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -54,7 +54,7 @@
 	</bean>
 	<bean id="userAccount22" class="security.UserAccount">
 		<property name="username" value="alumno3" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="password" value="c6865cf98b133f1f3de596a4a2894630" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -66,7 +66,7 @@
 
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="academia1" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="21100e9e60400b9704419459ec2babfd" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -77,7 +77,7 @@
 	</bean>
 	<bean id="userAccount31" class="security.UserAccount">
 		<property name="username" value="academia2" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="21100e9e60400b9704419459ec2babfd" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -88,7 +88,7 @@
 	</bean>
 	<bean id="userAccount32" class="security.UserAccount">
 		<property name="username" value="academia3" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="21100e9e60400b9704419459ec2babfd" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
