@@ -32,13 +32,32 @@ public class AcademiaController extends AbstractController {
 	@Autowired
 	private LoginService		loginService;
 
-	//todas necesitan.
-
 
 	// Constructors -----------------------------------------------------------
 
 	public AcademiaController() {
 		super();
+	}
+
+	//Mostrar perfil
+
+	@RequestMapping("/show_profile")
+	public ModelAndView show_profile() {
+		ModelAndView result;
+
+		final UserAccount aux = LoginService.getPrincipal();
+
+		if (aux.getAuth() == Authority.ACADEMIA) {
+			result = new ModelAndView("academy/academy");
+			result.addObject("esAlumno", false);
+			result.addObject("esAcademia", true);
+			result.addObject("esAdmin", false);
+		} else
+			result = new ModelAndView("welcome/index");
+
+		result.addObject("academia", this.academiaService.findByAccountId(aux.getId()));
+
+		return result;
 	}
 
 	//Mostrar academia

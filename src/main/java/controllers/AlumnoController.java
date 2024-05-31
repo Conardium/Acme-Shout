@@ -38,6 +38,27 @@ public class AlumnoController extends AbstractController {
 		super();
 	}
 
+	//Mostrar perfil
+
+	@RequestMapping("/show_profile")
+	public ModelAndView show_profile() {
+		ModelAndView result;
+
+		final UserAccount aux = LoginService.getPrincipal();
+
+		if (aux.getAuth() == Authority.ALUMNO) {
+			result = new ModelAndView("alumno/alumno");
+			result.addObject("esAlumno", true);
+			result.addObject("esAcademia", false);
+			result.addObject("esAdmin", false);
+		} else
+			result = new ModelAndView("welcome/index");
+
+		result.addObject("alumno", this.alumnoService.findByAccountId(aux.getId()));
+
+		return result;
+	}
+
 	//Mostrar alumno
 
 	@RequestMapping("/show_student")
@@ -45,7 +66,7 @@ public class AlumnoController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("student/student");
-		result.addObject("student", this.alumnoService.findOne(studentId));
+		result.addObject("alumno", this.alumnoService.findOne(studentId));
 
 		return result;
 	}
