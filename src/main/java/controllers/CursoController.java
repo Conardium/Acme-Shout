@@ -221,11 +221,8 @@ public class CursoController extends AbstractController {
 		final UserAccount aux = LoginService.getPrincipal();
 
 		if (aux.getAuth() == Authority.ACADEMIA) {
-			result = new ModelAndView("listofcourses/allcoursesfromacademy");
+			result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
 			result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(aux.getId()).getId()));
-			result.addObject("esAlumno", false);
-			result.addObject("esAcademia", true);
-			result.addObject("esAdmin", false);
 		} else
 			result = new ModelAndView("welcome/index");
 		return result;
