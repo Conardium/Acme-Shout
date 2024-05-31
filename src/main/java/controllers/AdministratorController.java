@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Administrador;
@@ -42,6 +41,8 @@ public class AdministratorController extends AbstractController {
 	private TutorialService			tutorialService;
 	@Autowired
 	private AlumnoService			alumnoService;
+	@Autowired
+	private LoginService			loginService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -74,11 +75,12 @@ public class AdministratorController extends AbstractController {
 	//Modificar admin form
 
 	@RequestMapping("/form_edit_admin")
-	public ModelAndView form_edit_admin(@RequestParam(required = true) final int adminId) {
+	public ModelAndView form_edit_admin() {
 		ModelAndView result;
-
 		result = new ModelAndView("create_edit_actor/form_edit_admin");
-		result.addObject("admin", this.adminService.findOne(adminId));
+
+		final UserAccount aux = LoginService.getPrincipal();
+		result.addObject("admin", this.adminService.findByAccountId(aux.getId()));
 
 		return result;
 	}
@@ -89,12 +91,21 @@ public class AdministratorController extends AbstractController {
 	public ModelAndView edit_admin(@ModelAttribute("admin") final Administrador admin, final BindingResult resultado) {
 		ModelAndView result;
 
-		if (resultado.hasErrors())
+		if (resultado.hasErrors()) {
 			result = new ModelAndView("create_edit_actor/form_edit_admin");
-		else
+			result.addObject("admin", admin);
+		} else {
+			final UserAccount user = LoginService.getPrincipal();
+			UserAccount.generateMD5Hash(admin.getUserAccount().getPassword(), user);
+			user.setUsername(admin.getUserAccount().getUsername());
+
 			result = new ModelAndView("admin/admin");
 
-		this.adminService.save(admin);
+			admin.setUserAccount(this.loginService.save(user));
+			result.addObject("admin", this.adminService.save(admin));
+
+			result.addObject("autoridad", user.getAuth());
+		}
 
 		return result;
 	}

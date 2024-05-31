@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles.xml
+ * tiles_es.xml
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -13,17 +13,13 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+      
 <tiles-definitions>
 
-	<definition name="create_edit_style/form_create_style" extends="master.page">	
-		<put-attribute name="title" value="Create Style" />
-		<put-attribute name="body" value="/views/create_edit_style/create_style.jsp" />
+	<definition name="style/style" extends="master.page">	
+		<put-attribute name="title" value="Estilos" />
+		<put-attribute name="body" value="/views/style/style.jsp" />
 	</definition>
 	
-	<definition name="create_edit_style/form_edit_style" extends="master.page">	
-		<put-attribute name="title" value="Edit Style" />
-		<put-attribute name="body" value="/views/create_edit_style/edit_style.jsp" />
-	</definition>
 	
 </tiles-definitions>

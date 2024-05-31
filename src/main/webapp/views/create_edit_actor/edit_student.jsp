@@ -20,6 +20,14 @@
 	<form:form modelAttribute="alumno" method="post"
 		action="${pageContext.request.contextPath}/alumno/edit_alumno">
 		<table>
+			<!-- Campo Id (oculto) -->
+			<tr>
+				<td><form:hidden path="id" /></td>
+			</tr>
+			<!-- Campo Version (oculto) -->
+			<tr>
+				<td><form:hidden path="version" /></td>
+			</tr>
 			<!-- Campos Actor -->
 			<tr>
 				<td><form:label path="nombre">Nombre:</form:label></td>
@@ -48,7 +56,14 @@
 				<td><form:input path="direccionPostal" />${alumno.direccionPostal}</td>
 				<td><form:errors path="direccionPostal" cssClass="error" /></td>
 			</tr>
-
+			<!-- Campo Id (oculto) -->
+			<tr>
+				<td><form:hidden path="userAccount.id" /></td>
+			</tr>
+			<!-- Campo Version (oculto) -->
+			<tr>
+				<td><form:hidden path="userAccount.version" /></td>
+			</tr>
 			<!-- Campos de UserAccount -->
 			<tr>
 				<td><form:label path="userAccount.username">Nombre de Usuario:</form:label></td>

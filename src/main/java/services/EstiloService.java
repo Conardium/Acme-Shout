@@ -76,11 +76,10 @@ public class EstiloService {
 
 	public void delete(final Estilo estilo) {
 		Assert.assertNotNull(estilo);
-		Assert.assertEquals(estilo.getId(), 0);
+		Assert.assertNotEquals(estilo.getId(), 0);
 
-		//¿¿¿¿¿¿ ESTO ESTA BIEN ?????
 		//Comprobamos antes de borrar el estilo que este no pertenezca a ningun curso
-		Assert.assertTrue(this.cursoService.existeCursoConEstilo(estilo));
+		Assert.assertTrue(!this.cursoService.existeCursoConEstilo(estilo));
 
 		this.estiloRepository.delete(estilo);
 	}

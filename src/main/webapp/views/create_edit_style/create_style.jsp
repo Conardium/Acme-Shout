@@ -11,14 +11,12 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Gestionar Estilos</title>
+    <title>Crear Estilos</title>
 </head>
 <body>
-    <h1>Gestionar Estilos</h1>
 
     <!-- Formulario para crear un nuevo estilo -->
-    <h2>Crear un nuevo estilo</h2>
-    <form:form method="post" modelAttribute="nuevoEstilo" action="${pageContext.request.contextPath}/createestilo">
+    <form:form method="post" modelAttribute="estilo" action="${pageContext.request.contextPath}/estilo/create_style.do">
         <table>
             <!-- Campo para el nombre -->
             <tr>
@@ -61,7 +59,7 @@
             <!-- Botón de volver -->
             <tr>
                 <td colspan="2">
-                    <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/estilos';">Volver</button>
+	<button type="button" onclick="goBack()">Volver</button>
                 </td>
             </tr>
         </table>
