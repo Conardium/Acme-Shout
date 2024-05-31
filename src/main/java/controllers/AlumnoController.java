@@ -32,8 +32,6 @@ public class AlumnoController extends AbstractController {
 	private LoginService		loginService;
 
 
-	@Autowired
-
 	// Constructors -----------------------------------------------------------
 
 	public AlumnoController() {
