@@ -22,6 +22,7 @@ import domain.Curso;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import services.AcademiaService;
 import services.CursoService;
 
 @Controller
@@ -29,7 +30,9 @@ import services.CursoService;
 public class CursoController extends AbstractController {
 
 	@Autowired
-	private CursoService cursoService;
+	private CursoService	cursoService;
+	@Autowired
+	private AcademiaService	academiaService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -219,8 +222,7 @@ public class CursoController extends AbstractController {
 
 		if (aux.getAuth() == Authority.ACADEMIA) {
 			result = new ModelAndView("listofcourses/allcoursesfromacademy");
-			final int academiaId = aux.getId();
-			result.addObject("cursos", this.cursoService.findCursosporAcademia(academiaId));
+			result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(aux.getId()).getId()));
 			result.addObject("esAlumno", false);
 			result.addObject("esAcademia", true);
 			result.addObject("esAdmin", false);

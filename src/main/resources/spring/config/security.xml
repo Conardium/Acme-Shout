@@ -99,7 +99,7 @@
 				<security:intercept-url pattern="/curso/form_edit_course.do" access="hasRole('ACADEMIA')" />	
 				<security:intercept-url pattern="/curso/edit_course.do" access="hasRole('ACADEMIA')" />
 				<security:intercept-url pattern="/curso/delete_course.do" access="hasRole('ACADEMIA')" />
-				
+				<security:intercept-url pattern="/curso/coursesbyacademyprofile.do" access="hasRole('ACADEMIA')"/>
 				<security:intercept-url pattern="/solicitud/rejectapplication.do" access="hasRole('ACADEMIA')" />
 				<security:intercept-url pattern="/solicitud/acceptapplication.do" access="hasRole('ACADEMIA')" />
 				
