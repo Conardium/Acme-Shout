@@ -16,7 +16,6 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import services.AcademiaService;
-import services.AlumnoService;
 import services.SolicitudService;
 
 @Controller
@@ -27,8 +26,6 @@ public class AcademiaController extends AbstractController {
 	private AcademiaService		academiaService;
 	@Autowired
 	private SolicitudService	solicitudService;
-	@Autowired
-	private AlumnoService		alumnoService;
 	@Autowired
 	private LoginService		loginService;
 
@@ -87,11 +84,13 @@ public class AcademiaController extends AbstractController {
 	//Modificar academia form
 
 	@RequestMapping("/form_edit_academy")
-	public ModelAndView form_edit_academy(@RequestParam(required = true) final int academiaId) {
+	public ModelAndView form_edit_academy() {
 		ModelAndView result;
 
+		final UserAccount aux = LoginService.getPrincipal();
+
 		result = new ModelAndView("create_edit_actor/form_edit_academy");
-		result.addObject("academia", this.academiaService.findOne(academiaId));
+		result.addObject("academia", this.academiaService.findByAccountId(aux.getId()));
 
 		return result;
 	}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles_es.xml
+ * tiles.xml
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -13,13 +13,14 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-      
+       
 <tiles-definitions>
 
-
-			<definition name="dashboard/dashboard" extends="master.page">	
-		<put-attribute name="title" value="Panel de control" />
-		<put-attribute name="body" value="/views/dashboard/dashboard.jsp" />
+	<definition name="style/style" extends="master.page">	
+		<put-attribute name="title" value="Style" />
+		<put-attribute name="body" value="/views/style/style.jsp" />
 	</definition>
+	
+
 	
 </tiles-definitions>

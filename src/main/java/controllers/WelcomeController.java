@@ -13,6 +13,7 @@ package controllers;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,10 @@ import security.UserAccount;
 @RequestMapping("/welcome")
 public class WelcomeController extends AbstractController {
 
+	@Autowired
+	private LoginService loginService;
+
+
 	// Constructors -----------------------------------------------------------
 
 	public WelcomeController() {
@@ -34,7 +39,7 @@ public class WelcomeController extends AbstractController {
 	// Index ------------------------------------------------------------------
 
 	@RequestMapping(value = "/index")
-	public ModelAndView index(@RequestParam(required = false, defaultValue = "Anonimo") final String name) {
+	public ModelAndView index(@RequestParam(required = false) final String nombre) {
 
 		ModelAndView result;
 		SimpleDateFormat formatter;
@@ -44,17 +49,19 @@ public class WelcomeController extends AbstractController {
 		moment = formatter.format(new Date());
 
 		result = new ModelAndView("welcome/index");
-		result.addObject("name", name);
+
 		result.addObject("moment", moment);
 
 		// Verificar si el usuario está autenticado
 		try {
 			final UserAccount user = LoginService.getPrincipal();
 			result.addObject("autoridad", user.getAuth());
+			result.addObject("name", user.getUsername());
 
 		} catch (final Exception ex) {
 			//No esta conectado
 			result.addObject("autoridad", "NADA");
+			result.addObject("name", "Anonimo");
 		}
 
 		return result;

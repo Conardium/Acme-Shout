@@ -16,10 +16,10 @@
       
 <tiles-definitions>
 
-
-			<definition name="dashboard/dashboard" extends="master.page">	
-		<put-attribute name="title" value="Panel de control" />
-		<put-attribute name="body" value="/views/dashboard/dashboard.jsp" />
+	<definition name="style/style" extends="master.page">	
+		<put-attribute name="title" value="Estilos" />
+		<put-attribute name="body" value="/views/style/style.jsp" />
 	</definition>
+	
 	
 </tiles-definitions>

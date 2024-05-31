@@ -122,11 +122,13 @@ public class AlumnoController extends AbstractController {
 	//Modificar alumno form
 
 	@RequestMapping("/form_edit_student")
-	public ModelAndView form_edit_alumno(@RequestParam(required = true) final int alumnoId) {
+	public ModelAndView form_edit_alumno() {
 		ModelAndView result;
 
+		final UserAccount aux = LoginService.getPrincipal();
+
 		result = new ModelAndView("create_edit_actor/form_edit_alumno");
-		result.addObject("alumno", this.alumnoService.findOne(alumnoId));
+		result.addObject("alumno", this.alumnoService.findByAccountId(aux.getId()));
 
 		return result;
 	}

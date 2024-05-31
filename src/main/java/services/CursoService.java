@@ -100,7 +100,7 @@ public class CursoService {
 		Collection<Curso> cursos;
 
 		cursos = this.cursoRepository.findByEstilo(estilo.getId());
-		result = cursos.isEmpty();
+		result = !cursos.isEmpty();
 
 		return result;
 	}

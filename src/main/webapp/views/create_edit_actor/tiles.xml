@@ -33,5 +33,12 @@
 		<put-attribute name="body"
 			value="/views/create_edit_actor/edit_student.jsp" />
 	</definition>
+	
+			<definition name="create_edit_actor/form_edit_admin"
+		extends="master.page">
+		<put-attribute name="title" value="Modify Admin" />
+		<put-attribute name="body"
+			value="/views/create_edit_actor/edit_admin.jsp" />
+	</definition>
 
 </tiles-definitions>

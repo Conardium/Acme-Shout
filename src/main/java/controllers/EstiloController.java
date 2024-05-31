@@ -37,6 +37,29 @@ public class EstiloController extends AbstractController {
 		super();
 	}
 
+	// Mostrar estilo ---------------------------------------------------------------
+
+	@RequestMapping("/style")
+	public ModelAndView MostrarEstilo(@RequestParam(required = true) final int estiloId) {
+
+		ModelAndView result;
+
+		result = new ModelAndView("style/style");
+		result.addObject("estilo", this.estiloService.findOne(estiloId));
+
+		// Verificar si el usuario está autenticado
+		try {
+			final UserAccount user = LoginService.getPrincipal();
+			result.addObject("autoridad", user.getAuth());
+
+		} catch (final Exception ex) {
+			//No esta conectado
+			result.addObject("autoridad", "NADA");
+		}
+
+		return result;
+	}
+
 	// Listar todos los estilos ---------------------------------------------------------------
 
 	@RequestMapping("/allstyles")
@@ -63,7 +86,7 @@ public class EstiloController extends AbstractController {
 	// Crear Estilo form ---------------------------------------------------------------
 
 	@RequestMapping("/form_create_style")
-	public ModelAndView form_sing_up_student() {
+	public ModelAndView form_create_style() {
 		ModelAndView result;
 
 		result = new ModelAndView("create_edit_style/form_create_style");
@@ -75,17 +98,21 @@ public class EstiloController extends AbstractController {
 	// Crear Estilo ---------------------------------------------------------------
 
 	@RequestMapping("/create_style")
-	public ModelAndView sing_up_student(@ModelAttribute("Estilo") final Estilo estilo, final BindingResult resultado) {
+	public ModelAndView create_style(@ModelAttribute("Estilo") final Estilo estilo, final BindingResult resultado) {
 		ModelAndView result;
 
 		result = new ModelAndView("welcome/index");
 
 		if (resultado.hasErrors())
 			result = new ModelAndView("create_edit_style/form_create_style");
-		else
-			result = new ModelAndView("welcome/index");
+		else {
+			result = new ModelAndView("listofstyles/allstyles");
 
-		this.estiloService.save(estilo);
+			final UserAccount user = LoginService.getPrincipal();
+			result.addObject("autoridad", user.getAuth());
+			this.estiloService.save(estilo);
+			result.addObject("estilos", this.estiloService.findAll());
+		}
 
 		return result;
 	}
@@ -93,11 +120,11 @@ public class EstiloController extends AbstractController {
 	//Modificar Estilo form
 
 	@RequestMapping("/form_edit_style")
-	public ModelAndView form_edit_alumno(@RequestParam(required = true) final int cursoId) {
+	public ModelAndView form_edit_style(@RequestParam(required = true) final int estiloId) {
 		ModelAndView result;
 
 		result = new ModelAndView("create_edit_style/form_edit_style");
-		result.addObject("estilo", this.estiloService.findOne(cursoId));
+		result.addObject("estilo", this.estiloService.findOne(estiloId));
 
 		return result;
 	}
@@ -105,15 +132,20 @@ public class EstiloController extends AbstractController {
 	//Modificar Estilo
 
 	@RequestMapping("/edit_style")
-	public ModelAndView edit_alumno(@ModelAttribute("Estilo") final Estilo estilo, final BindingResult resultado) {
+	public ModelAndView edit_style(@ModelAttribute("Estilo") final Estilo estilo, final BindingResult resultado) {
 		ModelAndView result;
 
-		if (resultado.hasErrors())
+		if (resultado.hasErrors()) {
 			result = new ModelAndView("create_edit_style/form_edit_style");
-		else
-			result = new ModelAndView("welcome/index");
+			result.addObject("estilo", estilo);
+		} else {
+			result = new ModelAndView("listofstyles/allstyles");
 
-		this.estiloService.save(estilo);
+			final UserAccount user = LoginService.getPrincipal();
+			result.addObject("autoridad", user.getAuth());
+			this.estiloService.save(estilo);
+			result.addObject("estilos", this.estiloService.findAll());
+		}
 
 		return result;
 	}
@@ -121,17 +153,22 @@ public class EstiloController extends AbstractController {
 	//Borrar Estilo
 
 	@RequestMapping("/delete_style")
-	public ModelAndView delete_style(@ModelAttribute("Estilo") final Estilo estilo) {
+	public ModelAndView delete_style(@RequestParam(required = true) final int estiloId) {
 		ModelAndView result;
 
-		result = new ModelAndView("welcome/index");
+		Estilo estilo = this.estiloService.findOne(estiloId);
 
 		//Ningun Curso debe tener este estilo
 		if (this.estiloService.existeCursoConEstilo(estilo))
-			return result;
+			result = new ModelAndView("listofstyles/allstyles");
+		else {
+			result = new ModelAndView("listofstyles/allstyles");
+			this.estiloService.delete(estilo);
+		}
 
-		this.estiloService.delete(estilo);
-
+		final UserAccount user = LoginService.getPrincipal();
+		result.addObject("autoridad", user.getAuth());
+		result.addObject("estilos", this.estiloService.findAll());
 		return result;
 	}
 

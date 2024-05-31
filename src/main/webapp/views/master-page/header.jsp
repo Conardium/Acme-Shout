@@ -15,8 +15,8 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="${pageContext.request.contextPath}/admin/dashboard.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
+					<li><a href="${pageContext.request.contextPath}/estilo/allstyles.do"><spring:message code="master.page.administrator.action.1" /></a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/dashboard.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
 				</ul>
 			</li>
 		</security:authorize>
@@ -56,9 +56,8 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="${pageContext.request.contextPath}/admin/show_admin.do"><spring:message code="master.page.profile.action.1" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
+					<li><a href="${pageContext.request.contextPath}/admin/show_profile.do"><spring:message code="master.page.profile.action.1" /></a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/form_edit_admin.do"><spring:message code="master.page.profile.action.2" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
@@ -71,7 +70,7 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="${pageContext.request.contextPath}/academia/show_academy.do"><spring:message code="master.page.profile.action.1" /></a></li>
+					<li><a href="${pageContext.request.contextPath}/academia/show_profile.do"><spring:message code="master.page.profile.action.1" /></a></li>
 					<li><a href="${pageContext.request.contextPath}/academia/form_edit_academy.do"><spring:message code="master.page.profile.action.2" /></a></li>
 					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
@@ -86,7 +85,7 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="${pageContext.request.contextPath}/alumno/show_student.do"><spring:message code="master.page.profile.action.1" /></a></li>
+					<li><a href="${pageContext.request.contextPath}/alumno/show_profile.do"><spring:message code="master.page.profile.action.1" /></a></li>
 					<li><a href="${pageContext.request.contextPath}/academia/form_edit_student.do"><spring:message code="master.page.profile.action.2" /></a></li>
 					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>

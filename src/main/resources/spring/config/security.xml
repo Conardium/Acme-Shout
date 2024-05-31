@@ -57,6 +57,7 @@
 				<security:intercept-url pattern="/curso/allcoursesfromstyle.do" access="permitAll" />
 		<!-- Vistas de Estilo -->
 				<security:intercept-url pattern="/estilo/allstyles.do" access="permitAll" />
+				<security:intercept-url pattern="/estilo/style.do" access="permitAll" />
 		<!-- Vistas de Solicitud -->
 		<!-- Vistas de Tarjeta_Credito -->
 		<!-- Vistas de Tutorial -->
@@ -64,17 +65,17 @@
 		
 	<!-- Vistas identificadas -->	
 		<!-- Vistas de Admin -->
-				<security:intercept-url pattern="/admin/show_academy.do" access="hasRole('ADMIN')" />
-				<security:intercept-url pattern="/admin/form_edit_admin.do" access="hasRole('ADMIN')" />
-				<security:intercept-url pattern="/admin/edit_admin.do" access="hasRole('ADMIN')" />
-				<security:intercept-url pattern="/admin/dashboard.do" access="hasRole('ADMIN')" />
-				<security:intercept-url pattern="/admin/show_profile.do" access="hasRole('ADMIN')" />
+				<security:intercept-url pattern="/admin/show_academy.do" access="hasRole('ADMINISTRADOR')" />
+				<security:intercept-url pattern="/admin/form_edit_admin.do" access="hasRole('ADMINISTRADOR')" />
+				<security:intercept-url pattern="/admin/edit_admin.do" access="hasRole('ADMINISTRADOR')" />
+				<security:intercept-url pattern="/admin/dashboard.do" access="hasRole('ADMINISTRADOR')" />
+				<security:intercept-url pattern="/admin/show_profile.do" access="hasRole('ADMINISTRADOR')" />
 				
-				<security:intercept-url pattern="/estilo/create_edit_style.do" access="hasRole('ADMIN')" />
-				<security:intercept-url pattern="/estilo/create_style.do" access="hasRole('ADMIN')" />
-				<security:intercept-url pattern="/estilo/form_edit_style.do" access="hasRole('ADMIN')" />
-				<security:intercept-url pattern="/estilo/edit_style.do" access="hasRole('ADMIN')" />
-				<security:intercept-url pattern="/estilo/delete_style.do" access="hasRole('ADMIN')" />
+				<security:intercept-url pattern="/estilo/form_create_style.do" access="hasRole('ADMINISTRADOR')" />
+				<security:intercept-url pattern="/estilo/create_style.do" access="hasRole('ADMINISTRADOR')" />
+				<security:intercept-url pattern="/estilo/form_edit_style.do" access="hasRole('ADMINISTRADOR')" />
+				<security:intercept-url pattern="/estilo/edit_style.do" access="hasRole('ADMINISTRADOR')" />
+				<security:intercept-url pattern="/estilo/delete_style.do" access="hasRole('ADMINISTRADOR')" />
 	<!-- Vistas de Alumno -->
 				<security:intercept-url pattern="/alumno/show_student.do" access="hasRole('ALUMNO')" />
 				<security:intercept-url pattern="/alumno/form_edit_student.do" access="hasRole('ALUMNO')" />
