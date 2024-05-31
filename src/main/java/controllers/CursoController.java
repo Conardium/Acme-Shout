@@ -210,6 +210,25 @@ public class CursoController extends AbstractController {
 		return result;
 	}
 
+	// Cursos del usuario logueado como academia -------------------------------------------
+	@RequestMapping("/coursesbyacademyprofile")
+	public ModelAndView coursesofacademyprofile() {
+
+		ModelAndView result;
+		final UserAccount aux = LoginService.getPrincipal();
+
+		if (aux.getAuth() == Authority.ACADEMIA) {
+			result = new ModelAndView("listofcourses/allcoursesfromacademy");
+			final int academiaId = aux.getId();
+			result.addObject("cursos", this.cursoService.findCursosporAcademia(academiaId));
+			result.addObject("esAlumno", false);
+			result.addObject("esAcademia", true);
+			result.addObject("esAdmin", false);
+		} else
+			result = new ModelAndView("welcome/index");
+		return result;
+	}
+
 	// Cursos por estilo --------------------------------------
 
 	@RequestMapping("/allcoursesfromstyle")

@@ -25,7 +25,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.academy" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="curso/allcoursesfromacademy.do"><spring:message code="master.page.academy.action.1" /></a></li>
+					<li><a href="${pageContext.request.contextPath}/curso/coursesbyacademyprofile.do"><spring:message code="master.page.academy.action.1" /></a></li>
 					<li><a href="customer/action-2.do"><spring:message code="master.page.academy.action.2" /></a></li>					
 				</ul>
 			</li>
