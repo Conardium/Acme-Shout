@@ -114,7 +114,7 @@ public class AdministratorController extends AbstractController {
 		result.addObject("maxCursoPorAcademia", this.academiaService.findMaxCursosByAcademia());
 
 		//SOLICITUD POR CURSO
-		result.addObject("minSolicitudPorCurso", this.cursoService.findMinSolicitudesByCurso());
+		result.addObject("minSolicitudPorCurso", this.cursoService.findMinSolicitudesByCurso());//FALLA
 		result.addObject("mediaSolicitudPorCuros", this.cursoService.findAvgSolicitudesByCurso());
 		result.addObject("minSolicitudPorCurso", this.cursoService.findStdDevSolicitudesByCurso());
 		result.addObject("minSolicitudPorCurso", this.cursoService.findMaxSolicitudesByCurso());
