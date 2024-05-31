@@ -14,8 +14,6 @@
     <title>Lista de Estilos</title>
 </head>
 <body>
-<button type="button" onclick="goBack()">Volver</button>
-    <h1>Lista de Estilos</h1>
     <table border="1">
         <thead>
             <tr>
@@ -40,5 +38,6 @@
             </jstl:forEach>
         </tbody>
     </table>
+    <button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>

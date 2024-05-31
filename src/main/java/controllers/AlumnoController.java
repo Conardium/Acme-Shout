@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Academia;
 import domain.Alumno;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import services.AcademiaService;
@@ -23,8 +24,12 @@ public class AlumnoController extends AbstractController {
 
 	@Autowired
 	private AlumnoService		alumnoService;
+	@Autowired
 	private AcademiaService		academiaService;
+	@Autowired
 	private SolicitudService	solicitudService;
+	@Autowired
+	private LoginService		loginService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -67,10 +72,29 @@ public class AlumnoController extends AbstractController {
 
 		if (resultado.hasErrors())
 			result = new ModelAndView("create_edit_actor/form_sing_up_student");
-		else
-			result = new ModelAndView("welcome/index");
+		else {
+			final UserAccount cuenta = this.loginService.create();
+			cuenta.setUsername(alumno.getUserAccount().getUsername());
+			UserAccount.generateMD5Hash(alumno.getUserAccount().getPassword(), cuenta);
 
-		this.alumnoService.save(alumno);
+			final Authority auth = new Authority();
+			auth.setAuthority(Authority.ALUMNO);
+			cuenta.addAuthority(auth);
+
+			try {
+				alumno.setUserAccount(this.loginService.save(cuenta));
+			} catch (final Exception e) {
+				System.err.println("Error al guardar el UserAccount: " + e.getMessage());
+				result = new ModelAndView("create_edit_actor/form_sing_up_academy");
+			}
+
+			try {
+				this.alumnoService.save(alumno);
+			} catch (final Exception e) {
+				System.err.println("Error al guardar el Usuario: " + e.getMessage());
+				result = new ModelAndView("create_edit_actor/form_sing_up_academy");
+			}
+		}
 		return result;
 	}
 
