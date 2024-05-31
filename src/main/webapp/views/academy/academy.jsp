@@ -14,7 +14,6 @@
 <title>Academia</title>
 </head>
 <body>
-	<h2>Academia</h2>
 
 	<table>
 		<!-- Campos Actor -->

@@ -11,25 +11,29 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Academia;
 import domain.Alumno;
+import domain.Tarjeta_Credito;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import services.AcademiaService;
 import services.AlumnoService;
 import services.SolicitudService;
+import services.Tarjeta_CreditoService;
 
 @Controller
 @RequestMapping("/alumno")
 public class AlumnoController extends AbstractController {
 
 	@Autowired
-	private AlumnoService		alumnoService;
+	private AlumnoService			alumnoService;
 	@Autowired
-	private AcademiaService		academiaService;
+	private AcademiaService			academiaService;
 	@Autowired
-	private SolicitudService	solicitudService;
+	private SolicitudService		solicitudService;
 	@Autowired
-	private LoginService		loginService;
+	private LoginService			loginService;
+	@Autowired
+	private Tarjeta_CreditoService	tarjetaService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -47,7 +51,7 @@ public class AlumnoController extends AbstractController {
 		final UserAccount aux = LoginService.getPrincipal();
 
 		if (aux.getAuth() == Authority.ALUMNO) {
-			result = new ModelAndView("alumno/alumno");
+			result = new ModelAndView("student/student");
 			result.addObject("esAlumno", true);
 			result.addObject("esAcademia", false);
 			result.addObject("esAdmin", false);
@@ -76,8 +80,8 @@ public class AlumnoController extends AbstractController {
 	@RequestMapping("/form_sing_up_student")
 	public ModelAndView form_sing_up_student() {
 		ModelAndView result;
-
 		result = new ModelAndView("create_edit_actor/form_sing_up_student");
+
 		result.addObject("alumno", this.alumnoService.create());
 
 		return result;
@@ -89,7 +93,7 @@ public class AlumnoController extends AbstractController {
 	public ModelAndView sing_up_student(@ModelAttribute("alumno") final Alumno alumno, final BindingResult resultado) {
 		ModelAndView result;
 
-		result = new ModelAndView("welcome/index");
+		result = new ModelAndView("security/login");
 
 		if (resultado.hasErrors())
 			result = new ModelAndView("create_edit_actor/form_sing_up_student");
@@ -106,14 +110,28 @@ public class AlumnoController extends AbstractController {
 				alumno.setUserAccount(this.loginService.save(cuenta));
 			} catch (final Exception e) {
 				System.err.println("Error al guardar el UserAccount: " + e.getMessage());
-				result = new ModelAndView("create_edit_actor/form_sing_up_academy");
+				result = new ModelAndView("create_edit_actor/form_sing_up_student");
+			}
+
+			try {
+				Tarjeta_Credito tarjeta = this.tarjetaService.create();
+				tarjeta.setMarca(alumno.getTarjetaCredito().getMarca());
+				tarjeta.setAnio(alumno.getTarjetaCredito().getAnio());
+				tarjeta.setCodigoCVV(alumno.getTarjetaCredito().getCodigoCVV());
+				tarjeta.setMes(alumno.getTarjetaCredito().getMes());
+				tarjeta.setNombreTitular(alumno.getNombre() + " " + alumno.getApellidos());
+				tarjeta.setNumero(alumno.getTarjetaCredito().getNumero());
+				alumno.setTarjetaCredito(this.tarjetaService.save(tarjeta));
+			} catch (final Exception e) {
+				System.err.println("Error al guardar la Tarjeta de Credito: " + e.getMessage());
+				result = new ModelAndView("create_edit_actor/form_sing_up_student");
 			}
 
 			try {
 				this.alumnoService.save(alumno);
 			} catch (final Exception e) {
 				System.err.println("Error al guardar el Usuario: " + e.getMessage());
-				result = new ModelAndView("create_edit_actor/form_sing_up_academy");
+				result = new ModelAndView("create_edit_actor/form_sing_up_student");
 			}
 		}
 		return result;
@@ -124,10 +142,9 @@ public class AlumnoController extends AbstractController {
 	@RequestMapping("/form_edit_student")
 	public ModelAndView form_edit_alumno() {
 		ModelAndView result;
+		result = new ModelAndView("create_edit_actor/form_edit_student");
 
 		final UserAccount aux = LoginService.getPrincipal();
-
-		result = new ModelAndView("create_edit_actor/form_edit_alumno");
 		result.addObject("alumno", this.alumnoService.findByAccountId(aux.getId()));
 
 		return result;
@@ -139,12 +156,28 @@ public class AlumnoController extends AbstractController {
 	public ModelAndView edit_student(@ModelAttribute("Alumno") final Alumno alumno, final BindingResult resultado) {
 		ModelAndView result;
 
-		if (resultado.hasErrors())
+		if (resultado.hasErrors()) {
 			result = new ModelAndView("create_edit_actor/form_edit_student");
-		else
+			result.addObject("alumno", alumno);
+		} else {
+			final UserAccount user = LoginService.getPrincipal();
+			UserAccount.generateMD5Hash(alumno.getUserAccount().getPassword(), user);
+			user.setUsername(alumno.getUserAccount().getUsername());
+
+			Alumno aux = this.alumnoService.findByAccountId(user.getId());
+			aux.setApellidos(alumno.getApellidos());
+			aux.setNombre(alumno.getNombre());
+			aux.setCorreo(alumno.getCorreo());
+			aux.setDireccionPostal(alumno.getDireccionPostal());
+			aux.setTelefono(alumno.getTelefono());
+			aux.setUserAccount(this.loginService.save(user));
+
 			result = new ModelAndView("student/student");
 
-		this.alumnoService.save(alumno);
+			result.addObject("alumno", this.alumnoService.save(aux));
+
+			result.addObject("autoridad", user.getAuth());
+		}
 
 		return result;
 	}

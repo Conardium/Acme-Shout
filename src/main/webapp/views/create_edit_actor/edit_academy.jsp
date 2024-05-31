@@ -15,10 +15,9 @@
 </head>
 <body>
 	<button type="button" onclick="goBack()">Volver</button>
-	<h2>Modificar Academia</h2>
 
 	<form:form modelAttribute="academia" method="post"
-		action="${pageContext.request.contextPath}/academia/edit_academy">
+		action="${pageContext.request.contextPath}/academia/edit_academy.do">
 		<table>
 
 			<!-- Campo Id (oculto) -->
@@ -89,7 +88,5 @@
 			</tr>
 		</table>
 	</form:form>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>

@@ -14,7 +14,6 @@
 <title>Estudiante</title>
 </head>
 <body>
-	<h2>Estudiante</h2>
 
 	<table>
 		<!-- Campos Actor -->
@@ -40,7 +39,7 @@
 		</tr>
 	</table>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/alumno/form_edit_alumno.do'">Modificar
+		onclick="location.href='${pageContext.request.contextPath}/alumno/form_edit_student.do'">Modificar
 		Alumno</button>
 	<button type="button"
 		onclick="location.href='${pageContext.request.contextPath}/tarjeta/form_edit_tarjeta.do'">Modificar

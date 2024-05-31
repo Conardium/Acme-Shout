@@ -95,6 +95,39 @@ public class AcademiaController extends AbstractController {
 		return result;
 	}
 
+	//Modificar academia
+
+	@RequestMapping("/edit_academy")
+	public ModelAndView edit_academy(@ModelAttribute("academia") final Academia academia, final BindingResult resultado) {
+		ModelAndView result;
+
+		if (resultado.hasErrors()) {
+			result = new ModelAndView("create_edit_actor/form_edit_academy");
+			result.addObject("academia", academia);
+		} else {
+			final UserAccount user = LoginService.getPrincipal();
+			UserAccount.generateMD5Hash(academia.getUserAccount().getPassword(), user);
+			user.setUsername(academia.getUserAccount().getUsername());
+
+			Academia aux = this.academiaService.findByAccountId(user.getId());
+			aux.setApellidos(academia.getApellidos());
+			aux.setNombre(academia.getNombre());
+			aux.setCorreo(academia.getCorreo());
+			aux.setDireccionPostal(academia.getDireccionPostal());
+			aux.setTelefono(academia.getTelefono());
+			aux.setNombreComercial(academia.getNombreComercial());
+			aux.setUserAccount(this.loginService.save(user));
+
+			result = new ModelAndView("academy/academy");
+
+			result.addObject("academia", this.academiaService.save(aux));
+
+			result.addObject("autoridad", user.getAuth());
+		}
+
+		return result;
+	}
+
 	//Crear academia
 
 	@RequestMapping("/sing_up_academy")
@@ -130,22 +163,6 @@ public class AcademiaController extends AbstractController {
 			//Te mande al login
 			result = new ModelAndView("security/login");
 		}
-		return result;
-	}
-
-	//Modificar academia
-
-	@RequestMapping("/edit_academy")
-	public ModelAndView edit_academy(@ModelAttribute("academia") final Academia academia, final BindingResult resultado) {
-		ModelAndView result;
-
-		if (resultado.hasErrors())
-			result = new ModelAndView("create_edit_actor/form_edit_academy");
-		else
-			result = new ModelAndView("academy/academy");
-
-		this.academiaService.save(academia);
-
 		return result;
 	}
 

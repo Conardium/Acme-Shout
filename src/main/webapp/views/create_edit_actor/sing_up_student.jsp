@@ -15,8 +15,6 @@
 </head>
 <body>
 
-	<h2>Registro de Alumno</h2>
-
 	<form:form modelAttribute="alumno" method="post"
 		action="alumno/sing_up_student.do">
 		<table>
@@ -53,16 +51,24 @@
 			<!-- Número de Tarjeta de Crédito -->
 			<tr>
 				<td><form:label path="tarjetaCredito.numero">Número de Tarjeta de Crédito:</form:label></td>
-				<td><form:input path="tarjetaCredito.numero" pattern="\d{16}"
-						title="El número de tarjeta debe tener 16 dígitos" required /></td>
+				<td><form:input path="tarjetaCredito.numero" pattern="\\d{16}"
+						title="El número de tarjeta debe tener 16 dígitos" required="required" /></td>
 				<td><form:errors path="tarjetaCredito.numero" cssClass="error" /></td>
+			</tr>
+		
+			<!-- Marca -->
+			<tr>
+				<td><form:label path="tarjetaCredito.marca">Marca de Tarjeta:</form:label></td>
+				<td><form:input path="tarjetaCredito.marca"
+						title="Falta agregar el tipo de marca" required="required" /></td>
+				<td><form:errors path="tarjetaCredito.marca" cssClass="error" /></td>
 			</tr>
 
 			<!-- Mes de Expiración -->
 			<tr>
 				<td><form:label path="tarjetaCredito.mes">Mes de Expiración:</form:label></td>
 				<td><form:input path="tarjetaCredito.mes" type="number" min="1"
-						max="12" required /></td>
+						max="12" required="required" /></td>
 				<td><form:errors path="tarjetaCredito.mes" cssClass="error" /></td>
 			</tr>
 
@@ -70,7 +76,7 @@
 			<tr>
 				<td><form:label path="tarjetaCredito.anio">Año de Expiración:</form:label></td>
 				<td><form:input path="tarjetaCredito.anio" type="number"
-						min="2024" required /></td>
+						min="2024" required="required" /></td>
 				<td><form:errors path="tarjetaCredito.anio" cssClass="error" /></td>
 			</tr>
 
@@ -78,7 +84,7 @@
 			<tr>
 				<td><form:label path="tarjetaCredito.codigoCVV">CVV:</form:label></td>
 				<td><form:input path="tarjetaCredito.codigoCVV" pattern="\d{3}"
-						title="El CVV debe tener 3 dígitos" required /></td>
+						title="El CVV debe tener 3 dígitos" required="required" /></td>
 				<td><form:errors path="tarjetaCredito.codigoCVV"
 						cssClass="error" /></td>
 			</tr>

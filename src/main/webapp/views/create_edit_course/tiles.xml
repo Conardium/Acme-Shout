@@ -21,9 +21,19 @@
 		<put-attribute name="body" value="/views/create_edit_course/form_create_course.jsp" />
 	</definition>
 	
-	<definition name="create_edit_course/action-2" extends="master.page">	
+	<definition name="create_edit_course/create_course" extends="master.page">	
+		<put-attribute name="title" value="Create course" />
+		<put-attribute name="body" value="/views/create_edit_course/form_create_course.jsp" />
+	</definition>
+	
+	<definition name="create_edit_course/edit_course" extends="master.page">	
 		<put-attribute name="title" value="Edit course" />
-		<put-attribute name="body" value="/views/create_edit_course/form_edit_course.jsp" />
+		<put-attribute name="body" value="/views/create_edit_course/edit_course.jsp" />
+	</definition>
+	
+	<definition name="create_edit_course/form_edit_course" extends="master.page">	
+		<put-attribute name="title" value="Edit course" />
+		<put-attribute name="body" value="/views/create_edit_course/edit_course.jsp" />
 	</definition>
 	
 </tiles-definitions>

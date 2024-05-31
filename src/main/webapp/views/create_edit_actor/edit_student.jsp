@@ -15,10 +15,9 @@
 </head>
 <body>
 	<button type="button" onclick="goBack()">Volver</button>
-	<h2>Modificar Alumno</h2>
 
 	<form:form modelAttribute="alumno" method="post"
-		action="${pageContext.request.contextPath}/alumno/edit_alumno">
+		action="${pageContext.request.contextPath}/alumno/edit_student.do">
 		<table>
 			<!-- Campo Id (oculto) -->
 			<tr>
@@ -67,7 +66,7 @@
 			<!-- Campos de UserAccount -->
 			<tr>
 				<td><form:label path="userAccount.username">Nombre de Usuario:</form:label></td>
-				<td><form:input path="userAccount.username" />${alumno.userAccount.username}<</td>
+				<td><form:input path="userAccount.username" />${alumno.userAccount.username}</td>
 				<td><form:errors path="userAccount.username" cssClass="error" /></td>
 			</tr>
 			<tr>
@@ -81,7 +80,6 @@
 			</tr>
 		</table>
 	</form:form>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
+	<button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>

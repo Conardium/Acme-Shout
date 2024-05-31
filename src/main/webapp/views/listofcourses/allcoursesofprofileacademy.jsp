@@ -48,15 +48,15 @@
 
 					<td>
 						<form
-							action="${pageContext.request.contextPath}/editcourse/${curso.id}"
-							method="get">
+							action="${pageContext.request.contextPath}/curso/form_edit_course.do" method="get">
+							<input type="hidden" name="cursoId" value="${curso.id}" />
 							<button type="submit">Editar</button>
 						</form>
 					</td>
 					<td>
 						<form
-							action="${pageContext.request.contextPath}/delete/${curso.id}"
-							method="get">
+							action="${pageContext.request.contextPath}/curso/delete_course.do" method="get">
+							<input type="hidden" name="cursoId" value="${curso.id}" />
 							<button type="submit">Borrar</button>
 						</form>
 					</td>

@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Curso;
+import domain.Estilo;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import services.AcademiaService;
 import services.CursoService;
+import services.EstiloService;
 
 @Controller
 @RequestMapping("/curso")
@@ -33,6 +35,8 @@ public class CursoController extends AbstractController {
 	private CursoService	cursoService;
 	@Autowired
 	private AcademiaService	academiaService;
+	@Autowired
+	private EstiloService	estiloService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -96,8 +100,14 @@ public class CursoController extends AbstractController {
 
 		if (resultado.hasErrors())
 			result = new ModelAndView("create_edit_course/form_create_course");
-		else
-			result = new ModelAndView("welcome/index");
+		else {
+			result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
+
+			final UserAccount user = LoginService.getPrincipal();
+			result.addObject("autoridad", user.getAuth());
+			this.cursoService.save(curso);
+			result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(user.getId()).getId()));
+		}
 
 		this.cursoService.save(curso);
 
@@ -110,8 +120,9 @@ public class CursoController extends AbstractController {
 	public ModelAndView form_edit_course(@RequestParam(required = true) final int cursoId) {
 		ModelAndView result;
 
-		result = new ModelAndView("create_edit_course/form_edit_course");
+		result = new ModelAndView("create_edit_course/edit_course");
 		result.addObject("curso", this.cursoService.findOne(cursoId));
+		result.addObject("estilos", this.estiloService.findAll());
 
 		return result;
 	}
@@ -122,12 +133,20 @@ public class CursoController extends AbstractController {
 	public ModelAndView edit_course(@ModelAttribute("Curso") final Curso curso, final BindingResult resultado) {
 		ModelAndView result;
 
-		if (resultado.hasErrors())
+		if (resultado.hasErrors()) {
 			result = new ModelAndView("create_edit_course/form_edit_course");
-		else
-			result = new ModelAndView("welcome/index");
+			result.addObject("curso", curso);
+			result.addObject("estilos", this.estiloService.findAll());
+		} else {
+			Estilo est = this.estiloService.findOne(curso.getEstilo().getId());
+			curso.setEstilo(est);
+			result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
+			result.addObject("curso", this.cursoService.save(curso));
 
-		this.cursoService.save(curso);
+			final UserAccount user = LoginService.getPrincipal();
+			result.addObject("autoridad", user.getAuth());
+			this.cursoService.save(curso);
+		}
 
 		return result;
 	}

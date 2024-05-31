@@ -16,14 +16,24 @@
       
 <tiles-definitions>
 
-	<definition name="create_edit_style/form_create_style" extends="master.page">	
-		<put-attribute name="title" value="Crear Estilo" />
-		<put-attribute name="body" value="/views/create_edit_style/create_style.jsp" />
+	<definition name="create_edit_course/form_create_course" extends="master.page">	
+		<put-attribute name="title" value="Crear curso" />
+		<put-attribute name="body" value="/views/create_edit_course/form_create_course.jsp" />
 	</definition>
 	
-	<definition name="create_edit_style/form_edit_style" extends="master.page">	
-		<put-attribute name="title" value="Editar Estilo" />
-		<put-attribute name="body" value="/views/create_edit_style/edit_style.jsp" />
+	<definition name="create_edit_course/create_course" extends="master.page">	
+		<put-attribute name="title" value="Crear curso" />
+		<put-attribute name="body" value="/views/create_edit_course/form_create_course.jsp" />
+	</definition>
+	
+	<definition name="create_edit_course/edit_course" extends="master.page">	
+		<put-attribute name="title" value="Editar curso" />
+		<put-attribute name="body" value="/views/create_edit_course/edit_course.jsp" />
+	</definition>
+	
+	<definition name="create_edit_course/form_edit_course" extends="master.page">	
+		<put-attribute name="title" value="Editar curso" />
+		<put-attribute name="body" value="/views/create_edit_course/edit_course.jsp" />
 	</definition>
 	
 </tiles-definitions>

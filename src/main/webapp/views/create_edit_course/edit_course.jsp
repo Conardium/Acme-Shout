@@ -8,11 +8,17 @@
 <title>Modificar Curso</title>
 </head>
 <body>
-
-	<h2>Modificar Curso</h2>
-
-	<form:form modelAttribute="curso" method="post" action="editCourse">
+	<form:form modelAttribute="curso" method="post" 
+		action="${pageContext.request.contextPath}/curso/edit_course.do">
 		<table>
+			<!-- Campo Id (oculto) -->
+			<tr>
+				<td><form:hidden path="id" /></td>
+			</tr>
+			<!-- Campo Version (oculto) -->
+			<tr>
+				<td><form:hidden path="version" /></td>
+			</tr>
 			<tr>
 				<td><form:label path="titulo">Título:</form:label></td>
 				<td><form:input path="titulo" />${curso.titulo}</td>
