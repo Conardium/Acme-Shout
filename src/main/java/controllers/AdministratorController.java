@@ -31,9 +31,13 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministradorService	adminService;
+	@Autowired
 	private CursoService			cursoService;
+	@Autowired
 	private AcademiaService			academiaService;
+	@Autowired
 	private TutorialService			tutorialService;
+	@Autowired
 	private AlumnoService			alumnoService;
 
 
