@@ -80,7 +80,7 @@ public class AlumnoController extends AbstractController {
 			UserAccount.generateMD5Hash(alumno.getUserAccount().getPassword(), cuenta);
 
 			final Authority auth = new Authority();
-			auth.setAuthority(Authority.ACADEMIA);
+			auth.setAuthority(Authority.ALUMNO);
 			cuenta.addAuthority(auth);
 
 			try {
