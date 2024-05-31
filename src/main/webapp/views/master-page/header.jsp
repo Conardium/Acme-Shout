@@ -11,7 +11,7 @@
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
-		<security:authorize access="hasRole('ADMIN')">
+		<security:authorize access="hasRole('ADMINISTRADOR')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -21,22 +21,22 @@
 			</li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('ESTUDIANTE')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+		<security:authorize access="hasRole('ACADEMIA')">
+			<li><a class="fNiv"><spring:message	code="master.page.academy" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
+					<li><a href="curso/allcoursesfromacademy.do"><spring:message code="master.page.academy.action.1" /></a></li>
+					<li><a href="customer/action-2.do"><spring:message code="master.page.academy.action.2" /></a></li>					
 				</ul>
 			</li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('ACADEMIA')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+		<security:authorize access="hasRole('ALUMNO')">
+			<li><a class="fNiv"><spring:message	code="master.page.student" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
+					<li><a href="customer/action-1.do"><spring:message code="master.page.student.action.1" /></a></li>
+					<li><a href="customer/action-2.do"><spring:message code="master.page.student.action.2" /></a></li>					
 				</ul>
 			</li>
 		</security:authorize>
