@@ -72,7 +72,7 @@ public class CursoService {
 	}
 	public void delete(final Curso curso) {
 		Assert.assertNotNull(curso);
-		Assert.assertEquals(curso.getId(), 0);
+		Assert.assertNotEquals(curso.getId(), 0);
 
 		this.cursoRepository.delete(curso);
 	}

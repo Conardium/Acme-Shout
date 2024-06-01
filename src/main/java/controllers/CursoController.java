@@ -10,7 +10,13 @@
 
 package controllers;
 
+import java.sql.Time;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +26,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Academia;
 import domain.Curso;
+import domain.DiaSemana;
 import domain.Estilo;
+import domain.Nivel;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
@@ -41,6 +50,8 @@ public class CursoController extends AbstractController {
 	private AcademiaService					academiaService;
 	@Autowired
 	private EstiloService					estiloService;
+	@Autowired
+	private LoginService					loginService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -77,6 +88,17 @@ public class CursoController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("create_edit_course/form_create_course");
+
+		List<String> niveles = new ArrayList<String>();
+		for (int i = 0; i < Nivel.values().length; i++)
+			niveles.add(Nivel.values()[i].name());
+		result.addObject("niveles", niveles);
+
+		List<String> dias = new ArrayList<String>();
+		for (int i = 0; i < DiaSemana.values().length; i++)
+			dias.add(DiaSemana.values()[i].name());
+		result.addObject("dias", dias);
+
 		result.addObject("curso", this.cursoService.create());
 		result.addObject("estilos", this.estiloService.findAll());
 
@@ -86,21 +108,49 @@ public class CursoController extends AbstractController {
 	// Crear Curso ---------------------------------------------------------------
 
 	@RequestMapping("/create_course")
-	public ModelAndView sing_up_course(@ModelAttribute("Curso") final Curso curso, final BindingResult resultado) {
+	public ModelAndView create_course(@ModelAttribute("Curso") final Curso curso, @RequestParam("estiloId") int estiloId, @RequestParam("horaCurso") String horaCurso, final BindingResult resultado) {
 		ModelAndView result;
 
-		if (resultado.hasErrors())
+		if (resultado.hasErrors()) {
+
 			result = new ModelAndView("create_edit_course/form_create_course");
-		else {
-			result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
+
+			List<String> niveles = new ArrayList<String>();
+			for (int i = 0; i < Nivel.values().length; i++)
+				niveles.add(Nivel.values()[i].name());
+			result.addObject("niveles", niveles);
+
+			List<String> dias = new ArrayList<String>();
+			for (int i = 0; i < DiaSemana.values().length; i++)
+				dias.add(DiaSemana.values()[i].name());
+			result.addObject("dias", dias);
+
+			result.addObject("curso", this.cursoService.create());
+			result.addObject("estilos", this.estiloService.findAll());
+		} else {
+
+			Estilo est = this.estiloService.findOne(estiloId);
+			curso.setEstilo(est);
+
+			try {
+				Date parsedDate = CursoController.timeFormat.parse(horaCurso);
+				curso.setHora(new Time(parsedDate.getTime()));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 
 			final UserAccount user = LoginService.getPrincipal();
-			result.addObject("autoridad", user.getAuth());
-			this.cursoService.save(curso);
-			result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(user.getId()).getId()));
-		}
+			final Academia actual = this.academiaService.findByAccountId(user.getId());
+			actual.getCursos().add(this.cursoService.save(curso));
 
-		this.cursoService.save(curso);
+			this.academiaService.save(actual);
+
+			result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
+
+			result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(user.getId()).getId()));
+			result.addObject("autoridad", user.getAuth());
+
+		}
 
 		return result;
 	}
@@ -115,23 +165,51 @@ public class CursoController extends AbstractController {
 		result.addObject("curso", this.cursoService.findOne(cursoId));
 		result.addObject("estilos", this.estiloService.findAll());
 
+		List<String> niveles = new ArrayList<String>();
+		for (int i = 0; i < Nivel.values().length; i++)
+			niveles.add(Nivel.values()[i].name());
+		result.addObject("niveles", niveles);
+
+		List<String> dias = new ArrayList<String>();
+		for (int i = 0; i < DiaSemana.values().length; i++)
+			dias.add(DiaSemana.values()[i].name());
+		result.addObject("dias", dias);
+
 		return result;
 	}
 
 	//Modificar Curso
 
 	@RequestMapping("/edit_course")
-	public ModelAndView edit_course(@ModelAttribute("Curso") final Curso curso, @RequestParam("estiloId") int estiloId, final BindingResult resultado) {
+	public ModelAndView edit_course(@ModelAttribute("Curso") final Curso curso, @RequestParam("estiloId") int estiloId, @RequestParam("horaCurso") String horaCurso, final BindingResult resultado) {
 		ModelAndView result;
 
 		if (resultado.hasErrors()) {
 			result = new ModelAndView("create_edit_course/form_edit_course");
 			result.addObject("curso", curso);
 			result.addObject("estilos", this.estiloService.findAll());
+
+			List<String> niveles = new ArrayList<String>();
+			for (int i = 0; i < Nivel.values().length; i++)
+				niveles.add(Nivel.values()[i].name());
+			result.addObject("niveles", niveles);
+
+			List<String> dias = new ArrayList<String>();
+			for (int i = 0; i < DiaSemana.values().length; i++)
+				dias.add(DiaSemana.values()[i].name());
+			result.addObject("dias", dias);
 		} else {
 
 			Estilo est = this.estiloService.findOne(estiloId);
 			curso.setEstilo(est);
+
+			try {
+				Date parsedDate = CursoController.timeFormat.parse(horaCurso);
+				curso.setHora(new Time(parsedDate.getTime()));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
 			this.cursoService.save(curso);
 
 			result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
@@ -148,12 +226,30 @@ public class CursoController extends AbstractController {
 	//Borrar Curso
 
 	@RequestMapping("/delete_course")
-	public ModelAndView delete_course(@ModelAttribute("Curso") final Curso curso) {
+	public ModelAndView delete_course(@RequestParam(required = true) final int cursoId) {
 		ModelAndView result;
 
-		result = new ModelAndView("welcome/index");
+		final UserAccount user = LoginService.getPrincipal();
+		final Academia actual = this.academiaService.findByAccountId(user.getId());
 
+		Curso curso = this.cursoService.findOne(cursoId);
+
+		Iterator<Curso> iterator = actual.getCursos().iterator();
+		while (iterator.hasNext()) {
+			Curso c = iterator.next();
+			if (c.equals(curso)) {
+				iterator.remove();
+				break;
+			}
+		}
+
+		this.academiaService.save(actual);
 		this.cursoService.delete(curso);
+
+		result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
+
+		result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(user.getId()).getId()));
+		result.addObject("autoridad", user.getAuth());
 
 		return result;
 	}

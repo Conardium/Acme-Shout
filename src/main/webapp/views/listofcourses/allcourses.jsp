@@ -17,7 +17,6 @@
 <title>Lista de Cursos</title>
 </head>
 <body>
-<button type="button" onclick="goBack()">Volver</button>
 	<table border="1">
 		<thead>
 			<tr>

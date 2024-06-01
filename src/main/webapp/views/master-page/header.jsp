@@ -26,7 +26,8 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="${pageContext.request.contextPath}/curso/coursesbyacademyprofile.do"><spring:message code="master.page.academy.action.1" /></a></li>
-					<li><a href="${pageContext.request.contextPath}/curso/form_create_course.do"><spring:message code="master.page.academy.action.2" /></a></li>					
+					<li><a href="${pageContext.request.contextPath}/curso/form_create_course.do"><spring:message code="master.page.academy.action.2" /></a></li>	
+					<li><a href="${pageContext.request.contextPath}/academia/listofapplicationbyacademy.do"><spring:message code="master.page.academy.action.3" /></a></li>				
 				</ul>
 			</li>
 		</security:authorize>
@@ -35,8 +36,8 @@
 			<li><a class="fNiv"><spring:message	code="master.page.student" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.student.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.student.action.2" /></a></li>					
+					<li><a href="${pageContext.request.contextPath}/alumno/listofapplicationbystudent.do"><spring:message code="master.page.student.action.1" /></a></li>				
+					<li><a href="${pageContext.request.contextPath}/curso/allcourses.do"><spring:message code="master.page.student.action.2" /></a></li>				
 				</ul>
 			</li>
 		</security:authorize>
@@ -72,7 +73,6 @@
 					<li class="arrow"></li>
 					<li><a href="${pageContext.request.contextPath}/academia/show_profile.do"><spring:message code="master.page.profile.action.1" /></a></li>
 					<li><a href="${pageContext.request.contextPath}/academia/form_edit_academy.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>

@@ -15,17 +15,7 @@
 <title>Listado de Solicitudes del Alumno</title>
 </head>
 <body>
-	<button type="button" onclick="goBack()">Volver</button>
-	<h2>Listado de Solicitudes del Alumno</h2>
-
-	<display:table name="${solicitudes}" requestURI="" pagesize="10"
-		id="solicitud" class="displaytag">
-		<display:column property="estado" title="Estado" sortable="true" />
-		<display:column property="fecha" title="Fecha" sortable="true"
-			format="{0,date,dd/MM/yyyy HH:mm}" />
-		<display:column property="curso.nombre" title="Curso" sortable="true" />
-	</display:table>
-	<table class="displaytag">
+	<table>
 		<thead>
 			<tr>
 				<th>Estado</th>
@@ -39,10 +29,11 @@
 					<td>${solicitud.estado}</td>
 					<td><fmt:formatDate value="${solicitud.fecha}"
 							pattern="dd/MM/yyyy HH:mm" /></td>
-					<td>${solicitud.curso.nombre}</td>
+					<td>${solicitud.curso.titulo}</td>
 				</tr>
 			</jstl:forEach>
 		</tbody>
 	</table>
+		<button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>

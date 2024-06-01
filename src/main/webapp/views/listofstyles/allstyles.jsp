@@ -72,10 +72,12 @@
 			</jstl:forEach>
 		</tbody>
 	</table>
+	<jstl:if test="${autoridad == 'ADMINISTRADOR'}">
 	<form action="${pageContext.request.contextPath}/estilo/form_create_style.do"
 			method="get">
 			<button type="submit">Crear</button>
 		</form>
+		</jstl:if>
 	<button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>

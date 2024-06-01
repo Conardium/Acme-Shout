@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -8,7 +10,7 @@
 <title>Modificar Curso</title>
 </head>
 <body>
-	<form:form modelAttribute="curso" method="post" 
+	<form:form modelAttribute="curso" method="post"
 		action="${pageContext.request.contextPath}/curso/edit_course.do">
 		<table>
 			<!-- Campo Id (oculto) -->
@@ -25,15 +27,20 @@
 				<td><form:errors path="titulo" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="estilo.id">Estilo:</form:label></td>
-				<td><form:select path="estilo.id">
-						<form:options items="${estilos}" itemValue="id" itemLabel="nombre" />
-					</form:select></td>
-				<td><form:errors path="estilo.id" cssClass="error" /></td>
+				<td><label for="estilo">Estilo:</label></td>
+				<td><select id="estilo" name="estiloId">
+						<jstl:forEach items="${estilos}" var="estilo">
+							<option value="${estilo.id}"
+								<jstl:if test="${curso.estilo.id == estilo.id}">selected</jstl:if>>${estilo.nombre}</option>
+						</jstl:forEach>
+				</select></td>
+				<td><form:errors path="estilo" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="nivel">Nivel:</form:label></td>
-				<td><form:input path="nivel" />${curso.nivel}</td>
+				<td><form:select path="nivel">
+						<form:options items="${niveles}" />
+					</form:select></td>
 				<td><form:errors path="nivel" cssClass="error" /></td>
 			</tr>
 			<tr>
@@ -48,20 +55,21 @@
 			</tr>
 			<tr>
 				<td><form:label path="diaSemana">Día de la Semana:</form:label></td>
-				<td><form:input path="diaSemana" />${curso.diaSemana}</td>
+				<td><form:select path="diaSemana">
+						<form:options items="${dias}" />
+					</form:select></td>
 				<td><form:errors path="diaSemana" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="hora">Hora:</form:label></td>
-				<td><form:input path="hora" />${curso.hora}</td>
+				<td><label for="horaCurso">Hora:</label></td>
+				<td><input type="text" id="horaCurso" name="horaCurso"
+					value="${curso.hora}" /></td>
 				<td><form:errors path="hora" cssClass="error" /></td>
-			</tr>
-
 			<tr>
 				<td colspan="3"><input type="submit" value="Modificar Curso" /></td>
 			</tr>
 		</table>
 	</form:form>
-
+	<button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>
