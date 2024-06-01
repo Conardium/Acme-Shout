@@ -1,9 +1,6 @@
 
 package controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Academia;
-import domain.Solicitud;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
@@ -207,12 +203,6 @@ public class AcademiaController extends AbstractController {
 
 		result = new ModelAndView("listofapplication/listofapplicationbyacademy");
 		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAcademia(actual.getId()));
-
-		List<String> solicitudes = new ArrayList<String>();
-		for (Solicitud solicitud : this.solicitudService.findAllSolicitudesByAcademia(actual.getId())) {
-			solicitudes.add(solicitud.getEstado().name());
-			result.addObject("estadoSolicitudes", solicitudes);
-		}
 
 		return result;
 	}

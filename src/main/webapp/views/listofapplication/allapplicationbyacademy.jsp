@@ -27,14 +27,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<jstl:forEach var="solicitud" items="${solicitudes}" varStatus="status">
+			<jstl:forEach var="solicitud" items="${solicitudes}">
 				<tr>
 					<td>${solicitud.estado}</td>
 					<td><fmt:formatDate value="${solicitud.fecha}"
 							pattern="dd/MM/yyyy HH:mm" /></td>
 					<td>${solicitud.curso.titulo}</td>
 					<jstl:choose>
-						<jstl:when test="${estadoSolicitudes[status.index] == 'Pendiente'}">
+						<jstl:when test="${solicitud.estado == 'Pendiente'}">
 							<td>
 								<form
 									action="${pageContext.request.contextPath}/solicitud/acceptapplication.do"

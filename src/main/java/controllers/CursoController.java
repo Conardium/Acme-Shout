@@ -14,7 +14,9 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -50,8 +52,6 @@ public class CursoController extends AbstractController {
 	private AcademiaService					academiaService;
 	@Autowired
 	private EstiloService					estiloService;
-	@Autowired
-	private LoginService					loginService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -89,12 +89,12 @@ public class CursoController extends AbstractController {
 
 		result = new ModelAndView("create_edit_course/form_create_course");
 
-		List<String> niveles = new ArrayList<String>();
+		Collection<String> niveles = new HashSet<String>();
 		for (int i = 0; i < Nivel.values().length; i++)
 			niveles.add(Nivel.values()[i].name());
 		result.addObject("niveles", niveles);
 
-		List<String> dias = new ArrayList<String>();
+		Collection<String> dias = new HashSet<String>();
 		for (int i = 0; i < DiaSemana.values().length; i++)
 			dias.add(DiaSemana.values()[i].name());
 		result.addObject("dias", dias);
@@ -115,12 +115,12 @@ public class CursoController extends AbstractController {
 
 			result = new ModelAndView("create_edit_course/form_create_course");
 
-			List<String> niveles = new ArrayList<String>();
+			Collection<String> niveles = new HashSet<String>();
 			for (int i = 0; i < Nivel.values().length; i++)
 				niveles.add(Nivel.values()[i].name());
 			result.addObject("niveles", niveles);
 
-			List<String> dias = new ArrayList<String>();
+			Collection<String> dias = new HashSet<String>();
 			for (int i = 0; i < DiaSemana.values().length; i++)
 				dias.add(DiaSemana.values()[i].name());
 			result.addObject("dias", dias);
