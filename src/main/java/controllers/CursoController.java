@@ -37,6 +37,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import services.AcademiaService;
+import services.AlumnoService;
 import services.CursoService;
 import services.EstiloService;
 
@@ -50,6 +51,8 @@ public class CursoController extends AbstractController {
 	private CursoService					cursoService;
 	@Autowired
 	private AcademiaService					academiaService;
+	@Autowired
+	private AlumnoService					alumnoService;
 	@Autowired
 	private EstiloService					estiloService;
 
@@ -264,9 +267,41 @@ public class CursoController extends AbstractController {
 		result = new ModelAndView("listofcourses/allcourses");
 		result.addObject("cursos", this.cursoService.findAll());
 
+		final UserAccount user = LoginService.getPrincipal();
+
+		if (user.getAuth().equals("ALUMNO"))
+			result.addObject("esAlumno", true);
+
 		// Verificar si el usuario está autenticado
 		try {
-			final UserAccount user = LoginService.getPrincipal();
+			result.addObject("autoridad", user.getAuth());
+		} catch (final Exception ex) {
+			//No esta conectado
+			result.addObject("autoridad", "nada");
+		}
+
+		return result;
+	}
+
+	// Cursos que puede solicitar el alumno -------------------------------------------------------
+
+	@RequestMapping("/allcoursesprofilestudent")
+	public ModelAndView listbystudent() {
+
+		ModelAndView result;
+		final UserAccount user = LoginService.getPrincipal();
+
+		result = new ModelAndView("listofcourses/allcoursesprofilestudent");
+		int idAlumno = this.alumnoService.findByAccountId(user.getId()).getId();
+		result.addObject("cursos", this.cursoService.findCursosNotSolicitedByAlumno(idAlumno));
+
+		if (user.getAuth().equals("ALUMNO"))
+			result.addObject("esAlumno", true);
+		else
+			result.addObject("esAlumno", false);
+
+		// Verificar si el usuario está autenticado
+		try {
 			result.addObject("autoridad", user.getAuth());
 		} catch (final Exception ex) {
 			//No esta conectado

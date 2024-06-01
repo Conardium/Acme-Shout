@@ -105,4 +105,12 @@ public class AlumnoService {
 
 		return result;
 	}
+
+	public Alumno findAlumnoBySolicitudId(int idSolicitud) {
+		Alumno result;
+
+		result = this.alumnoRepository.findAlumnoBySolicitudId(idSolicitud);
+
+		return result;
+	}
 }

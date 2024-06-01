@@ -85,6 +85,7 @@
 				<security:intercept-url pattern="/alumno/listofapplicationbystudent.do" access="hasRole('ALUMNO')" />
 				<security:intercept-url pattern="/alumno/show_profile.do" access="hasRole('ALUMNO')" />
 				
+				<security:intercept-url pattern="/curso/allcoursesprofilestudent.do" access="hasRole('ALUMNO')" />
 				<security:intercept-url pattern="/solicitud/apply.do" access="hasRole('ALUMNO')" />
 				
 				<security:intercept-url pattern="/tarjeta/show_creditcard.do" access="hasRole('ALUMNO')" />

@@ -39,15 +39,15 @@
 								<form
 									action="${pageContext.request.contextPath}/solicitud/acceptapplication.do"
 									method="post">
-									<input type="hidden" name="solicitudId" value="${solicitud.id}" />
+									<input type="hidden" name="idSolicitud" value="${solicitud.id}" />
 									<button type="submit">Aceptar</button>
 								</form>
 							</td>
 							<td>
 								<form
-									action="${pageContext.request.contextPath}/solicitud/rejectapplication"
+									action="${pageContext.request.contextPath}/solicitud/rejectapplication.do"
 									method="post">
-									<input type="hidden" name="solicitudId" value="${solicitud.id}" />
+									<input type="hidden" name="idSolicitud" value="${solicitud.id}" />
 									<button type="submit">Rechazar</button>
 								</form>
 							</td>

@@ -13,6 +13,7 @@ import domain.Academia;
 import domain.Alumno;
 import domain.Tarjeta_Credito;
 import security.Authority;
+import security.Credentials;
 import security.LoginService;
 import security.UserAccount;
 import services.AcademiaService;
@@ -93,8 +94,6 @@ public class AlumnoController extends AbstractController {
 	public ModelAndView sing_up_student(@ModelAttribute("alumno") final Alumno alumno, final BindingResult resultado) {
 		ModelAndView result;
 
-		result = new ModelAndView("security/login");
-
 		if (resultado.hasErrors())
 			result = new ModelAndView("create_edit_actor/form_sing_up_student");
 		else {
@@ -133,6 +132,9 @@ public class AlumnoController extends AbstractController {
 				System.err.println("Error al guardar el Usuario: " + e.getMessage());
 				result = new ModelAndView("create_edit_actor/form_sing_up_student");
 			}
+			result = new ModelAndView("security/login");
+			Credentials credentials = new Credentials();
+			result.addObject("credentials", credentials);
 		}
 		return result;
 	}

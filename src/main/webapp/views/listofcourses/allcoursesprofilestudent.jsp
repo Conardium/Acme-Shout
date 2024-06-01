@@ -28,6 +28,9 @@
 				<th>Día de la Semana</th>
 				<th>Hora</th>
 				<th>Academia</th>
+				<jstl:if test="${esAlumno}">
+					<th>Solicitud</th>
+				</jstl:if>
 			</tr>
 		</thead>
 		<tbody>
@@ -49,7 +52,17 @@
 							<input type="hidden" name="cursoId" value="${curso.id}" />
 							<button type="submit">Ver Academia</button>
 						</form>
-					</td>					
+					</td>
+					<jstl:if test="${esAlumno}">
+						<td>
+							<form
+								action="${pageContext.request.contextPath}/solicitud/apply.do"
+								method="get">
+								<input type="hidden" name="idCurso" value="${curso.id}" />
+								<button type="submit">Solicitar</button>
+							</form>
+						</td>
+					</jstl:if>					
 				</tr>
 			</jstl:forEach>
 		</tbody>

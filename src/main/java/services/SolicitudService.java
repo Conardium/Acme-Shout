@@ -2,7 +2,6 @@
 package services;
 
 import java.util.Collection;
-import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -54,11 +53,6 @@ public class SolicitudService {
 	}
 	public Solicitud save(final Solicitud solicitud) {
 		Assert.assertNotNull(solicitud);
-
-		Date currentMoment;
-		currentMoment = new Date();
-
-		Assert.assertTrue(solicitud.getFecha().after(currentMoment));
 
 		Solicitud result;
 

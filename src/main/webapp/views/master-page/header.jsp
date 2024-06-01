@@ -37,7 +37,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="${pageContext.request.contextPath}/alumno/listofapplicationbystudent.do"><spring:message code="master.page.student.action.1" /></a></li>				
-					<li><a href="${pageContext.request.contextPath}/curso/allcourses.do"><spring:message code="master.page.student.action.2" /></a></li>				
+					<li><a href="${pageContext.request.contextPath}/curso/allcoursesprofilestudent.do"><spring:message code="master.page.student.action.2" /></a></li>				
 				</ul>
 			</li>
 		</security:authorize>

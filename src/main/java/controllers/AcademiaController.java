@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Academia;
 import security.Authority;
+import security.Credentials;
 import security.LoginService;
 import security.UserAccount;
 import services.AcademiaService;
@@ -162,6 +163,8 @@ public class AcademiaController extends AbstractController {
 			}
 			//Te mande al login
 			result = new ModelAndView("security/login");
+			Credentials credentials = new Credentials();
+			result.addObject("credentials", credentials);
 		}
 		return result;
 	}

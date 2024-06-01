@@ -2,7 +2,6 @@
 package services;
 
 import java.util.Collection;
-import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -58,10 +57,6 @@ public class CursoService {
 	public Curso save(final Curso curso) {
 		Assert.assertNotNull(curso);
 
-		Date currentMoment;
-		currentMoment = new Date();
-
-		Assert.assertTrue(curso.getFechaInicio().after(currentMoment));
 		Assert.assertTrue(curso.getFechaFin().after(curso.getFechaInicio()));
 
 		Curso result;
@@ -146,8 +141,17 @@ public class CursoService {
 	public Collection<Curso> findCursosByFiltro(final String filtro) {
 		Collection<Curso> result;
 
-		result = this.findCursosByFiltro(filtro);
+		result = this.cursoRepository.findCursosByFiltro(filtro);
 
 		return result;
 	}
+
+	public Collection<Curso> findCursosNotSolicitedByAlumno(final int idAlumno) {
+		Collection<Curso> result;
+
+		result = this.cursoRepository.findCursosNotSolicitedByAlumno(idAlumno);
+
+		return result;
+	}
+
 }

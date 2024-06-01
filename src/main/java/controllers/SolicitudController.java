@@ -18,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Academia;
 import domain.Alumno;
+import domain.Curso;
 import domain.Estado;
 import domain.Solicitud;
 import security.LoginService;
 import security.UserAccount;
+import services.AcademiaService;
 import services.AlumnoService;
 import services.CursoService;
 import services.SolicitudService;
@@ -41,7 +44,11 @@ public class SolicitudController extends AbstractController {
 	// Services --------------------------------------------------------------
 	@Autowired
 	private SolicitudService	solicitudService;
+	@Autowired
+	private AcademiaService		academiaService;
+	@Autowired
 	private AlumnoService		alumnoService;
+	@Autowired
 	private CursoService		cursoService;
 
 
@@ -51,20 +58,27 @@ public class SolicitudController extends AbstractController {
 		ModelAndView result;
 
 		final UserAccount user = LoginService.getPrincipal();
-		final Alumno actual = this.alumnoService.findByAccountId(user.getId());
+		final Alumno alumno = this.alumnoService.findByAccountId(user.getId());
+		final Curso curso = this.cursoService.findOne(idCurso);
+		final Academia academia = this.academiaService.findAcademiaporCurso(idCurso);
 
-		final Solicitud nuevaSolicitud = this.solicitudService.create();
+		Solicitud nuevaSolicitud = this.solicitudService.create();
 
-		nuevaSolicitud.setCurso(this.cursoService.findOne(idCurso));
+		nuevaSolicitud.setCurso(curso);
 		nuevaSolicitud.setEstado(Estado.Pendiente);
 		nuevaSolicitud.setFecha(new Date());
+		nuevaSolicitud = this.solicitudService.save(nuevaSolicitud);
 
-		actual.addSolicitud(nuevaSolicitud);
+		curso.getSolicitudes().add(nuevaSolicitud);
+		alumno.addSolicitud(nuevaSolicitud);
+		academia.getSolicitudes().add(nuevaSolicitud);
 
-		this.solicitudService.save(nuevaSolicitud);
-		this.alumnoService.save(actual);
+		this.alumnoService.save(alumno);
+		this.cursoService.save(curso);
+		this.academiaService.save(academia);
 
-		result = new ModelAndView("listofcourses/allcourses");
+		result = new ModelAndView("listofapplication/listofapplicationbystudent");
+		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(alumno.getId()));
 
 		return result;
 	}
@@ -74,14 +88,17 @@ public class SolicitudController extends AbstractController {
 	public ModelAndView RechazarSolicitud(@RequestParam(required = true) final int idSolicitud) {
 		ModelAndView result;
 
-		final Solicitud solicitud = this.solicitudService.findOne(idSolicitud);
+		final UserAccount user = LoginService.getPrincipal();
+		Solicitud solicitud = this.solicitudService.findOne(idSolicitud);
 		if (solicitud != null) {
 			solicitud.setEstado(Estado.Rechazado);
-			this.solicitudService.save(solicitud);
+			solicitud = this.solicitudService.save(solicitud);
 		}
 
-		result = new ModelAndView("listofapplication/allapplicationsbyacademy");
-		result.addObject("solicitudes", this.solicitudService.findAll());
+		result = new ModelAndView("listofapplication/listofapplicationbyacademy");
+		Academia academia = this.academiaService.findByAccountId(user.getId());
+		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAcademia(academia.getId()));
+
 		return result;
 	}
 
@@ -90,14 +107,17 @@ public class SolicitudController extends AbstractController {
 	public ModelAndView aceptarSolicitud(@RequestParam(required = true) final int idSolicitud) {
 		ModelAndView result;
 
-		final Solicitud solicitud = this.solicitudService.findOne(idSolicitud);
+		final UserAccount user = LoginService.getPrincipal();
+		Solicitud solicitud = this.solicitudService.findOne(idSolicitud);
 		if (solicitud != null) {
 			solicitud.setEstado(Estado.Aceptado);
-			this.solicitudService.save(solicitud);
+			solicitud = this.solicitudService.save(solicitud);
 		}
 
-		result = new ModelAndView("listofapplication/allapplicationsbyacademy");
-		result.addObject("solicitudes", this.solicitudService.findAll());
+		result = new ModelAndView("listofapplication/listofapplicationbyacademy");
+		Academia academia = this.academiaService.findByAccountId(user.getId());
+		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAcademia(academia.getId()));
+
 		return result;
 	}
 }
