@@ -14,9 +14,6 @@
 <title>Modificar Tarjeta de Credito</title>
 </head>
 <body>
-	<button type="button" onclick="goBack()">Volver</button>
-	<h2>Modificar Tarjeta de Credito</h2>
-
 	<form:form modelAttribute="tarjeta" method="post"
 		action="${pageContext.request.contextPath}/tarjeta/edit_creditcard.do">
 		<table>

@@ -62,7 +62,7 @@ public class TutorialService {
 	}
 	public void delete(final Tutorial tutorial) {
 		Assert.assertNotNull(tutorial);
-		Assert.assertEquals(tutorial.getId(), 0);
+		Assert.assertNotEquals(tutorial.getId(), 0);
 
 		this.tutorialRepository.delete(tutorial);
 	}
@@ -84,7 +84,7 @@ public class TutorialService {
 
 		return result;
 	}
-	
+
 	public int findMinVecesMostrado() {
 		int result = 0;
 

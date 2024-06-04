@@ -51,7 +51,7 @@
 					<jstl:if test="${autoridad != 'NADA'}">
 						<td>
 							<form
-								action="${pageContext.request.contextPath}/tutorial/alltutorialfromacademy.do"
+								action="${pageContext.request.contextPath}/tutorial/alltutorialbyacademy.do"
 								method="get">
 								<input type="hidden" name="idAcademia" value="${academia.id}" />
 								<button type="submit">Ver Tutoriales</button>

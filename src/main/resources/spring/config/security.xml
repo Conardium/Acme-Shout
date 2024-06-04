@@ -108,6 +108,7 @@
 				<security:intercept-url pattern="/solicitud/rejectapplication.do" access="hasRole('ACADEMIA')" />
 				<security:intercept-url pattern="/solicitud/acceptapplication.do" access="hasRole('ACADEMIA')" />
 				
+				<security:intercept-url pattern="/tutorial/alltutorialfromacademy.do" access="hasRole('ACADEMIA')" />
 				<security:intercept-url pattern="/tutorial/form_create_tutorial.do" access="hasRole('ACADEMIA')" />
 				<security:intercept-url pattern="/tutorial/create_tutorial.do" access="hasRole('ACADEMIA')" />
 				<security:intercept-url pattern="/tutorial/form_edit_tutorial.do" access="hasRole('ACADEMIA')" />	
@@ -121,7 +122,7 @@
 				<security:intercept-url pattern="/comentario/delete_comment.do" access="isAuthenticated()" />
 				
 				<security:intercept-url pattern="/tutorial/show_tutorial.do" access="isAuthenticated()" />
-				<security:intercept-url pattern="/tutorial/alltutorialfromacademy.do" access="isAuthenticated()" />
+				<security:intercept-url pattern="/tutorial/alltutorialbyacademy.do" access="isAuthenticated()" />
 				
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

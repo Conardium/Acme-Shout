@@ -18,12 +18,12 @@
 
 	<definition name="create_edit_tutorial/form_edit_tutorial" extends="master.page">	
 		<put-attribute name="title" value="Edit tutorial" />
-		<put-attribute name="body" value="/views/create_edit_tutorial/form_edit_tutorial.jsp" />
+		<put-attribute name="body" value="/views/create_edit_tutorial/edit_tutorial.jsp" />
 	</definition>
 	
 	<definition name="create_edit_tutorial/form_create_tutorial" extends="master.page">	
 		<put-attribute name="title" value="Create tutorial" />
-		<put-attribute name="body" value="/views/create_edit_tutorial/form_create_tutorial.jsp" />
+		<put-attribute name="body" value="/views/create_edit_tutorial/create_tutorial.jsp" />
 	</definition>
 	
 </tiles-definitions>

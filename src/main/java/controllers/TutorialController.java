@@ -18,10 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Academia;
 import domain.Tutorial;
-import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import services.AcademiaService;
 import services.TutorialService;
 
 @Controller
@@ -29,7 +30,9 @@ import services.TutorialService;
 public class TutorialController extends AbstractController {
 
 	@Autowired
-	private TutorialService tutorialService;
+	private TutorialService	tutorialService;
+	@Autowired
+	private AcademiaService	academiaService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -45,7 +48,14 @@ public class TutorialController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("tutorial/tutorial");
-		result.addObject("tutorial", this.tutorialService.findOne(tutorialId));
+		Tutorial tutorial = this.tutorialService.findOne(tutorialId);
+
+		result.addObject("tutorial", tutorial);
+
+		tutorial.setContador(tutorial.getContador() + 1);
+		tutorial = this.tutorialService.save(tutorial);
+
+		result.addObject("tutorial", tutorial);
 
 		return result;
 	}
@@ -68,15 +78,19 @@ public class TutorialController extends AbstractController {
 	public ModelAndView sing_up_course(@ModelAttribute("Tutorial") final Tutorial tutorial, final BindingResult resultado) {
 		ModelAndView result;
 
-		result = new ModelAndView("welcome/index");
-
 		if (resultado.hasErrors())
 			result = new ModelAndView("create_edit_tutorial/form_create_tutorial");
-		else
-			result = new ModelAndView("welcome/index");
+		else {
+			result = new ModelAndView("listoftutorial/alltutorialfromacademy");
 
-		this.tutorialService.save(tutorial);
+			tutorial.setContador(0);
 
+			final UserAccount user = LoginService.getPrincipal();
+			final Academia actual = this.academiaService.findByAccountId(user.getId());
+
+			actual.getTutoriales().add(this.tutorialService.save(tutorial));
+			this.academiaService.save(actual);
+		}
 		return result;
 	}
 
@@ -100,10 +114,15 @@ public class TutorialController extends AbstractController {
 
 		if (resultado.hasErrors())
 			result = new ModelAndView("create_edit_tutorial/form_edit_tutorial");
-		else
-			result = new ModelAndView("welcome/index");
+		else {
+			result = new ModelAndView("listoftutorial/alltutorialfromacademy");
 
-		this.tutorialService.save(tutorial);
+			final UserAccount user = LoginService.getPrincipal();
+			final Academia actual = this.academiaService.findByAccountId(user.getId());
+
+			actual.getTutoriales().add(this.tutorialService.save(tutorial));
+			this.academiaService.save(actual);
+		}
 
 		return result;
 	}
@@ -114,9 +133,28 @@ public class TutorialController extends AbstractController {
 	public ModelAndView delete_course(@RequestParam(required = true) final int tutorialId) {
 		ModelAndView result;
 
-		result = new ModelAndView("welcome/index");
+		result = new ModelAndView("listoftutorial/alltutorialfromacademy");
 
-		this.tutorialService.delete(this.tutorialService.findOne(tutorialId));
+		Tutorial tutorial = this.tutorialService.findOne(tutorialId);
+		final UserAccount user = LoginService.getPrincipal();
+		Academia actual = this.academiaService.findByAccountId(user.getId());
+		actual.getTutoriales().remove(tutorial);
+
+		this.academiaService.save(actual);
+		this.tutorialService.delete(tutorial);
+
+		return result;
+	}
+
+	// Listar todos los tutoriales por academia ---------------------------------------------------------------
+
+	@RequestMapping("/alltutorialbyacademy")
+	public ModelAndView listartutoriales(@RequestParam(required = true) final int idAcademia) {
+
+		ModelAndView result;
+
+		result = new ModelAndView("listoftutorial/alltutorialbyacademy");
+		result.addObject("tutoriales", this.tutorialService.findAllByAcademia(idAcademia));
 
 		return result;
 	}
@@ -124,19 +162,16 @@ public class TutorialController extends AbstractController {
 	// Listar todos los tutoriales por academia ---------------------------------------------------------------
 
 	@RequestMapping("/alltutorialfromacademy")
-	public ModelAndView action2(@RequestParam(required = true) final int idAcademia) {
+	public ModelAndView listartutorialesdeacademia() {
 
 		ModelAndView result;
-		
+
 		// Verificar si el usuario está autenticado
 		final UserAccount user = LoginService.getPrincipal();
+		Academia actual = this.academiaService.findByAccountId(user.getId());
 
-		if (user.getAuth() == Authority.ALUMNO || user.getAuth() == Authority.ACADEMIA || user.getAuth() == Authority.ADMINISTRADOR) {
-			result = new ModelAndView("listoftutorial/alltutorialfromacademy");
-			result.addObject("tutoriales", this.tutorialService.findAllByAcademia(idAcademia));
-			
-		} else
-			result = new ModelAndView("welcome/index");
+		result = new ModelAndView("listoftutorial/alltutorialfromacademy");
+		result.addObject("tutoriales", this.tutorialService.findAllByAcademia(actual.getId()));
 
 		return result;
 	}

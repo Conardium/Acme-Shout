@@ -18,8 +18,6 @@
 				<th>Título</th>
 				<th>Descripción</th>
 				<th>Ver</th>
-				<th>Editar</th>
-				<th>Borrar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,36 +27,16 @@
 					<td>${tutorial.descripcion}</td>
 					<td>
 						<form
-							action="${pageContext.request.contextPath}/tutorial/form_show_tutorial.do"
+							action="${pageContext.request.contextPath}/tutorial/show_tutorial.do"
 							method="get">
 							<input type="hidden" name="tutorialId" value="${tutorial.id}" />
 							<button type="submit">Ver</button>
-						</form>
-					<td>
-						<form
-							action="${pageContext.request.contextPath}/tutorial/form_edit_tutorial.do"
-							method="get">
-							<input type="hidden" name="tutorialId" value="${tutorial.id}" />
-							<button type="submit">Editar</button>
-						</form>
-					</td>
-					<td>
-						<form
-							action="${pageContext.request.contextPath}/tutorial/delete_tutorial.do"
-							method="get">
-							<input type="hidden" name="tutorialId" value="${tutorial.id}" />
-							<button type="submit">Borrar</button>
 						</form>
 					</td>
 				</tr>
 			</jstl:forEach>
 		</tbody>
 	</table>
-	<form
-		action="${pageContext.request.contextPath}/tutorial/create_tutorial.do"
-		method="get">
-		<button type="submit">Crear</button>
-	</form>
 	<button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>
