@@ -19,11 +19,11 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Estado</th>
-				<th>Fecha</th>
-				<th>Curso</th>
-				<th>Aceptar</th>
-				<th>Rechazar</th>
+				<th><spring:message code="all.applications.by.academy.value.1" /></th>
+				<th><spring:message code="all.applications.by.academy.value.2" /></th>
+				<th><spring:message code="all.applications.by.academy.value.3" /></th>
+				<th><spring:message code="all.applications.by.academy.value.4" /></th>
+				<th><spring:message code="all.applications.by.academy.value.5" /></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -40,7 +40,7 @@
 									action="${pageContext.request.contextPath}/solicitud/acceptapplication.do"
 									method="post">
 									<input type="hidden" name="idSolicitud" value="${solicitud.id}" />
-									<button type="submit">Aceptar</button>
+									<button type="submit"><spring:message code="all.applications.by.academy.value.6" /></button>
 								</form>
 							</td>
 							<td>
@@ -48,7 +48,7 @@
 									action="${pageContext.request.contextPath}/solicitud/rejectapplication.do"
 									method="post">
 									<input type="hidden" name="idSolicitud" value="${solicitud.id}" />
-									<button type="submit">Rechazar</button>
+									<button type="submit"><spring:message code="all.applications.by.academy.value.7" /></button>
 								</form>
 							</td>
 						</jstl:when>
@@ -61,6 +61,6 @@
 			</jstl:forEach>
 		</tbody>
 	</table>
-	<button type="button" onclick="goBack()">Volver</button>
+	<button type="button" onclick="goBack()"><spring:message code="all.applications.by.academy.value.8" /></button>
 </body>
 </html>
