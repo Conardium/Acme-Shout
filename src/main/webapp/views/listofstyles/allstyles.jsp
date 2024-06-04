@@ -19,13 +19,13 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<th>Nombre</th>
-				<th>Descripcion</th>
-				<th>Detalles</th>
-				<th>Cursos</th>
+				<th><spring:message code="list.of.tutorial.value.1" /></th>
+				<th><spring:message code="list.of.tutorial.value.2" /></th>
+				<th><spring:message code="list.of.tutorial.value.3" /></th>
+				<th><spring:message code="list.of.tutorial.value.4" /></th>
 				<jstl:if test="${autoridad == 'ADMINISTRADOR'}">
-					<th>Editar</th>
-					<th>Borrar</th>
+					<th><spring:message code="list.of.tutorial.value.5" /></th>
+					<th><spring:message code="list.of.tutorial.value.6" /></th>
 				</jstl:if>
 			</tr>
 		</thead>
@@ -39,7 +39,7 @@
 							action="${pageContext.request.contextPath}/estilo/style.do"
 							method="get">
 							<input type="hidden" name="estiloId" value="${estilo.id}" />
-							<button type="submit">Detalles</button>
+							<button type="submit"><spring:message code="list.of.tutorial.value.6" /></button>
 						</form>
 					</td>
 					<td>
@@ -47,7 +47,7 @@
 							action="${pageContext.request.contextPath}/curso/allcoursesfromstyle.do"
 							method="get">
 							<input type="hidden" name="estiloId" value="${estilo.id}" />
-							<button type="submit">Ver Cursos</button>
+							<button type="submit"><spring:message code="list.of.tutorial.value.7" /></button>
 						</form>
 					</td>
 					<jstl:if test="${autoridad == 'ADMINISTRADOR'}">
@@ -56,7 +56,7 @@
 								action="${pageContext.request.contextPath}/estilo/form_edit_style.do"
 								method="get">
 								<input type="hidden" name="estiloId" value="${estilo.id}" />
-								<button type="submit">Editar</button>
+								<button type="submit"><spring:message code="list.of.tutorial.value.8" /></button>
 							</form>
 						</td>
 						<td>
@@ -64,7 +64,7 @@
 								action="${pageContext.request.contextPath}/estilo/delete_style.do"
 								method="get">
 								<input type="hidden" name="estiloId" value="${estilo.id}" />
-								<button type="submit">Borrar</button>
+								<button type="submit"><spring:message code="list.of.tutorial.value.9" /></button>
 							</form>
 						</td>
 					</jstl:if>
@@ -75,9 +75,9 @@
 	<jstl:if test="${autoridad == 'ADMINISTRADOR'}">
 	<form action="${pageContext.request.contextPath}/estilo/form_create_style.do"
 			method="get">
-			<button type="submit">Crear</button>
+			<button type="submit"><spring:message code="list.of.tutorial.value.10" /></button>
 		</form>
 		</jstl:if>
-	<button type="button" onclick="goBack()">Volver</button>
+	<button type="button" onclick="goBack()"><spring:message code="list.of.tutorial.value.11" /></button>
 </body>
 </html>
