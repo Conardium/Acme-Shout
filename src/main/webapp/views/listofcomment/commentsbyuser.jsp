@@ -35,8 +35,9 @@
 					<td>${comentario.texto}</td>
 					<td>
 						<form
-							action="${pageContext.request.contextPath}/comentario/delete_comment/${comentario.id}"
+							action="${pageContext.request.contextPath}/comentario/delete_comment.do"
 							method="post">
+							<input type="hidden" name="comentarioId" value="${comentario.id}" />
 							<input type="submit" value="Borrar" />
 						</form>
 					</td>

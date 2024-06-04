@@ -3,6 +3,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -111,7 +112,7 @@ public class ComentarioController {
 	public ModelAndView allcommentsfromstudent() {
 		ModelAndView result;
 
-		result = new ModelAndView("listofcomment/allcomments");
+		result = new ModelAndView("listofcomment/commentsbyuser");
 
 		final UserAccount user = LoginService.getPrincipal();
 		final Alumno alumno = this.alumnoService.findByAccountId(user.getId());
@@ -126,7 +127,7 @@ public class ComentarioController {
 	public ModelAndView allcommentsfromacademy() {
 		ModelAndView result;
 
-		result = new ModelAndView("listofcomment/allcomments");
+		result = new ModelAndView("listofcomment/commentsbyuser");
 
 		final UserAccount user = LoginService.getPrincipal();
 		final Academia academia = this.academiaService.findByAccountId(user.getId());
@@ -154,33 +155,70 @@ public class ComentarioController {
 	public ModelAndView sing_up_course(@ModelAttribute("Comentario") final Comentario comentario, final BindingResult resultado) {
 		ModelAndView result;
 
-		result = new ModelAndView("welcome/index");
-
 		if (resultado.hasErrors())
 			result = new ModelAndView("create_comment/form_create_comment");
-		else
-			result = new ModelAndView("welcome/index");
+		else {
+			result = new ModelAndView("listofcomment/commentsbyuser");
 
-		//FALTA AÑADIRSELO AL USUARIO
-		//IGUAL QUE EL DE TUTORIALES
+			final UserAccount user = LoginService.getPrincipal();
+			Actor actor;
+			comentario.setFechaPublicacion(new Date());
 
-		this.comentarioService.save(comentario);
+			if (this.academiaService.findByAccountId(user.getId()) != null) {
+				actor = this.academiaService.findByAccountId(user.getId());
+				comentario.setActor(actor);
+				actor.getComentarios().add(this.comentarioService.save(comentario));
+				this.academiaService.save((Academia) actor);
+			} else {
+				actor = this.alumnoService.findByAccountId(user.getId());
+				comentario.setActor(actor);
+				actor.getComentarios().add(this.comentarioService.save(comentario));
+				this.alumnoService.save((Alumno) actor);
+			}
 
+			result.addObject("comentarios", actor.getComentarios());
+
+		}
 		return result;
 	}
 
 	//Borrar Comentario
 
 	@RequestMapping("/delete_comment")
-	public ModelAndView delete_course(@ModelAttribute("Comentario") final Comentario comentario) {
+	public ModelAndView delete_course(@RequestParam(required = true) final int comentarioId) {
 		ModelAndView result;
 
-		result = new ModelAndView("welcome/index");
+		result = new ModelAndView("listofcomment/commentsbyuser");
 
-		//HAY QUE ELIMINARLO DE LA LISTA DE COMENTARIOS DEL USUARIO Y HACERLE SAVE
-		//MIRAR TUTORIALES PARA HACERLO IGUAL
+		final UserAccount user = LoginService.getPrincipal();
+		Actor actor;
+		Collection<Comentario> comentarios;
 
-		this.comentarioService.delete(comentario);
+		if (this.academiaService.findByAccountId(user.getId()) != null) {
+			actor = this.academiaService.findByAccountId(user.getId());
+			comentarios = actor.getComentarios();
+			for (Comentario comentario : comentarios)
+				if (comentario.getId() == comentarioId) {
+					this.comentarioService.delete(comentario);
+					comentarios.remove(comentario);
+					break;
+				}
+			actor.setComentarios(comentarios);
+			this.academiaService.save((Academia) actor);
+		} else {
+			actor = this.alumnoService.findByAccountId(user.getId());
+			comentarios = actor.getComentarios();
+			for (Comentario comentario : comentarios)
+				if (comentario.getId() == comentarioId) {
+					this.comentarioService.delete(comentario);
+					comentarios.remove(comentario);
+					break;
+				}
+			actor.setComentarios(comentarios);
+			this.alumnoService.save((Alumno) actor);
+		}
+
+		result.addObject("comentarios", actor.getComentarios());
 
 		return result;
 	}

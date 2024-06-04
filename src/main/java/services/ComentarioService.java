@@ -66,7 +66,7 @@ public class ComentarioService {
 
 	public void delete(final Comentario comentario) {
 		Assert.assertNotNull(comentario);
-		Assert.assertEquals(comentario.getId(), 0);
+		Assert.assertNotEquals(comentario.getId(), 0);
 
 		this.comentarioRepository.delete(comentario);
 	}
