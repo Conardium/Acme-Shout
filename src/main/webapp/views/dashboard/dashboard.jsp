@@ -13,42 +13,42 @@
 </head>
 <body>
 
-<h2>Cursos por Academia</h2>
+<h2><spring:message code="titulo.parte.0" /></h2>
 <ul>
-    <li>Mínimo: ${minimoCursoPorAcademia}</li>
-    <li>Media: ${mediaCursoPorAcademia}</li>
-    <li>Desviación Típica: ${stdDevCursoPorAcademia}</li>
-    <li>Máximo: ${maxCursoPorAcademia}</li>
+    <li><spring:message code="titulo.parte.7" /> ${minimoCursoPorAcademia}</li>
+    <li><spring:message code="titulo.parte.8" /> ${mediaCursoPorAcademia}</li>
+    <li><spring:message code="titulo.parte.9" /> ${stdDevCursoPorAcademia}</li>
+    <li><spring:message code="titulo.parte.10" /> ${maxCursoPorAcademia}</li>
 </ul>
 
-<h2>Solicitudes por Curso</h2>
+<h2><spring:message code="titulo.parte.1" /></h2>
 <ul>
-    <li>Mínimo: ${minSolicitudPorCurso}</li>
-    <li>Media: ${mediaSolicitudPorCuros}</li>
-    <li>Desviación Típica: ${minSolicitudPorCurso}</li>
-    <li>Máximo: ${minSolicitudPorCurso}</li>
+    <li><spring:message code="titulo.parte.7" /> ${minSolicitudPorCurso}</li>
+    <li><spring:message code="titulo.parte.8" /> ${mediaSolicitudPorCuros}</li>
+    <li><spring:message code="titulo.parte.9" /> ${minSolicitudPorCurso}</li>
+    <li><spring:message code="titulo.parte.10" /> ${minSolicitudPorCurso}</li>
 </ul>
 
-<h2>Tutoriales por Academia</h2>
+<h2><spring:message code="titulo.parte.2" /></h2>
 <ul>
-    <li>Mínimo: ${minTutorialPorAcademia}</li>
-    <li>Media: ${mediaTutorialPorAcademia}</li>
-    <li>Máximo: ${maxTutorialPorAcademia}</li>
+    <li><spring:message code="titulo.parte.7" /> ${minTutorialPorAcademia}</li>
+    <li><spring:message code="titulo.parte.8" /> ${mediaTutorialPorAcademia}</li>
+    <li><spring:message code="titulo.parte.10" /> ${maxTutorialPorAcademia}</li>
 </ul>
 
-<h2>Veces que son Mostrados los Tutoriales</h2>
+<h2><spring:message code="titulo.parte.3" /></h2>
 <ul>
-    <li>Mínimo: ${minTutorialVecesMostrado}</li>
-    <li>Media: ${mediaTutorialVecesMostrado}</li>
-    <li>Máximo: ${maxTutorialVecesMostrado}</li>
+    <li><spring:message code="titulo.parte.7" /> ${minTutorialVecesMostrado}</li>
+    <li><spring:message code="titulo.parte.8" /> ${mediaTutorialVecesMostrado}</li>
+    <li><spring:message code="titulo.parte.10" /> ${maxTutorialVecesMostrado}</li>
 </ul>
 
-<h2>Listado de Tutoriales (Orden Descendente por Visualizaciones</h2>
+<h2><spring:message code="titulo.parte.4" /></h2>
 <table>
     <thead>
         <tr>
-            <th>Título</th>
-            <th>Visualizaciones</th>
+            <th><spring:message code="titulo.parte.11" /></th>
+            <th><spring:message code="titulo.parte.12" /></th>
         </tr>
     </thead>
     <tbody>
@@ -61,14 +61,14 @@
     </tbody>
 </table>
 
-<h2>Comentarios por Actor</h2>
+<h2><spring:message code="titulo.parte.5" /></h2>
 <ul>
-    <li>Media: ${mediaComentariosPorActor}</li>
+    <li><spring:message code="titulo.parte.8" /> ${mediaComentariosPorActor}</li>
 </ul>
 
-<h2>Suscripciones por Actor</h2>
+<h2><spring:message code="titulo.parte.6" /></h2>
 <ul>
-    <li>Media: ${mediaSuscriptoresPorActor}</li>
+    <li><spring:message code="titulo.parte.8" /> ${mediaSuscriptoresPorActor}</li>
 </ul>
 
 </body>
