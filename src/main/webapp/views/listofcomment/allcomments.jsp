@@ -23,7 +23,7 @@
 			<tr>
 				<th>Fecha de Publicación</th>
 				<th>Texto</th>
-				<th>Actor</th>
+				<th>Usuario</th>
 				<th>Suscribirse</th>
 			</tr>
 		</thead>

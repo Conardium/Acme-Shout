@@ -20,7 +20,7 @@
 			<tr>
 				<th>Fecha de Publicación</th>
 				<th>Texto</th>
-				<th>Actor</th>
+				<th>Usuario</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,7 +28,7 @@
 					<td><fmt:formatDate value="${comentario.fechaPublicacion}"
 							pattern="dd/MM/yyyy HH:mm" /></td>
 					<td>${comentario.texto}</td>
-					<td>${comentario.actor.nombre}</td>
+					<td>${comentario.actor.userAccount.username}</td>
 				</tr>
 		</tbody>
 	</table>
