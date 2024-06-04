@@ -216,7 +216,7 @@ public class AcademiaController extends AbstractController {
 		final Academia actual = this.academiaService.findByAccountId(user.getId());
 
 		result = new ModelAndView("listofapplication/listofapplicationbyacademy");
-		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAcademia(actual.getId()));
+		result.addObject("comentarios", this.solicitudService.findAllSolicitudesByAcademia(actual.getId()));
 
 		return result;
 	}

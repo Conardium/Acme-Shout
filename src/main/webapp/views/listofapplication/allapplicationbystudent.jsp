@@ -18,9 +18,9 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Estado</th>
-				<th>Fecha</th>
-				<th>Curso</th>
+				<th><spring:message code="all.applications.by.academy.value.1" /></th>
+				<th><spring:message code="all.applications.by.academy.value.2" /></th>
+				<th><spring:message code="all.applications.by.academy.value.3" /></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,6 +34,6 @@
 			</jstl:forEach>
 		</tbody>
 	</table>
-		<button type="button" onclick="goBack()">Volver</button>
+		<button type="button" onclick="goBack()"><spring:message code="all.applications.by.academy.value.1" /></button>
 </body>
 </html>
