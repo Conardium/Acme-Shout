@@ -21,10 +21,10 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<th>Fecha de Publicación</th>
-				<th>Texto</th>
-				<th>Actor</th>
-				<th>Suscribirse</th>
+				<th><spring:message code="all.comments.value.1" /></th>
+				<th><spring:message code="all.comments.value.2" /></th>
+				<th><spring:message code="all.comments.value.3" /></th>
+				<th><spring:message code="all.comments.value.4" /></th>
 			</tr>
 		</thead>
 		<tbody>

@@ -34,6 +34,6 @@
 			</jstl:forEach>
 		</tbody>
 	</table>
-		<button type="button" onclick="goBack()"><spring:message code="all.applications.by.academy.value.8" /></button>
+		<button type="button" onclick="goBack()"><spring:message code="all.applications.by.academy.value.1" /></button>
 </body>
 </html>
