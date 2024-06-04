@@ -74,6 +74,7 @@ public class ComentarioController {
 		final UserAccount user = LoginService.getPrincipal();
 
 		result.addObject("nombre", user.getUsername());
+		result.addObject("autoridad", user.getAuth());
 
 		return result;
 	}

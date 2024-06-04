@@ -37,19 +37,29 @@
 					<jstl:choose>
 						<jstl:when
 							test="${nombre != comentario.actor.userAccount.username}">
-							<td>
-								<form
-									action="${pageContext.request.contextPath}/comentario/suscribirseUser"
-									method="post">
-									<input type="hidden" name="comentarioId"
-										value="${comentario.id}" /> <input type="submit"
-										value="Suscribirse" />
-								</form>
-							</td>
+							<td><jstl:choose>
+									<jstl:when test="${autoridad == 'ALUMNO'}">
+										<form
+											action="${pageContext.request.contextPath}/alumno/sub_student.do"
+											method="post">
+											<input type="hidden" name="comentarioId"
+												value="${comentario.id}" /> <input type="submit"
+												value="Suscribirse" />
+										</form>
+									</jstl:when>
+									<jstl:otherwise>
+										<form
+											action="${pageContext.request.contextPath}/academia/sub_academy.do"
+											method="post">
+											<input type="hidden" name="comentarioId"
+												value="${comentario.id}" /> <input type="submit"
+												value="Suscribirse" />
+										</form>
+									</jstl:otherwise>
+								</jstl:choose></td>
 						</jstl:when>
 						<jstl:otherwise>
-							<td>
-							</td>
+							<td></td>
 						</jstl:otherwise>
 					</jstl:choose>
 				</tr>
