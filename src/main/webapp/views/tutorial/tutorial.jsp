@@ -28,9 +28,9 @@
             </iframe>
         </jstl:when>
         <jstl:otherwise>
-            <p>El vídeo no está disponible.</p>
+            <p><spring:message code="tutorial.value.1" /></p>
         </jstl:otherwise>
     </jstl:choose>
-    <button type="button" onclick="goBack()">Volver</button>
+    <button type="button" onclick="goBack()"><spring:message code="tutorial.value.2" /></button>
 </body>
 </html>

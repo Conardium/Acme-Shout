@@ -17,28 +17,28 @@
 	<table>
 		<!-- Campos Estilo -->
 		<tr>
-			<td>Nombre:</td>
+			<td><spring:message code="style.value.1" /></td>
 			<td><jstl:out value="${estilo.nombre}" /></td>
 		</tr>
 		<tr>
-			<td>Descripcion:</td>
+			<td><spring:message code="style.value.2" /></td>
 			<td><jstl:out value="${estilo.descripcion}" /></td>
 		</tr>
 		<tr>
-			<td>Imagenes:</td>
+			<td><spring:message code="style.value.3" /></td>
 			<td><jstl:forEach var="imagen" items="${estilo.imagenes}">
 					<a href="${video}" target="_blank">${imagen}</a>
 					<br />
 				</jstl:forEach></td>
 		</tr>
 		<tr>
-			<td>Videos:</td>
+			<td><spring:message code="style.value.4" /></td>
 			<td><jstl:forEach var="video" items="${estilo.videos}">
 					<a href="${video}" target="_blank">${video}</a>
 					<br />
 				</jstl:forEach></td>
 		</tr>
 	</table>
-	<button type="button" onclick="goBack()">Volver</button>
+	<button type="button" onclick="goBack()"><spring:message code="style.value.5" /></button>
 </body>
 </html>
