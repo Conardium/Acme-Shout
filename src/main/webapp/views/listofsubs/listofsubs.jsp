@@ -17,8 +17,8 @@
     <table border="1">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Apellidos</th>
+                <th><spring:message code="list.of.subs.value.1" /></th>
+                <th><spring:message code="list.of.subs.value.2" /></th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +30,6 @@
             </jstl:forEach>
         </tbody>
     </table>
-    <button type="button" onclick="goBack()">Volver</button>
+    <button type="button" onclick="goBack()"><spring:message code="list.of.subs.value.3" /></button>
 </body>
 </html>

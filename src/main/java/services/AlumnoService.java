@@ -113,4 +113,12 @@ public class AlumnoService {
 
 		return result;
 	}
+
+	public Alumno findAlumnoByComentarioId(int idComentario) {
+		Alumno result;
+
+		result = this.alumnoRepository.findAlumnoByComentarioId(idComentario);
+
+		return result;
+	}
 }

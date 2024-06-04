@@ -30,7 +30,7 @@
 					<li><a href="${pageContext.request.contextPath}/academia/listofapplicationbyacademy.do"><spring:message code="master.page.academy.action.3" /></a></li>
 					<li><a href="${pageContext.request.contextPath}/academia/listofsubsbyacademy.do"><spring:message code="master.page.academy.action.4" /></a></li>
 					<li><a href="${pageContext.request.contextPath}/tutorial/alltutorialfromacademy.do"><spring:message code="master.page.academy.action.5" /></a></li>													
-					<li><a href="${pageContext.request.contextPath}/comentario/-.do"><spring:message code="master.page.academy.action.6" /></a></li>								
+					<li><a href="${pageContext.request.contextPath}/comentario/show_academy_comments.do"><spring:message code="master.page.academy.action.6" /></a></li>								
 				</ul>
 			</li>
 		</security:authorize>
@@ -43,7 +43,7 @@
 					<li><a href="${pageContext.request.contextPath}/curso/allcoursesprofilestudent.do"><spring:message code="master.page.student.action.2" /></a></li>
 					<li><a href="${pageContext.request.contextPath}/tarjeta/show_creditcard.do"><spring:message code="master.page.student.action.3" /></a></li>
 					<li><a href="${pageContext.request.contextPath}/alumno/listofsubsbystudent.do"><spring:message code="master.page.student.action.4" /></a></li>					
-					<li><a href="${pageContext.request.contextPath}/comentario/-.do"><spring:message code="master.page.student.action.5" /></a></li>					
+					<li><a href="${pageContext.request.contextPath}/comentario/show_student_comments.do"><spring:message code="master.page.student.action.5" /></a></li>					
 				</ul>
 			</li>
 		</security:authorize>

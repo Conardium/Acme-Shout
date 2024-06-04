@@ -91,6 +91,8 @@
 				<security:intercept-url pattern="/tarjeta/show_creditcard.do" access="hasRole('ALUMNO')" />
 				<security:intercept-url pattern="/tarjeta/form_edit_creditcard.do" access="hasRole('ALUMNO')" />
 				<security:intercept-url pattern="/tarjeta/edit_creditcard.do" access="hasRole('ALUMNO')" />
+				
+				<security:intercept-url pattern="/comentario/show_student_comments.do" access="hasRole('ALUMNO')" />
 	<!-- Vistas de Academia -->
 				<security:intercept-url pattern="/academia/form_edit_academy.do" access="hasRole('ACADEMIA')" />
 				<security:intercept-url pattern="/academia/edit_academy.do" access="hasRole('ACADEMIA')" />
@@ -114,6 +116,8 @@
 				<security:intercept-url pattern="/tutorial/form_edit_tutorial.do" access="hasRole('ACADEMIA')" />	
 				<security:intercept-url pattern="/tutorial/edit_tutorial.do" access="hasRole('ACADEMIA')" />
 				<security:intercept-url pattern="/tutorial/delete_tutorial.do" access="hasRole('ACADEMIA')" />
+				
+				<security:intercept-url pattern="/comentario/show_academy_comments.do" access="hasRole('ACADEMIA')" />
     <!-- Vistas para todos -->
 				<security:intercept-url pattern="/comentario/show_comment.do" access="isAuthenticated()" />
 				<security:intercept-url pattern="/comentario/allcomments.do" access="isAuthenticated()" />
