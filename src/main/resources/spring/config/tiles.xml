@@ -29,7 +29,7 @@
 		<value>/views/create_edit_course/tiles.xml</value>
 		<value>/views/create_edit_creditcard/tiles.xml</value>
 		<value>/views/create_edit_style/tiles.xml</value>
-		<value>/views/create_edit_tutorials/tiles.xml</value>
+		<value>/views/create_edit_tutorial/tiles.xml</value>
 
 		<value>/views/listofacademies/tiles.xml</value>
 		<value>/views/listofapplication/tiles.xml</value>
