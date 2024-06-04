@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Alumno;
 import domain.Tarjeta_Credito;
 import security.Authority;
 import security.LoginService;
@@ -90,10 +91,16 @@ public class Tarjeta_CreditoController extends AbstractController {
 
 		if (resultado.hasErrors())
 			result = new ModelAndView("create_edit_creditcard/form_edit_creditcard");
-		else
+		else {
+			final UserAccount aux = LoginService.getPrincipal();
+			Alumno alumno = this.alumnoService.findByAccountId(aux.getId());
 			result = new ModelAndView("student/student");
 
-		this.tarjetaService.save(tarjeta);
+			tarjeta.setNombreTitular(alumno.getNombre() + " " + alumno.getApellidos());
+
+			alumno.setTarjetaCredito(this.tarjetaService.save(tarjeta));
+			this.alumnoService.save(alumno);
+		}
 
 		return result;
 	}
