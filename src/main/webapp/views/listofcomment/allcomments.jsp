@@ -34,15 +34,24 @@
 							pattern="dd/MM/yyyy HH:mm" /></td>
 					<td>${comentario.texto}</td>
 					<td>${comentario.actor.userAccount.username}</td>
-					<jstl:if test="${nombre != comentario.actor.userAccount.username}">
-						<td><form
-								action="${pageContext.request.contextPath}/comentario/suscribirseUser"
-								method="post">
-								<input type="hidden" name="comentarioId"
-									value="${comentario.id}" /> <input type="submit"
-									value="Suscribirse" />
-							</form></td>
-					</jstl:if>
+					<jstl:choose>
+						<jstl:when
+							test="${nombre != comentario.actor.userAccount.username}">
+							<td>
+								<form
+									action="${pageContext.request.contextPath}/comentario/suscribirseUser"
+									method="post">
+									<input type="hidden" name="comentarioId"
+										value="${comentario.id}" /> <input type="submit"
+										value="Suscribirse" />
+								</form>
+							</td>
+						</jstl:when>
+						<jstl:otherwise>
+							<td>
+							</td>
+						</jstl:otherwise>
+					</jstl:choose>
 				</tr>
 			</jstl:forEach>
 		</tbody>

@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * i18n-l10n.xml
- *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * i18n-l10n.xml * * Copyright (C) 2018 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
+	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd 
@@ -20,10 +15,34 @@
 	<util:list id="messages">
 		<value>/views/master-page/messages</value>
 		<value>/views/misc/messages</value>
-		<value>/views/security/messages</value>		
+		<value>/views/security/messages</value>
 		<value>/views/welcome/messages</value>
-		<value>/views/**/messages</value>
+
+		<value>/views/academy/messages</value>
+		<value>/views/admin/messages</value>
+		<value>/views/comment/messages</value>
+		<value>/views/course/messages</value>
+		<value>/views/creditcard/messages</value>
+		<value>/views/dashboard/messages</value>
+		<value>/views/style/messages</value>
+		<value>/views/tutorial/messages</value>
+		<value>/views/student/messages</value>
+
+		<value>/views/create_comment/messages</value>
+		<value>/views/create_edit_actor/messages</value>
+		<value>/views/create_edit_course/messages</value>
+		<value>/views/create_edit_creditcard/messages</value>
+		<value>/views/create_edit_style/messages</value>
+		<value>/views/create_edit_tutorial/messages</value>
+
 		<value>/views/listofacademies/messages</value>
+		<value>/views/listofapplication/messages</value>
+		<value>/views/listofcomment/messages</value>
+		<value>/views/listofcourses/messages</value>
+		<value>/views/listofstyles/messages</value>
+		<value>/views/listofsubs/messages</value>
+		<value>/views/listoftutorial/messages</value>
+
 	</util:list>
 
 </beans>
