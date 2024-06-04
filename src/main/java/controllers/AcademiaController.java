@@ -220,11 +220,11 @@ public class AcademiaController extends AbstractController {
 	public ModelAndView subbyacademy() {
 		ModelAndView result;
 
-		//hace falta recoger tanto academias como alumnos para pasarlos los dos
-		//aunque se puede hacer un collection de Actores;
+		final UserAccount user = LoginService.getPrincipal();
+		final Academia actual = this.academiaService.findByAccountId(user.getId());
 
 		result = new ModelAndView("listofsubs/listofsubsbyacademy");
-		//result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(idAlumno));
+		result.addObject("suscriptores", this.academiaService.findSuscritporByAcademia(actual.getId()));
 
 		return result;
 	}
