@@ -80,6 +80,14 @@ public class ComentarioService {
 		return result;
 	}
 
+	public Collection<Comentario> findAllComentariosByAcademia(final int idAcademia) {
+		Collection<Comentario> result;
+
+		result = this.comentarioRepository.findAllComentariosByAcademia(idAcademia);
+
+		return result;
+	}
+
 	public Collection<Comentario> findAllOrderByfechaPublicacionDesc() {
 		Collection<Comentario> result;
 
