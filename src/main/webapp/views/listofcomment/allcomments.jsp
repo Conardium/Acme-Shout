@@ -14,11 +14,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Gestionar Comentarios</title>
+<title>Listado Comentarios</title>
 </head>
 <body>
 	<!-- Listado de comentarios existentes -->
-	<h2>Listado de Comentarios</h2>
 	<table border="1">
 		<thead>
 			<tr>
