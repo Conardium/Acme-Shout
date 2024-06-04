@@ -26,20 +26,26 @@
                     <td>${tutorial.titulo}</td>
                     <td>${tutorial.descripcion}</td>
                     <td>
-                        <form action="${pageContext.request.contextPath}/edittutorial.do" 
+                        <form action="${pageContext.request.contextPath}/tutorial/edittutorial.do" 
                         method="get">
                         <input type="hidden" name="tutorialId" value="${tutorial.id}" />
                             <button type="submit">Editar</button>
                         </form>
-                        <form action="${pageContext.request.contextPath}/deletetutorial.do" 
+                        <form action="${pageContext.request.contextPath}/tutorial/deletetutorial.do" 
                         method="get">
                         <input type="hidden" name="tutorialId" value="${tutorial.id}" />
                             <button type="submit">Borrar</button>
+                        </form>
+                        <form action="${pageContext.request.contextPath}/tutorial/show_tutorial.do" 
+                        method="get">
+                        <input type="hidden" name="tutorialId" value="${tutorial.id}" />
+                            <button type="submit">Ver</button>
                         </form>
                     </td>
                 </tr>
             </jstl:forEach>
         </tbody>
     </table>
+    <button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>

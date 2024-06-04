@@ -127,14 +127,14 @@ public class TutorialController extends AbstractController {
 	public ModelAndView action2(@RequestParam(required = true) final int idAcademia) {
 
 		ModelAndView result;
-
+		
 		// Verificar si el usuario está autenticado
 		final UserAccount user = LoginService.getPrincipal();
 
 		if (user.getAuth() == Authority.ALUMNO || user.getAuth() == Authority.ACADEMIA || user.getAuth() == Authority.ADMINISTRADOR) {
 			result = new ModelAndView("listoftutorial/alltutorialfromacademy");
 			result.addObject("tutoriales", this.tutorialService.findAllByAcademia(idAcademia));
-
+			
 		} else
 			result = new ModelAndView("welcome/index");
 

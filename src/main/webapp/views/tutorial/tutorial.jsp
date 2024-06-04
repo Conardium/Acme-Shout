@@ -31,5 +31,6 @@
             <p>El vídeo no está disponible.</p>
         </jstl:otherwise>
     </jstl:choose>
+    <button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>
