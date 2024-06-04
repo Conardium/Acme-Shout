@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="listofcomment/allcomments" extends="master.page">	
-		<put-attribute name="title" value="Comments" />
+		<put-attribute name="title" value="List of Comments" />
 		<put-attribute name="body" value="/views/listofcomment/allcomments.jsp" />
 	</definition>
 	
