@@ -42,7 +42,7 @@
 		onclick="location.href='${pageContext.request.contextPath}/alumno/form_edit_student.do'">Modificar
 		Alumno</button>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/tarjeta/form_edit_tarjeta.do'">Modificar
+		onclick="location.href='${pageContext.request.contextPath}/tarjeta/show_creditcard.do'">Mostrar
 		Tarjeta</button>
 	<button type="button"
 		onclick="location.href='${pageContext.request.contextPath}/alumno/listarsolicitudesAlumno.do?idAlumno=${alumno.id}'">Listar Solicitudes

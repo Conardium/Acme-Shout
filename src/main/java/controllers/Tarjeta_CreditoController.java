@@ -15,10 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Tarjeta_Credito;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
+import services.AlumnoService;
 import services.Tarjeta_CreditoService;
 
 @Controller
@@ -26,7 +29,9 @@ import services.Tarjeta_CreditoService;
 public class Tarjeta_CreditoController extends AbstractController {
 
 	@Autowired
-	private Tarjeta_CreditoService tarjetaService;
+	private Tarjeta_CreditoService	tarjetaService;
+	@Autowired
+	private AlumnoService			alumnoService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -38,11 +43,20 @@ public class Tarjeta_CreditoController extends AbstractController {
 	//Mostrar Tarjeta
 
 	@RequestMapping("/show_creditcard")
-	public ModelAndView show_academy(@RequestParam(required = true) final int tarjetaId) {
+	public ModelAndView show_creditcard() {
 		ModelAndView result;
 
-		result = new ModelAndView("creditcard/creditcard");
-		result.addObject("tarjeta", this.tarjetaService.findOne(tarjetaId));
+		final UserAccount aux = LoginService.getPrincipal();
+
+		if (aux.getAuth() == Authority.ALUMNO) {
+			result = new ModelAndView("creditcard/creditcard");
+			result.addObject("esAlumno", true);
+			result.addObject("esAcademia", false);
+			result.addObject("esAdmin", false);
+		} else
+			result = new ModelAndView("welcome/index");
+
+		result.addObject("tarjeta", this.alumnoService.findByAccountId(aux.getId()).getTarjetaCredito());
 
 		return result;
 	}
@@ -50,11 +64,20 @@ public class Tarjeta_CreditoController extends AbstractController {
 	//Modificar Tarjeta form
 
 	@RequestMapping("/form_edit_creditcard")
-	public ModelAndView form_edit_course(@RequestParam(required = true) final int tarjetaId) {
+	public ModelAndView form_edit_creditcard() {
 		ModelAndView result;
 
-		result = new ModelAndView("create_edit_creditcard/form_edit_creditcard");
-		result.addObject("tarjeta", this.tarjetaService.findOne(tarjetaId));
+		final UserAccount aux = LoginService.getPrincipal();
+
+		if (aux.getAuth() == Authority.ALUMNO) {
+			result = new ModelAndView("create_edit_creditcard/form_edit_creditcard");
+			result.addObject("esAlumno", true);
+			result.addObject("esAcademia", false);
+			result.addObject("esAdmin", false);
+		} else
+			result = new ModelAndView("welcome/index");
+
+		result.addObject("tarjeta", this.alumnoService.findByAccountId(aux.getId()).getTarjetaCredito());
 
 		return result;
 	}
@@ -62,13 +85,13 @@ public class Tarjeta_CreditoController extends AbstractController {
 	//Modificar Tarjeta
 
 	@RequestMapping("/edit_creditcard")
-	public ModelAndView edit_course(@ModelAttribute("Tarjeta") final Tarjeta_Credito tarjeta, final BindingResult resultado) {
+	public ModelAndView edit_creditcard(@ModelAttribute("Tarjeta_Credito") final Tarjeta_Credito tarjeta, final BindingResult resultado) {
 		ModelAndView result;
 
 		if (resultado.hasErrors())
 			result = new ModelAndView("create_edit_creditcard/form_edit_creditcard");
 		else
-			result = new ModelAndView("welcome/index");
+			result = new ModelAndView("student/student");
 
 		this.tarjetaService.save(tarjeta);
 
