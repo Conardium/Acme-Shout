@@ -18,36 +18,33 @@
 	<table>
 		<!-- Campos Actor -->
 		<tr>
-			<td>Nombre:</td>
+			<td><spring:message code="student.value.1" /></td>
 			<td><jstl:out value="${alumno.nombre}" /></td>
 		</tr>
 		<tr>
-			<td>Apellidos:</td>
+			<td><spring:message code="student.value.2" /></td>
 			<td><jstl:out value="${alumno.apellidos}" /></td>
 		</tr>
 		<tr>
-			<td>Correo:</td>
+			<td><spring:message code="student.value.3" /></td>
 			<td><jstl:out value="${alumno.correo}" /></td>
 		</tr>
 		<tr>
-			<td>Teléfono:</td>
+			<td><spring:message code="student.value.4" /></td>
 			<td><jstl:out value="${alumno.telefono}" /></td>
 		</tr>
 		<tr>
-			<td>Dirección Postal:</td>
+			<td><spring:message code="student.value.5" /></td>
 			<td><jstl:out value="${alumno.direccionPostal}" /></td>
 		</tr>
 	</table>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/alumno/form_edit_student.do'">Modificar
-		Alumno</button>
+		onclick="location.href='${pageContext.request.contextPath}/alumno/form_edit_student.do'"><spring:message code="student.value.6" /></button>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/tarjeta/show_creditcard.do'">Mostrar
-		Tarjeta</button>
+		onclick="location.href='${pageContext.request.contextPath}/tarjeta/show_creditcard.do'"><spring:message code="student.value.7" /></button>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/alumno/listarsolicitudesAlumno.do?idAlumno=${alumno.id}'">Listar Solicitudes
-	</button>
-	<button type="button" onclick="goBack()">Volver</button>
+		onclick="location.href='${pageContext.request.contextPath}/alumno/listarsolicitudesAlumno.do?idAlumno=${alumno.id}'"><spring:message code="student.value.8" /></button>
+	<button type="button" onclick="goBack()"><spring:message code="student.value.9" /></button>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
