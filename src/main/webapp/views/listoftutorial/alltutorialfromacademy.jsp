@@ -32,14 +32,14 @@
 							action="${pageContext.request.contextPath}/tutorial/show_tutorial.do"
 							method="get">
 							<input type="hidden" name="tutorialId" value="${tutorial.id}" />
-							<button type="submit">Ver</button>
+							<button type="submit"><spring:message code="alltutorial.value.3" /></button>
 						</form>
 					<td>
 						<form
 							action="${pageContext.request.contextPath}/tutorial/form_edit_tutorial.do"
 							method="get">
 							<input type="hidden" name="tutorialId" value="${tutorial.id}" />
-							<button type="submit">Editar</button>
+							<button type="submit"><spring:message code="alltutorial.value.4" /></button>
 						</form>
 					</td>
 					<td>
@@ -47,7 +47,7 @@
 							action="${pageContext.request.contextPath}/tutorial/delete_tutorial.do"
 							method="get">
 							<input type="hidden" name="tutorialId" value="${tutorial.id}" />
-							<button type="submit">Borrar</button>
+							<button type="submit"><spring:message code="alltutorial.value.5" /></button>
 						</form>
 					</td>
 				</tr>
@@ -57,8 +57,8 @@
 	<form
 		action="${pageContext.request.contextPath}/tutorial/form_create_tutorial.do"
 		method="get">
-		<button type="submit">Crear</button>
+		<button type="submit"><spring:message code="alltutorial.value.7" /></button>
 	</form>
-	<button type="button" onclick="goBack()">Volver</button>
+	<button type="button" onclick="goBack()"><spring:message code="alltutorial.value.8" /></button>
 </body>
 </html>

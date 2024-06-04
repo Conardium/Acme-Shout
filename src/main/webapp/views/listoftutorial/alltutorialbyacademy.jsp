@@ -15,9 +15,9 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<th>Título</th>
-				<th>Descripción</th>
-				<th>Ver</th>
+				<th><spring:message code="alltutorial.value.1" /></th>
+				<th><spring:message code="alltutorial.value.2" /></th>
+				<th><spring:message code="alltutorial.value.3" /></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -30,13 +30,13 @@
 							action="${pageContext.request.contextPath}/tutorial/show_tutorial.do"
 							method="get">
 							<input type="hidden" name="tutorialId" value="${tutorial.id}" />
-							<button type="submit">Ver</button>
+							<button type="submit"><spring:message code="alltutorial.value.3" /></button>
 						</form>
 					</td>
 				</tr>
 			</jstl:forEach>
 		</tbody>
 	</table>
-	<button type="button" onclick="goBack()">Volver</button>
+	<button type="button" onclick="goBack()"><spring:message code="alltutorial.value.8" /></button>
 </body>
 </html>
