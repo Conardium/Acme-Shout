@@ -12,28 +12,26 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Gestionar Comentarios</title>
+    <title>Comentar</title>
 </head>
 <body>
-    <h1>Gestionar Comentarios</h1>
 
-    <!-- Formulario para escribir un nuevo comentario -->
-    <h2>Escribir un nuevo comentario</h2>
-    <form:form method="post" modelAttribute="nuevoComentario" action="${pageContext.request.contextPath}/createcomment">
+    <form:form method="post" modelAttribute="nuevoComentario" action="${pageContext.request.contextPath}/comentario/create_comment">
         <table>
             <tr>
-                <td>Texto:</td>
+                <td>Comentario:</td>
                 <td>
-                    <form:textarea path="texto" rows="3" cols="50"/>
+                    <form:textarea path="texto" rows="3" cols="50" required="required" maxlength="140"/>
                     <form:errors path="texto" cssClass="error"/>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="submit" value="Guardar"/>
+                    <input type="submit" value="Crear"/>
                 </td>
             </tr>
         </table>
     </form:form>
+    	<button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>

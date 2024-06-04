@@ -88,5 +88,6 @@
 			</tr>
 		</table>
 	</form:form>
+		<button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>

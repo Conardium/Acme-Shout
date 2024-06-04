@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            <jstl:forEach var="subs" items="${suscritos}">
+            <jstl:forEach var="subs" items="${suscriptores}">
                 <tr>
                     <td>${subs.nombre}</td>
                     <td>${subs.apellido}</td>

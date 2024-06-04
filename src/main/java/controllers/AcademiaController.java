@@ -245,18 +245,19 @@ public class AcademiaController extends AbstractController {
 		final UserAccount user = LoginService.getPrincipal();
 		final Academia actual = this.academiaService.findByAccountId(user.getId());
 
-		if (this.academiaService.findOne(actorId) != null) {
-			final Academia actor = this.academiaService.findOne(actorId);
+		if (this.academiaService.findByAccountId(actorId) != null) {
+			final Academia actor = this.academiaService.findByAccountId(actorId);
 			actual.addSuscritos(actor);
 		} else {
-			final Alumno actor = this.alumnoService.findOne(actorId);
+
+			final Alumno actor = this.alumnoService.findByAccountId(actorId);
 			actual.addSuscritos(actor);
 		}
 
 		this.academiaService.save(actual);
 
 		result = new ModelAndView("listofcomment/allcomments");
-		result.addObject(this.cometarioService.findAllOrderByfechaPublicacionDesc());
+		result.addObject("comentarios", this.cometarioService.findAllOrderByfechaPublicacionDesc());
 
 		return result;
 	}

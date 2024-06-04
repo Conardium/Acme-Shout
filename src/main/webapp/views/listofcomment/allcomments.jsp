@@ -43,8 +43,8 @@
 											action="${pageContext.request.contextPath}/alumno/sub_student.do"
 											method="post">
 											<input type="hidden" name="actorId"
-												value="${comentario.actor.userAccount.id}" /> <input type="submit"
-												value="Suscribirse" />
+												value="${comentario.actor.userAccount.id}" /> <input
+												type="submit" value="Suscribirse" />
 										</form>
 									</jstl:when>
 									<jstl:otherwise>
@@ -52,8 +52,8 @@
 											action="${pageContext.request.contextPath}/academia/sub_academy.do"
 											method="post">
 											<input type="hidden" name="actorId"
-												value="${comentario.actor.userAccount.id}" /> <input type="submit"
-												value="Suscribirse" />
+												value="${comentario.actor.userAccount.id}" /> <input
+												type="submit" value="Suscribirse" />
 										</form>
 									</jstl:otherwise>
 								</jstl:choose></td>
@@ -66,5 +66,11 @@
 			</jstl:forEach>
 		</tbody>
 	</table>
+	<form
+		action="${pageContext.request.contextPath}/comentario/form_create_comment.do"
+		method="get">
+		<button type="submit">Comentar</button>
+	</form>
+	<button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>
