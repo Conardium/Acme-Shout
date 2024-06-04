@@ -51,7 +51,7 @@
 			<!-- Número de Tarjeta de Crédito -->
 			<tr>
 				<td><form:label path="tarjetaCredito.numero">Número de Tarjeta de Crédito:</form:label></td>
-				<td><form:input path="tarjetaCredito.numero" pattern="\\d{16}"
+				<td><form:input path="tarjetaCredito.numero" pattern="\d{16}"
 						title="El número de tarjeta debe tener 16 dígitos" required="required" /></td>
 				<td><form:errors path="tarjetaCredito.numero" cssClass="error" /></td>
 			</tr>

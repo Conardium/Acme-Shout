@@ -20,13 +20,13 @@
 		<thead>
 			<tr>
 				<th><spring:message code="list.all.academy.value.1" /></th>
-				<th>Persona al cargo</th>
-				<th>Correo</th>
-				<th>Nombre Comercial</th>
-				<th>Dirección Postal</th>
-				<th>Cursos</th>
+				<th><spring:message code="list.all.academy.value.2" /></th>
+				<th><spring:message code="list.all.academy.value.3" /></th>
+				<th><spring:message code="list.all.academy.value.4" />l</th>
+				<th><spring:message code="list.all.academy.value.5" /></th>
+				<th><spring:message code="list.all.academy.value.6" /></th>
 				<jstl:if test="${autoridad != 'NADA'}">
-					<th>Tutoriales</th>
+					<th><spring:message code="list.all.academy.value.7" /></th>
 				</jstl:if>
 
 			</tr>
