@@ -202,7 +202,7 @@ public class AlumnoController extends AbstractController {
 	//Mostrar suscriptores
 
 	@RequestMapping(value = "/listofsubsbystudent")
-	public ModelAndView subbystudent(@RequestParam(required = true) final int alumnoId) {
+	public ModelAndView subbystudent() {
 		ModelAndView result;
 
 		final UserAccount user = LoginService.getPrincipal();

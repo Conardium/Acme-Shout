@@ -56,7 +56,5 @@
 		onclick="location.href='${pageContext.request.contextPath}/tarjeta/form_edit_creditcard.do'">Modificar
 		Tarjeta</button>
 	<button type="button" onclick="goBack()">Volver</button>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>

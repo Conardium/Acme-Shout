@@ -58,7 +58,6 @@
 			</tr>
 		</table>
 	</form:form>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
+<button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>

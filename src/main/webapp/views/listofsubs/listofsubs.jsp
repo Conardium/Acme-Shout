@@ -11,40 +11,25 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Lista de Academias</title>
+    <title>Lista de Suscripciones</title>
 </head>
 <body>
-<button type="button" onclick="goBack()">Volver</button>
-    <h1>Lista de Academias</h1>
     <table border="1">
         <thead>
             <tr>
-                <th>Nombre Comercial</th>
-                <th>Persona al cargo</th>
-                <th>Correo</th>
-                <th>Nombre Comercial</th>
-                <th>Dirección Postal</th>
-                <th>Cursos</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
             </tr>
         </thead>
         <tbody>
-            <jstl:forEach var="academia" items="${academias}">
+            <jstl:forEach var="subs" items="${suscritos}">
                 <tr>
-                    <td>${academia.nombreComercial}</td>
-                    <td>${academia.nombre} ${academia.apellidos}</td>
-                    <td>${academia.correo}</td>
-                    <td>${academia.telefono}</td>
-                    <td>${academia.direccionPostal}</td>
-                    <td>
-                        <form action="${pageContext.request.contextPath}/curso/allcoursesfromacademy.do" 
-                        method="get">
-                        	<input type="hidden" name="academiaId" value="${academia.id}" />
-                            <button type="submit">Ver Cursos</button>
-                        </form>
-                    </td>
+                    <td>${subs.nombre}</td>
+                    <td>${subs.apellido}</td>
                 </tr>
             </jstl:forEach>
         </tbody>
     </table>
+    <button type="button" onclick="goBack()">Volver</button>
 </body>
 </html>

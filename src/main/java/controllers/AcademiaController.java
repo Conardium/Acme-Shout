@@ -213,7 +213,7 @@ public class AcademiaController extends AbstractController {
 	//Mostrar suscriptores
 
 	@RequestMapping(value = "/listofsubsbyacademy")
-	public ModelAndView subbystudent(@RequestParam(required = true) final int idAlumno) {
+	public ModelAndView subbyacademy() {
 		ModelAndView result;
 
 		//hace falta recoger tanto academias como alumnos para pasarlos los dos
