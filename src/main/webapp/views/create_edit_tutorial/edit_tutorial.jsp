@@ -12,6 +12,12 @@
 		action="${pageContext.request.contextPath}/tutorial/edit_tutorial.do">
 		<table>
 			<tr>
+				<td><form:input path="id" type="hidden" /></td>
+			</tr>
+			<tr>
+				<td><form:input path="version" type="hidden" /></td>
+			</tr>
+			<tr>
 				<td><form:label path="titulo">Título:</form:label></td>
 				<td><form:input path="titulo" required="required" /></td>
 				<td><form:errors path="titulo" cssClass="error" /></td>
@@ -28,9 +34,7 @@
 				<td><form:errors path="video" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="contador">Contador:</form:label></td>
 				<td><form:input path="contador" type="hidden" /></td>
-				<td><form:errors path="contador" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td colspan="3"><input type="submit" value="Modificar Tutorial" /></td>

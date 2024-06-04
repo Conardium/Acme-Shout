@@ -29,7 +29,7 @@
 					<td>${tutorial.descripcion}</td>
 					<td>
 						<form
-							action="${pageContext.request.contextPath}/tutorial/form_show_tutorial.do"
+							action="${pageContext.request.contextPath}/tutorial/show_tutorial.do"
 							method="get">
 							<input type="hidden" name="tutorialId" value="${tutorial.id}" />
 							<button type="submit">Ver</button>
@@ -55,7 +55,7 @@
 		</tbody>
 	</table>
 	<form
-		action="${pageContext.request.contextPath}/tutorial/create_tutorial.do"
+		action="${pageContext.request.contextPath}/tutorial/form_create_tutorial.do"
 		method="get">
 		<button type="submit">Crear</button>
 	</form>

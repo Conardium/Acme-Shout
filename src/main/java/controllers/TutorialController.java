@@ -90,6 +90,8 @@ public class TutorialController extends AbstractController {
 
 			actual.getTutoriales().add(this.tutorialService.save(tutorial));
 			this.academiaService.save(actual);
+
+			result.addObject("tutoriales", this.tutorialService.findAllByAcademia(actual.getId()));
 		}
 		return result;
 	}
@@ -120,8 +122,9 @@ public class TutorialController extends AbstractController {
 			final UserAccount user = LoginService.getPrincipal();
 			final Academia actual = this.academiaService.findByAccountId(user.getId());
 
-			actual.getTutoriales().add(this.tutorialService.save(tutorial));
-			this.academiaService.save(actual);
+			this.tutorialService.save(tutorial);
+
+			result.addObject("tutoriales", this.tutorialService.findAllByAcademia(actual.getId()));
 		}
 
 		return result;
@@ -142,6 +145,8 @@ public class TutorialController extends AbstractController {
 
 		this.academiaService.save(actual);
 		this.tutorialService.delete(tutorial);
+
+		result.addObject("tutoriales", this.tutorialService.findAllByAcademia(actual.getId()));
 
 		return result;
 	}

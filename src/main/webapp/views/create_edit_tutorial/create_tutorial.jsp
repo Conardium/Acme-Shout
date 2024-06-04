@@ -26,9 +26,7 @@
             <td><form:errors path="video" cssClass="error" /></td>
         </tr>
         <tr>
-            <td><form:label path="contador">Contador:</form:label></td>
             <td><form:input path="contador" type="hidden"/></td>
-            <td><form:errors path="contador" cssClass="error" /></td>
         </tr>
         <tr>
             <td colspan="3"><input type="submit" value="Registrar Tutorial" /></td>
