@@ -22,39 +22,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Tarjeta de Credito</title>
+<title><spring:message code="creditcard.value.1" /></title>
 </head>
 <body>
 	<table>
 		<!-- Campos Tarjeta -->
 		<tr>
-			<td>Nombre Titular:</td>
+			<td><spring:message code="creditcard.value.2" /></td>
 			<td><jstl:out value="${tarjeta.nombreTitular}" /></td>
 		</tr>
 		<tr>
-			<td>Marca:</td>
+			<td><spring:message code="creditcard.value.3" /></td>
 			<td><jstl:out value="${tarjeta.marca}" /></td>
 		</tr>
 		<tr>
-			<td>Numero:</td>
+			<td><spring:message code="creditcard.value.4" /></td>
 			<td><jstl:out value="${tarjeta.numero}" /></td>
 		</tr>
 		<tr>
-			<td>Mes:</td>
+			<td><spring:message code="creditcard.value.5" /></td>
 			<td><jstl:out value="${tarjeta.mes}" /></td>
 		</tr>
 		<tr>
-			<td>Año:</td>
+			<td><spring:message code="creditcard.value.6" /></td>
 			<td><jstl:out value="${tarjeta.anio}" /></td>
 		</tr>
 		<tr>
-			<td>codigoCVV:</td>
+			<td><spring:message code="creditcard.value.7" /></td>
 			<td><jstl:out value="${tarjeta.codigoCVV}" /></td>
 		</tr>
 	</table>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/tarjeta/form_edit_creditcard.do'">Modificar
-		Tarjeta</button>
-	<button type="button" onclick="goBack()">Volver</button>
+		onclick="location.href='${pageContext.request.contextPath}/tarjeta/form_edit_creditcard.do'"><spring:message code="creditcard.value.8" /></button>
+	<button type="button" onclick="goBack()"><spring:message code="creditcard.value.9" /></button>
 </body>
 </html>
