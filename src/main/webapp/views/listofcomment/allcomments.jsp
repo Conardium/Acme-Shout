@@ -28,7 +28,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<jstl:forEach var="comentario" items="${comentarios}">
+			<jstl:forEach var="comentario" items="${comentarios}" varStatus="status">
 				<tr>
 					<td><fmt:formatDate value="${comentario.fechaPublicacion}"
 							pattern="dd/MM/yyyy HH:mm" /></td>
@@ -36,7 +36,7 @@
 					<td>${comentario.actor.userAccount.username}</td>
 					<jstl:choose>
 						<jstl:when
-							test="${nombre != comentario.actor.userAccount.username}">
+							test="${nombre != comentario.actor.userAccount.username && estaSuscrito[status.index] == 'No'}">
 							<td><jstl:choose>
 									<jstl:when test="${autoridad == 'ALUMNO'}">
 										<form

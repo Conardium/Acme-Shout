@@ -25,7 +25,7 @@
             <jstl:forEach var="subs" items="${suscriptores}">
                 <tr>
                     <td>${subs.nombre}</td>
-                    <td>${subs.apellido}</td>
+                    <td>${subs.apellidos}</td>
                 </tr>
             </jstl:forEach>
         </tbody>

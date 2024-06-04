@@ -20,7 +20,7 @@
 		extends="master.page">
 		<put-attribute name="title" value="Crear comentario" />
 		<put-attribute name="body"
-			value="/views/create_comment/sing_up_academy.jsp" />
+			value="/views/create_comment/create_comment.jsp" />
 	</definition>
 	
 </tiles-definitions>

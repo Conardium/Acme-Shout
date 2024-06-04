@@ -1,6 +1,9 @@
 
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Academia;
+import domain.Actor;
 import domain.Alumno;
 import domain.Comentario;
 import security.Authority;
@@ -68,11 +72,34 @@ public class ComentarioController {
 		ModelAndView result;
 
 		result = new ModelAndView("listofcomment/allcomments");
-		result.addObject("comentarios", this.comentarioService.findAll());
 
-		// Verificar si el usuario está autenticado
+		Collection<Comentario> comentarios = this.comentarioService.findAll();
+		result.addObject("comentarios", comentarios);
+		ArrayList<String> estaSuscrito = new ArrayList<String>();
+
 		final UserAccount user = LoginService.getPrincipal();
+		Actor actor;
+		boolean esta;
 
+		if (this.academiaService.findByAccountId(user.getId()) != null)
+			actor = this.academiaService.findByAccountId(user.getId());
+		else
+			actor = this.alumnoService.findByAccountId(user.getId());
+
+		for (Comentario comentario : comentarios) {
+			esta = false;
+			for (Actor suscrito : actor.getSuscritos())
+				if (comentario.getActor().getId() == suscrito.getId()) {
+					esta = true;
+					break;
+				}
+			if (esta)
+				estaSuscrito.add("Si");
+			else
+				estaSuscrito.add("No");
+		}
+
+		result.addObject("estaSuscrito", estaSuscrito);
 		result.addObject("nombre", user.getUsername());
 		result.addObject("autoridad", user.getAuth());
 
@@ -112,7 +139,7 @@ public class ComentarioController {
 	// Crear Comentario form ---------------------------------------------------------------
 
 	@RequestMapping("/form_create_comment")
-	public ModelAndView form_sing_up_student() {
+	public ModelAndView form_create_comment() {
 		ModelAndView result;
 
 		result = new ModelAndView("create_comment/form_create_comment");
@@ -134,6 +161,9 @@ public class ComentarioController {
 		else
 			result = new ModelAndView("welcome/index");
 
+		//FALTA AÑADIRSELO AL USUARIO
+		//IGUAL QUE EL DE TUTORIALES
+
 		this.comentarioService.save(comentario);
 
 		return result;
@@ -146,6 +176,9 @@ public class ComentarioController {
 		ModelAndView result;
 
 		result = new ModelAndView("welcome/index");
+
+		//HAY QUE ELIMINARLO DE LA LISTA DE COMENTARIOS DEL USUARIO Y HACERLE SAVE
+		//MIRAR TUTORIALES PARA HACERLO IGUAL
 
 		this.comentarioService.delete(comentario);
 

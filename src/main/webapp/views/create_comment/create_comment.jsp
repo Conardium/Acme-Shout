@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <form:form method="post" modelAttribute="nuevoComentario" action="${pageContext.request.contextPath}/comentario/create_comment">
+    <form:form method="post" modelAttribute="comentario" action="${pageContext.request.contextPath}/comentario/create_comment">
         <table>
             <tr>
                 <td>Comentario:</td>

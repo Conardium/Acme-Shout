@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Academia;
-import domain.Alumno;
+import domain.Actor;
 import security.Authority;
 import security.Credentials;
 import security.LoginService;
@@ -244,20 +244,21 @@ public class AcademiaController extends AbstractController {
 
 		final UserAccount user = LoginService.getPrincipal();
 		final Academia actual = this.academiaService.findByAccountId(user.getId());
+		Actor actor;
+		if (this.academiaService.findByAccountId(actorId) != null)
+			actor = this.academiaService.findByAccountId(actorId);
+		else
+			actor = this.alumnoService.findByAccountId(actorId);
 
-		if (this.academiaService.findByAccountId(actorId) != null) {
-			final Academia actor = this.academiaService.findByAccountId(actorId);
+		if (!actual.getSuscritos().contains(actor) && actual.getId() != actor.getId()) {
 			actual.addSuscritos(actor);
-		} else {
 
-			final Alumno actor = this.alumnoService.findByAccountId(actorId);
-			actual.addSuscritos(actor);
+			this.academiaService.save(actual);
+
 		}
 
-		this.academiaService.save(actual);
-
-		result = new ModelAndView("listofcomment/allcomments");
-		result.addObject("comentarios", this.cometarioService.findAllOrderByfechaPublicacionDesc());
+		result = new ModelAndView("listofsubs/listofsubsbyacademy");
+		result.addObject("suscriptores", this.academiaService.findSuscritporByAcademia(actual.getId()));
 
 		return result;
 	}
