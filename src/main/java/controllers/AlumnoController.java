@@ -18,6 +18,7 @@ import security.LoginService;
 import security.UserAccount;
 import services.AcademiaService;
 import services.AlumnoService;
+import services.ComentarioService;
 import services.SolicitudService;
 import services.Tarjeta_CreditoService;
 
@@ -35,6 +36,8 @@ public class AlumnoController extends AbstractController {
 	private LoginService			loginService;
 	@Autowired
 	private Tarjeta_CreditoService	tarjetaService;
+	@Autowired
+	private ComentarioService		cometarioService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -233,7 +236,8 @@ public class AlumnoController extends AbstractController {
 
 		this.alumnoService.save(actual);
 
-		result = new ModelAndView("student/student");
+		result = new ModelAndView("listofcomment/allcomments");
+		result.addObject(this.cometarioService.findAllOrderByfechaPublicacionDesc());
 
 		return result;
 	}
