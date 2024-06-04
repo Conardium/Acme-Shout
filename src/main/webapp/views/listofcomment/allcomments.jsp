@@ -42,8 +42,8 @@
 										<form
 											action="${pageContext.request.contextPath}/alumno/sub_student.do"
 											method="post">
-											<input type="hidden" name="comentarioId"
-												value="${comentario.id}" /> <input type="submit"
+											<input type="hidden" name="actorId"
+												value="${comentario.actor.userAccount.id}" /> <input type="submit"
 												value="Suscribirse" />
 										</form>
 									</jstl:when>
@@ -51,8 +51,8 @@
 										<form
 											action="${pageContext.request.contextPath}/academia/sub_academy.do"
 											method="post">
-											<input type="hidden" name="comentarioId"
-												value="${comentario.id}" /> <input type="submit"
+											<input type="hidden" name="actorId"
+												value="${comentario.actor.userAccount.id}" /> <input type="submit"
 												value="Suscribirse" />
 										</form>
 									</jstl:otherwise>
