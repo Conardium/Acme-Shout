@@ -173,4 +173,12 @@ public class AcademiaService {
 
 		return result;
 	}
+
+	public Academia findAlumnoByComentarioId(int idComentario) {
+		Academia result;
+
+		result = this.academiaRepository.findAcademiaByComentarioId(idComentario);
+
+		return result;
+	}
 }

@@ -15,8 +15,6 @@
 <title>Comentario</title>
 </head>
 <body>
-	<h2>Comentario</h2>
-
 	<table>
 		<tr>
 			<td>Título:</td>
