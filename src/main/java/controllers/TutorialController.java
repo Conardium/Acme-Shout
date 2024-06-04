@@ -124,29 +124,19 @@ public class TutorialController extends AbstractController {
 	// Listar todos los tutoriales por academia ---------------------------------------------------------------
 
 	@RequestMapping("/alltutorialfromacademy")
-	public ModelAndView action2(@RequestParam(required = true) final int tutorialId) {
+	public ModelAndView action2(@RequestParam(required = true) final int idAcademia) {
 
 		ModelAndView result;
-
-		result = new ModelAndView("listoftutorial/alltutorialfromacademy");
-		result.addObject("tutoriales", this.tutorialService.findAllByAcademia(tutorialId));
-
-		boolean esAlumno = false, esAcademia = false, esAdmin = false;
 
 		// Verificar si el usuario está autenticado
 		final UserAccount user = LoginService.getPrincipal();
 
-		for (final Authority authority : user.getAuthorities())
-			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-				esAlumno = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-				esAcademia = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-				esAdmin = true;
+		if (user.getAuth() == Authority.ALUMNO || user.getAuth() == Authority.ACADEMIA || user.getAuth() == Authority.ADMINISTRADOR) {
+			result = new ModelAndView("listoftutorial/alltutorialfromacademy");
+			result.addObject("tutoriales", this.tutorialService.findAllByAcademia(idAcademia));
 
-		result.addObject("esAlumno", esAlumno);
-		result.addObject("esAcademia", esAcademia);
-		result.addObject("esAdmin", esAdmin);
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}

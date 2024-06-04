@@ -94,4 +94,24 @@ public class LoginService implements UserDetailsService {
 
 		return result;
 	}
+
+	public static boolean haySesionIniciada() {
+		boolean result;
+		SecurityContext context;
+		Authentication authentication;
+		Object principal;
+
+		context = SecurityContextHolder.getContext();
+		Assert.notNull(context);
+		authentication = context.getAuthentication();
+		Assert.notNull(authentication);
+		principal = authentication.getPrincipal();
+
+		if (principal instanceof UserAccount == false)
+			result = false;
+		else
+			result = true;
+
+		return result;
+	}
 }

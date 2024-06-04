@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="listoftutorial/alltutorialfromacademy" extends="master.page">	
-		<put-attribute name="title" value="Tutorial" />
+		<put-attribute name="title" value="Lista de Tutoriales" />
 		<put-attribute name="body" value="/views/listoftutorial/alltutorialfromacademy.jsp" />
 	</definition>
 	
