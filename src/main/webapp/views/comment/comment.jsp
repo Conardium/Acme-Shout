@@ -4,7 +4,7 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
@@ -15,6 +15,7 @@
 <title>Comentario</title>
 </head>
 <body>
+<<<<<<< HEAD
 	<table>
 		<tr>
 			<td>Título:</td>
@@ -46,14 +47,25 @@
 			<td>Hora:</td>
 			<td><fmt:formatDate value="${curso.hora}" pattern="HH:mm:ss" /></td>
 		</tr>
+=======
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Fecha de Publicación</th>
+				<th>Texto</th>
+				<th>Actor</th>
+			</tr>
+		</thead>
+		<tbody>
+				<tr>
+					<td><fmt:formatDate value="${comentario.fechaPublicacion}"
+							pattern="dd/MM/yyyy HH:mm" /></td>
+					<td>${comentario.texto}</td>
+					<td>${comentario.actor.nombre}</td>
+				</tr>
+		</tbody>
+>>>>>>> refs/remotes/origin/main
 	</table>
-	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/curso/form_edit_course.do'">Modificar
-		Curso</button>
-	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/curso/delete_course.do'">Eliminar Curso</button>
 	<button type="button" onclick="goBack()">Volver</button>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>
