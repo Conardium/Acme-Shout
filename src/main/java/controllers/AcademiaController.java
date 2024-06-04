@@ -175,8 +175,12 @@ public class AcademiaController extends AbstractController {
 	public ModelAndView allacademies() {
 
 		ModelAndView result;
-
 		result = new ModelAndView("listofacademies/allacademies");
+
+		//Verificamos si el usuario está registrado para mostrar o no los tutoriales
+		if (LoginService.haySesionIniciada() == false)
+			result.addObject("autoridad", "NADA");
+
 		result.addObject("academias", this.academiaService.findAll());
 
 		return result;
