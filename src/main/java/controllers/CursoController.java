@@ -267,19 +267,6 @@ public class CursoController extends AbstractController {
 		result = new ModelAndView("listofcourses/allcourses");
 		result.addObject("cursos", this.cursoService.findAll());
 
-		final UserAccount user = LoginService.getPrincipal();
-
-		if (user.getAuth().equals("ALUMNO"))
-			result.addObject("esAlumno", true);
-
-		// Verificar si el usuario está autenticado
-		try {
-			result.addObject("autoridad", user.getAuth());
-		} catch (final Exception ex) {
-			//No esta conectado
-			result.addObject("autoridad", "nada");
-		}
-
 		return result;
 	}
 

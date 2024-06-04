@@ -19,7 +19,7 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<th>Nombre Comercial</th>
+				<th><spring:message code="list.all.academy.value.1" /></th>
 				<th>Persona al cargo</th>
 				<th>Correo</th>
 				<th>Nombre Comercial</th>
