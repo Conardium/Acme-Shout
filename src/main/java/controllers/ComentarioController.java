@@ -17,7 +17,6 @@ import domain.Academia;
 import domain.Actor;
 import domain.Alumno;
 import domain.Comentario;
-import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import services.AcademiaService;
@@ -35,35 +34,6 @@ public class ComentarioController {
 	@Autowired
 	private AcademiaService		academiaService;
 
-
-	//Mostrar Comentario
-
-	@RequestMapping("/show_comment")
-	public ModelAndView show_academy(@RequestParam(required = true) final int comentarioId) {
-		ModelAndView result;
-
-		result = new ModelAndView("comment/comment");
-		result.addObject("comentario", this.comentarioService.findOne(comentarioId));
-
-		boolean esAlumno = false, esAcademia = false, esAdmin = false;
-
-		// Verificar si el usuario está autenticado
-		final UserAccount user = LoginService.getPrincipal();
-
-		for (final Authority authority : user.getAuthorities())
-			if (authority.getAuthority().equalsIgnoreCase("ALUMNO"))
-				esAlumno = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ACADEMIA"))
-				esAcademia = true;
-			else if (authority.getAuthority().equalsIgnoreCase("ADMINISTRADOR"))
-				esAdmin = true;
-
-		result.addObject("esAlumno", esAlumno);
-		result.addObject("esAcademia", esAcademia);
-		result.addObject("esAdmin", esAdmin);
-
-		return result;
-	}
 
 	// Listar todos los comentarios ---------------------------------------------------------------
 

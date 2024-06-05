@@ -120,7 +120,6 @@
 				
 				<security:intercept-url pattern="/comentario/show_academy_comments.do" access="hasRole('ACADEMIA')" />
     <!-- Vistas para todos -->
-				<security:intercept-url pattern="/comentario/show_comment.do" access="isAuthenticated()" />
 				<security:intercept-url pattern="/comentario/allcomments.do" access="isAuthenticated()" />
 				<security:intercept-url pattern="/comentario/form_create_comment.do" access="isAuthenticated()" />
 				<security:intercept-url pattern="/comentario/create_comment.do" access="isAuthenticated()" />

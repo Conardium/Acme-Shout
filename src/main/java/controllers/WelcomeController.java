@@ -13,7 +13,6 @@ package controllers;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,10 +24,6 @@ import security.UserAccount;
 @Controller
 @RequestMapping("/welcome")
 public class WelcomeController extends AbstractController {
-
-	@Autowired
-	private LoginService loginService;
-
 
 	// Constructors -----------------------------------------------------------
 

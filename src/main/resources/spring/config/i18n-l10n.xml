@@ -20,7 +20,6 @@
 
 		<value>/views/academy/messages</value>
 		<value>/views/admin/messages</value>
-		<value>/views/comment/messages</value>
 		<value>/views/course/messages</value>
 		<value>/views/creditcard/messages</value>
 		<value>/views/dashboard/messages</value>

@@ -9,16 +9,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p>
-	<spring:message code="welcome.greeting.prefix" />
-	${name}
-	<spring:message code="welcome.greeting.suffix" />
-</p>
 
-<p>
-	<spring:message code="welcome.greeting.current.time" />
-	${moment}
-</p>
 
 <!DOCTYPE html>
 <html>
@@ -40,47 +31,76 @@
 </style>
 </head>
 <body>
+	<p>
+		<spring:message code="welcome.greeting.prefix" />
+		${name}
+		<spring:message code="welcome.greeting.suffix" />
+	</p>
 
-	<h1><spring:message code="welcome.value.1" /></h1>
+	<p>
+		<spring:message code="welcome.greeting.current.time" />
+		${moment}
+	</p>
+	<h1>
+		<spring:message code="welcome.value.1" />
+	</h1>
 
 	<jstl:if test="${autoridad == 'NADA'}">
 		<div class="button-container">
-			<h3><spring:message code="welcome.value.2" /></h3>
+			<h3>
+				<spring:message code="welcome.value.2" />
+			</h3>
 			<form
 				action="${pageContext.request.contextPath}/alumno/form_sing_up_student.do"
 				method="get">
-				<button type="submit"><spring:message code="welcome.value.3" /></button>
+				<button type="submit">
+					<spring:message code="welcome.value.3" />
+				</button>
 			</form>
 			<form
 				action="${pageContext.request.contextPath}/academia/form_sing_up_academy.do"
 				method="get">
-				<button type="submit"><spring:message code="welcome.value.4" /></button>
+				<button type="submit">
+					<spring:message code="welcome.value.4" />
+				</button>
 			</form>
 		</div>
 	</jstl:if>
 
 	<div class="button-container">
-		<h3><spring:message code="welcome.value.5" /></h3>
+		<h3>
+			<spring:message code="welcome.value.5" />
+		</h3>
 		<form
 			action="${pageContext.request.contextPath}/academia/allacademies.do"
 			method="get">
-			<button type="submit"><spring:message code="welcome.value.6" /></button>
+			<button type="submit">
+				<spring:message code="welcome.value.6" />
+			</button>
 		</form>
 	</div>
 
 	<div class="button-container">
-		<h3><spring:message code="welcome.value.7" /></h3>
+		<h3>
+			<spring:message code="welcome.value.7" />
+		</h3>
 		<form action="${pageContext.request.contextPath}/curso/allcourses.do"
 			method="get">
-			<button type="submit"><spring:message code="welcome.value.8" /></button>
+			<button type="submit">
+				<spring:message code="welcome.value.8" />
+			</button>
 		</form>
 	</div>
 
 	<div class="button-container">
-		<h3><spring:message code="welcome.value.9" /></h3>
+		<h3>
+			<spring:message code="welcome.value.9" />
+		</h3>
 		<form action="${pageContext.request.contextPath}/estilo/allstyles.do"
 			method="get">
-			<button type="submit"><spring:message code="welcome.value.10" /></button>
+			<button type="submit">
+				<spring:message code="welcome.value.10" />
+			</button>
 		</form>
 	</div>
 

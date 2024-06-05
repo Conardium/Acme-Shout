@@ -19,7 +19,6 @@ import security.LoginService;
 import security.UserAccount;
 import services.AcademiaService;
 import services.AlumnoService;
-import services.ComentarioService;
 import services.SolicitudService;
 
 @Controller
@@ -34,8 +33,6 @@ public class AcademiaController extends AbstractController {
 	private SolicitudService	solicitudService;
 	@Autowired
 	private LoginService		loginService;
-	@Autowired
-	private ComentarioService	cometarioService;
 
 
 	// Constructors -----------------------------------------------------------

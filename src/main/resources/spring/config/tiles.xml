@@ -18,7 +18,6 @@
 		<value>/views/student/tiles.xml</value>
 		
 		<value>/views/style/tiles.xml</value>
-		<value>/views/comment/tiles.xml</value>
 		<value>/views/course/tiles.xml</value>
 		<value>/views/creditcard/tiles.xml</value>
 		<value>/views/dashboard/tiles.xml</value>

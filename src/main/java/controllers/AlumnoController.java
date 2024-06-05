@@ -18,7 +18,6 @@ import security.LoginService;
 import security.UserAccount;
 import services.AcademiaService;
 import services.AlumnoService;
-import services.ComentarioService;
 import services.SolicitudService;
 import services.Tarjeta_CreditoService;
 
@@ -36,8 +35,6 @@ public class AlumnoController extends AbstractController {
 	private LoginService			loginService;
 	@Autowired
 	private Tarjeta_CreditoService	tarjetaService;
-	@Autowired
-	private ComentarioService		cometarioService;
 
 
 	// Constructors -----------------------------------------------------------
