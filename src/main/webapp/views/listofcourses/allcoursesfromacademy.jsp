@@ -24,7 +24,7 @@
 			placeholder="Escribe aqui para filtrar..." /> <input type="hidden"
 			name="idVista" value="2" />
 			<input type="hidden" name="idAcademia" value="${idAcademia}" />
-			<input type="hidden" name="idEstilo" value="0" />
+			<input type="hidden" name="idEstilo" value=0 />
 		<button type="submit">Filtrar</button>
 	</form>
 
@@ -38,13 +38,6 @@
 				<th>Fecha de Fin</th>
 				<th>Día de la Semana</th>
 				<th>Hora</th>
-				<jstl:if test="${esAlumno}">
-					<th>Solicitud</th>
-				</jstl:if>
-				<jstl:if test="${esAcademia}  ">
-					<th>Editar</th>
-					<th>Borrar</th>
-				</jstl:if>
 			</tr>
 		</thead>
 		<tbody>
@@ -59,31 +52,6 @@
 							pattern="dd/MM/yyyy HH:mm" /></td>
 					<td>${curso.diaSemana}</td>
 					<td><fmt:formatDate value="${curso.hora}" pattern="HH:mm:ss" /></td>
-					<jstl:if test="${esAlumno && !yaSolicitada && !yaInscrito}  ">
-						<td>
-							<form
-								action="${pageContext.request.contextPath}/applicationcourse/${curso.id}"
-								method="get">
-								<button type="submit">Solicitar</button>
-							</form>
-						</td>
-					</jstl:if>
-					<jstl:if test="${esAcademia}  ">
-						<td>
-							<form
-								action="${pageContext.request.contextPath}/editcourse/${curso.id}"
-								method="get">
-								<button type="submit">Editar</button>
-							</form>
-						</td>
-						<td>
-							<form
-								action="${pageContext.request.contextPath}/delete/${curso.id}"
-								method="get">
-								<button type="submit">Borrar</button>
-							</form>
-						</td>
-					</jstl:if>
 				</tr>
 			</jstl:forEach>
 		</tbody>

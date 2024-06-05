@@ -16,15 +16,13 @@
 <title>Lista de Cursos</title>
 </head>
 <body>
-	<button type="button" onclick="goBack()">Volver</button>
-
 	<form
 		action="${pageContext.request.contextPath}/curso/allcoursesfromfilter.do"
 		method="get">
 		<label for="filtro">Filtro: </label> <input type="text" name="filtro"
 			placeholder="Escribe aqui para filtrar..." /> <input type="hidden"
 			name="idVista" value="3" />
-			<input type="hidden" name="idAcademia" value="0" />
+			<input type="hidden" name="idAcademia" value=0 />
 			<input type="hidden" name="idEstilo" value="${idEstilo}" />
 		<button type="submit">Filtrar</button>
 	</form>
@@ -39,13 +37,6 @@
 				<th>Fecha de Fin</th>
 				<th>Día de la Semana</th>
 				<th>Hora</th>
-				<jstl:if test="${esAlumno}">
-					<th>Solicitud</th>
-				</jstl:if>
-				<jstl:if test="${esAcademia}  ">
-					<th>Editar</th>
-					<th>Borrar</th>
-				</jstl:if>
 			</tr>
 		</thead>
 		<tbody>
@@ -60,36 +51,11 @@
 							pattern="dd/MM/yyyy HH:mm" /></td>
 					<td>${curso.diaSemana}</td>
 					<td><fmt:formatDate value="${curso.hora}" pattern="HH:mm:ss" /></td>
-					<jstl:if test="${esAlumno && !yaSolicitada && !yaInscrito}  ">
-						<td>
-							<form
-								action="${pageContext.request.contextPath}/applicationcourse/${curso.id}"
-								method="get">
-								<button type="submit">Solicitar</button>
-							</form>
-						</td>
-					</jstl:if>
-					<jstl:if test="${esAcademia}  ">
-						<td>
-							<form
-								action="${pageContext.request.contextPath}/editcourse/${curso.id}"
-								method="get">
-								<button type="submit">Editar</button>
-							</form>
-						</td>
-						<td>
-							<form
-								action="${pageContext.request.contextPath}/deletecourse/${curso.id}"
-								method="get">
-								<button type="submit">Borrar</button>
-							</form>
-						</td>
-					</jstl:if>
 				</tr>
 			</jstl:forEach>
 		</tbody>
 	</table>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
+		<button type="button" onclick="goBack()">Volver</button>
+	
 </body>
 </html>

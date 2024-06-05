@@ -22,9 +22,10 @@
 		method="get">
 		<label for="filtro">Filtro: </label> <input type="text" name="filtro"
 			placeholder="Escribe aqui para filtrar..." /> <input type="hidden"
-			name="idVista" value="5" />
-			<input type="hidden" name="idAcademia" value="0" />
-			<input type="hidden" name="idEstilo" value="0" />
+			name="idVista" value="5" /> 
+			<input type="hidden" name="idAcademia"
+			value=0 /> 
+			<input type="hidden" name="idEstilo" value=0 />
 		<button type="submit">Filtrar</button>
 	</form>
 
@@ -39,9 +40,7 @@
 				<th>Día de la Semana</th>
 				<th>Hora</th>
 				<th>Academia</th>
-				<jstl:if test="${esAlumno}">
-					<th>Solicitud</th>
-				</jstl:if>
+				<th>Solicitud</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -64,16 +63,14 @@
 							<button type="submit">Ver Academia</button>
 						</form>
 					</td>
-					<jstl:if test="${esAlumno}">
-						<td>
-							<form
-								action="${pageContext.request.contextPath}/solicitud/apply.do"
-								method="get">
-								<input type="hidden" name="idCurso" value="${curso.id}" />
-								<button type="submit">Solicitar</button>
-							</form>
-						</td>
-					</jstl:if>
+					<td>
+						<form
+							action="${pageContext.request.contextPath}/solicitud/apply.do"
+							method="get">
+							<input type="hidden" name="idCurso" value="${curso.id}" />
+							<button type="submit">Solicitar</button>
+						</form>
+					</td>
 				</tr>
 			</jstl:forEach>
 		</tbody>

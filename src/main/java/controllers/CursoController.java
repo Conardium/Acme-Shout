@@ -278,22 +278,12 @@ public class CursoController extends AbstractController {
 		ModelAndView result;
 		final UserAccount user = LoginService.getPrincipal();
 
-		result = new ModelAndView("listofcourses/allcoursesprofilestudent");
-		int idAlumno = this.alumnoService.findByAccountId(user.getId()).getId();
-		result.addObject("cursos", this.cursoService.findCursosNotSolicitedByAlumno(idAlumno));
-
-		if (user.getAuth().equals("ALUMNO"))
-			result.addObject("esAlumno", true);
-		else
-			result.addObject("esAlumno", false);
-
-		// Verificar si el usuario está autenticado
-		try {
-			result.addObject("autoridad", user.getAuth());
-		} catch (final Exception ex) {
-			//No esta conectado
-			result.addObject("autoridad", "nada");
-		}
+		if (user.getAuth() == Authority.ALUMNO) {
+			result = new ModelAndView("listofcourses/allcoursesprofilestudent");
+			int idAlumno = this.alumnoService.findByAccountId(user.getId()).getId();
+			result.addObject("cursos", this.cursoService.findCursosNotSolicitedByAlumno(idAlumno));
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -307,16 +297,6 @@ public class CursoController extends AbstractController {
 
 		result = new ModelAndView("listofcourses/allcoursesfromacademy");
 		result.addObject("cursos", this.cursoService.findCursosporAcademia(academiaId));
-
-		// Verificar si el usuario está autenticado
-		try {
-			final UserAccount user = LoginService.getPrincipal();
-			result.addObject("autoridad", user.getAuth());
-		} catch (final Exception ex) {
-			//No esta conectado
-			result.addObject("autoridad", "nada");
-		}
-
 		result.addObject("idAcademia", academiaId);
 
 		return result;
@@ -327,11 +307,11 @@ public class CursoController extends AbstractController {
 	public ModelAndView coursesofacademyprofile() {
 
 		ModelAndView result;
-		final UserAccount aux = LoginService.getPrincipal();
+		final UserAccount user = LoginService.getPrincipal();
 
-		if (aux.getAuth() == Authority.ACADEMIA) {
+		if (user.getAuth() == Authority.ACADEMIA) {
 			result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
-			result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(aux.getId()).getId()));
+			result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(user.getId()).getId()));
 		} else
 			result = new ModelAndView("welcome/index");
 		return result;
@@ -346,15 +326,6 @@ public class CursoController extends AbstractController {
 
 		result = new ModelAndView("listofcourses/allcoursesfromstyle");
 		result.addObject("cursos", this.cursoService.findCursosporEstilo(estiloId));
-
-		// Verificar si el usuario está autenticado
-		try {
-			final UserAccount user = LoginService.getPrincipal();
-			result.addObject("autoridad", user.getAuth());
-		} catch (final Exception ex) {
-			//No esta conectado
-			result.addObject("autoridad", "nada");
-		}
 		result.addObject("idEstilo", estiloId);
 
 		return result;
@@ -382,10 +353,12 @@ public class CursoController extends AbstractController {
 		case 2:
 			result = new ModelAndView("listofcourses/allcoursesfromacademy");
 			result.addObject("cursos", this.cursoService.findCursosByAcademyWithFiltro(idAcademia, filtroQuery));
+			result.addObject("idAcademia", idAcademia);
 			break;
 		case 3:
 			result = new ModelAndView("listofcourses/allcoursesfromstyle");
 			result.addObject("cursos", this.cursoService.findByEstiloWithFiltro(idEstilo, filtroQuery));
+			result.addObject("idEstilo", idEstilo);
 			break;
 		case 4:
 			if (LoginService.getPrincipal().getAuth() == Authority.ACADEMIA) {

@@ -21,8 +21,12 @@
 		action="${pageContext.request.contextPath}/curso/allcoursesfromfilter.do"
 		method="get">
 		<label for="filtro">Filtro: </label> <input type="text" name="filtro"
-			placeholder="Escribe aqui para filtrar..." /> <input type="hidden"
+			placeholder="Escribe aqui para filtrar..." /> 
+			<input type="hidden"
 			name="idVista" value="4" />
+			<input type="hidden" name="idAcademia"
+			value=0 /> 
+			<input type="hidden" name="idEstilo" value=0 />
 		<button type="submit">Filtrar</button>
 	</form>
 
@@ -36,7 +40,6 @@
 				<th>Fecha de Fin</th>
 				<th>Día de la Semana</th>
 				<th>Hora</th>
-
 				<th>Editar</th>
 				<th>Borrar</th>
 			</tr>
@@ -53,8 +56,6 @@
 							pattern="dd/MM/yyyy HH:mm" /></td>
 					<td>${curso.diaSemana}</td>
 					<td><fmt:formatDate value="${curso.hora}" pattern="HH:mm:ss" /></td>
-
-
 					<td>
 						<form
 							action="${pageContext.request.contextPath}/curso/form_edit_course.do"
