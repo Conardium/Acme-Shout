@@ -12,7 +12,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
 <title>Lista de Academias</title>
 </head>
 <body>
@@ -44,7 +43,7 @@
 							action="${pageContext.request.contextPath}/curso/allcoursesfromacademy.do"
 							method="get">
 							<input type="hidden" name="academiaId" value="${academia.id}" />
-							<button type="submit">Ver Cursos</button>
+							<button type="submit"><spring:message code="list.all.academy.value.8" /></button>
 						</form>
 					</td>
 
@@ -54,7 +53,7 @@
 								action="${pageContext.request.contextPath}/tutorial/alltutorialbyacademy.do"
 								method="get">
 								<input type="hidden" name="idAcademia" value="${academia.id}" />
-								<button type="submit">Ver Tutoriales</button>
+								<button type="submit"><spring:message code="list.all.academy.value.9" /></button>
 							</form>
 						</td>
 					</jstl:if>
@@ -64,6 +63,6 @@
 			</jstl:forEach>
 		</tbody>
 	</table>
-	<button type="button" onclick="goBack()">Volver</button>
+	<button type="button" onclick="goBack()"><spring:message code="list.all.academy.value.10" /></button>
 </body>
 </html>

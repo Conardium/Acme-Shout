@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><spring:message code="create.edit.tutorial.value.7" /></title>
+<title>Modificar Tutorial</title>
 </head>
 <body>
 	<form:form modelAttribute="tutorial" method="post"
