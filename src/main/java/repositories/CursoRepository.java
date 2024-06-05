@@ -36,6 +36,12 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
 	@Query("select distinct c from Curso c join c.estilo e where c.titulo like '%?1%' OR e.nombre LIKE '%?1%' OR e.descripcion LIKE '%?1%'")
 	Collection<Curso> findCursosByFiltro(String filtro);
 
+	@Query("select distinct a.c from Academia a join a.c.estilo e where a.id = ?1 AND (a.c.titulo like '%?2%' OR e.nombre LIKE '%?2%' OR e.descripcion LIKE '%?2%')")
+	Collection<Curso> findCursosByAcademyWithFiltro(int idAcademia, String filtro);
+
+	@Query("select distinct c from Curso c join c.estilo e where c.id not in (select s.curso.id from Alumno a join a.solicitudes s where a.id = ?1) AND (c.titulo like '%?2%' OR e.nombre LIKE '%?2%' OR e.descripcion LIKE '%?2%')")
+	Collection<Curso> findCursosNotSolicitedByAlumnoWithFiltro(int idAlumno, String filtro);
+
 	@Query("select distinct c from Curso c where c.id not in (select s.curso.id from Alumno a join a.solicitudes s where a.id = ?1)")
 	Collection<Curso> findCursosNotSolicitedByAlumno(int idAlumno);
 }

@@ -17,6 +17,13 @@
 <title>Lista de Cursos</title>
 </head>
 <body>
+	<form
+		action="${pageContext.request.contextPath}/academia/academybycourse.do"
+		method="get">
+		<input type="hidden" name="idVista" value="1" />
+		<button type="submit">Filtrar</button>
+	</form>
+
 	<table border="1">
 		<thead>
 			<tr>
@@ -49,7 +56,7 @@
 							<input type="hidden" name="cursoId" value="${curso.id}" />
 							<button type="submit">Ver Academia</button>
 						</form>
-					</td>					
+					</td>
 				</tr>
 			</jstl:forEach>
 		</tbody>

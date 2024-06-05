@@ -360,12 +360,42 @@ public class CursoController extends AbstractController {
 	//Cursos por filtro -------------------
 
 	@RequestMapping("/allcoursesfromfilter")
-	public ModelAndView listbyfilter(@RequestParam(required = true) final String filtro) {
+	public ModelAndView listbyfilter(@RequestParam(required = true) final String filtro, final int idVista) {
 
 		ModelAndView result;
 
-		result = new ModelAndView("listofcourses/allcoursesfromfilter");
-		result.addObject("cursos", this.cursoService.findCursosByFiltro(filtro));
+		//idVista values:
+		//
+		//1=allcourses, 2=allcoursesfromacademy, 3=allcoursesfromstyle, 4=allcoursesfromprofileacademy
+		//5=allcoursesprofilestudent
+
+		final UserAccount aux = LoginService.getPrincipal();
+
+		switch (idVista) {
+		case 1:
+			result = new ModelAndView("listofcourses/allcourses");
+			result.addObject("cursos", this.cursoService.findCursosByFiltro(filtro));
+			break;
+		case 2:
+			result = new ModelAndView("listofcourses/allcoursesfromacademy");
+			break;
+		case 3:
+			result = new ModelAndView("listofcourses/allcoursesfromstyle");
+			break;
+		case 4:
+			if (aux.getAuth() == Authority.ACADEMIA) {
+				result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
+				result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(aux.getId()).getId()));
+			} else
+				result = new ModelAndView("welcome/index");
+			break;
+		case 5:
+			result = new ModelAndView("listofcourses/allcoursesprofilestudent");
+			break;
+		default:
+			result = new ModelAndView("welcome/index");
+			break;
+		}
 
 		// Verificar si el usuario está autenticado
 		try {
