@@ -55,6 +55,7 @@
 				<security:intercept-url pattern="/curso/allcourses.do" access="permitAll" />
 				<security:intercept-url pattern="/curso/allcoursesfromacademy.do" access="permitAll" />
 				<security:intercept-url pattern="/curso/allcoursesfromstyle.do" access="permitAll" />
+				<security:intercept-url pattern="/curso/allcoursesfromfilter.do" access="permitAll" />
 		<!-- Vistas de Estilo -->
 				<security:intercept-url pattern="/estilo/allstyles.do" access="permitAll" />
 				<security:intercept-url pattern="/estilo/style.do" access="permitAll" />

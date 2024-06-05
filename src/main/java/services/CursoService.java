@@ -146,6 +146,22 @@ public class CursoService {
 		return result;
 	}
 
+	public Collection<Curso> findCursosByAcademyWithFiltro(int idAcademia, String filtro) {
+		Collection<Curso> result;
+
+		result = this.cursoRepository.findCursosByAcademyWithFiltro(idAcademia, filtro);
+
+		return result;
+	}
+
+	public Collection<Curso> findCursosNotSolicitedByAlumnoWithFiltro(int idAlumno, String filtro) {
+		Collection<Curso> result;
+
+		result = this.cursoRepository.findCursosNotSolicitedByAlumnoWithFiltro(idAlumno, filtro);
+
+		return result;
+	}
+
 	public Collection<Curso> findCursosNotSolicitedByAlumno(final int idAlumno) {
 		Collection<Curso> result;
 

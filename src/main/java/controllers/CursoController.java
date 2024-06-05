@@ -364,17 +364,17 @@ public class CursoController extends AbstractController {
 
 		ModelAndView result;
 
+		String filtroQuery = "%" + filtro + "%";
+
 		//idVista values:
 		//
 		//1=allcourses, 2=allcoursesfromacademy, 3=allcoursesfromstyle, 4=allcoursesfromprofileacademy
 		//5=allcoursesprofilestudent
 
-		final UserAccount aux = LoginService.getPrincipal();
-
 		switch (idVista) {
 		case 1:
 			result = new ModelAndView("listofcourses/allcourses");
-			result.addObject("cursos", this.cursoService.findCursosByFiltro(filtro));
+			result.addObject("cursos", this.cursoService.findCursosByFiltro(filtroQuery));
 			break;
 		case 2:
 			result = new ModelAndView("listofcourses/allcoursesfromacademy");
@@ -383,27 +383,23 @@ public class CursoController extends AbstractController {
 			result = new ModelAndView("listofcourses/allcoursesfromstyle");
 			break;
 		case 4:
-			if (aux.getAuth() == Authority.ACADEMIA) {
+			if (LoginService.getPrincipal().getAuth() == Authority.ACADEMIA) {
 				result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
-				result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(aux.getId()).getId()));
+				result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(LoginService.getPrincipal().getId()).getId()));
 			} else
 				result = new ModelAndView("welcome/index");
 			break;
 		case 5:
-			result = new ModelAndView("listofcourses/allcoursesprofilestudent");
+			if (LoginService.getPrincipal().getAuth() == Authority.ALUMNO) {
+				result = new ModelAndView("listofcourses/allcoursesprofilestudent");
+				result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(LoginService.getPrincipal().getId()).getId()));
+			} else
+				result = new ModelAndView("welcome/index");
+
 			break;
 		default:
 			result = new ModelAndView("welcome/index");
 			break;
-		}
-
-		// Verificar si el usuario está autenticado
-		try {
-			final UserAccount user = LoginService.getPrincipal();
-			result.addObject("autoridad", user.getAuth());
-		} catch (final Exception ex) {
-			//No esta conectado
-			result.addObject("autoridad", "nada");
 		}
 
 		return result;

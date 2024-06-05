@@ -18,8 +18,11 @@
 </head>
 <body>
 	<form
-		action="${pageContext.request.contextPath}/academia/academybycourse.do"
+	
+		action="${pageContext.request.contextPath}/curso/allcoursesfromfilter.do"
 		method="get">
+		<label for="filtro">Filtro: </label>
+		<input type="text" name="filtro" placeholder="Escribe aqui para filtrar..."/>
 		<input type="hidden" name="idVista" value="1" />
 		<button type="submit">Filtrar</button>
 	</form>
