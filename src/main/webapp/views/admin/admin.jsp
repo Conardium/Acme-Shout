@@ -11,10 +11,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><spring:message code="admin.0" /></title>
+<title>Administrador</title>
 </head>
 <body>
-	<h2><spring:message code="admin.0" /></h2>
 
 	<table>
 		<!-- Campos Actor -->

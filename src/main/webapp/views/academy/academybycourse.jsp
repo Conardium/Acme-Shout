@@ -14,8 +14,6 @@
 <title>Academia</title>
 </head>
 <body>
-<button type="button" onclick="goBack()"><spring:message code="academy.7" /></button>
-	<h2><spring:message code="academy.8" /></h2>
 	<table>
 		<!-- Campos Actor -->
 		<tr>
@@ -45,7 +43,7 @@
 			<td><jstl:out value="${academia.nombreComercial}" /></td>
 		</tr>
 	</table>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
+		<button type="button" onclick="goBack()"><spring:message code="academy.7" /></button>
 	
 </body>
 </html>

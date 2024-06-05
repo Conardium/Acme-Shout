@@ -82,14 +82,18 @@ public class ComentarioController {
 	public ModelAndView allcommentsfromstudent() {
 		ModelAndView result;
 
-		result = new ModelAndView("listofcomment/commentsbyuser");
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ALUMNO")) {
+			result = new ModelAndView("listofcomment/commentsbyuser");
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Alumno alumno = this.alumnoService.findByAccountId(user.getId());
+			final UserAccount user = LoginService.getPrincipal();
+			final Alumno alumno = this.alumnoService.findByAccountId(user.getId());
 
-		result.addObject("comentarios", this.comentarioService.findAllComentariosByAlumno(alumno.getId()));
+			result.addObject("comentarios", this.comentarioService.findAllComentariosByAlumno(alumno.getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
+
 	}
 
 	//Listar Comentarios por Academia ---------------------------------------------------------------
@@ -97,13 +101,15 @@ public class ComentarioController {
 	public ModelAndView allcommentsfromacademy() {
 		ModelAndView result;
 
-		result = new ModelAndView("listofcomment/commentsbyuser");
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			result = new ModelAndView("listofcomment/commentsbyuser");
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Academia academia = this.academiaService.findByAccountId(user.getId());
+			final UserAccount user = LoginService.getPrincipal();
+			final Academia academia = this.academiaService.findByAccountId(user.getId());
 
-		result.addObject("comentarios", this.comentarioService.findAllComentariosByAcademia(academia.getId()));
-
+			result.addObject("comentarios", this.comentarioService.findAllComentariosByAcademia(academia.getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 		return result;
 	}
 

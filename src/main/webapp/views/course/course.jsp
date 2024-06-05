@@ -15,7 +15,6 @@
 <title>Curso</title>
 </head>
 <body>
-	<h2><spring:message code="course.0" /></h2>
 
 	<table>
 		<tr>
@@ -54,7 +53,5 @@
 	<button type="button"
 		onclick="location.href='${pageContext.request.contextPath}/curso/delete_course.do'"><spring:message code="course.9" /></button>
 	<button type="button" onclick="goBack()"><spring:message code="course.10" /></button>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>

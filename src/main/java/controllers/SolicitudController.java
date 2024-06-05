@@ -57,28 +57,32 @@ public class SolicitudController extends AbstractController {
 	public ModelAndView Solicitar(@RequestParam(required = true) final int idCurso) {
 		ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Alumno alumno = this.alumnoService.findByAccountId(user.getId());
-		final Curso curso = this.cursoService.findOne(idCurso);
-		final Academia academia = this.academiaService.findAcademiaporCurso(idCurso);
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ALUMNO")) {
 
-		Solicitud nuevaSolicitud = this.solicitudService.create();
+			final UserAccount user = LoginService.getPrincipal();
+			final Alumno alumno = this.alumnoService.findByAccountId(user.getId());
+			final Curso curso = this.cursoService.findOne(idCurso);
+			final Academia academia = this.academiaService.findAcademiaporCurso(idCurso);
 
-		nuevaSolicitud.setCurso(curso);
-		nuevaSolicitud.setEstado(Estado.Pendiente);
-		nuevaSolicitud.setFecha(new Date());
-		nuevaSolicitud = this.solicitudService.save(nuevaSolicitud);
+			Solicitud nuevaSolicitud = this.solicitudService.create();
 
-		curso.getSolicitudes().add(nuevaSolicitud);
-		alumno.addSolicitud(nuevaSolicitud);
-		academia.getSolicitudes().add(nuevaSolicitud);
+			nuevaSolicitud.setCurso(curso);
+			nuevaSolicitud.setEstado(Estado.Pendiente);
+			nuevaSolicitud.setFecha(new Date());
+			nuevaSolicitud = this.solicitudService.save(nuevaSolicitud);
 
-		this.alumnoService.save(alumno);
-		this.cursoService.save(curso);
-		this.academiaService.save(academia);
+			curso.getSolicitudes().add(nuevaSolicitud);
+			alumno.addSolicitud(nuevaSolicitud);
+			academia.getSolicitudes().add(nuevaSolicitud);
 
-		result = new ModelAndView("listofapplication/listofapplicationbystudent");
-		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(alumno.getId()));
+			this.alumnoService.save(alumno);
+			this.cursoService.save(curso);
+			this.academiaService.save(academia);
+
+			result = new ModelAndView("listofapplication/listofapplicationbystudent");
+			result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(alumno.getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -88,16 +92,20 @@ public class SolicitudController extends AbstractController {
 	public ModelAndView RechazarSolicitud(@RequestParam(required = true) final int idSolicitud) {
 		ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		Solicitud solicitud = this.solicitudService.findOne(idSolicitud);
-		if (solicitud != null) {
-			solicitud.setEstado(Estado.Rechazado);
-			solicitud = this.solicitudService.save(solicitud);
-		}
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
 
-		result = new ModelAndView("listofapplication/listofapplicationbyacademy");
-		Academia academia = this.academiaService.findByAccountId(user.getId());
-		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAcademia(academia.getId()));
+			final UserAccount user = LoginService.getPrincipal();
+			Solicitud solicitud = this.solicitudService.findOne(idSolicitud);
+			if (solicitud != null) {
+				solicitud.setEstado(Estado.Rechazado);
+				solicitud = this.solicitudService.save(solicitud);
+			}
+
+			result = new ModelAndView("listofapplication/listofapplicationbyacademy");
+			Academia academia = this.academiaService.findByAccountId(user.getId());
+			result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAcademia(academia.getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -107,16 +115,20 @@ public class SolicitudController extends AbstractController {
 	public ModelAndView aceptarSolicitud(@RequestParam(required = true) final int idSolicitud) {
 		ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		Solicitud solicitud = this.solicitudService.findOne(idSolicitud);
-		if (solicitud != null) {
-			solicitud.setEstado(Estado.Aceptado);
-			solicitud = this.solicitudService.save(solicitud);
-		}
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
 
-		result = new ModelAndView("listofapplication/listofapplicationbyacademy");
-		Academia academia = this.academiaService.findByAccountId(user.getId());
-		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAcademia(academia.getId()));
+			final UserAccount user = LoginService.getPrincipal();
+			Solicitud solicitud = this.solicitudService.findOne(idSolicitud);
+			if (solicitud != null) {
+				solicitud.setEstado(Estado.Aceptado);
+				solicitud = this.solicitudService.save(solicitud);
+			}
+
+			result = new ModelAndView("listofapplication/listofapplicationbyacademy");
+			Academia academia = this.academiaService.findByAccountId(user.getId());
+			result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAcademia(academia.getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}

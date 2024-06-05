@@ -66,8 +66,11 @@ public class TutorialController extends AbstractController {
 	public ModelAndView form_sing_up_student() {
 		ModelAndView result;
 
-		result = new ModelAndView("create_edit_tutorial/form_create_tutorial");
-		result.addObject("tutorial", this.tutorialService.create());
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			result = new ModelAndView("create_edit_tutorial/form_create_tutorial");
+			result.addObject("tutorial", this.tutorialService.create());
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -78,21 +81,25 @@ public class TutorialController extends AbstractController {
 	public ModelAndView sing_up_course(@ModelAttribute("Tutorial") final Tutorial tutorial, final BindingResult resultado) {
 		ModelAndView result;
 
-		if (resultado.hasErrors())
-			result = new ModelAndView("create_edit_tutorial/form_create_tutorial");
-		else {
-			result = new ModelAndView("listoftutorial/alltutorialfromacademy");
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			if (resultado.hasErrors())
+				result = new ModelAndView("create_edit_tutorial/form_create_tutorial");
+			else {
+				result = new ModelAndView("listoftutorial/alltutorialfromacademy");
 
-			tutorial.setContador(0);
+				tutorial.setContador(0);
 
-			final UserAccount user = LoginService.getPrincipal();
-			final Academia actual = this.academiaService.findByAccountId(user.getId());
+				final UserAccount user = LoginService.getPrincipal();
+				final Academia actual = this.academiaService.findByAccountId(user.getId());
 
-			actual.getTutoriales().add(this.tutorialService.save(tutorial));
-			this.academiaService.save(actual);
+				actual.getTutoriales().add(this.tutorialService.save(tutorial));
+				this.academiaService.save(actual);
 
-			result.addObject("tutoriales", this.tutorialService.findAllByAcademia(actual.getId()));
-		}
+				result.addObject("tutoriales", this.tutorialService.findAllByAcademia(actual.getId()));
+			}
+		} else
+			result = new ModelAndView("welcome/index");
+
 		return result;
 	}
 
@@ -102,8 +109,11 @@ public class TutorialController extends AbstractController {
 	public ModelAndView form_edit_course(@RequestParam(required = true) final int tutorialId) {
 		ModelAndView result;
 
-		result = new ModelAndView("create_edit_tutorial/form_edit_tutorial");
-		result.addObject("tutorial", this.tutorialService.findOne(tutorialId));
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			result = new ModelAndView("create_edit_tutorial/form_edit_tutorial");
+			result.addObject("tutorial", this.tutorialService.findOne(tutorialId));
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -114,18 +124,21 @@ public class TutorialController extends AbstractController {
 	public ModelAndView edit_course(@ModelAttribute("Tutorial") final Tutorial tutorial, final BindingResult resultado) {
 		ModelAndView result;
 
-		if (resultado.hasErrors())
-			result = new ModelAndView("create_edit_tutorial/form_edit_tutorial");
-		else {
-			result = new ModelAndView("listoftutorial/alltutorialfromacademy");
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			if (resultado.hasErrors())
+				result = new ModelAndView("create_edit_tutorial/form_edit_tutorial");
+			else {
+				result = new ModelAndView("listoftutorial/alltutorialfromacademy");
 
-			final UserAccount user = LoginService.getPrincipal();
-			final Academia actual = this.academiaService.findByAccountId(user.getId());
+				final UserAccount user = LoginService.getPrincipal();
+				final Academia actual = this.academiaService.findByAccountId(user.getId());
 
-			this.tutorialService.save(tutorial);
+				this.tutorialService.save(tutorial);
 
-			result.addObject("tutoriales", this.tutorialService.findAllByAcademia(actual.getId()));
-		}
+				result.addObject("tutoriales", this.tutorialService.findAllByAcademia(actual.getId()));
+			}
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -136,17 +149,21 @@ public class TutorialController extends AbstractController {
 	public ModelAndView delete_course(@RequestParam(required = true) final int tutorialId) {
 		ModelAndView result;
 
-		result = new ModelAndView("listoftutorial/alltutorialfromacademy");
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			result = new ModelAndView("listoftutorial/alltutorialfromacademy");
 
-		Tutorial tutorial = this.tutorialService.findOne(tutorialId);
-		final UserAccount user = LoginService.getPrincipal();
-		Academia actual = this.academiaService.findByAccountId(user.getId());
-		actual.getTutoriales().remove(tutorial);
+			Tutorial tutorial = this.tutorialService.findOne(tutorialId);
+			final UserAccount user = LoginService.getPrincipal();
+			Academia actual = this.academiaService.findByAccountId(user.getId());
+			actual.getTutoriales().remove(tutorial);
 
-		this.academiaService.save(actual);
-		this.tutorialService.delete(tutorial);
+			this.academiaService.save(actual);
+			this.tutorialService.delete(tutorial);
 
-		result.addObject("tutoriales", this.tutorialService.findAllByAcademia(actual.getId()));
+			result.addObject("tutoriales", this.tutorialService.findAllByAcademia(actual.getId()));
+
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -171,12 +188,14 @@ public class TutorialController extends AbstractController {
 
 		ModelAndView result;
 
-		// Verificar si el usuario está autenticado
-		final UserAccount user = LoginService.getPrincipal();
-		Academia actual = this.academiaService.findByAccountId(user.getId());
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			final UserAccount user = LoginService.getPrincipal();
+			Academia actual = this.academiaService.findByAccountId(user.getId());
 
-		result = new ModelAndView("listoftutorial/alltutorialfromacademy");
-		result.addObject("tutoriales", this.tutorialService.findAllByAcademia(actual.getId()));
+			result = new ModelAndView("listoftutorial/alltutorialfromacademy");
+			result.addObject("tutoriales", this.tutorialService.findAllByAcademia(actual.getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}

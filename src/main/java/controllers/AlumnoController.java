@@ -49,29 +49,16 @@ public class AlumnoController extends AbstractController {
 	public ModelAndView show_profile() {
 		ModelAndView result;
 
-		final UserAccount aux = LoginService.getPrincipal();
-
-		if (aux.getAuth() == Authority.ALUMNO) {
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ALUMNO")) {
+			final UserAccount aux = LoginService.getPrincipal();
 			result = new ModelAndView("student/student");
 			result.addObject("esAlumno", true);
 			result.addObject("esAcademia", false);
 			result.addObject("esAdmin", false);
+			result.addObject("alumno", this.alumnoService.findByAccountId(aux.getId()));
+
 		} else
 			result = new ModelAndView("welcome/index");
-
-		result.addObject("alumno", this.alumnoService.findByAccountId(aux.getId()));
-
-		return result;
-	}
-
-	//Mostrar alumno
-
-	@RequestMapping("/show_student")
-	public ModelAndView show_student(@RequestParam(required = true) final int studentId) {
-		ModelAndView result;
-
-		result = new ModelAndView("student/student");
-		result.addObject("alumno", this.alumnoService.findOne(studentId));
 
 		return result;
 	}
@@ -144,11 +131,14 @@ public class AlumnoController extends AbstractController {
 	@RequestMapping("/form_edit_student")
 	public ModelAndView form_edit_alumno() {
 		ModelAndView result;
-		result = new ModelAndView("create_edit_actor/form_edit_student");
 
-		final UserAccount aux = LoginService.getPrincipal();
-		result.addObject("alumno", this.alumnoService.findByAccountId(aux.getId()));
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ALUMNO")) {
+			result = new ModelAndView("create_edit_actor/form_edit_student");
 
+			final UserAccount aux = LoginService.getPrincipal();
+			result.addObject("alumno", this.alumnoService.findByAccountId(aux.getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 		return result;
 	}
 
@@ -158,28 +148,31 @@ public class AlumnoController extends AbstractController {
 	public ModelAndView edit_student(@ModelAttribute("Alumno") final Alumno alumno, final BindingResult resultado) {
 		ModelAndView result;
 
-		if (resultado.hasErrors()) {
-			result = new ModelAndView("create_edit_actor/form_edit_student");
-			result.addObject("alumno", alumno);
-		} else {
-			final UserAccount user = LoginService.getPrincipal();
-			UserAccount.generateMD5Hash(alumno.getUserAccount().getPassword(), user);
-			user.setUsername(alumno.getUserAccount().getUsername());
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ALUMNO")) {
+			if (resultado.hasErrors()) {
+				result = new ModelAndView("create_edit_actor/form_edit_student");
+				result.addObject("alumno", alumno);
+			} else {
+				final UserAccount user = LoginService.getPrincipal();
+				UserAccount.generateMD5Hash(alumno.getUserAccount().getPassword(), user);
+				user.setUsername(alumno.getUserAccount().getUsername());
 
-			Alumno aux = this.alumnoService.findByAccountId(user.getId());
-			aux.setApellidos(alumno.getApellidos());
-			aux.setNombre(alumno.getNombre());
-			aux.setCorreo(alumno.getCorreo());
-			aux.setDireccionPostal(alumno.getDireccionPostal());
-			aux.setTelefono(alumno.getTelefono());
-			aux.setUserAccount(this.loginService.save(user));
+				Alumno aux = this.alumnoService.findByAccountId(user.getId());
+				aux.setApellidos(alumno.getApellidos());
+				aux.setNombre(alumno.getNombre());
+				aux.setCorreo(alumno.getCorreo());
+				aux.setDireccionPostal(alumno.getDireccionPostal());
+				aux.setTelefono(alumno.getTelefono());
+				aux.setUserAccount(this.loginService.save(user));
 
-			result = new ModelAndView("student/student");
+				result = new ModelAndView("student/student");
 
-			result.addObject("alumno", this.alumnoService.save(aux));
+				result.addObject("alumno", this.alumnoService.save(aux));
 
-			result.addObject("autoridad", user.getAuth());
-		}
+				result.addObject("autoridad", user.getAuth());
+			}
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -190,12 +183,14 @@ public class AlumnoController extends AbstractController {
 	public ModelAndView solicitudesPorAlumno() {
 		ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Alumno actual = this.alumnoService.findByAccountId(user.getId());
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ALUMNO")) {
+			final UserAccount user = LoginService.getPrincipal();
+			final Alumno actual = this.alumnoService.findByAccountId(user.getId());
 
-		result = new ModelAndView("listofapplication/listofapplicationbystudent");
-		result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(actual.getId()));
-
+			result = new ModelAndView("listofapplication/listofapplicationbystudent");
+			result.addObject("solicitudes", this.solicitudService.findAllSolicitudesByAlumno(actual.getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 		return result;
 	}
 
@@ -205,11 +200,14 @@ public class AlumnoController extends AbstractController {
 	public ModelAndView subbystudent() {
 		ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Alumno actual = this.alumnoService.findByAccountId(user.getId());
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ALUMNO")) {
+			final UserAccount user = LoginService.getPrincipal();
+			final Alumno actual = this.alumnoService.findByAccountId(user.getId());
 
-		result = new ModelAndView("listofsubs/listofsubsbystudent");
-		result.addObject("suscriptores", this.alumnoService.findSuscritporByAlumno(actual.getId()));
+			result = new ModelAndView("listofsubs/listofsubsbystudent");
+			result.addObject("suscriptores", this.alumnoService.findSuscritporByAlumno(actual.getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -220,23 +218,27 @@ public class AlumnoController extends AbstractController {
 	public ModelAndView sub_student(@RequestParam(required = true) final int actorId) {
 		final ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Alumno actual = this.alumnoService.findByAccountId(user.getId());
-		Actor actor;
-		if (this.academiaService.findByAccountId(actorId) != null)
-			actor = this.academiaService.findByAccountId(actorId);
-		else
-			actor = this.alumnoService.findByAccountId(actorId);
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ALUMNO")) {
 
-		if (!actual.getSuscritos().contains(actor) && actual.getId() != actor.getId()) {
-			actual.addSuscritos(actor);
+			final UserAccount user = LoginService.getPrincipal();
+			final Alumno actual = this.alumnoService.findByAccountId(user.getId());
+			Actor actor;
+			if (this.academiaService.findByAccountId(actorId) != null)
+				actor = this.academiaService.findByAccountId(actorId);
+			else
+				actor = this.alumnoService.findByAccountId(actorId);
 
-			this.alumnoService.save(actual);
+			if (!actual.getSuscritos().contains(actor) && actual.getId() != actor.getId()) {
+				actual.addSuscritos(actor);
 
-		}
+				this.alumnoService.save(actual);
 
-		result = new ModelAndView("listofsubs/listofsubsbystudent");
-		result.addObject("suscriptores", this.alumnoService.findSuscritporByAlumno(actual.getId()));
+			}
+
+			result = new ModelAndView("listofsubs/listofsubsbystudent");
+			result.addObject("suscriptores", this.alumnoService.findSuscritporByAlumno(actual.getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}

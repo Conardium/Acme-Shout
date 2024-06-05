@@ -11,7 +11,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-1">
     <title><spring:message code="createdit.comment.0" /></title>
 </head>
 <body>
@@ -27,7 +26,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="submit" value=<spring:message code="createdit.comment.2" />/>
+                    <input type="submit" value=<spring:message code="createdit.comment.2"/>>
                 </td>
             </tr>
         </table>

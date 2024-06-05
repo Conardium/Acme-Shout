@@ -45,11 +45,9 @@
 				<security:intercept-url pattern="/academia/allacademies.do" access="permitAll" />
 				<security:intercept-url pattern="/academia/sing_up_academy.do" access="permitAll" />
 				<security:intercept-url pattern="/academia/form_sing_up_academy.do" access="permitAll" />
-		<!-- Vistas de Administrador -->
 		<!-- Vistas de Alumno -->
 				<security:intercept-url pattern="/alumno/sing_up_student.do" access="permitAll" />
 				<security:intercept-url pattern="/alumno/form_sing_up_student.do" access="permitAll" />
-		<!-- Vistas de Comentario -->
 		<!-- Vistas de Curso -->
 		        <security:intercept-url pattern="/curso/show_course.do" access="permitAll" />
 				<security:intercept-url pattern="/curso/allcourses.do" access="permitAll" />
@@ -59,14 +57,10 @@
 		<!-- Vistas de Estilo -->
 				<security:intercept-url pattern="/estilo/allstyles.do" access="permitAll" />
 				<security:intercept-url pattern="/estilo/style.do" access="permitAll" />
-		<!-- Vistas de Solicitud -->
-		<!-- Vistas de Tarjeta_Credito -->
-		<!-- Vistas de Tutorial -->
 		
 		
 	<!-- Vistas identificadas -->	
 		<!-- Vistas de Admin -->
-				<security:intercept-url pattern="/admin/show_academy.do" access="hasRole('ADMINISTRADOR')" />
 				<security:intercept-url pattern="/admin/form_edit_admin.do" access="hasRole('ADMINISTRADOR')" />
 				<security:intercept-url pattern="/admin/edit_admin.do" access="hasRole('ADMINISTRADOR')" />
 				<security:intercept-url pattern="/admin/dashboard.do" access="hasRole('ADMINISTRADOR')" />
@@ -78,7 +72,6 @@
 				<security:intercept-url pattern="/estilo/edit_style.do" access="hasRole('ADMINISTRADOR')" />
 				<security:intercept-url pattern="/estilo/delete_style.do" access="hasRole('ADMINISTRADOR')" />
 	<!-- Vistas de Alumno -->
-				<security:intercept-url pattern="/alumno/show_student.do" access="hasRole('ALUMNO')" />
 				<security:intercept-url pattern="/alumno/form_edit_student.do" access="hasRole('ALUMNO')" />
 				<security:intercept-url pattern="/alumno/edit_student.do" access="hasRole('ALUMNO')" />
 				<security:intercept-url pattern="/alumno/listofsubsbystudent.do" access="hasRole('ALUMNO')" />

@@ -18,7 +18,6 @@
 </head>
 <body>
 	<!-- Listado de comentarios existentes -->
-	<h2>Listado de Comentarios</h2>
 	<table border="1">
 		<thead>
 			<tr>
@@ -38,7 +37,7 @@
 							action="${pageContext.request.contextPath}/comentario/delete_comment.do"
 							method="post">
 							<input type="hidden" name="comentarioId" value="${comentario.id}" />
-							<input type="submit" value="Borrar" />
+							<input type="submit" value=<spring:message code="all.comments.value.5" /> />
 						</form>
 					</td>
 				</tr>
@@ -48,8 +47,8 @@
 	<form
 		action="${pageContext.request.contextPath}/comentario/form_create_comment.do"
 		method="get">
-		<button type="submit">Comentar</button>
+		<button type="submit"><spring:message code="all.comments.value.6" /></button>
 	</form>
-	<button type="button" onclick="goBack()">Volver</button>
+	<button type="button" onclick="goBack()"><spring:message code="all.comments.value.7" /></button>
 </body>
 </html>

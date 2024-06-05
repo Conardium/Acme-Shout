@@ -47,17 +47,16 @@ public class AcademiaController extends AbstractController {
 	public ModelAndView show_profile() {
 		ModelAndView result;
 
-		final UserAccount aux = LoginService.getPrincipal();
-
-		if (aux.getAuth() == Authority.ACADEMIA) {
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			final UserAccount aux = LoginService.getPrincipal();
 			result = new ModelAndView("academy/academy");
 			result.addObject("esAlumno", false);
 			result.addObject("esAcademia", true);
 			result.addObject("esAdmin", false);
+			result.addObject("academia", this.academiaService.findByAccountId(aux.getId()));
+
 		} else
 			result = new ModelAndView("welcome/index");
-
-		result.addObject("academia", this.academiaService.findByAccountId(aux.getId()));
 
 		return result;
 	}
@@ -92,10 +91,13 @@ public class AcademiaController extends AbstractController {
 	public ModelAndView form_edit_academy() {
 		ModelAndView result;
 
-		final UserAccount aux = LoginService.getPrincipal();
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			final UserAccount aux = LoginService.getPrincipal();
 
-		result = new ModelAndView("create_edit_actor/form_edit_academy");
-		result.addObject("academia", this.academiaService.findByAccountId(aux.getId()));
+			result = new ModelAndView("create_edit_actor/form_edit_academy");
+			result.addObject("academia", this.academiaService.findByAccountId(aux.getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -106,29 +108,33 @@ public class AcademiaController extends AbstractController {
 	public ModelAndView edit_academy(@ModelAttribute("academia") final Academia academia, final BindingResult resultado) {
 		ModelAndView result;
 
-		if (resultado.hasErrors()) {
-			result = new ModelAndView("create_edit_actor/form_edit_academy");
-			result.addObject("academia", academia);
-		} else {
-			final UserAccount user = LoginService.getPrincipal();
-			UserAccount.generateMD5Hash(academia.getUserAccount().getPassword(), user);
-			user.setUsername(academia.getUserAccount().getUsername());
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
 
-			Academia aux = this.academiaService.findByAccountId(user.getId());
-			aux.setApellidos(academia.getApellidos());
-			aux.setNombre(academia.getNombre());
-			aux.setCorreo(academia.getCorreo());
-			aux.setDireccionPostal(academia.getDireccionPostal());
-			aux.setTelefono(academia.getTelefono());
-			aux.setNombreComercial(academia.getNombreComercial());
-			aux.setUserAccount(this.loginService.save(user));
+			if (resultado.hasErrors()) {
+				result = new ModelAndView("create_edit_actor/form_edit_academy");
+				result.addObject("academia", academia);
+			} else {
+				final UserAccount user = LoginService.getPrincipal();
+				UserAccount.generateMD5Hash(academia.getUserAccount().getPassword(), user);
+				user.setUsername(academia.getUserAccount().getUsername());
 
-			result = new ModelAndView("academy/academy");
+				Academia aux = this.academiaService.findByAccountId(user.getId());
+				aux.setApellidos(academia.getApellidos());
+				aux.setNombre(academia.getNombre());
+				aux.setCorreo(academia.getCorreo());
+				aux.setDireccionPostal(academia.getDireccionPostal());
+				aux.setTelefono(academia.getTelefono());
+				aux.setNombreComercial(academia.getNombreComercial());
+				aux.setUserAccount(this.loginService.save(user));
 
-			result.addObject("academia", this.academiaService.save(aux));
+				result = new ModelAndView("academy/academy");
 
-			result.addObject("autoridad", user.getAuth());
-		}
+				result.addObject("academia", this.academiaService.save(aux));
+
+				result.addObject("autoridad", user.getAuth());
+			}
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -209,11 +215,15 @@ public class AcademiaController extends AbstractController {
 	public ModelAndView solicitudesPorAlumno() {
 		ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Academia actual = this.academiaService.findByAccountId(user.getId());
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			final UserAccount user = LoginService.getPrincipal();
+			final Academia actual = this.academiaService.findByAccountId(user.getId());
 
-		result = new ModelAndView("listofapplication/listofapplicationbyacademy");
-		result.addObject("comentarios", this.solicitudService.findAllSolicitudesByAcademia(actual.getId()));
+			result = new ModelAndView("listofapplication/listofapplicationbyacademy");
+			result.addObject("comentarios", this.solicitudService.findAllSolicitudesByAcademia(actual.getId()));
+
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -224,11 +234,16 @@ public class AcademiaController extends AbstractController {
 	public ModelAndView subbyacademy() {
 		ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Academia actual = this.academiaService.findByAccountId(user.getId());
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
 
-		result = new ModelAndView("listofsubs/listofsubsbyacademy");
-		result.addObject("suscriptores", this.academiaService.findSuscritporByAcademia(actual.getId()));
+			final UserAccount user = LoginService.getPrincipal();
+			final Academia actual = this.academiaService.findByAccountId(user.getId());
+
+			result = new ModelAndView("listofsubs/listofsubsbyacademy");
+			result.addObject("suscriptores", this.academiaService.findSuscritporByAcademia(actual.getId()));
+
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -239,23 +254,25 @@ public class AcademiaController extends AbstractController {
 	public ModelAndView sub_academy(@RequestParam(required = true) final int actorId) {
 		ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Academia actual = this.academiaService.findByAccountId(user.getId());
-		Actor actor;
-		if (this.academiaService.findByAccountId(actorId) != null)
-			actor = this.academiaService.findByAccountId(actorId);
-		else
-			actor = this.alumnoService.findByAccountId(actorId);
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
 
-		if (!actual.getSuscritos().contains(actor) && actual.getId() != actor.getId()) {
-			actual.addSuscritos(actor);
+			final UserAccount user = LoginService.getPrincipal();
+			final Academia actual = this.academiaService.findByAccountId(user.getId());
+			Actor actor;
+			if (this.academiaService.findByAccountId(actorId) != null)
+				actor = this.academiaService.findByAccountId(actorId);
+			else
+				actor = this.alumnoService.findByAccountId(actorId);
 
-			this.academiaService.save(actual);
+			if (!actual.getSuscritos().contains(actor) && actual.getId() != actor.getId()) {
+				actual.addSuscritos(actor);
 
-		}
-
-		result = new ModelAndView("listofsubs/listofsubsbyacademy");
-		result.addObject("suscriptores", this.academiaService.findSuscritporByAcademia(actual.getId()));
+				this.academiaService.save(actual);
+			}
+			result = new ModelAndView("listofsubs/listofsubsbyacademy");
+			result.addObject("suscriptores", this.academiaService.findSuscritporByAcademia(actual.getId()));
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}

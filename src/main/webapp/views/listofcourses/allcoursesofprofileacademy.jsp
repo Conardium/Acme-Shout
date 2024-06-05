@@ -13,35 +13,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
 <title>Lista de sus Cursos</title>
 </head>
 <body>
 	<form
 		action="${pageContext.request.contextPath}/curso/allcoursesfromfilter.do"
 		method="get">
-		<label for="filtro">Filtro: </label> <input type="text" name="filtro"
-			placeholder="Escribe aqui para filtrar..." /> 
-			<input type="hidden"
-			name="idVista" value="4" />
-			<input type="hidden" name="idAcademia"
-			value=0 /> 
-			<input type="hidden" name="idEstilo" value=0 />
-		<button type="submit">Filtrar</button>
+		<label for="filtro"><spring:message
+				code="all.courses.value.01" /> </label> <input type="text" name="filtro"
+			placeholder=<spring:message code="all.courses.value.02" /> /> <input type="hidden"
+			name="idVista" value="4" /> <input type="hidden" name="idAcademia"
+			value=0 /> <input type="hidden" name="idEstilo" value=0 />
+		<button type="submit"><spring:message code="all.courses.value.03" /></button>
 	</form>
 
 	<table border="1">
 		<thead>
 			<tr>
-				<th>Título del Curso</th>
-				<th>Estilo</th>
-				<th>Nivel</th>
-				<th>Fecha de Inicio</th>
-				<th>Fecha de Fin</th>
-				<th>Día de la Semana</th>
-				<th>Hora</th>
-				<th>Editar</th>
-				<th>Borrar</th>
+				<th><spring:message code="all.courses.value.1" /></th>
+				<th><spring:message code="all.courses.value.2" /></th>
+				<th><spring:message code="all.courses.value.3" /></th>
+				<th><spring:message code="all.courses.value.4" /></th>
+				<th><spring:message code="all.courses.value.5" /></th>
+				<th><spring:message code="all.courses.value.6" /></th>
+				<th><spring:message code="all.courses.value.7" /></th>
+				<th><spring:message code="all.courses.value.10" /></th>
+				<th><spring:message code="all.courses.value.11" /></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -61,7 +58,7 @@
 							action="${pageContext.request.contextPath}/curso/form_edit_course.do"
 							method="get">
 							<input type="hidden" name="cursoId" value="${curso.id}" />
-							<button type="submit">Editar</button>
+							<button type="submit"><spring:message code="all.courses.value.10" /></button>
 						</form>
 					</td>
 					<td>
@@ -69,13 +66,15 @@
 							action="${pageContext.request.contextPath}/curso/delete_course.do"
 							method="get">
 							<input type="hidden" name="cursoId" value="${curso.id}" />
-							<button type="submit">Borrar</button>
+							<button type="submit"><spring:message code="all.courses.value.11" /></button>
 						</form>
 					</td>
 				</tr>
 			</jstl:forEach>
 		</tbody>
 	</table>
-	<button type="button" onclick="goBack()">Volver</button>
+	<button type="button" onclick="goBack()">
+		<spring:message code="all.courses.value.0" />
+	</button>
 </body>
 </html>

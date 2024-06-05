@@ -90,32 +90,7 @@ public class CursoController extends AbstractController {
 	public ModelAndView form_sing_up_student() {
 		ModelAndView result;
 
-		result = new ModelAndView("create_edit_course/form_create_course");
-
-		Collection<String> niveles = new HashSet<String>();
-		for (int i = 0; i < Nivel.values().length; i++)
-			niveles.add(Nivel.values()[i].name());
-		result.addObject("niveles", niveles);
-
-		Collection<String> dias = new HashSet<String>();
-		for (int i = 0; i < DiaSemana.values().length; i++)
-			dias.add(DiaSemana.values()[i].name());
-		result.addObject("dias", dias);
-
-		result.addObject("curso", this.cursoService.create());
-		result.addObject("estilos", this.estiloService.findAll());
-
-		return result;
-	}
-
-	// Crear Curso ---------------------------------------------------------------
-
-	@RequestMapping("/create_course")
-	public ModelAndView create_course(@ModelAttribute("Curso") final Curso curso, @RequestParam("estiloId") int estiloId, @RequestParam("horaCurso") String horaCurso, final BindingResult resultado) {
-		ModelAndView result;
-
-		if (resultado.hasErrors()) {
-
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
 			result = new ModelAndView("create_edit_course/form_create_course");
 
 			Collection<String> niveles = new HashSet<String>();
@@ -130,30 +105,61 @@ public class CursoController extends AbstractController {
 
 			result.addObject("curso", this.cursoService.create());
 			result.addObject("estilos", this.estiloService.findAll());
-		} else {
+		} else
+			result = new ModelAndView("welcome/index");
 
-			Estilo est = this.estiloService.findOne(estiloId);
-			curso.setEstilo(est);
+		return result;
+	}
 
-			try {
-				Date parsedDate = CursoController.timeFormat.parse(horaCurso);
-				curso.setHora(new Time(parsedDate.getTime()));
-			} catch (ParseException e) {
-				e.printStackTrace();
+	// Crear Curso ---------------------------------------------------------------
+
+	@RequestMapping("/create_course")
+	public ModelAndView create_course(@ModelAttribute("Curso") final Curso curso, @RequestParam("estiloId") int estiloId, @RequestParam("horaCurso") String horaCurso, final BindingResult resultado) {
+		ModelAndView result;
+
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			if (resultado.hasErrors()) {
+
+				result = new ModelAndView("create_edit_course/form_create_course");
+
+				Collection<String> niveles = new HashSet<String>();
+				for (int i = 0; i < Nivel.values().length; i++)
+					niveles.add(Nivel.values()[i].name());
+				result.addObject("niveles", niveles);
+
+				Collection<String> dias = new HashSet<String>();
+				for (int i = 0; i < DiaSemana.values().length; i++)
+					dias.add(DiaSemana.values()[i].name());
+				result.addObject("dias", dias);
+
+				result.addObject("curso", this.cursoService.create());
+				result.addObject("estilos", this.estiloService.findAll());
+			} else {
+
+				Estilo est = this.estiloService.findOne(estiloId);
+				curso.setEstilo(est);
+
+				try {
+					Date parsedDate = CursoController.timeFormat.parse(horaCurso);
+					curso.setHora(new Time(parsedDate.getTime()));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+
+				final UserAccount user = LoginService.getPrincipal();
+				final Academia actual = this.academiaService.findByAccountId(user.getId());
+				actual.getCursos().add(this.cursoService.save(curso));
+
+				this.academiaService.save(actual);
+
+				result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
+
+				result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(user.getId()).getId()));
+				result.addObject("autoridad", user.getAuth());
+
 			}
-
-			final UserAccount user = LoginService.getPrincipal();
-			final Academia actual = this.academiaService.findByAccountId(user.getId());
-			actual.getCursos().add(this.cursoService.save(curso));
-
-			this.academiaService.save(actual);
-
-			result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
-
-			result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(user.getId()).getId()));
-			result.addObject("autoridad", user.getAuth());
-
-		}
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -164,32 +170,9 @@ public class CursoController extends AbstractController {
 	public ModelAndView form_edit_course(@RequestParam(required = true) final int cursoId) {
 		ModelAndView result;
 
-		result = new ModelAndView("create_edit_course/form_edit_course");
-		result.addObject("curso", this.cursoService.findOne(cursoId));
-		result.addObject("estilos", this.estiloService.findAll());
-
-		List<String> niveles = new ArrayList<String>();
-		for (int i = 0; i < Nivel.values().length; i++)
-			niveles.add(Nivel.values()[i].name());
-		result.addObject("niveles", niveles);
-
-		List<String> dias = new ArrayList<String>();
-		for (int i = 0; i < DiaSemana.values().length; i++)
-			dias.add(DiaSemana.values()[i].name());
-		result.addObject("dias", dias);
-
-		return result;
-	}
-
-	//Modificar Curso
-
-	@RequestMapping("/edit_course")
-	public ModelAndView edit_course(@ModelAttribute("Curso") final Curso curso, @RequestParam("estiloId") int estiloId, @RequestParam("horaCurso") String horaCurso, final BindingResult resultado) {
-		ModelAndView result;
-
-		if (resultado.hasErrors()) {
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
 			result = new ModelAndView("create_edit_course/form_edit_course");
-			result.addObject("curso", curso);
+			result.addObject("curso", this.cursoService.findOne(cursoId));
 			result.addObject("estilos", this.estiloService.findAll());
 
 			List<String> niveles = new ArrayList<String>();
@@ -201,27 +184,55 @@ public class CursoController extends AbstractController {
 			for (int i = 0; i < DiaSemana.values().length; i++)
 				dias.add(DiaSemana.values()[i].name());
 			result.addObject("dias", dias);
-		} else {
+		} else
+			result = new ModelAndView("welcome/index");
 
-			Estilo est = this.estiloService.findOne(estiloId);
-			curso.setEstilo(est);
+		return result;
+	}
 
-			try {
-				Date parsedDate = CursoController.timeFormat.parse(horaCurso);
-				curso.setHora(new Time(parsedDate.getTime()));
-			} catch (ParseException e) {
-				e.printStackTrace();
+	//Modificar Curso
+
+	@RequestMapping("/edit_course")
+	public ModelAndView edit_course(@ModelAttribute("Curso") final Curso curso, @RequestParam("estiloId") int estiloId, @RequestParam("horaCurso") String horaCurso, final BindingResult resultado) {
+		ModelAndView result;
+
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			if (resultado.hasErrors()) {
+				result = new ModelAndView("create_edit_course/form_edit_course");
+				result.addObject("curso", curso);
+				result.addObject("estilos", this.estiloService.findAll());
+
+				List<String> niveles = new ArrayList<String>();
+				for (int i = 0; i < Nivel.values().length; i++)
+					niveles.add(Nivel.values()[i].name());
+				result.addObject("niveles", niveles);
+
+				List<String> dias = new ArrayList<String>();
+				for (int i = 0; i < DiaSemana.values().length; i++)
+					dias.add(DiaSemana.values()[i].name());
+				result.addObject("dias", dias);
+			} else {
+
+				Estilo est = this.estiloService.findOne(estiloId);
+				curso.setEstilo(est);
+
+				try {
+					Date parsedDate = CursoController.timeFormat.parse(horaCurso);
+					curso.setHora(new Time(parsedDate.getTime()));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+
+				this.cursoService.save(curso);
+
+				result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
+
+				final UserAccount user = LoginService.getPrincipal();
+				result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(user.getId()).getId()));
+				result.addObject("autoridad", user.getAuth());
 			}
-
-			this.cursoService.save(curso);
-
-			result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
-
-			final UserAccount user = LoginService.getPrincipal();
-			result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(user.getId()).getId()));
-			result.addObject("autoridad", user.getAuth());
-
-		}
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -232,28 +243,30 @@ public class CursoController extends AbstractController {
 	public ModelAndView delete_course(@RequestParam(required = true) final int cursoId) {
 		ModelAndView result;
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Academia actual = this.academiaService.findByAccountId(user.getId());
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ACADEMIA")) {
+			final UserAccount user = LoginService.getPrincipal();
+			final Academia actual = this.academiaService.findByAccountId(user.getId());
 
-		Curso curso = this.cursoService.findOne(cursoId);
+			Curso curso = this.cursoService.findOne(cursoId);
 
-		Iterator<Curso> iterator = actual.getCursos().iterator();
-		while (iterator.hasNext()) {
-			Curso c = iterator.next();
-			if (c.equals(curso)) {
-				iterator.remove();
-				break;
+			Iterator<Curso> iterator = actual.getCursos().iterator();
+			while (iterator.hasNext()) {
+				Curso c = iterator.next();
+				if (c.equals(curso)) {
+					iterator.remove();
+					break;
+				}
 			}
-		}
 
-		this.academiaService.save(actual);
-		this.cursoService.delete(curso);
+			this.academiaService.save(actual);
+			this.cursoService.delete(curso);
 
-		result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
+			result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
 
-		result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(user.getId()).getId()));
-		result.addObject("autoridad", user.getAuth());
-
+			result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(user.getId()).getId()));
+			result.addObject("autoridad", user.getAuth());
+		} else
+			result = new ModelAndView("welcome/index");
 		return result;
 	}
 

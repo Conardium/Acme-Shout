@@ -13,7 +13,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
 <title>Listado Comentarios</title>
 </head>
 <body>
@@ -44,7 +43,7 @@
 											method="post">
 											<input type="hidden" name="actorId"
 												value="${comentario.actor.userAccount.id}" /> <input
-												type="submit" value="Suscribirse" />
+												type="submit" value=<spring:message code="all.comments.value.4" /> />
 										</form>
 									</jstl:when>
 									<jstl:otherwise>
@@ -53,7 +52,7 @@
 											method="post">
 											<input type="hidden" name="actorId"
 												value="${comentario.actor.userAccount.id}" /> <input
-												type="submit" value="Suscribirse" />
+												type="submit" value=<spring:message code="all.comments.value.4" /> />
 										</form>
 									</jstl:otherwise>
 								</jstl:choose></td>
@@ -69,8 +68,8 @@
 	<form
 		action="${pageContext.request.contextPath}/comentario/form_create_comment.do"
 		method="get">
-		<button type="submit">Comentar</button>
+		<button type="submit"><spring:message code="all.comments.value.6" /></button>
 	</form>
-	<button type="button" onclick="goBack()">Volver</button>
+	<button type="button" onclick="goBack()"><spring:message code="all.comments.value.7" /></button>
 </body>
 </html>

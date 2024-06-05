@@ -89,8 +89,11 @@ public class EstiloController extends AbstractController {
 	public ModelAndView form_create_style() {
 		ModelAndView result;
 
-		result = new ModelAndView("create_edit_style/form_create_style");
-		result.addObject("estilo", this.estiloService.create());
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ADMINISTRADOR")) {
+			result = new ModelAndView("create_edit_style/form_create_style");
+			result.addObject("estilo", this.estiloService.create());
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -101,18 +104,20 @@ public class EstiloController extends AbstractController {
 	public ModelAndView create_style(@ModelAttribute("Estilo") final Estilo estilo, final BindingResult resultado) {
 		ModelAndView result;
 
-		result = new ModelAndView("welcome/index");
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ADMINISTRADOR")) {
 
-		if (resultado.hasErrors())
-			result = new ModelAndView("create_edit_style/form_create_style");
-		else {
-			result = new ModelAndView("listofstyles/allstyles");
+			if (resultado.hasErrors())
+				result = new ModelAndView("create_edit_style/form_create_style");
+			else {
+				result = new ModelAndView("listofstyles/allstyles");
 
-			final UserAccount user = LoginService.getPrincipal();
-			result.addObject("autoridad", user.getAuth());
-			this.estiloService.save(estilo);
-			result.addObject("estilos", this.estiloService.findAll());
-		}
+				final UserAccount user = LoginService.getPrincipal();
+				result.addObject("autoridad", user.getAuth());
+				this.estiloService.save(estilo);
+				result.addObject("estilos", this.estiloService.findAll());
+			}
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -123,9 +128,11 @@ public class EstiloController extends AbstractController {
 	public ModelAndView form_edit_style(@RequestParam(required = true) final int estiloId) {
 		ModelAndView result;
 
-		result = new ModelAndView("create_edit_style/form_edit_style");
-		result.addObject("estilo", this.estiloService.findOne(estiloId));
-
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ADMINISTRADOR")) {
+			result = new ModelAndView("create_edit_style/form_edit_style");
+			result.addObject("estilo", this.estiloService.findOne(estiloId));
+		} else
+			result = new ModelAndView("welcome/index");
 		return result;
 	}
 
@@ -135,17 +142,20 @@ public class EstiloController extends AbstractController {
 	public ModelAndView edit_style(@ModelAttribute("Estilo") final Estilo estilo, final BindingResult resultado) {
 		ModelAndView result;
 
-		if (resultado.hasErrors()) {
-			result = new ModelAndView("create_edit_style/form_edit_style");
-			result.addObject("estilo", estilo);
-		} else {
-			result = new ModelAndView("listofstyles/allstyles");
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ADMINISTRADOR")) {
+			if (resultado.hasErrors()) {
+				result = new ModelAndView("create_edit_style/form_edit_style");
+				result.addObject("estilo", estilo);
+			} else {
+				result = new ModelAndView("listofstyles/allstyles");
 
-			final UserAccount user = LoginService.getPrincipal();
-			result.addObject("autoridad", user.getAuth());
-			this.estiloService.save(estilo);
-			result.addObject("estilos", this.estiloService.findAll());
-		}
+				final UserAccount user = LoginService.getPrincipal();
+				result.addObject("autoridad", user.getAuth());
+				this.estiloService.save(estilo);
+				result.addObject("estilos", this.estiloService.findAll());
+			}
+		} else
+			result = new ModelAndView("welcome/index");
 
 		return result;
 	}
@@ -156,19 +166,23 @@ public class EstiloController extends AbstractController {
 	public ModelAndView delete_style(@RequestParam(required = true) final int estiloId) {
 		ModelAndView result;
 
-		Estilo estilo = this.estiloService.findOne(estiloId);
+		if (LoginService.haySesionIniciada() && LoginService.getPrincipal().getAuth().equals("ADMINISTRADOR")) {
+			Estilo estilo = this.estiloService.findOne(estiloId);
 
-		//Ningun Curso debe tener este estilo
-		if (this.estiloService.existeCursoConEstilo(estilo))
-			result = new ModelAndView("listofstyles/allstyles");
-		else {
-			result = new ModelAndView("listofstyles/allstyles");
-			this.estiloService.delete(estilo);
-		}
+			//Ningun Curso debe tener este estilo
+			if (this.estiloService.existeCursoConEstilo(estilo))
+				result = new ModelAndView("listofstyles/allstyles");
+			else {
+				result = new ModelAndView("listofstyles/allstyles");
+				this.estiloService.delete(estilo);
+			}
 
-		final UserAccount user = LoginService.getPrincipal();
-		result.addObject("autoridad", user.getAuth());
-		result.addObject("estilos", this.estiloService.findAll());
+			final UserAccount user = LoginService.getPrincipal();
+			result.addObject("autoridad", user.getAuth());
+			result.addObject("estilos", this.estiloService.findAll());
+		} else
+			result = new ModelAndView("welcome/index");
+
 		return result;
 	}
 
