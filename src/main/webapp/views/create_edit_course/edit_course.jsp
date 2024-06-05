@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><spring:message code="edit.courses.1" /></title>
+<title>Modificar Curso</title>
 </head>
 <body>
 	<form:form modelAttribute="curso" method="post"
@@ -27,54 +27,54 @@
 				<td><form:hidden path="version" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="titulo"><spring:message code="edit.courses.2" /></form:label></td>
-				<td><form:input path="titulo" />${curso.titulo}</td>
+				<td><form:label path="titulo"><spring:message code="edit.courses.1" /></form:label></td>
+				<td><form:input path="titulo" required="required" /></td>
 				<td><form:errors path="titulo" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td><label for="estilo"><spring:message code="edit.courses.3" /></label></td>
+				<td><label for="estilo"><spring:message code="edit.courses.2" /></label></td>
 				<td><select id="estilo" name="estiloId">
 						<jstl:forEach items="${estilos}" var="estilo">
 							<option value="${estilo.id}"
-								<jstl:if test="${curso.estilo.id == estilo.id}">selected</jstl:if>>${estilo.nombre}</option>
+								<jstl:if test="${curso.estilo.id == estilo.id}">selected</jstl:if>></option>
 						</jstl:forEach>
 				</select></td>
 				<td><form:errors path="estilo" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="nivel"><spring:message code="edit.courses.4" /></form:label></td>
+				<td><form:label path="nivel"><spring:message code="edit.courses.3" /></form:label></td>
 				<td><form:select path="nivel">
-						<form:options items="${niveles}" />
+						<form:options items="${niveles}" var="nivel" <jstl:if test="${curso.nivel == nivel}">selected</jstl:if>/>
 					</form:select></td>
 				<td><form:errors path="nivel" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="fechaInicio"><spring:message code="edit.courses.5" /></form:label></td>
-				<td><form:input path="fechaInicio" />${curso.fechaInicio}</td>
+				<td><form:label path="fechaInicio"><spring:message code="edit.courses.4" /></form:label></td>
+				<td><form:input path="fechaInicio" required="required" /></td>
 				<td><form:errors path="fechaInicio" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="fechaFin"><spring:message code="edit.courses.6" /></form:label></td>
-				<td><form:input path="fechaFin" />${curso.fechaFin}</td>
+				<td><form:label path="fechaFin"><spring:message code="edit.courses.5" /></form:label></td>
+				<td><form:input path="fechaFin" required="required" /></td>
 				<td><form:errors path="fechaFin" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="diaSemana"><spring:message code="edit.courses.7" /></form:label></td>
+				<td><form:label path="diaSemana"><spring:message code="edit.courses.6" /></form:label></td>
 				<td><form:select path="diaSemana">
-						<form:options items="${dias}" />
+						<form:options items="${dias}" var="diaSemana" <jstl:if test="${curso.diaSemana == diaSemana}">selected</jstl:if>/>
 					</form:select></td>
 				<td><form:errors path="diaSemana" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td><label for="horaCurso"><spring:message code="edit.courses.8" /></label></td>
+				<td><label for="horaCurso"><spring:message code="edit.courses.7" /></label></td>
 				<td><input type="text" id="horaCurso" name="horaCurso"
-					value="${curso.hora}" /></td>
+					value="${curso.hora}"  required="required" /></td>
 				<td><form:errors path="hora" cssClass="error" /></td>
 			<tr>
-				<td colspan="3"><input type="submit" value=<spring:message code="edit.courses.11" /> /></td>
+				<td colspan="3"><input type="submit" value=<spring:message code="edit.courses.10" /> /></td>
 			</tr>
 		</table>
 	</form:form>
-	<button type="button" onclick="goBack()"><spring:message code="edit.courses.10" /></button>
+	<button type="button" onclick="goBack()"><spring:message code="edit.courses.9" /></button>
 </body>
 </html>

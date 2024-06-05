@@ -21,7 +21,7 @@
             <tr>
                 <td><spring:message code="create.style.1" /></td>
                 <td>
-                    <form:input path="nombre" size="50"/>
+                    <form:input path="nombre" size="50" required="required" />
                     <form:errors path="nombre" cssClass="error"/>
                 </td>
             </tr>
@@ -29,7 +29,7 @@
             <tr>
                 <td><spring:message code="create.style.2" /></td>
                 <td>
-                    <form:textarea path="descripcion" rows="3" cols="50"/>
+                    <form:textarea path="descripcion" rows="3" cols="50" required="required" />
                     <form:errors path="descripcion" cssClass="error"/>
                 </td>
             </tr>
@@ -45,7 +45,7 @@
             <tr>
                 <td><spring:message code="create.style.4" /></td>
                 <td>
-                    <form:textarea path="videos" rows="3" cols="50"/>
+                    <form:textarea path="videos" rows="3" cols="50" />
                     <form:errors path="videos" cssClass="error"/>
                 </td>
             </tr>
