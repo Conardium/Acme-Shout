@@ -16,8 +16,19 @@
 <title>Lista de Cursos</title>
 </head>
 <body>
-<button type="button" onclick="goBack()">Volver</button>
-	<h1>Lista de Cursos</h1>
+	<button type="button" onclick="goBack()">Volver</button>
+
+	<form
+		action="${pageContext.request.contextPath}/curso/allcoursesfromfilter.do"
+		method="get">
+		<label for="filtro">Filtro: </label> <input type="text" name="filtro"
+			placeholder="Escribe aqui para filtrar..." /> <input type="hidden"
+			name="idVista" value="3" />
+			<input type="hidden" name="idAcademia" value="0" />
+			<input type="hidden" name="idEstilo" value="${idEstilo}" />
+		<button type="submit">Filtrar</button>
+	</form>
+
 	<table border="1">
 		<thead>
 			<tr>
@@ -49,8 +60,7 @@
 							pattern="dd/MM/yyyy HH:mm" /></td>
 					<td>${curso.diaSemana}</td>
 					<td><fmt:formatDate value="${curso.hora}" pattern="HH:mm:ss" /></td>
-					<jstl:if
-						test="${esAlumno && !yaSolicitada && !yaInscrito}  ">
+					<jstl:if test="${esAlumno && !yaSolicitada && !yaInscrito}  ">
 						<td>
 							<form
 								action="${pageContext.request.contextPath}/applicationcourse/${curso.id}"
@@ -79,6 +89,7 @@
 			</jstl:forEach>
 		</tbody>
 	</table>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>

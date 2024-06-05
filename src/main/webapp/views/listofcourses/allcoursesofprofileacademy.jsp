@@ -17,6 +17,15 @@
 <title>Lista de sus Cursos</title>
 </head>
 <body>
+	<form
+		action="${pageContext.request.contextPath}/curso/allcoursesfromfilter.do"
+		method="get">
+		<label for="filtro">Filtro: </label> <input type="text" name="filtro"
+			placeholder="Escribe aqui para filtrar..." /> <input type="hidden"
+			name="idVista" value="4" />
+		<button type="submit">Filtrar</button>
+	</form>
+
 	<table border="1">
 		<thead>
 			<tr>
@@ -48,14 +57,16 @@
 
 					<td>
 						<form
-							action="${pageContext.request.contextPath}/curso/form_edit_course.do" method="get">
+							action="${pageContext.request.contextPath}/curso/form_edit_course.do"
+							method="get">
 							<input type="hidden" name="cursoId" value="${curso.id}" />
 							<button type="submit">Editar</button>
 						</form>
 					</td>
 					<td>
 						<form
-							action="${pageContext.request.contextPath}/curso/delete_course.do" method="get">
+							action="${pageContext.request.contextPath}/curso/delete_course.do"
+							method="get">
 							<input type="hidden" name="cursoId" value="${curso.id}" />
 							<button type="submit">Borrar</button>
 						</form>

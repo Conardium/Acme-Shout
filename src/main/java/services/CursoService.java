@@ -162,6 +162,14 @@ public class CursoService {
 		return result;
 	}
 
+	public Collection<Curso> findByEstiloWithFiltro(int idEstilo, String filtro) {
+		Collection<Curso> result;
+
+		result = this.cursoRepository.findByEstiloWithFiltro(idEstilo, filtro);
+
+		return result;
+	}
+
 	public Collection<Curso> findCursosNotSolicitedByAlumno(final int idAlumno) {
 		Collection<Curso> result;
 

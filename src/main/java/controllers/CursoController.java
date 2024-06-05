@@ -317,6 +317,8 @@ public class CursoController extends AbstractController {
 			result.addObject("autoridad", "nada");
 		}
 
+		result.addObject("idAcademia", academiaId);
+
 		return result;
 	}
 
@@ -353,6 +355,7 @@ public class CursoController extends AbstractController {
 			//No esta conectado
 			result.addObject("autoridad", "nada");
 		}
+		result.addObject("idEstilo", estiloId);
 
 		return result;
 	}
@@ -360,7 +363,7 @@ public class CursoController extends AbstractController {
 	//Cursos por filtro -------------------
 
 	@RequestMapping("/allcoursesfromfilter")
-	public ModelAndView listbyfilter(@RequestParam(required = true) final String filtro, final int idVista) {
+	public ModelAndView listbyfilter(@RequestParam(required = true) final String filtro, final int idVista, @RequestParam(required = false) final int idAcademia, final int idEstilo) {
 
 		ModelAndView result;
 
@@ -378,21 +381,23 @@ public class CursoController extends AbstractController {
 			break;
 		case 2:
 			result = new ModelAndView("listofcourses/allcoursesfromacademy");
+			result.addObject("cursos", this.cursoService.findCursosByAcademyWithFiltro(idAcademia, filtroQuery));
 			break;
 		case 3:
 			result = new ModelAndView("listofcourses/allcoursesfromstyle");
+			result.addObject("cursos", this.cursoService.findByEstiloWithFiltro(idEstilo, filtroQuery));
 			break;
 		case 4:
 			if (LoginService.getPrincipal().getAuth() == Authority.ACADEMIA) {
 				result = new ModelAndView("listofcourses/allcoursesofprofileacademy");
-				result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(LoginService.getPrincipal().getId()).getId()));
+				result.addObject("cursos", this.cursoService.findCursosByAcademyWithFiltro(this.academiaService.findByAccountId(LoginService.getPrincipal().getId()).getId(), filtroQuery));
 			} else
 				result = new ModelAndView("welcome/index");
 			break;
 		case 5:
 			if (LoginService.getPrincipal().getAuth() == Authority.ALUMNO) {
 				result = new ModelAndView("listofcourses/allcoursesprofilestudent");
-				result.addObject("cursos", this.cursoService.findCursosporAcademia(this.academiaService.findByAccountId(LoginService.getPrincipal().getId()).getId()));
+				result.addObject("cursos", this.cursoService.findCursosNotSolicitedByAlumnoWithFiltro(this.alumnoService.findByAccountId(LoginService.getPrincipal().getId()).getId(), filtroQuery));
 			} else
 				result = new ModelAndView("welcome/index");
 

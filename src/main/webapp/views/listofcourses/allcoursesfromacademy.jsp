@@ -17,6 +17,17 @@
 <title>Lista de Cursos</title>
 </head>
 <body>
+	<form
+		action="${pageContext.request.contextPath}/curso/allcoursesfromfilter.do"
+		method="get">
+		<label for="filtro">Filtro: </label> <input type="text" name="filtro"
+			placeholder="Escribe aqui para filtrar..." /> <input type="hidden"
+			name="idVista" value="2" />
+			<input type="hidden" name="idAcademia" value="${idAcademia}" />
+			<input type="hidden" name="idEstilo" value="0" />
+		<button type="submit">Filtrar</button>
+	</form>
+
 	<table border="1">
 		<thead>
 			<tr>
@@ -48,8 +59,7 @@
 							pattern="dd/MM/yyyy HH:mm" /></td>
 					<td>${curso.diaSemana}</td>
 					<td><fmt:formatDate value="${curso.hora}" pattern="HH:mm:ss" /></td>
-					<jstl:if
-						test="${esAlumno && !yaSolicitada && !yaInscrito}  ">
+					<jstl:if test="${esAlumno && !yaSolicitada && !yaInscrito}  ">
 						<td>
 							<form
 								action="${pageContext.request.contextPath}/applicationcourse/${curso.id}"
