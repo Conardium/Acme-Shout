@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Crear Estilos</title>
+    <title><spring:message code="create.style.1" /></title>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
         <table>
             <!-- Campo para el nombre -->
             <tr>
-                <td>Nombre:</td>
+                <td><spring:message code="create.style.2" /></td>
                 <td>
                     <form:input path="nombre" size="50"/>
                     <form:errors path="nombre" cssClass="error"/>
@@ -28,7 +28,7 @@
             </tr>
             <!-- Campo para la descripción -->
             <tr>
-                <td>Descripción:</td>
+                <td><spring:message code="create.style.3" /></td>
                 <td>
                     <form:textarea path="descripcion" rows="3" cols="50"/>
                     <form:errors path="descripcion" cssClass="error"/>
@@ -36,7 +36,7 @@
             </tr>
             <!-- Campo para imágenes -->
             <tr>
-                <td>Imágenes (URLs, separadas por comas):</td>
+                <td><spring:message code="create.style.4" /></td>
                 <td>
                     <form:textarea path="imagenes" rows="3" cols="50"/>
                     <form:errors path="imagenes" cssClass="error"/>
@@ -44,7 +44,7 @@
             </tr>
             <!-- Campo para videos -->
             <tr>
-                <td>Videos (URLs, separadas por comas):</td>
+                <td><spring:message code="create.style.5" /></td>
                 <td>
                     <form:textarea path="videos" rows="3" cols="50"/>
                     <form:errors path="videos" cssClass="error"/>
@@ -53,13 +53,13 @@
             <!-- Botón de submit -->
             <tr>
                 <td colspan="2">
-                    <input type="submit" value="Guardar"/>
+                    <input type="submit" value=<spring:message code="create.style.6" />/>
                 </td>
             </tr>
             <!-- Botón de volver -->
             <tr>
                 <td colspan="2">
-	<button type="button" onclick="goBack()">Volver</button>
+	<button type="button" onclick="goBack()"><spring:message code="create.style.7" /></button>
                 </td>
             </tr>
         </table>
