@@ -15,11 +15,11 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<th>Título</th>
-				<th>Descripción</th>
-				<th>Ver</th>
-				<th>Editar</th>
-				<th>Borrar</th>
+				<th><spring:message code="alltutorial.value.1" /></th>
+				<th><spring:message code="alltutorial.value.2" /></th>
+				<th><spring:message code="alltutorial.value.3" /></th>
+				<th><spring:message code="alltutorial.value.4" /></th>
+				<th><spring:message code="alltutorial.value.5" /></th>
 			</tr>
 		</thead>
 		<tbody>
