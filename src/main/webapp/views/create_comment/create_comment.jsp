@@ -12,14 +12,14 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Comentar</title>
+    <title><spring:message code="createdit.comment.0" /></title>
 </head>
 <body>
 
     <form:form method="post" modelAttribute="comentario" action="${pageContext.request.contextPath}/comentario/create_comment.do">
         <table>
             <tr>
-                <td>Comentario:</td>
+                <td><spring:message code="createdit.comment.1" /></td>
                 <td>
                     <form:textarea path="texto" rows="3" cols="50" required="required" maxlength="140"/>
                     <form:errors path="texto" cssClass="error"/>
@@ -27,11 +27,11 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="submit" value="Crear"/>
+                    <input type="submit" value=<spring:message code="createdit.comment.2" />/>
                 </td>
             </tr>
         </table>
     </form:form>
-    	<button type="button" onclick="goBack()">Volver</button>
+    	<button type="button" onclick="goBack()"><spring:message code="createdit.comment.3" /></button>
 </body>
 </html>

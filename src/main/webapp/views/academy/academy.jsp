@@ -18,34 +18,34 @@
 	<table>
 		<!-- Campos Actor -->
 		<tr>
-			<td>Nombre Director:</td>
+			<td><spring:message code="academy.0" /></td>
 			<td><jstl:out value="${academia.nombre}" /></td>
 		</tr>
 		<tr>
-			<td>Apellidos Director:</td>
+			<td><spring:message code="academy.1" /></td>
 			<td><jstl:out value="${academia.apellidos}" /></td>
 		</tr>
 		<tr>
-			<td>Correo:</td>
+			<td><spring:message code="academy.2" /></td>
 			<td><jstl:out value="${academia.correo}" /></td>
 		</tr>
 		<tr>
-			<td>Teléfono:</td>
+			<td><spring:message code="academy.3" /></td>
 			<td><jstl:out value="${academia.telefono}" /></td>
 		</tr>
 		<tr>
-			<td>Dirección Postal:</td>
+			<td><spring:message code="academy.4" /></td>
 			<td><jstl:out value="${academia.direccionPostal}" /></td>
 		</tr>
 
 		<!-- Campo Academia -->
 		<tr>
-			<td>Nombre Comercial:</td>
+			<td><spring:message code="academy.5" /></td>
 			<td><jstl:out value="${academia.nombreComercial}" /></td>
 		</tr>
 	</table>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/academia/form_edit_academy.do'">Modificar</button>
-	<button type="button" onclick="goBack()">Volver</button>
+		onclick="location.href='${pageContext.request.contextPath}/academia/form_edit_academy.do'"><spring:message code="academy.6" /></button>
+	<button type="button" onclick="goBack()"><spring:message code="academy.7" /></button>
 </body>
 </html>

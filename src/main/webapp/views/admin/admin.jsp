@@ -11,39 +11,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Administrador</title>
+<title><spring:message code="admin.0" /></title>
 </head>
 <body>
-	<h2>Administrador</h2>
+	<h2><spring:message code="admin.0" /></h2>
 
 	<table>
 		<!-- Campos Actor -->
 		<tr>
-			<td>Nombre:</td>
+			<td><spring:message code="admin.1" /></td>
 			<td><jstl:out value="${admin.nombre}" /></td>
 		</tr>
 		<tr>
-			<td>Apellidos:</td>
+			<td><spring:message code="admin.2" /></td>
 			<td><jstl:out value="${admin.apellidos}" /></td>
 		</tr>
 		<tr>
-			<td>Correo:</td>
+			<td><spring:message code="admin.3" /></td>
 			<td><jstl:out value="${admin.correo}" /></td>
 		</tr>
 		<tr>
-			<td>Teléfono:</td>
+			<td><spring:message code="admin.4" /></td>
 			<td><jstl:out value="${admin.telefono}" /></td>
 		</tr>
 		<tr>
-			<td>Dirección Postal:</td>
+			<td><spring:message code="admin.5" /></td>
 			<td><jstl:out value="${admin.direccionPostal}" /></td>
 		</tr>
 	</table>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/admin/form_edit_admin.do'">Modificar</button>
+		onclick="location.href='${pageContext.request.contextPath}/admin/form_edit_admin.do'"><spring:message code="admin.6" /></button>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/admin/dashboard.do'">Dashboard
+		onclick="location.href='${pageContext.request.contextPath}/admin/dashboard.do'"><spring:message code="admin.7" />
 	</button>
-	<button type="button" onclick="goBack()">Volver</button>
+	<button type="button" onclick="goBack()"><spring:message code="admin.8" /></button>
 </body>
 </html>
