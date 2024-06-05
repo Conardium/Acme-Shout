@@ -41,46 +41,46 @@
 </head>
 <body>
 
-	<h1>Menú Principal</h1>
+	<h1><spring:message code="welcome.value.1" /></h1>
 
 	<jstl:if test="${autoridad == 'NADA'}">
 		<div class="button-container">
-			<h3>Registrarse en el sistema como academia o alumno/a</h3>
+			<h3><spring:message code="welcome.value.2" /></h3>
 			<form
 				action="${pageContext.request.contextPath}/alumno/form_sing_up_student.do"
 				method="get">
-				<button type="submit">Registrarse como Alumno</button>
+				<button type="submit"><spring:message code="welcome.value.3" /></button>
 			</form>
 			<form
 				action="${pageContext.request.contextPath}/academia/form_sing_up_academy.do"
 				method="get">
-				<button type="submit">Registrarse como Academia</button>
+				<button type="submit"><spring:message code="welcome.value.4" /></button>
 			</form>
 		</div>
 	</jstl:if>
 
 	<div class="button-container">
-		<h3>Navegar por el catálogo de academias</h3>
+		<h3><spring:message code="welcome.value.5" /></h3>
 		<form
 			action="${pageContext.request.contextPath}/academia/allacademies.do"
 			method="get">
-			<button type="submit">Ver Academias</button>
+			<button type="submit"><spring:message code="welcome.value.6" /></button>
 		</form>
 	</div>
 
 	<div class="button-container">
-		<h3>Navegar por el catálogo de cursos</h3>
+		<h3><spring:message code="welcome.value.7" /></h3>
 		<form action="${pageContext.request.contextPath}/curso/allcourses.do"
 			method="get">
-			<button type="submit">Ver Cursos</button>
+			<button type="submit"><spring:message code="welcome.value.8" /></button>
 		</form>
 	</div>
 
 	<div class="button-container">
-		<h3>Navegar por la tipología de estilos</h3>
+		<h3><spring:message code="welcome.value.9" /></h3>
 		<form action="${pageContext.request.contextPath}/estilo/allstyles.do"
 			method="get">
-			<button type="submit">Ver Estilos</button>
+			<button type="submit"><spring:message code="welcome.value.10" /></button>
 		</form>
 	</div>
 

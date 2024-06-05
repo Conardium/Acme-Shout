@@ -31,6 +31,8 @@
             <p><spring:message code="tutorial.value.1" /></p>
         </jstl:otherwise>
     </jstl:choose>
+    <br>
+    <br>
     <button type="button" onclick="goBack()"><spring:message code="tutorial.value.2" /></button>
 </body>
 </html>

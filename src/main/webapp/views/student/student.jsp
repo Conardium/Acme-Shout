@@ -45,7 +45,5 @@
 	<button type="button"
 		onclick="location.href='${pageContext.request.contextPath}/alumno/listarsolicitudesAlumno.do?idAlumno=${alumno.id}'"><spring:message code="student.value.8" /></button>
 	<button type="button" onclick="goBack()"><spring:message code="student.value.9" /></button>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
 </html>
