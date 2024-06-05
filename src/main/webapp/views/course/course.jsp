@@ -15,46 +15,45 @@
 <title>Curso</title>
 </head>
 <body>
-	<h2>Curso</h2>
+	<h2><spring:message code="course.0" /></h2>
 
 	<table>
 		<tr>
-			<td>Título:</td>
-			<td><c:out value="${curso.titulo}" /></td>
+			<td><spring:message code="course.1" /><spring:message code="course.1" /></td>
+			<td><jstl:out value="${curso.titulo}" /></td>
 		</tr>
 		<tr>
-			<td>Estilo:</td>
+			<td><spring:message code="course.2" /></td>
 			<td><jstl:out value="${curso.estilo}" /></td>
 		</tr>
 		<tr>
-			<td>Nivel:</td>
+			<td><spring:message code="course.3" /></td>
 			<td><jstl:out value="${curso.nivel}" /></td>
 		</tr>
 		<tr>
-			<td>Fecha de Inicio:</td>
+			<td><spring:message code="course.4" /></td>
 			<td><fmt:formatDate value="${curso.fechaInicio}"
 					pattern="dd/MM/yyyy" /></td>
 		</tr>
 		<tr>
-			<td>Fecha de Fin:</td>
+			<td><spring:message code="course.5" /></td>
 			<td><fmt:formatDate value="${curso.fechaFin}"
 					pattern="dd/MM/yyyy" /></td>
 		</tr>
 		<tr>
-			<td>Día de la Semana:</td>
+			<td><spring:message code="course.6" /></td>
 			<td><jstl:out value="${curso.diaSemana}" /></td>
 		</tr>
 		<tr>
-			<td>Hora:</td>
+			<td><spring:message code="course.7" /></td>
 			<td><fmt:formatDate value="${curso.hora}" pattern="HH:mm:ss" /></td>
 		</tr>
 	</table>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/curso/form_edit_course.do'">Modificar
-		Curso</button>
+		onclick="location.href='${pageContext.request.contextPath}/curso/form_edit_course.do'"><spring:message code="course.8" /></button>
 	<button type="button"
-		onclick="location.href='${pageContext.request.contextPath}/curso/delete_course.do'">Eliminar Curso</button>
-	<button type="button" onclick="goBack()">Volver</button>
+		onclick="location.href='${pageContext.request.contextPath}/curso/delete_course.do'"><spring:message code="course.9" /></button>
+	<button type="button" onclick="goBack()"><spring:message code="course.10" /></button>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/scripts/jcomun.js"></script>
 </body>
